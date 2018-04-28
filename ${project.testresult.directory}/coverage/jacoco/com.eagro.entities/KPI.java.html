@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>KPI.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.entities</a> &gt; <span class="el_source">KPI.java</span></div><h1>KPI.java</h1><pre class="source lang-java linenums">package com.eagro.entities;
+
+
+import javax.persistence.*;
+
+import com.eagro.entities.enumeration.ZoneType;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
+
+
+/**
+ * KPI entity.
+ */
+
+@Entity
+@Table(name = &quot;kpi&quot;)
+<span class="nc" id="L19">public class KPI implements Serializable {</span>
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = &quot;sequenceGenerator&quot;)
+    @SequenceGenerator(name = &quot;sequenceGenerator&quot;)
+    @Column(name = &quot;kpi_id&quot;)
+    private Long kpiId;
+
+    @Column(name = &quot;kpi_name&quot;)
+    private String kpiName;
+
+    @Column(name = &quot;kpi_desc&quot;)
+    private String kpiDesc;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = &quot;zone_type&quot;)
+    private ZoneType zoneType;
+
+    @Column(name = &quot;lower_ref_limit&quot;)
+    private Double lowerRefLimit;
+
+    @Column(name = &quot;upper_ref_limit&quot;)
+    private Double upperRefLimit;
+
+    @Column(name = &quot;optimal_value&quot;)
+    private Double optimalValue;
+
+    @Column(name = &quot;deviation_range&quot;)
+    private Double deviationRange;
+
+    @Column(name = &quot;active_flag&quot;)
+    private boolean activeFlag;
+
+    @Column(name = &quot;created_date&quot;)
+    private LocalDate createdDate;
+
+    @Column(name = &quot;created_by&quot;)
+    private String createdBy;
+
+    @Column(name = &quot;updated_date&quot;)
+    private LocalDate updatedDate;
+
+    @Column(name = &quot;updated_by&quot;)
+    private String updatedBy;
+
+    @ManyToOne
+    private Layout layout;
+
+    @ManyToOne
+    private Section section;
+
+    public Long getKpiId() {
+<span class="nc" id="L73">        return kpiId;</span>
+    }
+
+    public KPI kpiId(Long kpiId) {
+<span class="nc" id="L77">        this.kpiId = kpiId;</span>
+<span class="nc" id="L78">        return this;</span>
+    }
+
+    public void setKpiId(Long kpiId) {
+<span class="nc" id="L82">        this.kpiId = kpiId;</span>
+<span class="nc" id="L83">    }</span>
+
+    public String getKpiName() {
+<span class="nc" id="L86">        return kpiName;</span>
+    }
+
+    public KPI kpiName(String kpiName) {
+<span class="nc" id="L90">        this.kpiName = kpiName;</span>
+<span class="nc" id="L91">        return this;</span>
+    }
+
+    public void setKpiName(String kpiName) {
+<span class="nc" id="L95">        this.kpiName = kpiName;</span>
+<span class="nc" id="L96">    }</span>
+
+    public String getKpiDesc() {
+<span class="nc" id="L99">        return kpiDesc;</span>
+    }
+
+    public KPI kpiDesc(String kpiDesc) {
+<span class="nc" id="L103">        this.kpiDesc = kpiDesc;</span>
+<span class="nc" id="L104">        return this;</span>
+    }
+
+    public void setKpiDesc(String kpiDesc) {
+<span class="nc" id="L108">        this.kpiDesc = kpiDesc;</span>
+<span class="nc" id="L109">    }</span>
+
+    public ZoneType getZoneType() {
+<span class="nc" id="L112">        return zoneType;</span>
+    }
+
+    public KPI zoneType(ZoneType zoneType) {
+<span class="nc" id="L116">        this.zoneType = zoneType;</span>
+<span class="nc" id="L117">        return this;</span>
+    }
+
+    public void setZoneType(ZoneType zoneType) {
+<span class="nc" id="L121">        this.zoneType = zoneType;</span>
+<span class="nc" id="L122">    }</span>
+
+    public Double getLowerRefLimit() {
+<span class="nc" id="L125">        return lowerRefLimit;</span>
+    }
+
+    public KPI lowerRefLimit(Double lowerRefLimit) {
+<span class="nc" id="L129">        this.lowerRefLimit = lowerRefLimit;</span>
+<span class="nc" id="L130">        return this;</span>
+    }
+
+    public void setLowerRefLimit(Double lowerRefLimit) {
+<span class="nc" id="L134">        this.lowerRefLimit = lowerRefLimit;</span>
+<span class="nc" id="L135">    }</span>
+
+    public Double getUpperRefLimit() {
+<span class="nc" id="L138">        return upperRefLimit;</span>
+    }
+
+    public KPI upperRefLimit(Double upperRefLimit) {
+<span class="nc" id="L142">        this.upperRefLimit = upperRefLimit;</span>
+<span class="nc" id="L143">        return this;</span>
+    }
+
+    public void setUpperRefLimit(Double upperRefLimit) {
+<span class="nc" id="L147">        this.upperRefLimit = upperRefLimit;</span>
+<span class="nc" id="L148">    }</span>
+
+    public Double getOptimalValue() {
+<span class="nc" id="L151">        return optimalValue;</span>
+    }
+
+    public KPI optimalValue(Double optimalValue) {
+<span class="nc" id="L155">        this.optimalValue = optimalValue;</span>
+<span class="nc" id="L156">        return this;</span>
+    }
+
+    public void setOptimalValue(Double optimalValue) {
+<span class="nc" id="L160">        this.optimalValue = optimalValue;</span>
+<span class="nc" id="L161">    }</span>
+
+    public Double getDeviationRange() {
+<span class="nc" id="L164">        return deviationRange;</span>
+    }
+
+    public KPI deviationRange(Double deviationRange) {
+<span class="nc" id="L168">        this.deviationRange = deviationRange;</span>
+<span class="nc" id="L169">        return this;</span>
+    }
+
+    public void setDeviationRange(Double deviationRange) {
+<span class="nc" id="L173">        this.deviationRange = deviationRange;</span>
+<span class="nc" id="L174">    }</span>
+
+    public boolean isActiveFlag() {
+<span class="nc" id="L177">		return activeFlag;</span>
+	}
+
+	public void setActiveFlag(boolean activeFlag) {
+<span class="nc" id="L181">		this.activeFlag = activeFlag;</span>
+<span class="nc" id="L182">	}</span>
+
+	public LocalDate getCreatedDate() {
+<span class="nc" id="L185">        return createdDate;</span>
+    }
+
+    public KPI createdDate(LocalDate createdDate) {
+<span class="nc" id="L189">        this.createdDate = createdDate;</span>
+<span class="nc" id="L190">        return this;</span>
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+<span class="nc" id="L194">        this.createdDate = createdDate;</span>
+<span class="nc" id="L195">    }</span>
+
+    public String getCreatedBy() {
+<span class="nc" id="L198">        return createdBy;</span>
+    }
+
+    public KPI createdBy(String createdBy) {
+<span class="nc" id="L202">        this.createdBy = createdBy;</span>
+<span class="nc" id="L203">        return this;</span>
+    }
+
+    public void setCreatedBy(String createdBy) {
+<span class="nc" id="L207">        this.createdBy = createdBy;</span>
+<span class="nc" id="L208">    }</span>
+
+    public LocalDate getUpdatedDate() {
+<span class="nc" id="L211">        return updatedDate;</span>
+    }
+
+    public KPI updatedDate(LocalDate updatedDate) {
+<span class="nc" id="L215">        this.updatedDate = updatedDate;</span>
+<span class="nc" id="L216">        return this;</span>
+    }
+
+    public void setUpdatedDate(LocalDate updatedDate) {
+<span class="nc" id="L220">        this.updatedDate = updatedDate;</span>
+<span class="nc" id="L221">    }</span>
+
+    public String getUpdatedBy() {
+<span class="nc" id="L224">        return updatedBy;</span>
+    }
+
+    public KPI updatedBy(String updatedBy) {
+<span class="nc" id="L228">        this.updatedBy = updatedBy;</span>
+<span class="nc" id="L229">        return this;</span>
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+<span class="nc" id="L233">        this.updatedBy = updatedBy;</span>
+<span class="nc" id="L234">    }</span>
+
+    public Layout getLayout() {
+<span class="nc" id="L237">        return layout;</span>
+    }
+
+    public KPI layout(Layout layout) {
+<span class="nc" id="L241">        this.layout = layout;</span>
+<span class="nc" id="L242">        return this;</span>
+    }
+
+    public void setLayout(Layout layout) {
+<span class="nc" id="L246">        this.layout = layout;</span>
+<span class="nc" id="L247">    }</span>
+
+    public Section getSection() {
+<span class="nc" id="L250">        return section;</span>
+    }
+
+    public KPI section(Section section) {
+<span class="nc" id="L254">        this.section = section;</span>
+<span class="nc" id="L255">        return this;</span>
+    }
+
+    public void setSection(Section section) {
+<span class="nc" id="L259">        this.section = section;</span>
+<span class="nc" id="L260">    }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L264" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L265">            return true;</span>
+        }
+<span class="nc bnc" id="L267" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L268">            return false;</span>
+        }
+<span class="nc" id="L270">        KPI kPI = (KPI) o;</span>
+<span class="nc bnc" id="L271" title="All 4 branches missed.">        if (kPI.getKpiId() == null || getKpiId() == null) {</span>
+<span class="nc" id="L272">            return false;</span>
+        }
+<span class="nc" id="L274">        return Objects.equals(getKpiId(), kPI.getKpiId());</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L279">        return Objects.hashCode(getKpiId());</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L284">        return &quot;KPI{&quot; +</span>
+<span class="nc" id="L285">            &quot;, kpiId=&quot; + getKpiId() +</span>
+<span class="nc" id="L286">            &quot;, kpiName='&quot; + getKpiName() + &quot;'&quot; +</span>
+<span class="nc" id="L287">            &quot;, kpiDesc='&quot; + getKpiDesc() + &quot;'&quot; +</span>
+<span class="nc" id="L288">            &quot;, zoneType='&quot; + getZoneType() + &quot;'&quot; +</span>
+<span class="nc" id="L289">            &quot;, lowerRefLimit=&quot; + getLowerRefLimit() +</span>
+<span class="nc" id="L290">            &quot;, upperRefLimit=&quot; + getUpperRefLimit() +</span>
+<span class="nc" id="L291">            &quot;, optimalValue=&quot; + getOptimalValue() +</span>
+<span class="nc" id="L292">            &quot;, deviationRange=&quot; + getDeviationRange() +</span>
+<span class="nc" id="L293">            &quot;, activeFlag='&quot; + isActiveFlag() + &quot;'&quot; +</span>
+<span class="nc" id="L294">            &quot;, createdDate='&quot; + getCreatedDate() + &quot;'&quot; +</span>
+<span class="nc" id="L295">            &quot;, createdBy='&quot; + getCreatedBy() + &quot;'&quot; +</span>
+<span class="nc" id="L296">            &quot;, updatedDate='&quot; + getUpdatedDate() + &quot;'&quot; +</span>
+<span class="nc" id="L297">            &quot;, updatedBy='&quot; + getUpdatedBy() + &quot;'&quot; +</span>
+            &quot;}&quot;;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

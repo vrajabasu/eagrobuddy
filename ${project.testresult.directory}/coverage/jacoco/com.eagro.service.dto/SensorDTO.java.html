@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SensorDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.service.dto</a> &gt; <span class="el_source">SensorDTO.java</span></div><h1>SensorDTO.java</h1><pre class="source lang-java linenums">package com.eagro.service.dto;
+
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+/**
+ * A DTO for the Sensor entity.
+ */
+<span class="nc" id="L13">public class SensorDTO implements Serializable {</span>
+
+    private Long id;
+
+    private String sensorName;
+
+    private String sensorDesc;
+
+    private String activeFlag;
+
+    private LocalDate createdDate;
+
+    private String createdBy;
+
+    private LocalDate updatedDate;
+
+    private String updatedBy;
+
+<span class="nc" id="L31">    private Set&lt;SensorCoverageRangeDTO&gt; sensorCoverageRanges = new HashSet&lt;&gt;();</span>
+
+<span class="nc" id="L33">    private Set&lt;SectionSensorMappingDTO&gt; sectionSensorMappings = new HashSet&lt;&gt;();</span>
+
+<span class="nc" id="L35">    private Set&lt;SensorDataDTO&gt; sensorData = new HashSet&lt;&gt;();</span>
+
+    private Long layoutId;
+
+    private String layoutLayoutId;
+
+    public Long getId() {
+<span class="nc" id="L42">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L46">        this.id = id;</span>
+<span class="nc" id="L47">    }</span>
+
+    public String getSensorName() {
+<span class="nc" id="L50">        return sensorName;</span>
+    }
+
+    public void setSensorName(String sensorName) {
+<span class="nc" id="L54">        this.sensorName = sensorName;</span>
+<span class="nc" id="L55">    }</span>
+
+    public String getSensorDesc() {
+<span class="nc" id="L58">        return sensorDesc;</span>
+    }
+
+    public void setSensorDesc(String sensorDesc) {
+<span class="nc" id="L62">        this.sensorDesc = sensorDesc;</span>
+<span class="nc" id="L63">    }</span>
+
+    public String getActiveFlag() {
+<span class="nc" id="L66">        return activeFlag;</span>
+    }
+
+    public void setActiveFlag(String activeFlag) {
+<span class="nc" id="L70">        this.activeFlag = activeFlag;</span>
+<span class="nc" id="L71">    }</span>
+
+    public LocalDate getCreatedDate() {
+<span class="nc" id="L74">        return createdDate;</span>
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+<span class="nc" id="L78">        this.createdDate = createdDate;</span>
+<span class="nc" id="L79">    }</span>
+
+    public String getCreatedBy() {
+<span class="nc" id="L82">        return createdBy;</span>
+    }
+
+    public void setCreatedBy(String createdBy) {
+<span class="nc" id="L86">        this.createdBy = createdBy;</span>
+<span class="nc" id="L87">    }</span>
+
+    public LocalDate getUpdatedDate() {
+<span class="nc" id="L90">        return updatedDate;</span>
+    }
+
+    public void setUpdatedDate(LocalDate updatedDate) {
+<span class="nc" id="L94">        this.updatedDate = updatedDate;</span>
+<span class="nc" id="L95">    }</span>
+
+    public String getUpdatedBy() {
+<span class="nc" id="L98">        return updatedBy;</span>
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+<span class="nc" id="L102">        this.updatedBy = updatedBy;</span>
+<span class="nc" id="L103">    }</span>
+
+    public Set&lt;SensorCoverageRangeDTO&gt; getSensorCoverageRanges() {
+<span class="nc" id="L106">        return sensorCoverageRanges;</span>
+    }
+
+    public void setSensorCoverageRanges(Set&lt;SensorCoverageRangeDTO&gt; sensorCoverageRanges) {
+<span class="nc" id="L110">        this.sensorCoverageRanges = sensorCoverageRanges;</span>
+<span class="nc" id="L111">    }</span>
+
+    public Set&lt;SectionSensorMappingDTO&gt; getSectionSensorMappings() {
+<span class="nc" id="L114">        return sectionSensorMappings;</span>
+    }
+
+    public void setSectionSensorMappings(Set&lt;SectionSensorMappingDTO&gt; sectionSensorMappings) {
+<span class="nc" id="L118">        this.sectionSensorMappings = sectionSensorMappings;</span>
+<span class="nc" id="L119">    }</span>
+
+    public Set&lt;SensorDataDTO&gt; getSensorData() {
+<span class="nc" id="L122">        return sensorData;</span>
+    }
+
+    public void setSensorData(Set&lt;SensorDataDTO&gt; sensorData) {
+<span class="nc" id="L126">        this.sensorData = sensorData;</span>
+<span class="nc" id="L127">    }</span>
+
+    public Long getLayoutId() {
+<span class="nc" id="L130">        return layoutId;</span>
+    }
+
+    public void setLayoutId(Long layoutId) {
+<span class="nc" id="L134">        this.layoutId = layoutId;</span>
+<span class="nc" id="L135">    }</span>
+
+    public String getLayoutLayoutId() {
+<span class="nc" id="L138">        return layoutLayoutId;</span>
+    }
+
+    public void setLayoutLayoutId(String layoutLayoutId) {
+<span class="nc" id="L142">        this.layoutLayoutId = layoutLayoutId;</span>
+<span class="nc" id="L143">    }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L148">            return true;</span>
+        }
+<span class="nc bnc" id="L150" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L151">            return false;</span>
+        }
+
+<span class="nc" id="L154">        SensorDTO sensorDTO = (SensorDTO) o;</span>
+<span class="nc bnc" id="L155" title="All 4 branches missed.">        if(sensorDTO.getId() == null || getId() == null) {</span>
+<span class="nc" id="L156">            return false;</span>
+        }
+<span class="nc" id="L158">        return Objects.equals(getId(), sensorDTO.getId());</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L163">        return Objects.hashCode(getId());</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L168">        return &quot;SensorDTO{&quot; +</span>
+<span class="nc" id="L169">            &quot;id=&quot; + getId() +</span>
+<span class="nc" id="L170">            &quot;, sensorName='&quot; + getSensorName() + &quot;'&quot; +</span>
+<span class="nc" id="L171">            &quot;, sensorDesc='&quot; + getSensorDesc() + &quot;'&quot; +</span>
+<span class="nc" id="L172">            &quot;, activeFlag='&quot; + getActiveFlag() + &quot;'&quot; +</span>
+<span class="nc" id="L173">            &quot;, createdDate='&quot; + getCreatedDate() + &quot;'&quot; +</span>
+<span class="nc" id="L174">            &quot;, createdBy='&quot; + getCreatedBy() + &quot;'&quot; +</span>
+<span class="nc" id="L175">            &quot;, updatedDate='&quot; + getUpdatedDate() + &quot;'&quot; +</span>
+<span class="nc" id="L176">            &quot;, updatedBy='&quot; + getUpdatedBy() + &quot;'&quot; +</span>
+            &quot;}&quot;;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

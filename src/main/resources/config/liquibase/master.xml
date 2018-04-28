@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <include file="classpath:config/liquibase/changelog/user.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/userrole.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/layout.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/userlayoutmapping.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/sensor.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/kpi.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/section.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/sensordata.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/sectionsensormapping.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/segment.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/sensorcoveragerange.xml" relativeToChangelogFile="false"/>
+  
+    <include file="classpath:config/liquibase/changelog/user_constraints.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/userrole_constraints.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/layout_constraints.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/sensor_constraints.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/kpi_constraints.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/section_constraints.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/sensordata_constraints.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/sectionsensormapping_constraints.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/segment_constraints.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/sensorcoveragerange_constraints.xml" relativeToChangelogFile="false"/>
+</databaseChangeLog>

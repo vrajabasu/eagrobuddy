@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SensorDataResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.web.rest</a> &gt; <span class="el_source">SensorDataResource.java</span></div><h1>SensorDataResource.java</h1><pre class="source lang-java linenums">package com.eagro.web.rest;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.codahale.metrics.annotation.Timed;
+import com.eagro.service.SensorDataService;
+import com.eagro.service.dto.SensorDataDTO;
+import com.eagro.service.exception.BadRequestAlertException;
+import com.eagro.service.utils.HeaderUtil;
+import com.eagro.service.utils.ResponseUtil;
+
+/**
+ * REST controller for managing SensorData.
+ */
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class SensorDataResource {
+
+<span class="nc" id="L31">    private final Logger log = LoggerFactory.getLogger(SensorDataResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;sensorData&quot;;
+
+    private final SensorDataService sensorDataService;
+
+<span class="nc" id="L37">    public SensorDataResource(SensorDataService sensorDataService) {</span>
+<span class="nc" id="L38">        this.sensorDataService = sensorDataService;</span>
+<span class="nc" id="L39">    }</span>
+
+    /**
+     * POST  /sensor-data : Create a new sensorData.
+     *
+     * @param sensorDataDTO the sensorDataDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new sensorDataDTO, or with status 400 (Bad Request) if the sensorData has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @RequestMapping(value = &quot;/sensor-data&quot;,method = RequestMethod.POST)
+    @Timed
+    public ResponseEntity&lt;SensorDataDTO&gt; createSensorData(@RequestBody SensorDataDTO sensorDataDTO) throws URISyntaxException {
+<span class="nc" id="L51">        log.debug(&quot;REST request to save SensorData : {}&quot;, sensorDataDTO);</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (sensorDataDTO.getId() != null) {</span>
+<span class="nc" id="L53">            throw new BadRequestAlertException(&quot;A new sensorData cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }
+<span class="nc" id="L55">        SensorDataDTO result = sensorDataService.save(sensorDataDTO);</span>
+<span class="nc" id="L56">        return ResponseEntity.created(new URI(&quot;/api/sensor-data/&quot; + result.getId()))</span>
+<span class="nc" id="L57">            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L58">            .body(result);</span>
+    }
+
+    /**
+     * PUT  /sensor-data : Updates an existing sensorData.
+     *
+     * @param sensorDataDTO the sensorDataDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated sensorDataDTO,
+     * or with status 400 (Bad Request) if the sensorDataDTO is not valid,
+     * or with status 500 (Internal Server Error) if the sensorDataDTO couldn't be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @RequestMapping(value = &quot;/sensor-data&quot;,method = RequestMethod.PUT)
+    @Timed
+    public ResponseEntity&lt;SensorDataDTO&gt; updateSensorData(@RequestBody SensorDataDTO sensorDataDTO) throws URISyntaxException {
+<span class="nc" id="L73">        log.debug(&quot;REST request to update SensorData : {}&quot;, sensorDataDTO);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (sensorDataDTO.getId() == null) {</span>
+<span class="nc" id="L75">            return createSensorData(sensorDataDTO);</span>
+        }
+<span class="nc" id="L77">        SensorDataDTO result = sensorDataService.save(sensorDataDTO);</span>
+<span class="nc" id="L78">        return ResponseEntity.ok()</span>
+<span class="nc" id="L79">            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, sensorDataDTO.getId().toString()))</span>
+<span class="nc" id="L80">            .body(result);</span>
+    }
+
+    /**
+     * GET  /sensor-data : get all the sensorData.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of sensorData in body
+     */
+    @RequestMapping(value = &quot;/sensor-data&quot;,method = RequestMethod.GET)
+    @Timed
+    public List&lt;SensorDataDTO&gt; getAllSensorData() {
+<span class="nc" id="L91">        log.debug(&quot;REST request to get all SensorData&quot;);</span>
+<span class="nc" id="L92">        return sensorDataService.findAll();</span>
+        }
+
+    /**
+     * GET  /sensor-data/:id : get the &quot;id&quot; sensorData.
+     *
+     * @param id the id of the sensorDataDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the sensorDataDTO, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = &quot;/sensor-data/{id}&quot;,method = RequestMethod.GET)
+    @Timed
+    public ResponseEntity&lt;SensorDataDTO&gt; getSensorData(@PathVariable Long id) {
+<span class="nc" id="L104">        log.debug(&quot;REST request to get SensorData : {}&quot;, id);</span>
+<span class="nc" id="L105">        SensorDataDTO sensorDataDTO = sensorDataService.findOne(id);</span>
+<span class="nc" id="L106">        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(sensorDataDTO));</span>
+    }
+
+    /**
+     * DELETE  /sensor-data/:id : delete the &quot;id&quot; sensorData.
+     *
+     * @param id the id of the sensorDataDTO to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @RequestMapping(value = &quot;/sensor-data/{id}&quot;,method = RequestMethod.DELETE)
+    @Timed
+    public ResponseEntity&lt;Void&gt; deleteSensorData(@PathVariable Long id) {
+<span class="nc" id="L118">        log.debug(&quot;REST request to delete SensorData : {}&quot;, id);</span>
+<span class="nc" id="L119">        sensorDataService.delete(id);</span>
+<span class="nc" id="L120">        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

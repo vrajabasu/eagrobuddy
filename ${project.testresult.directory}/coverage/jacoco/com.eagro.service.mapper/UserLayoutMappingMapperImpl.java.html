@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserLayoutMappingMapperImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.service.mapper</a> &gt; <span class="el_source">UserLayoutMappingMapperImpl.java</span></div><h1>UserLayoutMappingMapperImpl.java</h1><pre class="source lang-java linenums">package com.eagro.service.mapper;
+
+import com.eagro.entities.UserLayoutMapping;
+import com.eagro.service.dto.UserLayoutMappingDTO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2018-04-25T23:58:51+0530&quot;,
+    comments = &quot;version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_60 (Oracle Corporation)&quot;
+)
+@Component
+<span class="nc" id="L16">public class UserLayoutMappingMapperImpl implements UserLayoutMappingMapper {</span>
+
+    @Override
+    public UserLayoutMappingDTO toDto(UserLayoutMapping entity) {
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        if ( entity == null ) {</span>
+<span class="nc" id="L21">            return null;</span>
+        }
+
+<span class="nc" id="L24">        UserLayoutMappingDTO userLayoutMappingDTO = new UserLayoutMappingDTO();</span>
+
+<span class="nc" id="L26">        userLayoutMappingDTO.setId( entity.getId() );</span>
+<span class="nc" id="L27">        userLayoutMappingDTO.setActiveFlag( String.valueOf( entity.isActiveFlag() ) );</span>
+<span class="nc" id="L28">        userLayoutMappingDTO.setCreatedDate( entity.getCreatedDate() );</span>
+<span class="nc" id="L29">        userLayoutMappingDTO.setCreatedBy( entity.getCreatedBy() );</span>
+<span class="nc" id="L30">        userLayoutMappingDTO.setUpdatedDate( entity.getUpdatedDate() );</span>
+<span class="nc" id="L31">        userLayoutMappingDTO.setUpdatedBy( entity.getUpdatedBy() );</span>
+
+<span class="nc" id="L33">        return userLayoutMappingDTO;</span>
+    }
+
+    @Override
+    public List&lt;UserLayoutMapping&gt; toEntity(List&lt;UserLayoutMappingDTO&gt; dtoList) {
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        if ( dtoList == null ) {</span>
+<span class="nc" id="L39">            return null;</span>
+        }
+
+<span class="nc" id="L42">        List&lt;UserLayoutMapping&gt; list = new ArrayList&lt;UserLayoutMapping&gt;( dtoList.size() );</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        for ( UserLayoutMappingDTO userLayoutMappingDTO : dtoList ) {</span>
+<span class="nc" id="L44">            list.add( toEntity( userLayoutMappingDTO ) );</span>
+<span class="nc" id="L45">        }</span>
+
+<span class="nc" id="L47">        return list;</span>
+    }
+
+    @Override
+    public List&lt;UserLayoutMappingDTO&gt; toDto(List&lt;UserLayoutMapping&gt; entityList) {
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if ( entityList == null ) {</span>
+<span class="nc" id="L53">            return null;</span>
+        }
+
+<span class="nc" id="L56">        List&lt;UserLayoutMappingDTO&gt; list = new ArrayList&lt;UserLayoutMappingDTO&gt;( entityList.size() );</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        for ( UserLayoutMapping userLayoutMapping : entityList ) {</span>
+<span class="nc" id="L58">            list.add( toDto( userLayoutMapping ) );</span>
+<span class="nc" id="L59">        }</span>
+
+<span class="nc" id="L61">        return list;</span>
+    }
+
+    @Override
+    public UserLayoutMapping toEntity(UserLayoutMappingDTO userLayoutMappingDTO) {
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if ( userLayoutMappingDTO == null ) {</span>
+<span class="nc" id="L67">            return null;</span>
+        }
+
+<span class="nc" id="L70">        UserLayoutMapping userLayoutMapping = new UserLayoutMapping();</span>
+
+<span class="nc" id="L72">        userLayoutMapping.setId( userLayoutMappingDTO.getId() );</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if ( userLayoutMappingDTO.getActiveFlag() != null ) {</span>
+<span class="nc" id="L74">            userLayoutMapping.setActiveFlag( Boolean.parseBoolean( userLayoutMappingDTO.getActiveFlag() ) );</span>
+        }
+<span class="nc" id="L76">        userLayoutMapping.setCreatedDate( userLayoutMappingDTO.getCreatedDate() );</span>
+<span class="nc" id="L77">        userLayoutMapping.setCreatedBy( userLayoutMappingDTO.getCreatedBy() );</span>
+<span class="nc" id="L78">        userLayoutMapping.setUpdatedDate( userLayoutMappingDTO.getUpdatedDate() );</span>
+<span class="nc" id="L79">        userLayoutMapping.setUpdatedBy( userLayoutMappingDTO.getUpdatedBy() );</span>
+
+<span class="nc" id="L81">        return userLayoutMapping;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

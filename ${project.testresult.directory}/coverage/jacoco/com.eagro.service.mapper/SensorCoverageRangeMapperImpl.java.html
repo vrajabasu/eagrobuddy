@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SensorCoverageRangeMapperImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.service.mapper</a> &gt; <span class="el_source">SensorCoverageRangeMapperImpl.java</span></div><h1>SensorCoverageRangeMapperImpl.java</h1><pre class="source lang-java linenums">package com.eagro.service.mapper;
+
+import com.eagro.entities.Layout;
+import com.eagro.entities.Section;
+import com.eagro.entities.SensorCoverageRange;
+import com.eagro.service.dto.SensorCoverageRangeDTO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2018-04-25T23:58:51+0530&quot;,
+    comments = &quot;version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_60 (Oracle Corporation)&quot;
+)
+@Component
+<span class="nc" id="L19">public class SensorCoverageRangeMapperImpl implements SensorCoverageRangeMapper {</span>
+
+    @Autowired
+    private LayoutMapper layoutMapper;
+    @Autowired
+    private SectionMapper sectionMapper;
+
+    @Override
+    public List&lt;SensorCoverageRange&gt; toEntity(List&lt;SensorCoverageRangeDTO&gt; dtoList) {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if ( dtoList == null ) {</span>
+<span class="nc" id="L29">            return null;</span>
+        }
+
+<span class="nc" id="L32">        List&lt;SensorCoverageRange&gt; list = new ArrayList&lt;SensorCoverageRange&gt;( dtoList.size() );</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        for ( SensorCoverageRangeDTO sensorCoverageRangeDTO : dtoList ) {</span>
+<span class="nc" id="L34">            list.add( toEntity( sensorCoverageRangeDTO ) );</span>
+<span class="nc" id="L35">        }</span>
+
+<span class="nc" id="L37">        return list;</span>
+    }
+
+    @Override
+    public List&lt;SensorCoverageRangeDTO&gt; toDto(List&lt;SensorCoverageRange&gt; entityList) {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if ( entityList == null ) {</span>
+<span class="nc" id="L43">            return null;</span>
+        }
+
+<span class="nc" id="L46">        List&lt;SensorCoverageRangeDTO&gt; list = new ArrayList&lt;SensorCoverageRangeDTO&gt;( entityList.size() );</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        for ( SensorCoverageRange sensorCoverageRange : entityList ) {</span>
+<span class="nc" id="L48">            list.add( toDto( sensorCoverageRange ) );</span>
+<span class="nc" id="L49">        }</span>
+
+<span class="nc" id="L51">        return list;</span>
+    }
+
+    @Override
+    public SensorCoverageRangeDTO toDto(SensorCoverageRange sensorCoverageRange) {
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if ( sensorCoverageRange == null ) {</span>
+<span class="nc" id="L57">            return null;</span>
+        }
+
+<span class="nc" id="L60">        SensorCoverageRangeDTO sensorCoverageRangeDTO = new SensorCoverageRangeDTO();</span>
+
+<span class="nc" id="L62">        Long layoutId = sensorCoverageRangeLayoutLayoutId( sensorCoverageRange );</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if ( layoutId != null ) {</span>
+<span class="nc" id="L64">            sensorCoverageRangeDTO.setLayoutLayoutId( String.valueOf( layoutId ) );</span>
+        }
+<span class="nc" id="L66">        Long sectionId = sensorCoverageRangeSectionSectionId( sensorCoverageRange );</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if ( sectionId != null ) {</span>
+<span class="nc" id="L68">            sensorCoverageRangeDTO.setSectionSectionId( String.valueOf( sectionId ) );</span>
+        }
+<span class="nc" id="L70">        sensorCoverageRangeDTO.setId( sensorCoverageRange.getId() );</span>
+<span class="nc" id="L71">        sensorCoverageRangeDTO.setStartX( sensorCoverageRange.getStartX() );</span>
+<span class="nc" id="L72">        sensorCoverageRangeDTO.setStartY( sensorCoverageRange.getStartY() );</span>
+<span class="nc" id="L73">        sensorCoverageRangeDTO.setEndX( sensorCoverageRange.getEndX() );</span>
+<span class="nc" id="L74">        sensorCoverageRangeDTO.setEndY( sensorCoverageRange.getEndY() );</span>
+<span class="nc" id="L75">        sensorCoverageRangeDTO.setActiveFlag( String.valueOf( sensorCoverageRange.isActiveFlag() ) );</span>
+<span class="nc" id="L76">        sensorCoverageRangeDTO.setCreatedDate( sensorCoverageRange.getCreatedDate() );</span>
+<span class="nc" id="L77">        sensorCoverageRangeDTO.setCreatedBy( sensorCoverageRange.getCreatedBy() );</span>
+<span class="nc" id="L78">        sensorCoverageRangeDTO.setUpdatedDate( sensorCoverageRange.getUpdatedDate() );</span>
+<span class="nc" id="L79">        sensorCoverageRangeDTO.setUpdatedBy( sensorCoverageRange.getUpdatedBy() );</span>
+
+<span class="nc" id="L81">        return sensorCoverageRangeDTO;</span>
+    }
+
+    @Override
+    public SensorCoverageRange toEntity(SensorCoverageRangeDTO sensorCoverageRangeDTO) {
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        if ( sensorCoverageRangeDTO == null ) {</span>
+<span class="nc" id="L87">            return null;</span>
+        }
+
+<span class="nc" id="L90">        SensorCoverageRange sensorCoverageRange = new SensorCoverageRange();</span>
+
+<span class="nc" id="L92">        sensorCoverageRange.setLayout( layoutMapper.fromId( sensorCoverageRangeDTO.getLayoutId() ) );</span>
+<span class="nc" id="L93">        sensorCoverageRange.setSection( sectionMapper.fromId( sensorCoverageRangeDTO.getSectionId() ) );</span>
+<span class="nc" id="L94">        sensorCoverageRange.setId( sensorCoverageRangeDTO.getId() );</span>
+<span class="nc" id="L95">        sensorCoverageRange.setStartX( sensorCoverageRangeDTO.getStartX() );</span>
+<span class="nc" id="L96">        sensorCoverageRange.setStartY( sensorCoverageRangeDTO.getStartY() );</span>
+<span class="nc" id="L97">        sensorCoverageRange.setEndX( sensorCoverageRangeDTO.getEndX() );</span>
+<span class="nc" id="L98">        sensorCoverageRange.setEndY( sensorCoverageRangeDTO.getEndY() );</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        if ( sensorCoverageRangeDTO.getActiveFlag() != null ) {</span>
+<span class="nc" id="L100">            sensorCoverageRange.setActiveFlag( Boolean.parseBoolean( sensorCoverageRangeDTO.getActiveFlag() ) );</span>
+        }
+<span class="nc" id="L102">        sensorCoverageRange.setCreatedDate( sensorCoverageRangeDTO.getCreatedDate() );</span>
+<span class="nc" id="L103">        sensorCoverageRange.setCreatedBy( sensorCoverageRangeDTO.getCreatedBy() );</span>
+<span class="nc" id="L104">        sensorCoverageRange.setUpdatedDate( sensorCoverageRangeDTO.getUpdatedDate() );</span>
+<span class="nc" id="L105">        sensorCoverageRange.setUpdatedBy( sensorCoverageRangeDTO.getUpdatedBy() );</span>
+
+<span class="nc" id="L107">        return sensorCoverageRange;</span>
+    }
+
+    private Long sensorCoverageRangeLayoutLayoutId(SensorCoverageRange sensorCoverageRange) {
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if ( sensorCoverageRange == null ) {</span>
+<span class="nc" id="L112">            return null;</span>
+        }
+<span class="nc" id="L114">        Layout layout = sensorCoverageRange.getLayout();</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if ( layout == null ) {</span>
+<span class="nc" id="L116">            return null;</span>
+        }
+<span class="nc" id="L118">        Long layoutId = layout.getLayoutId();</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        if ( layoutId == null ) {</span>
+<span class="nc" id="L120">            return null;</span>
+        }
+<span class="nc" id="L122">        return layoutId;</span>
+    }
+
+    private Long sensorCoverageRangeSectionSectionId(SensorCoverageRange sensorCoverageRange) {
+<span class="nc bnc" id="L126" title="All 2 branches missed.">        if ( sensorCoverageRange == null ) {</span>
+<span class="nc" id="L127">            return null;</span>
+        }
+<span class="nc" id="L129">        Section section = sensorCoverageRange.getSection();</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">        if ( section == null ) {</span>
+<span class="nc" id="L131">            return null;</span>
+        }
+<span class="nc" id="L133">        Long sectionId = section.getSectionId();</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        if ( sectionId == null ) {</span>
+<span class="nc" id="L135">            return null;</span>
+        }
+<span class="nc" id="L137">        return sectionId;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

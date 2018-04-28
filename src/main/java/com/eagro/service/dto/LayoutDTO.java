@@ -1,0 +1,164 @@
+package com.eagro.service.dto;
+
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+/**
+ * A DTO for the Layout entity.
+ */
+public class LayoutDTO implements Serializable {
+
+    private Long layoutId;
+
+    private String layoutName;
+
+    private String layoutDesc;
+
+    private Double widthX;
+
+    private Double heightY;
+
+    private boolean activeFlag;
+
+    private LocalDate createdDate;
+
+    private String createdBy;
+
+    private LocalDate updatedDate;
+
+    private String updatedBy;
+
+    private Set<UserLayoutMappingDTO> userLayoutMappings = new HashSet<>();
+
+
+    public Long getLayoutId() {
+        return layoutId;
+    }
+
+    public void setLayoutId(Long layoutId) {
+        this.layoutId = layoutId;
+    }
+
+    public String getLayoutName() {
+        return layoutName;
+    }
+
+    public void setLayoutName(String layoutName) {
+        this.layoutName = layoutName;
+    }
+
+    public String getLayoutDesc() {
+        return layoutDesc;
+    }
+
+    public void setLayoutDesc(String layoutDesc) {
+        this.layoutDesc = layoutDesc;
+    }
+
+    public Double getWidthX() {
+        return widthX;
+    }
+
+    public void setWidthX(Double widthX) {
+        this.widthX = widthX;
+    }
+
+    public Double getHeightY() {
+        return heightY;
+    }
+
+    public void setHeightY(Double heightY) {
+        this.heightY = heightY;
+    }
+
+
+
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public LocalDate getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(LocalDate updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public Set<UserLayoutMappingDTO> getUserLayoutMappings() {
+        return userLayoutMappings;
+    }
+
+    public void setUserLayoutMappings(Set<UserLayoutMappingDTO> userLayoutMappings) {
+        this.userLayoutMappings = userLayoutMappings;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        LayoutDTO layoutDTO = (LayoutDTO) o;
+        if(layoutDTO.getLayoutId() == null || getLayoutId() == null) {
+            return false;
+        }
+        return Objects.equals(getLayoutId(), layoutDTO.getLayoutId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getLayoutId());
+    }
+
+    @Override
+    public String toString() {
+        return "LayoutDTO{" +
+            ", layoutId=" + getLayoutId() +
+            ", layoutName='" + getLayoutName() + "'" +
+            ", layoutDesc='" + getLayoutDesc() + "'" +
+            ", widthX=" + getWidthX() +
+            ", heightY=" + getHeightY() +
+            ", activeFlag='" + isActiveFlag() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
+            ", createdBy='" + getCreatedBy() + "'" +
+            ", updatedDate='" + getUpdatedDate() + "'" +
+            ", updatedBy='" + getUpdatedBy() + "'" +
+            "}";
+    }
+
+	public boolean isActiveFlag() {
+		return activeFlag;
+	}
+
+	public void setActiveFlag(boolean activeFlag) {
+		this.activeFlag = activeFlag;
+	}
+}

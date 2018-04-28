@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SensorMapperImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.service.mapper</a> &gt; <span class="el_source">SensorMapperImpl.java</span></div><h1>SensorMapperImpl.java</h1><pre class="source lang-java linenums">package com.eagro.service.mapper;
+
+import com.eagro.entities.Layout;
+import com.eagro.entities.SectionSensorMapping;
+import com.eagro.entities.Sensor;
+import com.eagro.entities.SensorCoverageRange;
+import com.eagro.entities.SensorData;
+import com.eagro.service.dto.SectionSensorMappingDTO;
+import com.eagro.service.dto.SensorCoverageRangeDTO;
+import com.eagro.service.dto.SensorDTO;
+import com.eagro.service.dto.SensorDataDTO;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.annotation.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2018-04-25T23:58:52+0530&quot;,
+    comments = &quot;version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_60 (Oracle Corporation)&quot;
+)
+@Component
+<span class="nc" id="L26">public class SensorMapperImpl implements SensorMapper {</span>
+
+    @Autowired
+    private SensorCoverageRangeMapper sensorCoverageRangeMapper;
+    @Autowired
+    private SectionSensorMappingMapper sectionSensorMappingMapper;
+    @Autowired
+    private SensorDataMapper sensorDataMapper;
+    @Autowired
+    private LayoutMapper layoutMapper;
+
+    @Override
+    public List&lt;Sensor&gt; toEntity(List&lt;SensorDTO&gt; dtoList) {
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if ( dtoList == null ) {</span>
+<span class="nc" id="L40">            return null;</span>
+        }
+
+<span class="nc" id="L43">        List&lt;Sensor&gt; list = new ArrayList&lt;Sensor&gt;( dtoList.size() );</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        for ( SensorDTO sensorDTO : dtoList ) {</span>
+<span class="nc" id="L45">            list.add( toEntity( sensorDTO ) );</span>
+<span class="nc" id="L46">        }</span>
+
+<span class="nc" id="L48">        return list;</span>
+    }
+
+    @Override
+    public List&lt;SensorDTO&gt; toDto(List&lt;Sensor&gt; entityList) {
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if ( entityList == null ) {</span>
+<span class="nc" id="L54">            return null;</span>
+        }
+
+<span class="nc" id="L57">        List&lt;SensorDTO&gt; list = new ArrayList&lt;SensorDTO&gt;( entityList.size() );</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        for ( Sensor sensor : entityList ) {</span>
+<span class="nc" id="L59">            list.add( toDto( sensor ) );</span>
+<span class="nc" id="L60">        }</span>
+
+<span class="nc" id="L62">        return list;</span>
+    }
+
+    @Override
+    public SensorDTO toDto(Sensor sensor) {
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if ( sensor == null ) {</span>
+<span class="nc" id="L68">            return null;</span>
+        }
+
+<span class="nc" id="L71">        SensorDTO sensorDTO = new SensorDTO();</span>
+
+<span class="nc" id="L73">        Long layoutId = sensorLayoutLayoutId( sensor );</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if ( layoutId != null ) {</span>
+<span class="nc" id="L75">            sensorDTO.setLayoutLayoutId( String.valueOf( layoutId ) );</span>
+        }
+<span class="nc" id="L77">        sensorDTO.setId( sensor.getId() );</span>
+<span class="nc" id="L78">        sensorDTO.setSensorName( sensor.getSensorName() );</span>
+<span class="nc" id="L79">        sensorDTO.setSensorDesc( sensor.getSensorDesc() );</span>
+<span class="nc" id="L80">        sensorDTO.setActiveFlag( String.valueOf( sensor.isActiveFlag() ) );</span>
+<span class="nc" id="L81">        sensorDTO.setCreatedDate( sensor.getCreatedDate() );</span>
+<span class="nc" id="L82">        sensorDTO.setCreatedBy( sensor.getCreatedBy() );</span>
+<span class="nc" id="L83">        sensorDTO.setUpdatedDate( sensor.getUpdatedDate() );</span>
+<span class="nc" id="L84">        sensorDTO.setUpdatedBy( sensor.getUpdatedBy() );</span>
+<span class="nc" id="L85">        sensorDTO.setSensorCoverageRanges( sensorCoverageRangeSetToSensorCoverageRangeDTOSet( sensor.getSensorCoverageRanges() ) );</span>
+<span class="nc" id="L86">        sensorDTO.setSectionSensorMappings( sectionSensorMappingSetToSectionSensorMappingDTOSet( sensor.getSectionSensorMappings() ) );</span>
+<span class="nc" id="L87">        sensorDTO.setSensorData( sensorDataSetToSensorDataDTOSet( sensor.getSensorData() ) );</span>
+
+<span class="nc" id="L89">        return sensorDTO;</span>
+    }
+
+    @Override
+    public Sensor toEntity(SensorDTO sensorDTO) {
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if ( sensorDTO == null ) {</span>
+<span class="nc" id="L95">            return null;</span>
+        }
+
+<span class="nc" id="L98">        Sensor sensor = new Sensor();</span>
+
+<span class="nc" id="L100">        sensor.setLayout( layoutMapper.fromId( sensorDTO.getLayoutId() ) );</span>
+<span class="nc" id="L101">        sensor.setId( sensorDTO.getId() );</span>
+<span class="nc" id="L102">        sensor.setSensorName( sensorDTO.getSensorName() );</span>
+<span class="nc" id="L103">        sensor.setSensorDesc( sensorDTO.getSensorDesc() );</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        if ( sensorDTO.getActiveFlag() != null ) {</span>
+<span class="nc" id="L105">            sensor.setActiveFlag( Boolean.parseBoolean( sensorDTO.getActiveFlag() ) );</span>
+        }
+<span class="nc" id="L107">        sensor.setCreatedDate( sensorDTO.getCreatedDate() );</span>
+<span class="nc" id="L108">        sensor.setCreatedBy( sensorDTO.getCreatedBy() );</span>
+<span class="nc" id="L109">        sensor.setUpdatedDate( sensorDTO.getUpdatedDate() );</span>
+<span class="nc" id="L110">        sensor.setUpdatedBy( sensorDTO.getUpdatedBy() );</span>
+<span class="nc" id="L111">        sensor.setSensorCoverageRanges( sensorCoverageRangeDTOSetToSensorCoverageRangeSet( sensorDTO.getSensorCoverageRanges() ) );</span>
+<span class="nc" id="L112">        sensor.setSectionSensorMappings( sectionSensorMappingDTOSetToSectionSensorMappingSet( sensorDTO.getSectionSensorMappings() ) );</span>
+<span class="nc" id="L113">        sensor.setSensorData( sensorDataDTOSetToSensorDataSet( sensorDTO.getSensorData() ) );</span>
+
+<span class="nc" id="L115">        return sensor;</span>
+    }
+
+    private Long sensorLayoutLayoutId(Sensor sensor) {
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        if ( sensor == null ) {</span>
+<span class="nc" id="L120">            return null;</span>
+        }
+<span class="nc" id="L122">        Layout layout = sensor.getLayout();</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        if ( layout == null ) {</span>
+<span class="nc" id="L124">            return null;</span>
+        }
+<span class="nc" id="L126">        Long layoutId = layout.getLayoutId();</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        if ( layoutId == null ) {</span>
+<span class="nc" id="L128">            return null;</span>
+        }
+<span class="nc" id="L130">        return layoutId;</span>
+    }
+
+    protected Set&lt;SensorCoverageRangeDTO&gt; sensorCoverageRangeSetToSensorCoverageRangeDTOSet(Set&lt;SensorCoverageRange&gt; set) {
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        if ( set == null ) {</span>
+<span class="nc" id="L135">            return null;</span>
+        }
+
+<span class="nc" id="L138">        Set&lt;SensorCoverageRangeDTO&gt; set1 = new HashSet&lt;SensorCoverageRangeDTO&gt;( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        for ( SensorCoverageRange sensorCoverageRange : set ) {</span>
+<span class="nc" id="L140">            set1.add( sensorCoverageRangeMapper.toDto( sensorCoverageRange ) );</span>
+<span class="nc" id="L141">        }</span>
+
+<span class="nc" id="L143">        return set1;</span>
+    }
+
+    protected Set&lt;SectionSensorMappingDTO&gt; sectionSensorMappingSetToSectionSensorMappingDTOSet(Set&lt;SectionSensorMapping&gt; set) {
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        if ( set == null ) {</span>
+<span class="nc" id="L148">            return null;</span>
+        }
+
+<span class="nc" id="L151">        Set&lt;SectionSensorMappingDTO&gt; set1 = new HashSet&lt;SectionSensorMappingDTO&gt;( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">        for ( SectionSensorMapping sectionSensorMapping : set ) {</span>
+<span class="nc" id="L153">            set1.add( sectionSensorMappingMapper.toDto( sectionSensorMapping ) );</span>
+<span class="nc" id="L154">        }</span>
+
+<span class="nc" id="L156">        return set1;</span>
+    }
+
+    protected Set&lt;SensorDataDTO&gt; sensorDataSetToSensorDataDTOSet(Set&lt;SensorData&gt; set) {
+<span class="nc bnc" id="L160" title="All 2 branches missed.">        if ( set == null ) {</span>
+<span class="nc" id="L161">            return null;</span>
+        }
+
+<span class="nc" id="L164">        Set&lt;SensorDataDTO&gt; set1 = new HashSet&lt;SensorDataDTO&gt;( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">        for ( SensorData sensorData : set ) {</span>
+<span class="nc" id="L166">            set1.add( sensorDataMapper.toDto( sensorData ) );</span>
+<span class="nc" id="L167">        }</span>
+
+<span class="nc" id="L169">        return set1;</span>
+    }
+
+    protected Set&lt;SensorCoverageRange&gt; sensorCoverageRangeDTOSetToSensorCoverageRangeSet(Set&lt;SensorCoverageRangeDTO&gt; set) {
+<span class="nc bnc" id="L173" title="All 2 branches missed.">        if ( set == null ) {</span>
+<span class="nc" id="L174">            return null;</span>
+        }
+
+<span class="nc" id="L177">        Set&lt;SensorCoverageRange&gt; set1 = new HashSet&lt;SensorCoverageRange&gt;( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">        for ( SensorCoverageRangeDTO sensorCoverageRangeDTO : set ) {</span>
+<span class="nc" id="L179">            set1.add( sensorCoverageRangeMapper.toEntity( sensorCoverageRangeDTO ) );</span>
+<span class="nc" id="L180">        }</span>
+
+<span class="nc" id="L182">        return set1;</span>
+    }
+
+    protected Set&lt;SectionSensorMapping&gt; sectionSensorMappingDTOSetToSectionSensorMappingSet(Set&lt;SectionSensorMappingDTO&gt; set) {
+<span class="nc bnc" id="L186" title="All 2 branches missed.">        if ( set == null ) {</span>
+<span class="nc" id="L187">            return null;</span>
+        }
+
+<span class="nc" id="L190">        Set&lt;SectionSensorMapping&gt; set1 = new HashSet&lt;SectionSensorMapping&gt;( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">        for ( SectionSensorMappingDTO sectionSensorMappingDTO : set ) {</span>
+<span class="nc" id="L192">            set1.add( sectionSensorMappingMapper.toEntity( sectionSensorMappingDTO ) );</span>
+<span class="nc" id="L193">        }</span>
+
+<span class="nc" id="L195">        return set1;</span>
+    }
+
+    protected Set&lt;SensorData&gt; sensorDataDTOSetToSensorDataSet(Set&lt;SensorDataDTO&gt; set) {
+<span class="nc bnc" id="L199" title="All 2 branches missed.">        if ( set == null ) {</span>
+<span class="nc" id="L200">            return null;</span>
+        }
+
+<span class="nc" id="L203">        Set&lt;SensorData&gt; set1 = new HashSet&lt;SensorData&gt;( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">        for ( SensorDataDTO sensorDataDTO : set ) {</span>
+<span class="nc" id="L205">            set1.add( sensorDataMapper.toEntity( sensorDataDTO ) );</span>
+<span class="nc" id="L206">        }</span>
+
+<span class="nc" id="L208">        return set1;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

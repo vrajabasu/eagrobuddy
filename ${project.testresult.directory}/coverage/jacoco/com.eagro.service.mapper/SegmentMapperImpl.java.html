@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SegmentMapperImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.service.mapper</a> &gt; <span class="el_source">SegmentMapperImpl.java</span></div><h1>SegmentMapperImpl.java</h1><pre class="source lang-java linenums">package com.eagro.service.mapper;
+
+import com.eagro.entities.Layout;
+import com.eagro.entities.Section;
+import com.eagro.entities.Segment;
+import com.eagro.service.dto.SegmentDTO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2018-04-25T23:58:52+0530&quot;,
+    comments = &quot;version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_60 (Oracle Corporation)&quot;
+)
+@Component
+<span class="nc" id="L19">public class SegmentMapperImpl implements SegmentMapper {</span>
+
+    @Autowired
+    private LayoutMapper layoutMapper;
+    @Autowired
+    private SectionMapper sectionMapper;
+
+    @Override
+    public List&lt;Segment&gt; toEntity(List&lt;SegmentDTO&gt; dtoList) {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if ( dtoList == null ) {</span>
+<span class="nc" id="L29">            return null;</span>
+        }
+
+<span class="nc" id="L32">        List&lt;Segment&gt; list = new ArrayList&lt;Segment&gt;( dtoList.size() );</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        for ( SegmentDTO segmentDTO : dtoList ) {</span>
+<span class="nc" id="L34">            list.add( toEntity( segmentDTO ) );</span>
+<span class="nc" id="L35">        }</span>
+
+<span class="nc" id="L37">        return list;</span>
+    }
+
+    @Override
+    public List&lt;SegmentDTO&gt; toDto(List&lt;Segment&gt; entityList) {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if ( entityList == null ) {</span>
+<span class="nc" id="L43">            return null;</span>
+        }
+
+<span class="nc" id="L46">        List&lt;SegmentDTO&gt; list = new ArrayList&lt;SegmentDTO&gt;( entityList.size() );</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        for ( Segment segment : entityList ) {</span>
+<span class="nc" id="L48">            list.add( toDto( segment ) );</span>
+<span class="nc" id="L49">        }</span>
+
+<span class="nc" id="L51">        return list;</span>
+    }
+
+    @Override
+    public SegmentDTO toDto(Segment segment) {
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if ( segment == null ) {</span>
+<span class="nc" id="L57">            return null;</span>
+        }
+
+<span class="nc" id="L60">        SegmentDTO segmentDTO = new SegmentDTO();</span>
+
+<span class="nc" id="L62">        Long layoutId = segmentLayoutLayoutId( segment );</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if ( layoutId != null ) {</span>
+<span class="nc" id="L64">            segmentDTO.setLayoutLayoutId( String.valueOf( layoutId ) );</span>
+        }
+<span class="nc" id="L66">        Long sectionId = segmentSectionSectionId( segment );</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if ( sectionId != null ) {</span>
+<span class="nc" id="L68">            segmentDTO.setSectionSectionId( String.valueOf( sectionId ) );</span>
+        }
+<span class="nc" id="L70">        segmentDTO.setSegmentId( segment.getSegmentId() );</span>
+<span class="nc" id="L71">        segmentDTO.setSegmentName( segment.getSegmentName() );</span>
+<span class="nc" id="L72">        segmentDTO.setSegmentDesc( segment.getSegmentDesc() );</span>
+<span class="nc" id="L73">        segmentDTO.setStartX( segment.getStartX() );</span>
+<span class="nc" id="L74">        segmentDTO.setStartY( segment.getStartY() );</span>
+<span class="nc" id="L75">        segmentDTO.setEndX( segment.getEndX() );</span>
+<span class="nc" id="L76">        segmentDTO.setEndY( segment.getEndY() );</span>
+<span class="nc" id="L77">        segmentDTO.setActiveFlag( segment.getActiveFlag() );</span>
+<span class="nc" id="L78">        segmentDTO.setCreatedDate( segment.getCreatedDate() );</span>
+<span class="nc" id="L79">        segmentDTO.setCreatedBy( segment.getCreatedBy() );</span>
+<span class="nc" id="L80">        segmentDTO.setUpdatedDate( segment.getUpdatedDate() );</span>
+<span class="nc" id="L81">        segmentDTO.setUpdatedBy( segment.getUpdatedBy() );</span>
+
+<span class="nc" id="L83">        return segmentDTO;</span>
+    }
+
+    @Override
+    public Segment toEntity(SegmentDTO segmentDTO) {
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        if ( segmentDTO == null ) {</span>
+<span class="nc" id="L89">            return null;</span>
+        }
+
+<span class="nc" id="L92">        Segment segment = new Segment();</span>
+
+<span class="nc" id="L94">        segment.setLayout( layoutMapper.fromId( segmentDTO.getLayoutId() ) );</span>
+<span class="nc" id="L95">        segment.setSection( sectionMapper.fromId( segmentDTO.getSectionId() ) );</span>
+<span class="nc" id="L96">        segment.setSegmentId( segmentDTO.getSegmentId() );</span>
+<span class="nc" id="L97">        segment.setSegmentName( segmentDTO.getSegmentName() );</span>
+<span class="nc" id="L98">        segment.setSegmentDesc( segmentDTO.getSegmentDesc() );</span>
+<span class="nc" id="L99">        segment.setStartX( segmentDTO.getStartX() );</span>
+<span class="nc" id="L100">        segment.setStartY( segmentDTO.getStartY() );</span>
+<span class="nc" id="L101">        segment.setEndX( segmentDTO.getEndX() );</span>
+<span class="nc" id="L102">        segment.setEndY( segmentDTO.getEndY() );</span>
+<span class="nc" id="L103">        segment.setActiveFlag( segmentDTO.getActiveFlag() );</span>
+<span class="nc" id="L104">        segment.setCreatedDate( segmentDTO.getCreatedDate() );</span>
+<span class="nc" id="L105">        segment.setCreatedBy( segmentDTO.getCreatedBy() );</span>
+<span class="nc" id="L106">        segment.setUpdatedDate( segmentDTO.getUpdatedDate() );</span>
+<span class="nc" id="L107">        segment.setUpdatedBy( segmentDTO.getUpdatedBy() );</span>
+
+<span class="nc" id="L109">        return segment;</span>
+    }
+
+    private Long segmentLayoutLayoutId(Segment segment) {
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        if ( segment == null ) {</span>
+<span class="nc" id="L114">            return null;</span>
+        }
+<span class="nc" id="L116">        Layout layout = segment.getLayout();</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        if ( layout == null ) {</span>
+<span class="nc" id="L118">            return null;</span>
+        }
+<span class="nc" id="L120">        Long layoutId = layout.getLayoutId();</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        if ( layoutId == null ) {</span>
+<span class="nc" id="L122">            return null;</span>
+        }
+<span class="nc" id="L124">        return layoutId;</span>
+    }
+
+    private Long segmentSectionSectionId(Segment segment) {
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        if ( segment == null ) {</span>
+<span class="nc" id="L129">            return null;</span>
+        }
+<span class="nc" id="L131">        Section section = segment.getSection();</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">        if ( section == null ) {</span>
+<span class="nc" id="L133">            return null;</span>
+        }
+<span class="nc" id="L135">        Long sectionId = section.getSectionId();</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        if ( sectionId == null ) {</span>
+<span class="nc" id="L137">            return null;</span>
+        }
+<span class="nc" id="L139">        return sectionId;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

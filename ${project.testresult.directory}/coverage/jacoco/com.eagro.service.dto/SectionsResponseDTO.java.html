@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SectionsResponseDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.service.dto</a> &gt; <span class="el_source">SectionsResponseDTO.java</span></div><h1>SectionsResponseDTO.java</h1><pre class="source lang-java linenums">package com.eagro.service.dto;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import javax.validation.Valid;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.wordnik.swagger.annotations.ApiModel;
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
+/**
+ * Representation of one of the section details.
+ */
+@ApiModel(description = &quot;Representation of one of the section details.&quot;)
+@Validated
+@javax.annotation.Generated(value = &quot;io.swagger.codegen.languages.SpringCodegen&quot;, date = &quot;2018-04-25T19:49:05.151Z&quot;)
+
+<span class="nc" id="L23">public class SectionsResponseDTO   {</span>
+<span class="nc" id="L24">  @JsonProperty(&quot;sectionId&quot;)</span>
+  private Long sectionId = null;
+
+<span class="nc" id="L27">  @JsonProperty(&quot;sectionName&quot;)</span>
+  private String sectionName = null;
+
+<span class="nc" id="L30">  @JsonProperty(&quot;sectionDescription&quot;)</span>
+  private String sectionDesc = null;
+
+<span class="nc" id="L33">  @JsonProperty(&quot;activeFlag&quot;)</span>
+  private Boolean activeFlag = null;
+
+<span class="nc" id="L36">  @JsonProperty(&quot;startX&quot;)</span>
+  private Double startX = null;
+
+<span class="nc" id="L39">  @JsonProperty(&quot;startY&quot;)</span>
+  private Double startY = null;
+
+<span class="nc" id="L42">  @JsonProperty(&quot;endX&quot;)</span>
+  private Double endX = null;
+
+<span class="nc" id="L45">  @JsonProperty(&quot;endY&quot;)</span>
+  private Double endY = null;
+
+<span class="nc" id="L48">  @JsonProperty(&quot;segments&quot;)</span>
+  @Valid
+  private List&lt;SegmentsResponseDTO&gt; segmentsResponseDTO = null;
+
+  public SectionsResponseDTO sectionId(Long sectionId) {
+<span class="nc" id="L53">    this.sectionId = sectionId;</span>
+<span class="nc" id="L54">    return this;</span>
+  }
+
+  /**
+   * The section Id
+   * @return sectionId
+  **/
+  @ApiModelProperty(value = &quot;The section Id&quot;)
+
+  @Valid
+
+  public Long getSectionId() {
+<span class="nc" id="L66">    return sectionId;</span>
+  }
+
+  public void setSectionId(Long sectionId) {
+<span class="nc" id="L70">    this.sectionId = sectionId;</span>
+<span class="nc" id="L71">  }</span>
+
+  public SectionsResponseDTO sectionName(String sectionName) {
+<span class="nc" id="L74">    this.sectionName = sectionName;</span>
+<span class="nc" id="L75">    return this;</span>
+  }
+
+  /**
+   * The name of the KPI.
+   * @return sectionName
+  **/
+  @ApiModelProperty(value = &quot;The name of the KPI.&quot;)
+
+
+  public String getSectionName() {
+<span class="nc" id="L86">    return sectionName;</span>
+  }
+
+  public void setSectionName(String sectionName) {
+<span class="nc" id="L90">    this.sectionName = sectionName;</span>
+<span class="nc" id="L91">  }</span>
+
+  public SectionsResponseDTO sectionDescription(String sectionDescription) {
+<span class="nc" id="L94">    this.sectionDesc = sectionDescription;</span>
+<span class="nc" id="L95">    return this;</span>
+  }
+
+  /**
+   * Get sectionDescription
+   * @return sectionDescription
+  **/
+  @ApiModelProperty(value = &quot;&quot;)
+
+
+  public String getSectionDescription() {
+<span class="nc" id="L106">    return sectionDesc;</span>
+  }
+
+  public void setSectionDescription(String sectionDescription) {
+<span class="nc" id="L110">    this.sectionDesc = sectionDescription;</span>
+<span class="nc" id="L111">  }</span>
+
+  public SectionsResponseDTO activeFlag(Boolean activeFlag) {
+<span class="nc" id="L114">    this.activeFlag = activeFlag;</span>
+<span class="nc" id="L115">    return this;</span>
+  }
+
+  /**
+   * The KPI is currently active or not(e.g. 'ON' or 'OFF').
+   * @return activeFlag
+  **/
+  @ApiModelProperty(value = &quot;The KPI is currently active or not(e.g. 'ON' or 'OFF').&quot;)
+
+
+  public Boolean isActiveFlag() {
+<span class="nc" id="L126">    return activeFlag;</span>
+  }
+
+  public void setActiveFlag(Boolean activeFlag) {
+<span class="nc" id="L130">    this.activeFlag = activeFlag;</span>
+<span class="nc" id="L131">  }</span>
+
+  public SectionsResponseDTO startX(Double startX) {
+<span class="nc" id="L134">    this.startX = startX;</span>
+<span class="nc" id="L135">    return this;</span>
+  }
+
+  /**
+   * The startX coordinates for specific section.
+   * @return startX
+  **/
+  @ApiModelProperty(value = &quot;The startX coordinates for specific section.&quot;)
+
+
+  public Double getStartX() {
+<span class="nc" id="L146">    return startX;</span>
+  }
+
+  public void setStartX(Double startX) {
+<span class="nc" id="L150">    this.startX = startX;</span>
+<span class="nc" id="L151">  }</span>
+
+  public SectionsResponseDTO startY(Double startY) {
+<span class="nc" id="L154">    this.startY = startY;</span>
+<span class="nc" id="L155">    return this;</span>
+  }
+
+  /**
+   * The startY coordinates for specific section.
+   * @return startY
+  **/
+  @ApiModelProperty(value = &quot;The startY coordinates for specific section.&quot;)
+
+
+  public Double getStartY() {
+<span class="nc" id="L166">    return startY;</span>
+  }
+
+  public void setStartY(Double startY) {
+<span class="nc" id="L170">    this.startY = startY;</span>
+<span class="nc" id="L171">  }</span>
+
+  public SectionsResponseDTO endX(Double endX) {
+<span class="nc" id="L174">    this.endX = endX;</span>
+<span class="nc" id="L175">    return this;</span>
+  }
+
+  /**
+   * The endX coordinates for specific section.
+   * @return endX
+  **/
+  @ApiModelProperty(value = &quot;The endX coordinates for specific section.&quot;)
+
+
+  public Double getEndX() {
+<span class="nc" id="L186">    return endX;</span>
+  }
+
+  public void setEndX(Double endX) {
+<span class="nc" id="L190">    this.endX = endX;</span>
+<span class="nc" id="L191">  }</span>
+
+  public SectionsResponseDTO endY(Double endY) {
+<span class="nc" id="L194">    this.endY = endY;</span>
+<span class="nc" id="L195">    return this;</span>
+  }
+
+  /**
+   * The endY coordinates for specific section.
+   * @return endY
+  **/
+  @ApiModelProperty(value = &quot;The endY coordinates for specific section.&quot;)
+
+
+  public Double getEndY() {
+<span class="nc" id="L206">    return endY;</span>
+  }
+
+  public void setEndY(Double endY) {
+<span class="nc" id="L210">    this.endY = endY;</span>
+<span class="nc" id="L211">  }</span>
+
+  public SectionsResponseDTO segmentsResponseDTO(List&lt;SegmentsResponseDTO&gt; segmentsResponseDTO) {
+<span class="nc" id="L214">    this.segmentsResponseDTO = segmentsResponseDTO;</span>
+<span class="nc" id="L215">    return this;</span>
+  }
+
+  public SectionsResponseDTO addSegmentsItem(SegmentsResponseDTO segmentsItem) {
+<span class="nc bnc" id="L219" title="All 2 branches missed.">    if (this.segmentsResponseDTO == null) {</span>
+<span class="nc" id="L220">      this.segmentsResponseDTO = new ArrayList&lt;SegmentsResponseDTO&gt;();</span>
+    }
+<span class="nc" id="L222">    this.segmentsResponseDTO.add(segmentsItem);</span>
+<span class="nc" id="L223">    return this;</span>
+  }
+
+  /**
+   * Represnts a list of segments for specific sections.
+   * @return segments
+  **/
+  @ApiModelProperty(value = &quot;Represnts a list of segments for specific sections.&quot;)
+
+  @Valid
+
+  public List&lt;SegmentsResponseDTO&gt; getSegments() {
+<span class="nc" id="L235">    return segmentsResponseDTO;</span>
+  }
+
+  public void setSegments(List&lt;SegmentsResponseDTO&gt; segmentsResponseDTO) {
+<span class="nc" id="L239">    this.segmentsResponseDTO = segmentsResponseDTO;</span>
+<span class="nc" id="L240">  }</span>
+
+
+  @Override
+  public boolean equals(java.lang.Object o) {
+<span class="nc bnc" id="L245" title="All 2 branches missed.">    if (this == o) {</span>
+<span class="nc" id="L246">      return true;</span>
+    }
+<span class="nc bnc" id="L248" title="All 4 branches missed.">    if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L249">      return false;</span>
+    }
+<span class="nc" id="L251">    SectionsResponseDTO sectionsResponseDTO = (SectionsResponseDTO) o;</span>
+<span class="nc bnc" id="L252" title="All 2 branches missed.">    return Objects.equals(this.sectionId, sectionsResponseDTO.sectionId) &amp;&amp;</span>
+<span class="nc bnc" id="L253" title="All 2 branches missed.">        Objects.equals(this.sectionName, sectionsResponseDTO.sectionName) &amp;&amp;</span>
+<span class="nc bnc" id="L254" title="All 2 branches missed.">        Objects.equals(this.sectionDesc, sectionsResponseDTO.sectionDesc) &amp;&amp;</span>
+<span class="nc bnc" id="L255" title="All 2 branches missed.">        Objects.equals(this.activeFlag, sectionsResponseDTO.activeFlag) &amp;&amp;</span>
+<span class="nc bnc" id="L256" title="All 2 branches missed.">        Objects.equals(this.startX, sectionsResponseDTO.startX) &amp;&amp;</span>
+<span class="nc bnc" id="L257" title="All 2 branches missed.">        Objects.equals(this.startY, sectionsResponseDTO.startY) &amp;&amp;</span>
+<span class="nc bnc" id="L258" title="All 2 branches missed.">        Objects.equals(this.endX, sectionsResponseDTO.endX) &amp;&amp;</span>
+<span class="nc bnc" id="L259" title="All 2 branches missed.">        Objects.equals(this.endY, sectionsResponseDTO.endY) &amp;&amp;</span>
+<span class="nc bnc" id="L260" title="All 2 branches missed.">        Objects.equals(this.segmentsResponseDTO, sectionsResponseDTO.segmentsResponseDTO);</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L265">    return Objects.hash(sectionId, sectionName, sectionDesc, activeFlag, startX, startY, endX, endY, segmentsResponseDTO);</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L270">    StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L271">    sb.append(&quot;class Sections1 {\n&quot;);</span>
+    
+<span class="nc" id="L273">    sb.append(&quot;    sectionId: &quot;).append(toIndentedString(sectionId)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L274">    sb.append(&quot;    sectionName: &quot;).append(toIndentedString(sectionName)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L275">    sb.append(&quot;    sectionDescription: &quot;).append(toIndentedString(sectionDesc)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L276">    sb.append(&quot;    activeFlag: &quot;).append(toIndentedString(activeFlag)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L277">    sb.append(&quot;    startX: &quot;).append(toIndentedString(startX)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L278">    sb.append(&quot;    startY: &quot;).append(toIndentedString(startY)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L279">    sb.append(&quot;    endX: &quot;).append(toIndentedString(endX)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L280">    sb.append(&quot;    endY: &quot;).append(toIndentedString(endY)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L281">    sb.append(&quot;    segments: &quot;).append(toIndentedString(segmentsResponseDTO)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L282">    sb.append(&quot;}&quot;);</span>
+<span class="nc" id="L283">    return sb.toString();</span>
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(java.lang.Object o) {
+<span class="nc bnc" id="L291" title="All 2 branches missed.">    if (o == null) {</span>
+<span class="nc" id="L292">      return &quot;null&quot;;</span>
+    }
+<span class="nc" id="L294">    return o.toString().replace(&quot;\n&quot;, &quot;\n    &quot;);</span>
+  }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

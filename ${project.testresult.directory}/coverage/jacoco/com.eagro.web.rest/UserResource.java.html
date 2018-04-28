@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.web.rest</a> &gt; <span class="el_source">UserResource.java</span></div><h1>UserResource.java</h1><pre class="source lang-java linenums">package com.eagro.web.rest;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.codahale.metrics.annotation.Timed;
+import com.eagro.service.UserService;
+import com.eagro.service.dto.UserDTO;
+import com.eagro.service.exception.BadRequestAlertException;
+import com.eagro.service.utils.HeaderUtil;
+import com.eagro.service.utils.ResponseUtil;
+
+/**
+ * REST controller for managing EagroUser.
+ */
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class UserResource {
+
+<span class="nc" id="L32">    private final Logger log = LoggerFactory.getLogger(UserResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;eagroUser&quot;;
+
+    private final UserService eagroUserService;
+
+<span class="nc" id="L38">    public UserResource(UserService eagroUserService) {</span>
+<span class="nc" id="L39">        this.eagroUserService = eagroUserService;</span>
+<span class="nc" id="L40">    }</span>
+
+    /**
+     * POST  /eagro-users : Create a new eagroUser.
+     *
+     * @param eagroUserDTO the eagroUserDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new eagroUserDTO, or with status 400 (Bad Request) if the eagroUser has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @RequestMapping(value = &quot;/users&quot;,method = RequestMethod.POST)
+    @Timed
+    public ResponseEntity&lt;UserDTO&gt; createEagroUser(@RequestBody UserDTO eagroUserDTO) throws URISyntaxException {
+<span class="nc" id="L52">        log.debug(&quot;REST request to save EagroUser : {}&quot;, eagroUserDTO);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (eagroUserDTO.getUserId() != null) {</span>
+<span class="nc" id="L54">            throw new BadRequestAlertException(&quot;A new eagroUser cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }
+<span class="nc" id="L56">        UserDTO result = eagroUserService.save(eagroUserDTO);</span>
+<span class="nc" id="L57">        return ResponseEntity.created(new URI(&quot;/api/eagro-users/&quot; + result.getUserId()))</span>
+<span class="nc" id="L58">            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getUserId().toString()))</span>
+<span class="nc" id="L59">            .body(result);</span>
+    }
+
+    /**
+     * PUT  /eagro-users : Updates an existing eagroUser.
+     *
+     * @param eagroUserDTO the eagroUserDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated eagroUserDTO,
+     * or with status 400 (Bad Request) if the eagroUserDTO is not valid,
+     * or with status 500 (Internal Server Error) if the eagroUserDTO couldn't be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @RequestMapping(value = &quot;/users&quot;,method = RequestMethod.PUT)
+    @Timed
+    public ResponseEntity&lt;UserDTO&gt; updateEagroUser(@RequestBody UserDTO eagroUserDTO) throws URISyntaxException {
+<span class="nc" id="L74">        log.debug(&quot;REST request to update EagroUser : {}&quot;, eagroUserDTO);</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (eagroUserDTO.getUserId() == null) {</span>
+<span class="nc" id="L76">            return createEagroUser(eagroUserDTO);</span>
+        }
+<span class="nc" id="L78">        UserDTO result = eagroUserService.save(eagroUserDTO);</span>
+<span class="nc" id="L79">        return ResponseEntity.ok()</span>
+<span class="nc" id="L80">            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, eagroUserDTO.getUserId().toString()))</span>
+<span class="nc" id="L81">            .body(result);</span>
+    }
+
+    /**
+     * GET  /eagro-users : get all the eagroUsers.
+     *
+     * @param filter the filter of the request
+     * @return the ResponseEntity with status 200 (OK) and the list of eagroUsers in body
+     */
+    @RequestMapping(value = &quot;/users&quot;,method = RequestMethod.GET)
+    @Timed
+    public List&lt;UserDTO&gt; getAllEagroUsers(@RequestParam(required = false) String filter) {
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (&quot;userrole-is-null&quot;.equals(filter)) {</span>
+<span class="nc" id="L94">            log.debug(&quot;REST request to get all EagroUsers where userRole is null&quot;);</span>
+<span class="nc" id="L95">            return eagroUserService.findAllWhereUserRoleIsNull();</span>
+        }
+<span class="nc" id="L97">        log.debug(&quot;REST request to get all EagroUsers&quot;);</span>
+<span class="nc" id="L98">        return eagroUserService.findAll();</span>
+        }
+
+    /**
+     * GET  /eagro-users/:id : get the &quot;id&quot; eagroUser.
+     *
+     * @param id the id of the eagroUserDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the eagroUserDTO, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = &quot;/users/{id}&quot;,method = RequestMethod.GET)
+    @Timed
+    public ResponseEntity&lt;UserDTO&gt; getEagroUser(@PathVariable Long id) {
+<span class="nc" id="L110">        log.debug(&quot;REST request to get EagroUser : {}&quot;, id);</span>
+<span class="nc" id="L111">        UserDTO eagroUserDTO = eagroUserService.findOne(id);</span>
+<span class="nc" id="L112">        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(eagroUserDTO));</span>
+    }
+
+    /**
+     * DELETE  /eagro-users/:id : delete the &quot;id&quot; eagroUser.
+     *
+     * @param id the id of the eagroUserDTO to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @RequestMapping(value = &quot;/users/{id}&quot;,method = RequestMethod.DELETE)
+    @Timed
+    public ResponseEntity&lt;Void&gt; deleteEagroUser(@PathVariable Long id) {
+<span class="nc" id="L124">        log.debug(&quot;REST request to delete EagroUser : {}&quot;, id);</span>
+<span class="nc" id="L125">        eagroUserService.delete(id);</span>
+<span class="nc" id="L126">        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

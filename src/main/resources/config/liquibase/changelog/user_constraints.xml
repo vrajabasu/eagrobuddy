@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity EagroUser.
+    -->
+    <changeSet id="20180422181224-2" author="Rajee">
+        
+        <addForeignKeyConstraint baseColumnNames="eagro_users_id"
+                                 baseTableName="eagro_user_user_layout_mapping"
+                                 constraintName="fk_eagro_user_user_layout_mapping_eagro_users_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="eagro_user"/>
+        <addForeignKeyConstraint baseColumnNames="user_layout_mappings_id"
+                                 baseTableName="eagro_user_user_layout_mapping"
+                                 constraintName="fk_eagro_user_user_layout_mapping_user_layout_mappings_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_layout_mapping"/>
+        
+    </changeSet>
+</databaseChangeLog>

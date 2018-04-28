@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Sensor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.entities</a> &gt; <span class="el_source">Sensor.java</span></div><h1>Sensor.java</h1><pre class="source lang-java linenums">package com.eagro.entities;
+
+
+import javax.persistence.*;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Objects;
+
+/**
+ * Sensor entity.
+ */
+@Entity
+@Table(name = &quot;sensor&quot;)
+<span class="nc" id="L17">public class Sensor implements Serializable {</span>
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = &quot;sequenceGenerator&quot;)
+    @SequenceGenerator(name = &quot;sequenceGenerator&quot;)
+    private Long id;
+
+    @Column(name = &quot;sensor_name&quot;)
+    private String sensorName;
+
+    @Column(name = &quot;sensor_desc&quot;)
+    private String sensorDesc;
+
+    @Column(name = &quot;active_flag&quot;)
+    private boolean activeFlag;
+
+    @Column(name = &quot;created_date&quot;)
+    private LocalDate createdDate;
+
+    @Column(name = &quot;created_by&quot;)
+    private String createdBy;
+
+    @Column(name = &quot;updated_date&quot;)
+    private LocalDate updatedDate;
+
+    @Column(name = &quot;updated_by&quot;)
+    private String updatedBy;
+
+<span class="nc" id="L47">    @ManyToMany</span>
+    @JoinTable(name = &quot;sensor_sensor_coverage_range&quot;,
+               joinColumns = @JoinColumn(name=&quot;sensors_id&quot;, referencedColumnName=&quot;id&quot;),
+               inverseJoinColumns = @JoinColumn(name=&quot;sensor_coverage_ranges_id&quot;, referencedColumnName=&quot;id&quot;))
+    private Set&lt;SensorCoverageRange&gt; sensorCoverageRanges = new HashSet&lt;&gt;();
+
+<span class="nc" id="L53">    @ManyToMany</span>
+    @JoinTable(name = &quot;sensor_section_sensor_mapping&quot;,
+               joinColumns = @JoinColumn(name=&quot;sensors_id&quot;, referencedColumnName=&quot;id&quot;),
+               inverseJoinColumns = @JoinColumn(name=&quot;section_sensor_mappings_id&quot;, referencedColumnName=&quot;id&quot;))
+    private Set&lt;SectionSensorMapping&gt; sectionSensorMappings = new HashSet&lt;&gt;();
+
+<span class="nc" id="L59">    @ManyToMany</span>
+    @JoinTable(name = &quot;sensor_sensor_data&quot;,
+               joinColumns = @JoinColumn(name=&quot;sensors_id&quot;, referencedColumnName=&quot;id&quot;),
+               inverseJoinColumns = @JoinColumn(name=&quot;sensor_data_id&quot;, referencedColumnName=&quot;id&quot;))
+    private Set&lt;SensorData&gt; sensorData = new HashSet&lt;&gt;();
+
+    @ManyToOne
+    private Layout layout;
+
+    public Long getId() {
+<span class="nc" id="L69">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L73">        this.id = id;</span>
+<span class="nc" id="L74">    }</span>
+
+    public String getSensorName() {
+<span class="nc" id="L77">        return sensorName;</span>
+    }
+
+    public Sensor sensorName(String sensorName) {
+<span class="nc" id="L81">        this.sensorName = sensorName;</span>
+<span class="nc" id="L82">        return this;</span>
+    }
+
+    public void setSensorName(String sensorName) {
+<span class="nc" id="L86">        this.sensorName = sensorName;</span>
+<span class="nc" id="L87">    }</span>
+
+    public String getSensorDesc() {
+<span class="nc" id="L90">        return sensorDesc;</span>
+    }
+
+    public Sensor sensorDesc(String sensorDesc) {
+<span class="nc" id="L94">        this.sensorDesc = sensorDesc;</span>
+<span class="nc" id="L95">        return this;</span>
+    }
+
+    public void setSensorDesc(String sensorDesc) {
+<span class="nc" id="L99">        this.sensorDesc = sensorDesc;</span>
+<span class="nc" id="L100">    }</span>
+
+    public boolean isActiveFlag() {
+<span class="nc" id="L103">		return activeFlag;</span>
+	}
+
+	public void setActiveFlag(boolean activeFlag) {
+<span class="nc" id="L107">		this.activeFlag = activeFlag;</span>
+<span class="nc" id="L108">	}</span>
+
+	public LocalDate getCreatedDate() {
+<span class="nc" id="L111">        return createdDate;</span>
+    }
+
+    public Sensor createdDate(LocalDate createdDate) {
+<span class="nc" id="L115">        this.createdDate = createdDate;</span>
+<span class="nc" id="L116">        return this;</span>
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+<span class="nc" id="L120">        this.createdDate = createdDate;</span>
+<span class="nc" id="L121">    }</span>
+
+    public String getCreatedBy() {
+<span class="nc" id="L124">        return createdBy;</span>
+    }
+
+    public Sensor createdBy(String createdBy) {
+<span class="nc" id="L128">        this.createdBy = createdBy;</span>
+<span class="nc" id="L129">        return this;</span>
+    }
+
+    public void setCreatedBy(String createdBy) {
+<span class="nc" id="L133">        this.createdBy = createdBy;</span>
+<span class="nc" id="L134">    }</span>
+
+    public LocalDate getUpdatedDate() {
+<span class="nc" id="L137">        return updatedDate;</span>
+    }
+
+    public Sensor updatedDate(LocalDate updatedDate) {
+<span class="nc" id="L141">        this.updatedDate = updatedDate;</span>
+<span class="nc" id="L142">        return this;</span>
+    }
+
+    public void setUpdatedDate(LocalDate updatedDate) {
+<span class="nc" id="L146">        this.updatedDate = updatedDate;</span>
+<span class="nc" id="L147">    }</span>
+
+    public String getUpdatedBy() {
+<span class="nc" id="L150">        return updatedBy;</span>
+    }
+
+    public Sensor updatedBy(String updatedBy) {
+<span class="nc" id="L154">        this.updatedBy = updatedBy;</span>
+<span class="nc" id="L155">        return this;</span>
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+<span class="nc" id="L159">        this.updatedBy = updatedBy;</span>
+<span class="nc" id="L160">    }</span>
+
+    public Set&lt;SensorCoverageRange&gt; getSensorCoverageRanges() {
+<span class="nc" id="L163">        return sensorCoverageRanges;</span>
+    }
+
+    public Sensor sensorCoverageRanges(Set&lt;SensorCoverageRange&gt; sensorCoverageRanges) {
+<span class="nc" id="L167">        this.sensorCoverageRanges = sensorCoverageRanges;</span>
+<span class="nc" id="L168">        return this;</span>
+    }
+
+    public Sensor addSensorCoverageRange(SensorCoverageRange sensorCoverageRange) {
+<span class="nc" id="L172">        this.sensorCoverageRanges.add(sensorCoverageRange);</span>
+<span class="nc" id="L173">        sensorCoverageRange.getSensors().add(this);</span>
+<span class="nc" id="L174">        return this;</span>
+    }
+
+    public Sensor removeSensorCoverageRange(SensorCoverageRange sensorCoverageRange) {
+<span class="nc" id="L178">        this.sensorCoverageRanges.remove(sensorCoverageRange);</span>
+<span class="nc" id="L179">        sensorCoverageRange.getSensors().remove(this);</span>
+<span class="nc" id="L180">        return this;</span>
+    }
+
+    public void setSensorCoverageRanges(Set&lt;SensorCoverageRange&gt; sensorCoverageRanges) {
+<span class="nc" id="L184">        this.sensorCoverageRanges = sensorCoverageRanges;</span>
+<span class="nc" id="L185">    }</span>
+
+    public Set&lt;SectionSensorMapping&gt; getSectionSensorMappings() {
+<span class="nc" id="L188">        return sectionSensorMappings;</span>
+    }
+
+    public Sensor sectionSensorMappings(Set&lt;SectionSensorMapping&gt; sectionSensorMappings) {
+<span class="nc" id="L192">        this.sectionSensorMappings = sectionSensorMappings;</span>
+<span class="nc" id="L193">        return this;</span>
+    }
+
+    public Sensor addSectionSensorMapping(SectionSensorMapping sectionSensorMapping) {
+<span class="nc" id="L197">        this.sectionSensorMappings.add(sectionSensorMapping);</span>
+<span class="nc" id="L198">        sectionSensorMapping.getSensors().add(this);</span>
+<span class="nc" id="L199">        return this;</span>
+    }
+
+    public Sensor removeSectionSensorMapping(SectionSensorMapping sectionSensorMapping) {
+<span class="nc" id="L203">        this.sectionSensorMappings.remove(sectionSensorMapping);</span>
+<span class="nc" id="L204">        sectionSensorMapping.getSensors().remove(this);</span>
+<span class="nc" id="L205">        return this;</span>
+    }
+
+    public void setSectionSensorMappings(Set&lt;SectionSensorMapping&gt; sectionSensorMappings) {
+<span class="nc" id="L209">        this.sectionSensorMappings = sectionSensorMappings;</span>
+<span class="nc" id="L210">    }</span>
+
+    public Set&lt;SensorData&gt; getSensorData() {
+<span class="nc" id="L213">        return sensorData;</span>
+    }
+
+    public Sensor sensorData(Set&lt;SensorData&gt; sensorData) {
+<span class="nc" id="L217">        this.sensorData = sensorData;</span>
+<span class="nc" id="L218">        return this;</span>
+    }
+
+    public Sensor addSensorData(SensorData sensorData) {
+<span class="nc" id="L222">        this.sensorData.add(sensorData);</span>
+<span class="nc" id="L223">        sensorData.getSensors().add(this);</span>
+<span class="nc" id="L224">        return this;</span>
+    }
+
+    public Sensor removeSensorData(SensorData sensorData) {
+<span class="nc" id="L228">        this.sensorData.remove(sensorData);</span>
+<span class="nc" id="L229">        sensorData.getSensors().remove(this);</span>
+<span class="nc" id="L230">        return this;</span>
+    }
+
+    public void setSensorData(Set&lt;SensorData&gt; sensorData) {
+<span class="nc" id="L234">        this.sensorData = sensorData;</span>
+<span class="nc" id="L235">    }</span>
+
+    public Layout getLayout() {
+<span class="nc" id="L238">        return layout;</span>
+    }
+
+    public Sensor layout(Layout layout) {
+<span class="nc" id="L242">        this.layout = layout;</span>
+<span class="nc" id="L243">        return this;</span>
+    }
+
+    public void setLayout(Layout layout) {
+<span class="nc" id="L247">        this.layout = layout;</span>
+<span class="nc" id="L248">    }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L252" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L253">            return true;</span>
+        }
+<span class="nc bnc" id="L255" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L256">            return false;</span>
+        }
+<span class="nc" id="L258">        Sensor sensor = (Sensor) o;</span>
+<span class="nc bnc" id="L259" title="All 4 branches missed.">        if (sensor.getId() == null || getId() == null) {</span>
+<span class="nc" id="L260">            return false;</span>
+        }
+<span class="nc" id="L262">        return Objects.equals(getId(), sensor.getId());</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L267">        return Objects.hashCode(getId());</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L272">        return &quot;Sensor{&quot; +</span>
+<span class="nc" id="L273">            &quot;id=&quot; + getId() +</span>
+<span class="nc" id="L274">            &quot;, sensorName='&quot; + getSensorName() + &quot;'&quot; +</span>
+<span class="nc" id="L275">            &quot;, sensorDesc='&quot; + getSensorDesc() + &quot;'&quot; +</span>
+<span class="nc" id="L276">            &quot;, activeFlag='&quot; + isActiveFlag() + &quot;'&quot; +</span>
+<span class="nc" id="L277">            &quot;, createdDate='&quot; + getCreatedDate() + &quot;'&quot; +</span>
+<span class="nc" id="L278">            &quot;, createdBy='&quot; + getCreatedBy() + &quot;'&quot; +</span>
+<span class="nc" id="L279">            &quot;, updatedDate='&quot; + getUpdatedDate() + &quot;'&quot; +</span>
+<span class="nc" id="L280">            &quot;, updatedBy='&quot; + getUpdatedBy() + &quot;'&quot; +</span>
+            &quot;}&quot;;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

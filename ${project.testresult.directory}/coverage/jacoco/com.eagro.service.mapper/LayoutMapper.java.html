@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LayoutMapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.service.mapper</a> &gt; <span class="el_source">LayoutMapper.java</span></div><h1>LayoutMapper.java</h1><pre class="source lang-java linenums">package com.eagro.service.mapper;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+import com.eagro.entities.Layout;
+import com.eagro.service.dto.LayoutDTO;
+
+/**
+ * Mapper for the entity Layout and its DTO LayoutDTO.
+ */
+@Mapper(componentModel = &quot;spring&quot;, imports  = {UserLayoutMappingMapper.class})
+public interface LayoutMapper extends EntityMapper&lt;LayoutDTO, Layout&gt; {
+
+
+    @Mapping(target = &quot;sections&quot;, ignore = true)
+    @Mapping(target = &quot;KPIS&quot;, ignore = true)
+    @Mapping(target = &quot;sectionSensorMappings&quot;, ignore = true)
+    @Mapping(target = &quot;sensorCoverageRanges&quot;, ignore = true)
+    @Mapping(target = &quot;segments&quot;, ignore = true)
+    @Mapping(target = &quot;sensors&quot;, ignore = true)
+    @Mapping(target = &quot;sensorData&quot;, ignore = true)
+    Layout toEntity(LayoutDTO layoutDTO);
+
+    default Layout fromId(Long id) {
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        if (id == null) {</span>
+<span class="nc" id="L27">            return null;</span>
+        }
+<span class="nc" id="L29">        Layout layout = new Layout();</span>
+<span class="nc" id="L30">        layout.setLayoutId(id);</span>
+<span class="nc" id="L31">        return layout;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

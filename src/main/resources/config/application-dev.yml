@@ -1,0 +1,42 @@
+# ===================================================================
+# Spring Boot configuration for the "dev" profile.
+#
+# This configuration overrides the application.yml file.
+# ===================================================================
+
+logging:
+    level:
+        ROOT: DEBUG
+        com.eagro: DEBUG
+        io.github.jhipster: DEBUG
+
+spring:
+    profiles:
+        active: dev
+        include: swagger
+        
+    jackson:
+        serialization.indent_output: true
+    
+    #datasource:
+     #   type: com.zaxxer.hikari.HikariDataSource
+      #  url: jdbc:postgresql://localhost:5432/eagro
+       # username: 
+        # password: 
+  #  jpa:
+   #     database-platform: 
+    #    database: POSTGRESQL
+     #   show-sql: false
+      #  properties:
+       #     hibernate.id.new_generator_mappings: true
+        #    hibernate.cache.use_second_level_cache: true
+         #   hibernate.cache.use_query_cache: false
+          #  hibernate.generate_statistics: false
+   
+    h2:
+        console:
+            enabled: true
+
+server:
+    port: 8080
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity KPI.
+    -->
+    <changeSet id="20180422181229-2" author="Rajee">
+        
+        <addForeignKeyConstraint baseColumnNames="layout_id"
+                                 baseTableName="kpi"
+                                 constraintName="fk_kpi_layout_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="layout"/>
+
+        <addForeignKeyConstraint baseColumnNames="section_id"
+                                 baseTableName="kpi"
+                                 constraintName="fk_kpi_section_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="section"/>
+
+    </changeSet>
+</databaseChangeLog>

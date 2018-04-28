@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SensorDataServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.service.impl</a> &gt; <span class="el_source">SensorDataServiceImpl.java</span></div><h1>SensorDataServiceImpl.java</h1><pre class="source lang-java linenums">package com.eagro.service.impl;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.eagro.entities.SensorData;
+import com.eagro.repository.SensorDataRepository;
+import com.eagro.service.SensorDataService;
+import com.eagro.service.dto.SensorDataDTO;
+import com.eagro.service.mapper.SensorDataMapper;
+
+/**
+ * Service Implementation for managing SensorData.
+ */
+@Service
+@Transactional
+<span class="nc" id="L24">public class SensorDataServiceImpl implements SensorDataService {</span>
+
+<span class="nc" id="L26">    private final Logger log = LoggerFactory.getLogger(SensorDataServiceImpl.class);</span>
+
+    @Autowired
+    public SensorDataRepository sensorDataRepository;
+
+    @Autowired
+    public SensorDataMapper sensorDataMapper;
+
+    /**
+     * Save a sensorData.
+     *
+     * @param sensorDataDTO the entity to save
+     * @return the persisted entity
+     */
+    @Override
+    public SensorDataDTO save(SensorDataDTO sensorDataDTO) {
+<span class="nc" id="L42">        log.debug(&quot;Request to save SensorData : {}&quot;, sensorDataDTO);</span>
+<span class="nc" id="L43">        SensorData sensorData = sensorDataMapper.toEntity(sensorDataDTO);</span>
+<span class="nc" id="L44">        sensorData = sensorDataRepository.save(sensorData);</span>
+<span class="nc" id="L45">        return sensorDataMapper.toDto(sensorData);</span>
+    }
+
+    /**
+     * Get all the sensorData.
+     *
+     * @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List&lt;SensorDataDTO&gt; findAll() {
+<span class="nc" id="L56">        log.debug(&quot;Request to get all SensorData&quot;);</span>
+<span class="nc" id="L57">        return sensorDataRepository.findAll().stream()</span>
+<span class="nc" id="L58">            .map(sensorDataMapper::toDto)</span>
+<span class="nc" id="L59">            .collect(Collectors.toCollection(LinkedList::new));</span>
+    }
+
+    /**
+     * Get one sensorData by id.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public SensorDataDTO findOne(Long id) {
+<span class="nc" id="L71">        log.debug(&quot;Request to get SensorData : {}&quot;, id);</span>
+<span class="nc" id="L72">       SensorData sensorData = sensorDataRepository.findOne(id);</span>
+<span class="nc" id="L73">        return sensorDataMapper.toDto(sensorData);</span>
+        
+    }
+
+    /**
+     * Delete the sensorData by id.
+     *
+     * @param id the id of the entity
+     */
+    @Override
+    public void delete(Long id) {
+<span class="nc" id="L84">        log.debug(&quot;Request to delete SensorData : {}&quot;, id);</span>
+<span class="nc" id="L85">        sensorDataRepository.delete(id);</span>
+<span class="nc" id="L86">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

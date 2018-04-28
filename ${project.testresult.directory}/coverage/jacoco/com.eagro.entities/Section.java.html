@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Section.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.entities</a> &gt; <span class="el_source">Section.java</span></div><h1>Section.java</h1><pre class="source lang-java linenums">package com.eagro.entities;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+/**
+ * Sections entity.
+ */
+@Entity
+@Table(name = &quot;section&quot;)
+<span class="nc" id="L26">public class Section implements Serializable {</span>
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = &quot;sequenceGenerator&quot;)
+    @SequenceGenerator(name = &quot;sequenceGenerator&quot;)
+    @Column(name = &quot;section_id&quot;)
+    private Long sectionId;
+
+    @Column(name = &quot;section_name&quot;)
+    private String sectionName;
+
+    @Column(name = &quot;section_desc&quot;)
+    private String sectionDesc;
+
+    @Column(name = &quot;start_x&quot;)
+    private Double startX;
+
+    @Column(name = &quot;start_y&quot;)
+    private Double startY;
+
+    @Column(name = &quot;end_x&quot;)
+    private Double endX;
+
+    @Column(name = &quot;end_y&quot;)
+    private Double endY;
+
+    @Column(name = &quot;active_flag&quot;)
+    private boolean activeFlag;
+
+    @Column(name = &quot;created_date&quot;)
+    private LocalDate createdDate;
+
+    @Column(name = &quot;created_by&quot;)
+    private String createdBy;
+
+    @Column(name = &quot;updated_date&quot;)
+    private LocalDate updatedDate;
+
+    @Column(name = &quot;updated_by&quot;)
+    private String updatedBy;
+
+<span class="nc" id="L69">    @OneToMany(mappedBy = &quot;section&quot;)</span>
+    @JsonIgnore
+    private Set&lt;Segment&gt; segments = new HashSet&lt;&gt;();
+
+<span class="nc" id="L73">    @OneToMany(mappedBy = &quot;section&quot;)</span>
+    @JsonIgnore
+    private Set&lt;KPI&gt; kPIS = new HashSet&lt;&gt;();
+
+<span class="nc" id="L77">    @OneToMany(mappedBy = &quot;section&quot;)</span>
+    @JsonIgnore
+    private Set&lt;SectionSensorMapping&gt; sectionSensorMappings = new HashSet&lt;&gt;();
+
+<span class="nc" id="L81">    @OneToMany(mappedBy = &quot;section&quot;)</span>
+    @JsonIgnore
+    private Set&lt;SensorCoverageRange&gt; sensorCoverageRanges = new HashSet&lt;&gt;();
+
+    @ManyToOne
+    private Layout layout;
+
+
+    public Long getSectionId() {
+<span class="nc" id="L90">        return sectionId;</span>
+    }
+
+    public Section sectionId(Long sectionId) {
+<span class="nc" id="L94">        this.sectionId = sectionId;</span>
+<span class="nc" id="L95">        return this;</span>
+    }
+
+    public void setSectionId(Long sectionId) {
+<span class="nc" id="L99">        this.sectionId = sectionId;</span>
+<span class="nc" id="L100">    }</span>
+
+    public String getSectionName() {
+<span class="nc" id="L103">        return sectionName;</span>
+    }
+
+    public Section sectionName(String sectionName) {
+<span class="nc" id="L107">        this.sectionName = sectionName;</span>
+<span class="nc" id="L108">        return this;</span>
+    }
+
+    public void setSectionName(String sectionName) {
+<span class="nc" id="L112">        this.sectionName = sectionName;</span>
+<span class="nc" id="L113">    }</span>
+
+    public String getSectionDesc() {
+<span class="nc" id="L116">        return sectionDesc;</span>
+    }
+
+    public Section sectionDesc(String sectionDesc) {
+<span class="nc" id="L120">        this.sectionDesc = sectionDesc;</span>
+<span class="nc" id="L121">        return this;</span>
+    }
+
+    public void setSectionDesc(String sectionDesc) {
+<span class="nc" id="L125">        this.sectionDesc = sectionDesc;</span>
+<span class="nc" id="L126">    }</span>
+
+    public Double getStartX() {
+<span class="nc" id="L129">        return startX;</span>
+    }
+
+    public Section startX(Double startX) {
+<span class="nc" id="L133">        this.startX = startX;</span>
+<span class="nc" id="L134">        return this;</span>
+    }
+
+    public void setStartX(Double startX) {
+<span class="nc" id="L138">        this.startX = startX;</span>
+<span class="nc" id="L139">    }</span>
+
+    public Double getStartY() {
+<span class="nc" id="L142">        return startY;</span>
+    }
+
+    public Section startY(Double startY) {
+<span class="nc" id="L146">        this.startY = startY;</span>
+<span class="nc" id="L147">        return this;</span>
+    }
+
+    public void setStartY(Double startY) {
+<span class="nc" id="L151">        this.startY = startY;</span>
+<span class="nc" id="L152">    }</span>
+
+    public Double getEndX() {
+<span class="nc" id="L155">        return endX;</span>
+    }
+
+    public Section endX(Double endX) {
+<span class="nc" id="L159">        this.endX = endX;</span>
+<span class="nc" id="L160">        return this;</span>
+    }
+
+    public void setEndX(Double endX) {
+<span class="nc" id="L164">        this.endX = endX;</span>
+<span class="nc" id="L165">    }</span>
+
+    public Double getEndY() {
+<span class="nc" id="L168">        return endY;</span>
+    }
+
+    public Section endY(Double endY) {
+<span class="nc" id="L172">        this.endY = endY;</span>
+<span class="nc" id="L173">        return this;</span>
+    }
+
+    public void setEndY(Double endY) {
+<span class="nc" id="L177">        this.endY = endY;</span>
+<span class="nc" id="L178">    }</span>
+
+
+    public boolean isActiveFlag() {
+<span class="nc" id="L182">		return activeFlag;</span>
+	}
+
+	public void setActiveFlag(boolean activeFlag) {
+<span class="nc" id="L186">		this.activeFlag = activeFlag;</span>
+<span class="nc" id="L187">	}</span>
+
+	public LocalDate getCreatedDate() {
+<span class="nc" id="L190">        return createdDate;</span>
+    }
+
+    public Section createdDate(LocalDate createdDate) {
+<span class="nc" id="L194">        this.createdDate = createdDate;</span>
+<span class="nc" id="L195">        return this;</span>
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+<span class="nc" id="L199">        this.createdDate = createdDate;</span>
+<span class="nc" id="L200">    }</span>
+
+    public String getCreatedBy() {
+<span class="nc" id="L203">        return createdBy;</span>
+    }
+
+    public Section createdBy(String createdBy) {
+<span class="nc" id="L207">        this.createdBy = createdBy;</span>
+<span class="nc" id="L208">        return this;</span>
+    }
+
+    public void setCreatedBy(String createdBy) {
+<span class="nc" id="L212">        this.createdBy = createdBy;</span>
+<span class="nc" id="L213">    }</span>
+
+    public LocalDate getUpdatedDate() {
+<span class="nc" id="L216">        return updatedDate;</span>
+    }
+
+    public Section updatedDate(LocalDate updatedDate) {
+<span class="nc" id="L220">        this.updatedDate = updatedDate;</span>
+<span class="nc" id="L221">        return this;</span>
+    }
+
+    public void setUpdatedDate(LocalDate updatedDate) {
+<span class="nc" id="L225">        this.updatedDate = updatedDate;</span>
+<span class="nc" id="L226">    }</span>
+
+    public String getUpdatedBy() {
+<span class="nc" id="L229">        return updatedBy;</span>
+    }
+
+    public Section updatedBy(String updatedBy) {
+<span class="nc" id="L233">        this.updatedBy = updatedBy;</span>
+<span class="nc" id="L234">        return this;</span>
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+<span class="nc" id="L238">        this.updatedBy = updatedBy;</span>
+<span class="nc" id="L239">    }</span>
+
+    public Set&lt;Segment&gt; getSegments() {
+<span class="nc" id="L242">        return segments;</span>
+    }
+
+    public Section segments(Set&lt;Segment&gt; segments) {
+<span class="nc" id="L246">        this.segments = segments;</span>
+<span class="nc" id="L247">        return this;</span>
+    }
+
+    public Section addSegment(Segment segment) {
+<span class="nc" id="L251">        this.segments.add(segment);</span>
+<span class="nc" id="L252">        segment.setSection(this);</span>
+<span class="nc" id="L253">        return this;</span>
+    }
+
+    public Section removeSegment(Segment segment) {
+<span class="nc" id="L257">        this.segments.remove(segment);</span>
+<span class="nc" id="L258">        segment.setSection(null);</span>
+<span class="nc" id="L259">        return this;</span>
+    }
+
+    public void setSegments(Set&lt;Segment&gt; segments) {
+<span class="nc" id="L263">        this.segments = segments;</span>
+<span class="nc" id="L264">    }</span>
+
+    public Set&lt;KPI&gt; getKPIS() {
+<span class="nc" id="L267">        return kPIS;</span>
+    }
+
+    public Section kPIS(Set&lt;KPI&gt; kPIS) {
+<span class="nc" id="L271">        this.kPIS = kPIS;</span>
+<span class="nc" id="L272">        return this;</span>
+    }
+
+    public Section addKPI(KPI kPI) {
+<span class="nc" id="L276">        this.kPIS.add(kPI);</span>
+<span class="nc" id="L277">        kPI.setSection(this);</span>
+<span class="nc" id="L278">        return this;</span>
+    }
+
+    public Section removeKPI(KPI kPI) {
+<span class="nc" id="L282">        this.kPIS.remove(kPI);</span>
+<span class="nc" id="L283">        kPI.setSection(null);</span>
+<span class="nc" id="L284">        return this;</span>
+    }
+
+    public void setKPIS(Set&lt;KPI&gt; kPIS) {
+<span class="nc" id="L288">        this.kPIS = kPIS;</span>
+<span class="nc" id="L289">    }</span>
+
+    public Set&lt;SectionSensorMapping&gt; getSectionSensorMappings() {
+<span class="nc" id="L292">        return sectionSensorMappings;</span>
+    }
+
+    public Section sectionSensorMappings(Set&lt;SectionSensorMapping&gt; sectionSensorMappings) {
+<span class="nc" id="L296">        this.sectionSensorMappings = sectionSensorMappings;</span>
+<span class="nc" id="L297">        return this;</span>
+    }
+
+    public Section addSectionSensorMapping(SectionSensorMapping sectionSensorMapping) {
+<span class="nc" id="L301">        this.sectionSensorMappings.add(sectionSensorMapping);</span>
+<span class="nc" id="L302">        sectionSensorMapping.setSection(this);</span>
+<span class="nc" id="L303">        return this;</span>
+    }
+
+    public Section removeSectionSensorMapping(SectionSensorMapping sectionSensorMapping) {
+<span class="nc" id="L307">        this.sectionSensorMappings.remove(sectionSensorMapping);</span>
+<span class="nc" id="L308">        sectionSensorMapping.setSection(null);</span>
+<span class="nc" id="L309">        return this;</span>
+    }
+
+    public void setSectionSensorMappings(Set&lt;SectionSensorMapping&gt; sectionSensorMappings) {
+<span class="nc" id="L313">        this.sectionSensorMappings = sectionSensorMappings;</span>
+<span class="nc" id="L314">    }</span>
+
+    public Set&lt;SensorCoverageRange&gt; getSensorCoverageRanges() {
+<span class="nc" id="L317">        return sensorCoverageRanges;</span>
+    }
+
+    public Section sensorCoverageRanges(Set&lt;SensorCoverageRange&gt; sensorCoverageRanges) {
+<span class="nc" id="L321">        this.sensorCoverageRanges = sensorCoverageRanges;</span>
+<span class="nc" id="L322">        return this;</span>
+    }
+
+    public Section addSensorCoverageRange(SensorCoverageRange sensorCoverageRange) {
+<span class="nc" id="L326">        this.sensorCoverageRanges.add(sensorCoverageRange);</span>
+<span class="nc" id="L327">        sensorCoverageRange.setSection(this);</span>
+<span class="nc" id="L328">        return this;</span>
+    }
+
+    public Section removeSensorCoverageRange(SensorCoverageRange sensorCoverageRange) {
+<span class="nc" id="L332">        this.sensorCoverageRanges.remove(sensorCoverageRange);</span>
+<span class="nc" id="L333">        sensorCoverageRange.setSection(null);</span>
+<span class="nc" id="L334">        return this;</span>
+    }
+
+    public void setSensorCoverageRanges(Set&lt;SensorCoverageRange&gt; sensorCoverageRanges) {
+<span class="nc" id="L338">        this.sensorCoverageRanges = sensorCoverageRanges;</span>
+<span class="nc" id="L339">    }</span>
+
+    public Layout getLayout() {
+<span class="nc" id="L342">        return layout;</span>
+    }
+
+    public Section layout(Layout layout) {
+<span class="nc" id="L346">        this.layout = layout;</span>
+<span class="nc" id="L347">        return this;</span>
+    }
+
+    public void setLayout(Layout layout) {
+<span class="nc" id="L351">        this.layout = layout;</span>
+<span class="nc" id="L352">    }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L356" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L357">            return true;</span>
+        }
+<span class="nc bnc" id="L359" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L360">            return false;</span>
+        }
+<span class="nc" id="L362">        Section section = (Section) o;</span>
+<span class="nc bnc" id="L363" title="All 4 branches missed.">        if (section.getSectionId() == null || getSectionId() == null) {</span>
+<span class="nc" id="L364">            return false;</span>
+        }
+<span class="nc" id="L366">        return Objects.equals(getSectionId(), section.getSectionId());</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L371">        return Objects.hashCode(getSectionId());</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L376">        return &quot;Section{&quot; +</span>
+<span class="nc" id="L377">            &quot;, sectionId=&quot; + getSectionId() +</span>
+<span class="nc" id="L378">            &quot;, sectionName='&quot; + getSectionName() + &quot;'&quot; +</span>
+<span class="nc" id="L379">            &quot;, sectionDesc='&quot; + getSectionDesc() + &quot;'&quot; +</span>
+<span class="nc" id="L380">            &quot;, startX=&quot; + getStartX() +</span>
+<span class="nc" id="L381">            &quot;, startY=&quot; + getStartY() +</span>
+<span class="nc" id="L382">            &quot;, endX=&quot; + getEndX() +</span>
+<span class="nc" id="L383">            &quot;, endY=&quot; + getEndY() +</span>
+<span class="nc" id="L384">            &quot;, activeFlag='&quot; + isActiveFlag() + &quot;'&quot; +</span>
+<span class="nc" id="L385">            &quot;, createdDate='&quot; + getCreatedDate() + &quot;'&quot; +</span>
+<span class="nc" id="L386">            &quot;, createdBy='&quot; + getCreatedBy() + &quot;'&quot; +</span>
+<span class="nc" id="L387">            &quot;, updatedDate='&quot; + getUpdatedDate() + &quot;'&quot; +</span>
+<span class="nc" id="L388">            &quot;, updatedBy='&quot; + getUpdatedBy() + &quot;'&quot; +</span>
+            &quot;}&quot;;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

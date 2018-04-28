@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SectionDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.service.dto</a> &gt; <span class="el_source">SectionDTO.java</span></div><h1>SectionDTO.java</h1><pre class="source lang-java linenums">package com.eagro.service.dto;
+
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
+
+/**
+ * A DTO for the Section entity.
+ */
+<span class="nc" id="L11">public class SectionDTO implements Serializable {</span>
+
+    private Long sectionId;
+
+    private String sectionName;
+
+    private String sectionDesc;
+
+    private Double startX;
+
+    private Double startY;
+
+    private Double endX;
+
+    private Double endY;
+
+    private boolean activeFlag;
+
+    private LocalDate createdDate;
+
+    private String createdBy;
+
+    private LocalDate updatedDate;
+
+    private String updatedBy;
+
+    private Long layoutId;
+
+    private String layoutLayoutId;
+
+
+    public Long getSectionId() {
+<span class="nc" id="L43">        return sectionId;</span>
+    }
+
+    public void setSectionId(Long sectionId) {
+<span class="nc" id="L47">        this.sectionId = sectionId;</span>
+<span class="nc" id="L48">    }</span>
+
+    public String getSectionName() {
+<span class="nc" id="L51">        return sectionName;</span>
+    }
+
+    public void setSectionName(String sectionName) {
+<span class="nc" id="L55">        this.sectionName = sectionName;</span>
+<span class="nc" id="L56">    }</span>
+
+    public String getSectionDesc() {
+<span class="nc" id="L59">        return sectionDesc;</span>
+    }
+
+    public void setSectionDesc(String sectionDesc) {
+<span class="nc" id="L63">        this.sectionDesc = sectionDesc;</span>
+<span class="nc" id="L64">    }</span>
+
+    public Double getStartX() {
+<span class="nc" id="L67">        return startX;</span>
+    }
+
+    public void setStartX(Double startX) {
+<span class="nc" id="L71">        this.startX = startX;</span>
+<span class="nc" id="L72">    }</span>
+
+    public Double getStartY() {
+<span class="nc" id="L75">        return startY;</span>
+    }
+
+    public void setStartY(Double startY) {
+<span class="nc" id="L79">        this.startY = startY;</span>
+<span class="nc" id="L80">    }</span>
+
+    public Double getEndX() {
+<span class="nc" id="L83">        return endX;</span>
+    }
+
+    public void setEndX(Double endX) {
+<span class="nc" id="L87">        this.endX = endX;</span>
+<span class="nc" id="L88">    }</span>
+
+    public Double getEndY() {
+<span class="nc" id="L91">        return endY;</span>
+    }
+
+    public void setEndY(Double endY) {
+<span class="nc" id="L95">        this.endY = endY;</span>
+<span class="nc" id="L96">    }</span>
+
+    public LocalDate getCreatedDate() {
+<span class="nc" id="L99">        return createdDate;</span>
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+<span class="nc" id="L103">        this.createdDate = createdDate;</span>
+<span class="nc" id="L104">    }</span>
+
+    public String getCreatedBy() {
+<span class="nc" id="L107">        return createdBy;</span>
+    }
+
+    public void setCreatedBy(String createdBy) {
+<span class="nc" id="L111">        this.createdBy = createdBy;</span>
+<span class="nc" id="L112">    }</span>
+
+    public LocalDate getUpdatedDate() {
+<span class="nc" id="L115">        return updatedDate;</span>
+    }
+
+    public void setUpdatedDate(LocalDate updatedDate) {
+<span class="nc" id="L119">        this.updatedDate = updatedDate;</span>
+<span class="nc" id="L120">    }</span>
+
+    public String getUpdatedBy() {
+<span class="nc" id="L123">        return updatedBy;</span>
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+<span class="nc" id="L127">        this.updatedBy = updatedBy;</span>
+<span class="nc" id="L128">    }</span>
+
+    public Long getLayoutId() {
+<span class="nc" id="L131">        return layoutId;</span>
+    }
+
+    public void setLayoutId(Long layoutId) {
+<span class="nc" id="L135">        this.layoutId = layoutId;</span>
+<span class="nc" id="L136">    }</span>
+
+    public String getLayoutLayoutId() {
+<span class="nc" id="L139">        return layoutLayoutId;</span>
+    }
+
+    public void setLayoutLayoutId(String layoutLayoutId) {
+<span class="nc" id="L143">        this.layoutLayoutId = layoutLayoutId;</span>
+<span class="nc" id="L144">    }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L148" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L149">            return true;</span>
+        }
+<span class="nc bnc" id="L151" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L152">            return false;</span>
+        }
+
+<span class="nc" id="L155">        SectionDTO sectionDTO = (SectionDTO) o;</span>
+<span class="nc bnc" id="L156" title="All 4 branches missed.">        if(sectionDTO.getSectionId() == null || getSectionId() == null) {</span>
+<span class="nc" id="L157">            return false;</span>
+        }
+<span class="nc" id="L159">        return Objects.equals(getSectionId(), sectionDTO.getSectionId());</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L164">        return Objects.hashCode(getSectionId());</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L169">        return &quot;SectionDTO{&quot; +</span>
+<span class="nc" id="L170">            &quot;, sectionId=&quot; + getSectionId() +</span>
+<span class="nc" id="L171">            &quot;, sectionName='&quot; + getSectionName() + &quot;'&quot; +</span>
+<span class="nc" id="L172">            &quot;, sectionDesc='&quot; + getSectionDesc() + &quot;'&quot; +</span>
+<span class="nc" id="L173">            &quot;, startX=&quot; + getStartX() +</span>
+<span class="nc" id="L174">            &quot;, startY=&quot; + getStartY() +</span>
+<span class="nc" id="L175">            &quot;, endX=&quot; + getEndX() +</span>
+<span class="nc" id="L176">            &quot;, endY=&quot; + getEndY() +</span>
+<span class="nc" id="L177">            &quot;, activeFlag='&quot; + isActiveFlag() + &quot;'&quot; +</span>
+<span class="nc" id="L178">            &quot;, createdDate='&quot; + getCreatedDate() + &quot;'&quot; +</span>
+<span class="nc" id="L179">            &quot;, createdBy='&quot; + getCreatedBy() + &quot;'&quot; +</span>
+<span class="nc" id="L180">            &quot;, updatedDate='&quot; + getUpdatedDate() + &quot;'&quot; +</span>
+<span class="nc" id="L181">            &quot;, updatedBy='&quot; + getUpdatedBy() + &quot;'&quot; +</span>
+            &quot;}&quot;;
+    }
+
+	public boolean isActiveFlag() {
+<span class="nc" id="L186">		return activeFlag;</span>
+	}
+
+	public void setActiveFlag(boolean activeFlag) {
+<span class="nc" id="L190">		this.activeFlag = activeFlag;</span>
+<span class="nc" id="L191">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

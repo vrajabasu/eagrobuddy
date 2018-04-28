@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SegmentDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eagroservice</a> &gt; <a href="index.source.html" class="el_package">com.eagro.service.dto</a> &gt; <span class="el_source">SegmentDTO.java</span></div><h1>SegmentDTO.java</h1><pre class="source lang-java linenums">package com.eagro.service.dto;
+
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
+
+/**
+ * A DTO for the Segment entity.
+ */
+<span class="nc" id="L11">public class SegmentDTO implements Serializable {</span>
+
+    private Long segmentId;
+
+    private String segmentName;
+
+    private String segmentDesc;
+
+    private Double startX;
+
+    private Double startY;
+
+    private Double endX;
+
+    private Double endY;
+
+    private String activeFlag;
+
+    private LocalDate createdDate;
+
+    private String createdBy;
+
+    private LocalDate updatedDate;
+
+    private String updatedBy;
+
+    private Long layoutId;
+
+    private String layoutLayoutId;
+
+    private Long sectionId;
+
+    private String sectionSectionId;
+
+    public Long getSegmentId() {
+<span class="nc" id="L46">        return segmentId;</span>
+    }
+
+    public void setSegmentId(Long segmentId) {
+<span class="nc" id="L50">        this.segmentId = segmentId;</span>
+<span class="nc" id="L51">    }</span>
+
+    public String getSegmentName() {
+<span class="nc" id="L54">        return segmentName;</span>
+    }
+
+    public void setSegmentName(String segmentName) {
+<span class="nc" id="L58">        this.segmentName = segmentName;</span>
+<span class="nc" id="L59">    }</span>
+
+    public String getSegmentDesc() {
+<span class="nc" id="L62">        return segmentDesc;</span>
+    }
+
+    public void setSegmentDesc(String segmentDesc) {
+<span class="nc" id="L66">        this.segmentDesc = segmentDesc;</span>
+<span class="nc" id="L67">    }</span>
+
+    public Double getStartX() {
+<span class="nc" id="L70">        return startX;</span>
+    }
+
+    public void setStartX(Double startX) {
+<span class="nc" id="L74">        this.startX = startX;</span>
+<span class="nc" id="L75">    }</span>
+
+    public Double getStartY() {
+<span class="nc" id="L78">        return startY;</span>
+    }
+
+    public void setStartY(Double startY) {
+<span class="nc" id="L82">        this.startY = startY;</span>
+<span class="nc" id="L83">    }</span>
+
+    public Double getEndX() {
+<span class="nc" id="L86">        return endX;</span>
+    }
+
+    public void setEndX(Double endX) {
+<span class="nc" id="L90">        this.endX = endX;</span>
+<span class="nc" id="L91">    }</span>
+
+    public Double getEndY() {
+<span class="nc" id="L94">        return endY;</span>
+    }
+
+    public void setEndY(Double endY) {
+<span class="nc" id="L98">        this.endY = endY;</span>
+<span class="nc" id="L99">    }</span>
+
+    public String getActiveFlag() {
+<span class="nc" id="L102">        return activeFlag;</span>
+    }
+
+    public void setActiveFlag(String activeFlag) {
+<span class="nc" id="L106">        this.activeFlag = activeFlag;</span>
+<span class="nc" id="L107">    }</span>
+
+    public LocalDate getCreatedDate() {
+<span class="nc" id="L110">        return createdDate;</span>
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+<span class="nc" id="L114">        this.createdDate = createdDate;</span>
+<span class="nc" id="L115">    }</span>
+
+    public String getCreatedBy() {
+<span class="nc" id="L118">        return createdBy;</span>
+    }
+
+    public void setCreatedBy(String createdBy) {
+<span class="nc" id="L122">        this.createdBy = createdBy;</span>
+<span class="nc" id="L123">    }</span>
+
+    public LocalDate getUpdatedDate() {
+<span class="nc" id="L126">        return updatedDate;</span>
+    }
+
+    public void setUpdatedDate(LocalDate updatedDate) {
+<span class="nc" id="L130">        this.updatedDate = updatedDate;</span>
+<span class="nc" id="L131">    }</span>
+
+    public String getUpdatedBy() {
+<span class="nc" id="L134">        return updatedBy;</span>
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+<span class="nc" id="L138">        this.updatedBy = updatedBy;</span>
+<span class="nc" id="L139">    }</span>
+
+    public Long getLayoutId() {
+<span class="nc" id="L142">        return layoutId;</span>
+    }
+
+    public void setLayoutId(Long layoutId) {
+<span class="nc" id="L146">        this.layoutId = layoutId;</span>
+<span class="nc" id="L147">    }</span>
+
+    public String getLayoutLayoutId() {
+<span class="nc" id="L150">        return layoutLayoutId;</span>
+    }
+
+    public void setLayoutLayoutId(String layoutLayoutId) {
+<span class="nc" id="L154">        this.layoutLayoutId = layoutLayoutId;</span>
+<span class="nc" id="L155">    }</span>
+
+    public Long getSectionId() {
+<span class="nc" id="L158">        return sectionId;</span>
+    }
+
+    public void setSectionId(Long sectionId) {
+<span class="nc" id="L162">        this.sectionId = sectionId;</span>
+<span class="nc" id="L163">    }</span>
+
+    public String getSectionSectionId() {
+<span class="nc" id="L166">        return sectionSectionId;</span>
+    }
+
+    public void setSectionSectionId(String sectionSectionId) {
+<span class="nc" id="L170">        this.sectionSectionId = sectionSectionId;</span>
+<span class="nc" id="L171">    }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L176">            return true;</span>
+        }
+<span class="nc bnc" id="L178" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L179">            return false;</span>
+        }
+
+<span class="nc" id="L182">        SegmentDTO segmentDTO = (SegmentDTO) o;</span>
+<span class="nc bnc" id="L183" title="All 4 branches missed.">        if(segmentDTO.getSegmentId() == null || getSegmentId() == null) {</span>
+<span class="nc" id="L184">            return false;</span>
+        }
+<span class="nc" id="L186">        return Objects.equals(getSegmentId(), segmentDTO.getSegmentId());</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L191">        return Objects.hashCode(getSegmentId());</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L196">        return &quot;SegmentDTO{&quot; +</span>
+<span class="nc" id="L197">            &quot;, segmentId=&quot; + getSegmentId() +</span>
+<span class="nc" id="L198">            &quot;, segmentName='&quot; + getSegmentName() + &quot;'&quot; +</span>
+<span class="nc" id="L199">            &quot;, segmentDesc='&quot; + getSegmentDesc() + &quot;'&quot; +</span>
+<span class="nc" id="L200">            &quot;, startX=&quot; + getStartX() +</span>
+<span class="nc" id="L201">            &quot;, startY=&quot; + getStartY() +</span>
+<span class="nc" id="L202">            &quot;, endX=&quot; + getEndX() +</span>
+<span class="nc" id="L203">            &quot;, endY=&quot; + getEndY() +</span>
+<span class="nc" id="L204">            &quot;, activeFlag='&quot; + getActiveFlag() + &quot;'&quot; +</span>
+<span class="nc" id="L205">            &quot;, createdDate='&quot; + getCreatedDate() + &quot;'&quot; +</span>
+<span class="nc" id="L206">            &quot;, createdBy='&quot; + getCreatedBy() + &quot;'&quot; +</span>
+<span class="nc" id="L207">            &quot;, updatedDate='&quot; + getUpdatedDate() + &quot;'&quot; +</span>
+<span class="nc" id="L208">            &quot;, updatedBy='&quot; + getUpdatedBy() + &quot;'&quot; +</span>
+            &quot;}&quot;;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
