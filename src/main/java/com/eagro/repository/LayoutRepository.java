@@ -14,10 +14,5 @@ import java.util.List;
  */
 @Repository
 public interface LayoutRepository extends JpaRepository<Layout, Long> {
-    @Query("select distinct layout from Layout layout left join fetch layout.userLayoutMappings")
-    List<Layout> findAllWithEagerRelationships();
-
-    @Query("select layout from Layout layout left join fetch layout.userLayoutMappings where layout.id =:id")
-    Layout findOneWithEagerRelationships(@Param("id") Long id);
 
 }

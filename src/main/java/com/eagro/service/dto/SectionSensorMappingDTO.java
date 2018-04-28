@@ -12,7 +12,12 @@ import com.eagro.entities.enumeration.ZoneType;
  */
 public class SectionSensorMappingDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private ZoneType zoneType;
 
@@ -30,12 +35,10 @@ public class SectionSensorMappingDTO implements Serializable {
 
     private Long layoutId;
 
-    private String layoutLayoutId;
-
     private Long sectionId;
-
-    private String sectionSectionId;
-
+    
+    private Long sensorId;
+    
     public Long getId() {
         return id;
     }
@@ -108,13 +111,6 @@ public class SectionSensorMappingDTO implements Serializable {
         this.layoutId = layoutId;
     }
 
-    public String getLayoutLayoutId() {
-        return layoutLayoutId;
-    }
-
-    public void setLayoutLayoutId(String layoutLayoutId) {
-        this.layoutLayoutId = layoutLayoutId;
-    }
 
     public Long getSectionId() {
         return sectionId;
@@ -122,14 +118,6 @@ public class SectionSensorMappingDTO implements Serializable {
 
     public void setSectionId(Long sectionId) {
         this.sectionId = sectionId;
-    }
-
-    public String getSectionSectionId() {
-        return sectionSectionId;
-    }
-
-    public void setSectionSectionId(String sectionSectionId) {
-        this.sectionSectionId = sectionSectionId;
     }
 
     @Override
@@ -166,4 +154,12 @@ public class SectionSensorMappingDTO implements Serializable {
             ", updatedBy='" + getUpdatedBy() + "'" +
             "}";
     }
+
+	public Long getSensorId() {
+		return sensorId;
+	}
+
+	public void setSensorId(Long sensorId) {
+		this.sensorId = sensorId;
+	}
 }

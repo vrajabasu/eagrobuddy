@@ -12,7 +12,7 @@ import com.eagro.service.dto.SensorDTO;
 @Mapper(componentModel = "spring", uses = {SensorCoverageRangeMapper.class, SectionSensorMappingMapper.class, SensorDataMapper.class, LayoutMapper.class})
 public interface SensorMapper extends EntityMapper<SensorDTO, Sensor> {
 
-    @Mapping(source = "layout.layoutId", target = "layoutLayoutId")
+    @Mapping(source = "layout.layoutId", target = "layoutId")
     SensorDTO toDto(Sensor sensor);
 
     @Mapping(source = "layoutId", target = "layout")

@@ -3,22 +3,27 @@ package com.eagro.service.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * A DTO for the Sensor entity.
  */
 public class SensorDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private String sensorName;
 
     private String sensorDesc;
 
     private String activeFlag;
+    
+    private String sensorId;
 
     private LocalDate createdDate;
 
@@ -28,15 +33,7 @@ public class SensorDTO implements Serializable {
 
     private String updatedBy;
 
-    private Set<SensorCoverageRangeDTO> sensorCoverageRanges = new HashSet<>();
-
-    private Set<SectionSensorMappingDTO> sectionSensorMappings = new HashSet<>();
-
-    private Set<SensorDataDTO> sensorData = new HashSet<>();
-
     private Long layoutId;
-
-    private String layoutLayoutId;
 
     public Long getId() {
         return id;
@@ -102,44 +99,12 @@ public class SensorDTO implements Serializable {
         this.updatedBy = updatedBy;
     }
 
-    public Set<SensorCoverageRangeDTO> getSensorCoverageRanges() {
-        return sensorCoverageRanges;
-    }
-
-    public void setSensorCoverageRanges(Set<SensorCoverageRangeDTO> sensorCoverageRanges) {
-        this.sensorCoverageRanges = sensorCoverageRanges;
-    }
-
-    public Set<SectionSensorMappingDTO> getSectionSensorMappings() {
-        return sectionSensorMappings;
-    }
-
-    public void setSectionSensorMappings(Set<SectionSensorMappingDTO> sectionSensorMappings) {
-        this.sectionSensorMappings = sectionSensorMappings;
-    }
-
-    public Set<SensorDataDTO> getSensorData() {
-        return sensorData;
-    }
-
-    public void setSensorData(Set<SensorDataDTO> sensorData) {
-        this.sensorData = sensorData;
-    }
-
     public Long getLayoutId() {
         return layoutId;
     }
 
     public void setLayoutId(Long layoutId) {
         this.layoutId = layoutId;
-    }
-
-    public String getLayoutLayoutId() {
-        return layoutLayoutId;
-    }
-
-    public void setLayoutLayoutId(String layoutLayoutId) {
-        this.layoutLayoutId = layoutLayoutId;
     }
 
     @Override
@@ -176,4 +141,12 @@ public class SensorDTO implements Serializable {
             ", updatedBy='" + getUpdatedBy() + "'" +
             "}";
     }
+
+	public String getSensorId() {
+		return sensorId;
+	}
+
+	public void setSensorId(String sensorId) {
+		this.sensorId = sensorId;
+	}
 }

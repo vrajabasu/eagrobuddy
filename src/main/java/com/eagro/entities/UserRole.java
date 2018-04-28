@@ -2,6 +2,8 @@ package com.eagro.entities;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -43,7 +45,7 @@ public class UserRole implements Serializable {
     private String updatedBy;
 
     @OneToOne
-    @JoinColumn(name = "role_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     public Long getRoleId() {

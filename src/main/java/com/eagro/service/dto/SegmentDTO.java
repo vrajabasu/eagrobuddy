@@ -10,7 +10,12 @@ import java.util.Objects;
  */
 public class SegmentDTO implements Serializable {
 
-    private Long segmentId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long segmentId;
 
     private String segmentName;
 
@@ -36,11 +41,7 @@ public class SegmentDTO implements Serializable {
 
     private Long layoutId;
 
-    private String layoutLayoutId;
-
     private Long sectionId;
-
-    private String sectionSectionId;
 
     public Long getSegmentId() {
         return segmentId;
@@ -146,28 +147,12 @@ public class SegmentDTO implements Serializable {
         this.layoutId = layoutId;
     }
 
-    public String getLayoutLayoutId() {
-        return layoutLayoutId;
-    }
-
-    public void setLayoutLayoutId(String layoutLayoutId) {
-        this.layoutLayoutId = layoutLayoutId;
-    }
-
     public Long getSectionId() {
         return sectionId;
     }
 
     public void setSectionId(Long sectionId) {
         this.sectionId = sectionId;
-    }
-
-    public String getSectionSectionId() {
-        return sectionSectionId;
-    }
-
-    public void setSectionSectionId(String sectionSectionId) {
-        this.sectionSectionId = sectionSectionId;
     }
 
     @Override

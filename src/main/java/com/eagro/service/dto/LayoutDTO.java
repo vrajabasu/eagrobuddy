@@ -3,16 +3,19 @@ package com.eagro.service.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * A DTO for the Layout entity.
  */
 public class LayoutDTO implements Serializable {
 
-    private Long layoutId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long layoutId;
 
     private String layoutName;
 
@@ -31,9 +34,6 @@ public class LayoutDTO implements Serializable {
     private LocalDate updatedDate;
 
     private String updatedBy;
-
-    private Set<UserLayoutMappingDTO> userLayoutMappings = new HashSet<>();
-
 
     public Long getLayoutId() {
         return layoutId;
@@ -107,14 +107,6 @@ public class LayoutDTO implements Serializable {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
-    }
-
-    public Set<UserLayoutMappingDTO> getUserLayoutMappings() {
-        return userLayoutMappings;
-    }
-
-    public void setUserLayoutMappings(Set<UserLayoutMappingDTO> userLayoutMappings) {
-        this.userLayoutMappings = userLayoutMappings;
     }
 
     @Override

@@ -10,7 +10,12 @@ import java.util.Objects;
  */
 public class SectionDTO implements Serializable {
 
-    private Long sectionId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long sectionId;
 
     private String sectionName;
 
@@ -35,8 +40,6 @@ public class SectionDTO implements Serializable {
     private String updatedBy;
 
     private Long layoutId;
-
-    private String layoutLayoutId;
 
 
     public Long getSectionId() {
@@ -133,14 +136,6 @@ public class SectionDTO implements Serializable {
 
     public void setLayoutId(Long layoutId) {
         this.layoutId = layoutId;
-    }
-
-    public String getLayoutLayoutId() {
-        return layoutLayoutId;
-    }
-
-    public void setLayoutLayoutId(String layoutLayoutId) {
-        this.layoutLayoutId = layoutLayoutId;
     }
 
     @Override

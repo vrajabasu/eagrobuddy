@@ -55,7 +55,7 @@ public class SensorServiceImpl implements SensorService {
     @Transactional(readOnly = true)
     public List<SensorDTO> findAll() {
         log.debug("Request to get all Sensors");
-        return sensorRepository.findAllWithEagerRelationships().stream()
+        return sensorRepository.findAll().stream()
             .map(sensorMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
@@ -70,7 +70,7 @@ public class SensorServiceImpl implements SensorService {
     @Transactional(readOnly = true)
     public SensorDTO findOne(Long id) {
         log.debug("Request to get Sensor : {}", id);
-        Sensor sensor = sensorRepository.findOneWithEagerRelationships(id);
+        Sensor sensor = sensorRepository.findOne(id);
         return sensorMapper.toDto(sensor);
     }
 

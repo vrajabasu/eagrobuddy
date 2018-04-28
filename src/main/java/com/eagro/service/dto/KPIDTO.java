@@ -12,7 +12,12 @@ import com.eagro.entities.enumeration.ZoneType;
  */
 public class KPIDTO implements Serializable {
 
-    private Long kpiId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long kpiId;
 
     private String kpiName;
 
@@ -40,11 +45,7 @@ public class KPIDTO implements Serializable {
 
     private Long layoutId;
 
-    private String layoutLayoutId;
-
     private Long sectionId;
-
-    private String sectionSectionId;
 
     public Long getKpiId() {
         return kpiId;
@@ -158,28 +159,12 @@ public class KPIDTO implements Serializable {
         this.layoutId = layoutId;
     }
 
-    public String getLayoutLayoutId() {
-        return layoutLayoutId;
-    }
-
-    public void setLayoutLayoutId(String layoutLayoutId) {
-        this.layoutLayoutId = layoutLayoutId;
-    }
-
     public Long getSectionId() {
         return sectionId;
     }
 
     public void setSectionId(Long sectionId) {
         this.sectionId = sectionId;
-    }
-
-    public String getSectionSectionId() {
-        return sectionSectionId;
-    }
-
-    public void setSectionSectionId(String sectionSectionId) {
-        this.sectionSectionId = sectionSectionId;
     }
 
     @Override

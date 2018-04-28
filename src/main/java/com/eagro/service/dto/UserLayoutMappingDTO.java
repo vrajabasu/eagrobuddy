@@ -10,7 +10,12 @@ import java.util.Objects;
  */
 public class UserLayoutMappingDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private String activeFlag;
 
@@ -21,6 +26,10 @@ public class UserLayoutMappingDTO implements Serializable {
     private LocalDate updatedDate;
 
     private String updatedBy;
+    
+    private Long layoutId;
+    
+    private Long userId;
 
     public Long getId() {
         return id;
@@ -70,7 +79,23 @@ public class UserLayoutMappingDTO implements Serializable {
         this.updatedBy = updatedBy;
     }
 
-    @Override
+    public Long getLayoutId() {
+		return layoutId;
+	}
+
+	public void setLayoutId(Long layoutId) {
+		this.layoutId = layoutId;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

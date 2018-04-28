@@ -10,7 +10,12 @@ import java.util.Objects;
  */
 public class SensorDataDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private LocalDate recordedDateTime;
 
@@ -25,10 +30,10 @@ public class SensorDataDTO implements Serializable {
     private String param3;
 
     private Double paramValue3;
+    
+    private Long sensorId;
 
     private Long layoutId;
-
-    private String layoutLayoutId;
 
     public Long getId() {
         return id;
@@ -102,14 +107,6 @@ public class SensorDataDTO implements Serializable {
         this.layoutId = layoutId;
     }
 
-    public String getLayoutLayoutId() {
-        return layoutLayoutId;
-    }
-
-    public void setLayoutLayoutId(String layoutLayoutId) {
-        this.layoutLayoutId = layoutLayoutId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -144,4 +141,12 @@ public class SensorDataDTO implements Serializable {
             ", paramValue3=" + getParamValue3() +
             "}";
     }
+
+	public Long getSensorId() {
+		return sensorId;
+	}
+
+	public void setSensorId(Long sensorId) {
+		this.sensorId = sensorId;
+	}
 }

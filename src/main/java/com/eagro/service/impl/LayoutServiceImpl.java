@@ -53,10 +53,11 @@ public class LayoutServiceImpl implements LayoutService {
     @Transactional(readOnly = true)
     public List<LayoutDTO> findAll() {
         log.debug("Request to get all Layouts");
-        return layoutRepository.findAllWithEagerRelationships().stream()
+        return layoutRepository.findAll().stream()
             .map(layoutMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
+
 
     /**
      * Get one layout by id.
@@ -68,7 +69,7 @@ public class LayoutServiceImpl implements LayoutService {
     @Transactional(readOnly = true)
     public LayoutDTO findOne(Long id) {
         log.debug("Request to get Layout : {}", id);
-        Layout layout = layoutRepository.findOneWithEagerRelationships(id);
+        Layout layout = layoutRepository.findOne(id);
         return layoutMapper.toDto(layout);
     }
 

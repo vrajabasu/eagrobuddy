@@ -64,9 +64,11 @@ public class KPI implements Serializable {
     private String updatedBy;
 
     @ManyToOne
+    @JoinColumn(name = "layout_id", nullable = false)
     private Layout layout;
 
     @ManyToOne
+    @JoinColumn(name = "section_id", nullable = false)
     private Section section;
 
     public Long getKpiId() {

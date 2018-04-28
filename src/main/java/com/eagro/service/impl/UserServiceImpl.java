@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public List<UserDTO> findAll() {
         log.debug("Request to get all EagroUsers");
-        return eagroUserRepository.findAllWithEagerRelationships().stream()
+        return eagroUserRepository.findAll().stream()
             .map(eagroUserMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public UserDTO findOne(Long id) {
         log.debug("Request to get EagroUser : {}", id);
-        User eagroUser = eagroUserRepository.findOneWithEagerRelationships(id);
+        User eagroUser = eagroUserRepository.findOne(id);
         return eagroUserMapper.toDto(eagroUser);
     }
 

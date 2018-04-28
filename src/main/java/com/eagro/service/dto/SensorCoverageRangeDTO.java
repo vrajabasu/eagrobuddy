@@ -10,7 +10,12 @@ import java.util.Objects;
  */
 public class SensorCoverageRangeDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private Double startX;
 
@@ -32,11 +37,9 @@ public class SensorCoverageRangeDTO implements Serializable {
 
     private Long layoutId;
 
-    private String layoutLayoutId;
-
     private Long sectionId;
-
-    private String sectionSectionId;
+    
+    private Long sensorId;
 
     public Long getId() {
         return id;
@@ -126,28 +129,12 @@ public class SensorCoverageRangeDTO implements Serializable {
         this.layoutId = layoutId;
     }
 
-    public String getLayoutLayoutId() {
-        return layoutLayoutId;
-    }
-
-    public void setLayoutLayoutId(String layoutLayoutId) {
-        this.layoutLayoutId = layoutLayoutId;
-    }
-
     public Long getSectionId() {
         return sectionId;
     }
 
     public void setSectionId(Long sectionId) {
         this.sectionId = sectionId;
-    }
-
-    public String getSectionSectionId() {
-        return sectionSectionId;
-    }
-
-    public void setSectionSectionId(String sectionSectionId) {
-        this.sectionSectionId = sectionSectionId;
     }
 
     @Override
@@ -186,4 +173,12 @@ public class SensorCoverageRangeDTO implements Serializable {
             ", updatedBy='" + getUpdatedBy() + "'" +
             "}";
     }
+
+	public Long getSensorId() {
+		return sensorId;
+	}
+
+	public void setSensorId(Long sensorId) {
+		this.sensorId = sensorId;
+	}
 }

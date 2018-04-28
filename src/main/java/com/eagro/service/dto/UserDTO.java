@@ -3,16 +3,19 @@ package com.eagro.service.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * A DTO for the EagroUser entity.
  */
 public class UserDTO implements Serializable {
 
-    private Long userId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long userId;
 
     private String loginKey;
 
@@ -35,8 +38,8 @@ public class UserDTO implements Serializable {
     private LocalDate updatedDate;
 
     private String updatedBy;
-
-    private Set<UserLayoutMappingDTO> userLayoutMappings = new HashSet<>();
+    
+    private Long roleId;
 
     public Long getUserId() {
         return userId;
@@ -134,14 +137,6 @@ public class UserDTO implements Serializable {
         this.updatedBy = updatedBy;
     }
 
-    public Set<UserLayoutMappingDTO> getUserLayoutMappings() {
-        return userLayoutMappings;
-    }
-
-    public void setUserLayoutMappings(Set<UserLayoutMappingDTO> userLayoutMappings) {
-        this.userLayoutMappings = userLayoutMappings;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -180,4 +175,12 @@ public class UserDTO implements Serializable {
             ", updatedBy='" + getUpdatedBy() + "'" +
             "}";
     }
+
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
 }

@@ -1,13 +1,21 @@
 package com.eagro.entities;
 
-
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Sensor entity.
@@ -16,90 +24,88 @@ import java.util.Objects;
 @Table(name = "sensor")
 public class Sensor implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+	@SequenceGenerator(name = "sequenceGenerator")
+	private Long id;
 
-    @Column(name = "sensor_name")
-    private String sensorName;
+	@Column(name = "sensor_name")
+	private String sensorName;
 
-    @Column(name = "sensor_desc")
-    private String sensorDesc;
+	@Column(name = "sensor_desc")
+	private String sensorDesc;
 
-    @Column(name = "active_flag")
-    private boolean activeFlag;
+	@Column(name = "sensor_id")
+	private Long sensorId;
 
-    @Column(name = "created_date")
-    private LocalDate createdDate;
+	@Column(name = "active_flag")
+	private boolean activeFlag;
 
-    @Column(name = "created_by")
-    private String createdBy;
+	@Column(name = "created_date")
+	private LocalDate createdDate;
 
-    @Column(name = "updated_date")
-    private LocalDate updatedDate;
+	@Column(name = "created_by")
+	private String createdBy;
 
-    @Column(name = "updated_by")
-    private String updatedBy;
+	@Column(name = "updated_date")
+	private LocalDate updatedDate;
 
-    @ManyToMany
-    @JoinTable(name = "sensor_sensor_coverage_range",
-               joinColumns = @JoinColumn(name="sensors_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="sensor_coverage_ranges_id", referencedColumnName="id"))
-    private Set<SensorCoverageRange> sensorCoverageRanges = new HashSet<>();
+	@Column(name = "updated_by")
+	private String updatedBy;
 
-    @ManyToMany
-    @JoinTable(name = "sensor_section_sensor_mapping",
-               joinColumns = @JoinColumn(name="sensors_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="section_sensor_mappings_id", referencedColumnName="id"))
-    private Set<SectionSensorMapping> sectionSensorMappings = new HashSet<>();
+	@OneToOne
+	@JsonIgnore
+	private SensorCoverageRange sensorCoverageRanges;
 
-    @ManyToMany
-    @JoinTable(name = "sensor_sensor_data",
-               joinColumns = @JoinColumn(name="sensors_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="sensor_data_id", referencedColumnName="id"))
-    private Set<SensorData> sensorData = new HashSet<>();
+	@OneToOne
+	@JsonIgnore
+	private SectionSensorMapping sectionSensorMapping;
 
-    @ManyToOne
-    private Layout layout;
+	@OneToOne
+	@JsonIgnore
+	private SensorData sensorData;
 
-    public Long getId() {
-        return id;
-    }
+	@ManyToOne
+	@JoinColumn(name = "layout_id", nullable = false)
+	private Layout layout;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getSensorName() {
-        return sensorName;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Sensor sensorName(String sensorName) {
-        this.sensorName = sensorName;
-        return this;
-    }
+	public String getSensorName() {
+		return sensorName;
+	}
 
-    public void setSensorName(String sensorName) {
-        this.sensorName = sensorName;
-    }
+	public Sensor sensorName(String sensorName) {
+		this.sensorName = sensorName;
+		return this;
+	}
 
-    public String getSensorDesc() {
-        return sensorDesc;
-    }
+	public void setSensorName(String sensorName) {
+		this.sensorName = sensorName;
+	}
 
-    public Sensor sensorDesc(String sensorDesc) {
-        this.sensorDesc = sensorDesc;
-        return this;
-    }
+	public String getSensorDesc() {
+		return sensorDesc;
+	}
 
-    public void setSensorDesc(String sensorDesc) {
-        this.sensorDesc = sensorDesc;
-    }
+	public Sensor sensorDesc(String sensorDesc) {
+		this.sensorDesc = sensorDesc;
+		return this;
+	}
 
-    public boolean isActiveFlag() {
+	public void setSensorDesc(String sensorDesc) {
+		this.sensorDesc = sensorDesc;
+	}
+
+	public boolean isActiveFlag() {
 		return activeFlag;
 	}
 
@@ -107,177 +113,133 @@ public class Sensor implements Serializable {
 		this.activeFlag = activeFlag;
 	}
 
+	public Long getSensorId() {
+		return sensorId;
+	}
+
+	public Sensor sensorId(Long sensorId) {
+		this.sensorId = sensorId;
+		return this;
+	}
+
+	public void setSensorId(Long sensorId) {
+		this.sensorId = sensorId;
+	}
+
 	public LocalDate getCreatedDate() {
-        return createdDate;
-    }
+		return createdDate;
+	}
 
-    public Sensor createdDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
-        return this;
-    }
+	public Sensor createdDate(LocalDate createdDate) {
+		this.createdDate = createdDate;
+		return this;
+	}
 
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
-    }
+	public void setCreatedDate(LocalDate createdDate) {
+		this.createdDate = createdDate;
+	}
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
+	public String getCreatedBy() {
+		return createdBy;
+	}
 
-    public Sensor createdBy(String createdBy) {
-        this.createdBy = createdBy;
-        return this;
-    }
+	public Sensor createdBy(String createdBy) {
+		this.createdBy = createdBy;
+		return this;
+	}
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
 
-    public LocalDate getUpdatedDate() {
-        return updatedDate;
-    }
+	public LocalDate getUpdatedDate() {
+		return updatedDate;
+	}
 
-    public Sensor updatedDate(LocalDate updatedDate) {
-        this.updatedDate = updatedDate;
-        return this;
-    }
+	public Sensor updatedDate(LocalDate updatedDate) {
+		this.updatedDate = updatedDate;
+		return this;
+	}
 
-    public void setUpdatedDate(LocalDate updatedDate) {
-        this.updatedDate = updatedDate;
-    }
+	public void setUpdatedDate(LocalDate updatedDate) {
+		this.updatedDate = updatedDate;
+	}
 
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
 
-    public Sensor updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-        return this;
-    }
+	public Sensor updatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+		return this;
+	}
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
 
-    public Set<SensorCoverageRange> getSensorCoverageRanges() {
-        return sensorCoverageRanges;
-    }
+	public SensorCoverageRange getSensorCoverageRanges() {
+		return sensorCoverageRanges;
+	}
 
-    public Sensor sensorCoverageRanges(Set<SensorCoverageRange> sensorCoverageRanges) {
-        this.sensorCoverageRanges = sensorCoverageRanges;
-        return this;
-    }
+	public void setSensorCoverageRanges(SensorCoverageRange sensorCoverageRanges) {
+		this.sensorCoverageRanges = sensorCoverageRanges;
+	}
 
-    public Sensor addSensorCoverageRange(SensorCoverageRange sensorCoverageRange) {
-        this.sensorCoverageRanges.add(sensorCoverageRange);
-        sensorCoverageRange.getSensors().add(this);
-        return this;
-    }
+	public SectionSensorMapping getSectionSensorMapping() {
+		return sectionSensorMapping;
+	}
 
-    public Sensor removeSensorCoverageRange(SensorCoverageRange sensorCoverageRange) {
-        this.sensorCoverageRanges.remove(sensorCoverageRange);
-        sensorCoverageRange.getSensors().remove(this);
-        return this;
-    }
+	public void setSectionSensorMapping(SectionSensorMapping sectionSensorMapping) {
+		this.sectionSensorMapping = sectionSensorMapping;
+	}
 
-    public void setSensorCoverageRanges(Set<SensorCoverageRange> sensorCoverageRanges) {
-        this.sensorCoverageRanges = sensorCoverageRanges;
-    }
+	public SensorData getSensorData() {
+		return sensorData;
+	}
 
-    public Set<SectionSensorMapping> getSectionSensorMappings() {
-        return sectionSensorMappings;
-    }
+	public void setSensorData(SensorData sensorData) {
+		this.sensorData = sensorData;
+	}
 
-    public Sensor sectionSensorMappings(Set<SectionSensorMapping> sectionSensorMappings) {
-        this.sectionSensorMappings = sectionSensorMappings;
-        return this;
-    }
+	public Layout getLayout() {
+		return layout;
+	}
 
-    public Sensor addSectionSensorMapping(SectionSensorMapping sectionSensorMapping) {
-        this.sectionSensorMappings.add(sectionSensorMapping);
-        sectionSensorMapping.getSensors().add(this);
-        return this;
-    }
+	public Sensor layout(Layout layout) {
+		this.layout = layout;
+		return this;
+	}
 
-    public Sensor removeSectionSensorMapping(SectionSensorMapping sectionSensorMapping) {
-        this.sectionSensorMappings.remove(sectionSensorMapping);
-        sectionSensorMapping.getSensors().remove(this);
-        return this;
-    }
+	public void setLayout(Layout layout) {
+		this.layout = layout;
+	}
 
-    public void setSectionSensorMappings(Set<SectionSensorMapping> sectionSensorMappings) {
-        this.sectionSensorMappings = sectionSensorMappings;
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Sensor sensor = (Sensor) o;
+		if (sensor.getId() == null || getId() == null) {
+			return false;
+		}
+		return Objects.equals(getId(), sensor.getId());
+	}
 
-    public Set<SensorData> getSensorData() {
-        return sensorData;
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(getId());
+	}
 
-    public Sensor sensorData(Set<SensorData> sensorData) {
-        this.sensorData = sensorData;
-        return this;
-    }
-
-    public Sensor addSensorData(SensorData sensorData) {
-        this.sensorData.add(sensorData);
-        sensorData.getSensors().add(this);
-        return this;
-    }
-
-    public Sensor removeSensorData(SensorData sensorData) {
-        this.sensorData.remove(sensorData);
-        sensorData.getSensors().remove(this);
-        return this;
-    }
-
-    public void setSensorData(Set<SensorData> sensorData) {
-        this.sensorData = sensorData;
-    }
-
-    public Layout getLayout() {
-        return layout;
-    }
-
-    public Sensor layout(Layout layout) {
-        this.layout = layout;
-        return this;
-    }
-
-    public void setLayout(Layout layout) {
-        this.layout = layout;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Sensor sensor = (Sensor) o;
-        if (sensor.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), sensor.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
-
-    @Override
-    public String toString() {
-        return "Sensor{" +
-            "id=" + getId() +
-            ", sensorName='" + getSensorName() + "'" +
-            ", sensorDesc='" + getSensorDesc() + "'" +
-            ", activeFlag='" + isActiveFlag() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
-            ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedDate='" + getUpdatedDate() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
-            "}";
-    }
+	@Override
+	public String toString() {
+		return "Sensor{" + "id=" + getId() + ", sensorName='" + getSensorName() + "'" + ", sensorDesc='"
+				+ getSensorDesc() + "'" + ", activeFlag='" + isActiveFlag() + "'" + ", createdDate='" + getCreatedDate()
+				+ "'" + ", createdBy='" + getCreatedBy() + "'" + ", updatedDate='" + getUpdatedDate() + "'"
+				+ ", updatedBy='" + getUpdatedBy() + "'" + "}";
+	}
 }

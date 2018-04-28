@@ -15,8 +15,8 @@ import com.eagro.service.dto.SegmentDTO;
 @Mapper(componentModel = "spring", uses = {LayoutMapper.class, SectionMapper.class})
 public interface SegmentMapper extends EntityMapper<SegmentDTO, Segment> {
 
-    @Mapping(source = "layout.layoutId", target = "layoutLayoutId")
-    @Mapping(source = "section.sectionId", target = "sectionSectionId")
+    @Mapping(source = "layout.layoutId", target = "layoutId")
+    @Mapping(source = "section.sectionId", target = "sectionId")
     SegmentDTO toDto(Segment segment);
 
     @Mapping(source = "layoutId", target = "layout")

@@ -1,14 +1,19 @@
 package com.eagro.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * SensorData entity.
@@ -46,11 +51,12 @@ public class SensorData implements Serializable {
     private Double paramValue3;
 
     @ManyToOne
+    @JoinColumn(name = "layout_id", nullable = false)
     private Layout layout;
 
-    @ManyToMany(mappedBy = "sensorData")
-    @JsonIgnore
-    private Set<Sensor> sensors = new HashSet<>();
+    @OneToOne
+    @JoinColumn(name = "sensor_id", nullable = false)
+    private Sensor sensor;
 
     public Long getId() {
         return id;
@@ -164,32 +170,15 @@ public class SensorData implements Serializable {
         this.layout = layout;
     }
 
-    public Set<Sensor> getSensors() {
-        return sensors;
-    }
+    public Sensor getSensor() {
+		return sensor;
+	}
 
-    public SensorData sensors(Set<Sensor> sensors) {
-        this.sensors = sensors;
-        return this;
-    }
+	public void setSensor(Sensor sensor) {
+		this.sensor = sensor;
+	}
 
-    public SensorData addSensor(Sensor sensor) {
-        this.sensors.add(sensor);
-        sensor.getSensorData().add(this);
-        return this;
-    }
-
-    public SensorData removeSensor(Sensor sensor) {
-        this.sensors.remove(sensor);
-        sensor.getSensorData().remove(this);
-        return this;
-    }
-
-    public void setSensors(Set<Sensor> sensors) {
-        this.sensors = sensors;
-    }
-
-    @Override
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

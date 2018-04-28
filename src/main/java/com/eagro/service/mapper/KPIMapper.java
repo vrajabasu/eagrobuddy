@@ -12,8 +12,8 @@ import com.eagro.service.dto.KPIDTO;
 @Mapper(componentModel = "spring", uses  = {LayoutMapper.class, SectionMapper.class})
 public interface KPIMapper extends EntityMapper<KPIDTO, KPI> {
 
-    @Mapping(source = "layout.layoutId", target = "layoutLayoutId")
-    @Mapping(source = "section.sectionId", target = "sectionSectionId")
+    @Mapping(source = "layout.layoutId", target = "layoutId")
+    @Mapping(source = "section.sectionId", target = "sectionId")
     KPIDTO toDto(KPI kPI);
 
     @Mapping(source = "layoutId", target = "layout")
