@@ -62,7 +62,7 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 		// TODO
 
 		// Fetch layout information from layout table
-		log.debug("Request to get Layout : {}", layoutId);
+		log.debug("Request to get Layout  : {}", layoutId);
 		Layout layout = layoutRepository.findOneWithEagerRelationships(layoutId);
 		LayoutDTO layoutDTO = layoutMapper.toDto(layout);
 		// Enrich layout information in response
@@ -76,8 +76,10 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 		layoutResponseDTO.setSections(sections);
 		// Iterate the section
 		for (SectionsResponseDTO section : sections) {
+			
 			List<Segment> segmentList = segmentRepository.findByLayoutIdAndSectionId(layoutId, section.getSectionId());
 			List<SegmentDTO> segmentDTOList = segmentMapper.toDto(segmentList);
+			
 
 		}
 		return null;

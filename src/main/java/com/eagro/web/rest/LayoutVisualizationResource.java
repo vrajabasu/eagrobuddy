@@ -16,14 +16,13 @@ import com.eagro.service.LayoutVisualizationService;
 import com.eagro.service.dto.LayoutResponseDTO;
 import com.eagro.service.utils.ResponseUtil;
 
-
 /**
  * The Class LayoutVisualizationResource.
  */
 @RestController
 @RequestMapping("/api")
 public class LayoutVisualizationResource {
-	
+
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(LayoutVisualizationResource.class);
 
@@ -31,11 +30,19 @@ public class LayoutVisualizationResource {
 	@Autowired
 	public LayoutVisualizationService layoutVisualizationService;
 
-
 	/**
-	 * Gets the layout.
-	 *
-	 * @param layoutId the layout id
+	 * Gets the layout information used to retrieve overall layout
+	 * visualization showing sections and segments with in the sections, as well
+	 * current status of each section represented by colour coding. Green
+	 * indicates segment is under normal condition.Yellow indicates that the
+	 * section is performing with in the reference range but KPIs are outside
+	 * deviation range specified and propability of moving out of reference
+	 * range is likely.<br/>
+	 * RED indicates that reading from sensors are outside optimal reference
+	 * range for that particular segment.
+	 * 
+	 * @param layoutId
+	 *            the layout id
 	 * @return the layout
 	 */
 	@RequestMapping(value = "/eagro/v1/visualization/layout/{layoutId}", method = RequestMethod.GET)
