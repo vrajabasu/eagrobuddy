@@ -23,15 +23,16 @@ import com.eagro.service.dto.KPIDTO;
 import com.eagro.service.dto.SectionDTO;
 import com.eagro.service.dto.SectionSensorMappingDTO;
 import com.eagro.service.dto.SegmentDTO;
+import com.eagro.service.dto.SegmentsResponseDTO.OverallThresholdstateEnum;
 import com.eagro.service.dto.SensorCoverageRangeDTO;
 import com.eagro.service.dto.SensorDataDTO;
-import com.eagro.service.dto.enumeration.ThresholdState;
 import com.eagro.service.impl.LayoutVisualizationServiceImpl;
 import com.eagro.service.mapper.KPIMapper;
 import com.eagro.service.mapper.LayoutVisualizationMapper;
 import com.eagro.service.mapper.SectionSensorMappingMapper;
 import com.eagro.service.mapper.SensorCoverageRangeMapper;
 import com.eagro.service.mapper.SensorDataMapper;
+import com.eagro.service.utils.ServiceUtil;
 
 @Component
 public class SegmentDetailsService {
@@ -39,10 +40,10 @@ public class SegmentDetailsService {
 	private static final String LIGHT = "Light";
 
 	private final Logger log = LoggerFactory.getLogger(LayoutVisualizationServiceImpl.class);
-	
+
 	@Autowired
 	public LayoutVisualizationMapper layoutVisualizationMapper;
-	
+
 	@Autowired
 	public SectionSensorMappingRepository sectionSensorMappingRepository;
 	@Autowired
@@ -64,48 +65,81 @@ public class SegmentDetailsService {
 	@Autowired
 	public SensorCoverageRangeMapper sensorCoverageRangeMapper;
 
-	public ThresholdState calculateOverallThresholdState(Map<Long, SensorDataDTO> sensorActualValueMap,
+	/**
+	 * Calculate overall threshold state by comparing actual sensor data and
+	 * optimal sensor data.
+	 *
+	 * @param sensorActualValueMap
+	 *            the sensor actual value map
+	 * @param sensorOptimalKPIMap
+	 *            the sensor optimal KPI map
+	 * @return the overall thresholdstate enum
+	 */
+	public OverallThresholdstateEnum calculateOverallThresholdState(Map<Long, SensorDataDTO> sensorActualValueMap,
 			Map<Long, List<KPIDTO>> sensorOptimalKPIMap) {
-		// TODO Auto-generated method stub
-		List<ThresholdState> currentThresholdStateList = new ArrayList<>();
+		List<OverallThresholdstateEnum> currentThresholdStateList = new ArrayList<>();
 		// Iterate sensorActualValue Map
 		sensorActualValueMap.values().forEach(sensor -> {
-			ThresholdState currentSensorState = ThresholdState.NORMAL;
-			// Iterate Kpi
-			if (!(LIGHT.equalsIgnoreCase(sensor.getParam1())) && !(LIGHT.equalsIgnoreCase(sensor.getParam2()))
-					&& !(LIGHT.equalsIgnoreCase(sensor.getParam3()))) {
-				sensorOptimalKPIMap.values().forEach(kpiList -> {
-					kpiList.forEach(kpi -> {
-
-					});
+			OverallThresholdstateEnum currentSensorState = OverallThresholdstateEnum.NORMAL;
+			// For each Kpi from sensor check the current KPI is not light then
+			// consider
+			if (!(LIGHT.equalsIgnoreCase(sensor.getParam1()))) {
+				List<KPIDTO> sensorOptimalKpi = sensorOptimalKPIMap.get(sensor.getSensorId());
+				sensorOptimalKpi.forEach(kpi -> {
+					if (kpi != null && ServiceUtil.isNotEmpty(kpi.getKpiName())) {
+						if (kpi.getKpiName().equals(sensor.getParam1())) {
+							// TODO Logic to check within reference range and
+							// deviation range
+							sensor.getParamValue1().equals(kpi.getDeviationRange());
+						}
+					}
 				});
 			}
-
+			log.trace("The sensorId : {} hold the threshold state as : {}", sensor.getSensorId(), currentSensorState);
+			currentThresholdStateList.add(currentSensorState);
 		});
-		return null;
+
+		return calculateThresholdBasedOnPrecendence(currentThresholdStateList);
 	}
 
-	private ThresholdState calculateThresholdBasedOnPrecendence(List<ThresholdState> currentThresholdStateList) {
-		ThresholdState thresholdState = ThresholdState.NORMAL;
-		for (ThresholdState currentState : currentThresholdStateList) {
-			if (!currentState.equals(ThresholdState.NORMAL)) {
-				if (currentState.equals(ThresholdState.EXCEEDING_SOON)
-						&& (currentState.equals(ThresholdState.NORMAL))) {
-					thresholdState = ThresholdState.EXCEEDING_SOON;
+	/**
+	 * Calculate overall threshold state from list of threshold state for per
+	 * segment based on precedence.
+	 *
+	 * @param currentThresholdStateList
+	 *            the current threshold state list
+	 * @return the overall thresholdstate enum
+	 */
+	private OverallThresholdstateEnum calculateThresholdBasedOnPrecendence(
+			List<OverallThresholdstateEnum> currentThresholdStateList) {
+		OverallThresholdstateEnum thresholdState = OverallThresholdstateEnum.NORMAL;
+		for (OverallThresholdstateEnum currentState : currentThresholdStateList) {
+			if (!currentState.equals(OverallThresholdstateEnum.NORMAL)) {
+				if (currentState.equals(OverallThresholdstateEnum.EXCEEDING_SOON)
+						&& (currentState.equals(OverallThresholdstateEnum.NORMAL))) {
+					thresholdState = OverallThresholdstateEnum.EXCEEDING_SOON;
 				}
-				if (currentState.equals(ThresholdState.EXCEEDED)) {
-					thresholdState = ThresholdState.EXCEEDED;
+				if (currentState.equals(OverallThresholdstateEnum.EXCEEDED)) {
+					thresholdState = OverallThresholdstateEnum.EXCEEDED;
 				}
 			}
 		}
-
+		log.trace("The Overall Threshold for the specific segment :{}", thresholdState);
 		return thresholdState;
 
 	}
 
+	/**
+	 * Retrieve current data from sensors by actual KPI values i.e., latest
+	 * sensor data at that point in time from cloud data source for applicable
+	 * sensors retrieved from retrieveOptimalKPIsForSensors method.
+	 *
+	 * @param segmentSensorMap
+	 *            the segment sensor map
+	 * @return the map
+	 */
 	public Map<Long, SensorDataDTO> retrieveCurrentDataFromSensors(
 			Map<Long, SectionSensorMappingDTO> segmentSensorMap) {
-		// TODO Auto-generated method stub
 		Map<Long, SensorDataDTO> sensorActualValueMap = new HashMap<>();
 		// Iterate Map with key
 		if (segmentSensorMap.values() != null && !segmentSensorMap.values().isEmpty()) {
@@ -124,7 +158,6 @@ public class SegmentDetailsService {
 
 	public Map<Long, List<KPIDTO>> retrieveOptimalKPIsForSensors(SectionDTO section,
 			Map<Long, SectionSensorMappingDTO> segmentSensorMap) {
-		// TODO Auto-generated method stub
 		Map<Long, List<KPIDTO>> sensorOptimalKPIMap = new HashMap<>();
 		segmentSensorMap.values().forEach(senor -> {
 			// Retrieve zoneType from sectionsensormapping entity
@@ -143,6 +176,15 @@ public class SegmentDetailsService {
 		return sensorOptimalKPIMap;
 	}
 
+	/**
+	 * Retrieve list of sensors applicable for current segment.
+	 *
+	 * @param sectionDTO
+	 *            the section DTO
+	 * @param segmentDTO
+	 *            the segment DTO
+	 * @return the map
+	 */
 	public Map<Long, SectionSensorMappingDTO> retrieveSensorForCurrentSegment(SectionDTO sectionDTO,
 			SegmentDTO segmentDTO) {
 
@@ -155,13 +197,10 @@ public class SegmentDetailsService {
 		List<SectionSensorMappingDTO> sensorDTOList = sectionSensorMappingMapper.toDto(sensorList);
 		// validate whether the coordinates of the sensor falls within the
 		// segment coordinates
-		// List<SectionSensorMappingDTO> sectionBasedSensorList = new
-		// ArrayList<SectionSensorMappingDTO>();
 		for (SectionSensorMappingDTO sensor : sensorDTOList) {
 			SectionSensorMappingDTO interimSectionBasedSensor = null;
 			if (checkSensorWithInSegRange(segmentDTO, sensor)) {
 				interimSectionBasedSensor = layoutVisualizationMapper.sensorToSensor(sensor);
-				// sectionBasedSensorList.add(interimSectionBasedSensor);
 				segmentSensorMap.put(segmentDTO.getSegmentId(), interimSectionBasedSensor);
 
 			}
@@ -194,6 +233,16 @@ public class SegmentDetailsService {
 		return segmentSensorMap;
 	}
 
+	/**
+	 * Check whether the sensor coverage range is with in the segment
+	 * coordinates range.
+	 *
+	 * @param segmentDTO
+	 *            the segment DTO
+	 * @param currentSensorCoverageRangeDTO
+	 *            the current sensor coverage range DTO
+	 * @return true, if successful
+	 */
 	private boolean checkSensorCoverageWithinsegRange(SegmentDTO segmentDTO,
 			SensorCoverageRangeDTO currentSensorCoverageRangeDTO) {
 		return (currentSensorCoverageRangeDTO.getStartX() <= segmentDTO.getEndX())
