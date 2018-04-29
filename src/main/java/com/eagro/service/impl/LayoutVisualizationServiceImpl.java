@@ -87,58 +87,65 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 			List<SectionsResponseDTO> sectionResponseDTOList = new ArrayList<>();
 			// Iterate the section
 			for (SectionDTO sectionDTO : sectionDTOList) {
+				SectionsResponseDTO sectionResponseDTO = null;
 				if (sectionDTO != null) {
-					// Enrich section details to the response
-					SectionsResponseDTO sectionResponseDTO = new SectionsResponseDTO();
-					sectionResponseDTO = layoutVisualizationMapper.sectiontoSectionResponse(sectionDTO);
-					// Retrieve the list of segments for specific section
-					List<Segment> segmentList = segmentRepository.findByLayoutIdAndSectionId(layoutId,
-							sectionDTO.getSectionId());
-					List<SegmentDTO> segmentDTOList = segmentMapper.toDto(segmentList);
-					List<SegmentsResponseDTO> segmentsResponseDTOList = new ArrayList<>();
-					for (SegmentDTO segment : segmentDTOList) {
-						// Enrich segment details to the response
-						SegmentsResponseDTO segmentsResponseDTO = layoutVisualizationMapper
-								.segmenttoSegmentsResponseDTO(segment);
-						// Retrieve sensor applicable for segment
-						Map<Long, SectionSensorMappingDTO> segmentSensorMap = segmentDetailsService
-								.retrieveSensorForCurrentSegment(sectionDTO, segment);
-						// Retrieve Optimal KPI values
-						if (segmentSensorMap != null && !segmentSensorMap.isEmpty()) {
-							Map<Long, List<KPIDTO>> sensorOptimalKPIMap = segmentDetailsService
-									.retrieveOptimalKPIsForSensors(sectionDTO, segmentSensorMap);
-							if (sensorOptimalKPIMap != null && !sensorOptimalKPIMap.isEmpty()) {
-								// Retrieve Actual KPI Values
-								Map<Long, SensorDataDTO> sensorActualValueMap = segmentDetailsService
-										.retrieveCurrentDataFromSensors(segmentSensorMap);
-								// calculate overall threshold
-								if (sensorActualValueMap != null && !sensorActualValueMap.isEmpty()) {
-									OverallThresholdstateEnum thresholdState = segmentDetailsService
-											.calculateOverallThresholdState(sensorActualValueMap, sensorOptimalKPIMap);
-									// Enrich the overall Threshold state to segment response
-									segmentsResponseDTO.setOverallThresholdstate(thresholdState);
-									segmentsResponseDTOList.add(segmentsResponseDTO);
-								}
-							}
-						}
-					}
-					//Enrich the segments list to response
-					sectionResponseDTO.setSegments(segmentsResponseDTOList);
-					sectionResponseDTOList.add(sectionResponseDTO);
+					sectionResponseDTO = fetchPerSectionDetails(layoutId, sectionDTO);
 				}
+				sectionResponseDTOList.add(sectionResponseDTO);
 			}
-			//Enrich the sections list to response
+			// Enrich the sections list to response
 			layoutResponseDTO.setSections(sectionResponseDTOList);
 		}
 
 		return layoutResponseDTO;
 	}
 
+	private SectionsResponseDTO fetchPerSectionDetails(Long layoutId, SectionDTO sectionDTO) {
+		// Enrich section details to the response
+		SectionsResponseDTO sectionResponseDTO = new SectionsResponseDTO();
+		sectionResponseDTO = layoutVisualizationMapper.sectiontoSectionResponse(sectionDTO);
+		// Retrieve the list of segments for specific section
+		List<Segment> segmentList = segmentRepository.findByLayoutIdAndSectionId(layoutId, sectionDTO.getSectionId());
+		List<SegmentDTO> segmentDTOList = segmentMapper.toDto(segmentList);
+		List<SegmentsResponseDTO> segmentsResponseDTOList = new ArrayList<>();
+		for (SegmentDTO segment : segmentDTOList) {
+			// Enrich segment details to the response
+			SegmentsResponseDTO segmentsResponseDTO = layoutVisualizationMapper.segmenttoSegmentsResponseDTO(segment);
+			// Retrieve sensor applicable for segment
+			Map<Long, SectionSensorMappingDTO> segmentSensorMap = segmentDetailsService
+					.retrieveSensorForCurrentSegment(sectionDTO, segment);
+			// Retrieve Optimal KPI values
+			if (segmentSensorMap != null && !segmentSensorMap.isEmpty()) {
+				Map<Long, List<KPIDTO>> sensorOptimalKPIMap = segmentDetailsService
+						.retrieveOptimalKPIsForSensors(sectionDTO, segmentSensorMap);
+				if (sensorOptimalKPIMap != null && !sensorOptimalKPIMap.isEmpty()) {
+					// Retrieve Actual KPI Values
+					Map<Long, SensorDataDTO> sensorActualValueMap = segmentDetailsService
+							.retrieveCurrentDataFromSensors(segmentSensorMap);
+					// calculate overall threshold
+					if (sensorActualValueMap != null && !sensorActualValueMap.isEmpty()) {
+						OverallThresholdstateEnum thresholdState = segmentDetailsService
+								.calculateOverallThresholdState(sensorActualValueMap, sensorOptimalKPIMap);
+						// Enrich the overall Threshold state to segment
+						// response
+						segmentsResponseDTO.setOverallThresholdstate(thresholdState);
+						segmentsResponseDTOList.add(segmentsResponseDTO);
+					}
+				}
+			}
+		}
+		// Enrich the segments list to response
+		sectionResponseDTO.setSegments(segmentsResponseDTOList);
+		return sectionResponseDTO;
+
+	}
+
 	@Override
 	public SectionsResponseDTO getSectionDetails(Long layoutId, Long sectionId) {
-		// TODO Auto-generated method stub
-		//
-		return null;
+		log.debug("Request to get Section details based on layoutId  : {} and sectionId : {}", layoutId, sectionId);
+		Section section = sectionRepository.findByLayoutIdAndSectionId(layoutId, sectionId);
+		SectionDTO sectionDTO = sectionMapper.toDto(section);
+		return fetchPerSectionDetails(layoutId, sectionDTO);
 	}
 
 }

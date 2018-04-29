@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.eagro.entities.Section;
 
-
 /**
  * Spring Data JPA repository for the Section entity.
  */
@@ -17,5 +16,9 @@ import com.eagro.entities.Section;
 public interface SectionRepository extends JpaRepository<Section, Long> {
 
 	@Query("select section from Section section where section.layout.layoutId =:layoutId")
-    List<Section> findByLayoutId(@Param("layoutId") Long layoutId);
+	List<Section> findByLayoutId(@Param("layoutId") Long layoutId);
+
+	@Query("select section from Section section where section.layout.layoutId =:layoutId and sectionId =:sectionId ")
+	Section findByLayoutIdAndSectionId(@Param("layoutId") Long layoutId, @Param("sectionId") Long sectionId);
+
 }
