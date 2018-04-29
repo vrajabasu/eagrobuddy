@@ -11,13 +11,13 @@
         <addForeignKeyConstraint baseColumnNames="layout_id"
                                  baseTableName="section_sensor_mapping"
                                  constraintName="fk_section_sensor_mapping_layout_id"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="layout_id"
                                  referencedTableName="layout"/>
 
         <addForeignKeyConstraint baseColumnNames="section_id"
                                  baseTableName="section_sensor_mapping"
                                  constraintName="fk_section_sensor_mapping_section_id"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="section_id"
                                  referencedTableName="section"/>
 
     </changeSet>

@@ -8,11 +8,11 @@
     -->
     <changeSet id="20180422181225-2" author="Rajee">
         
-        <addForeignKeyConstraint baseColumnNames="eagro_user_id"
+        <addForeignKeyConstraint baseColumnNames="role_id"
                                  baseTableName="user_role"
-                                 constraintName="fk_user_role_eagro_user_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="eagro_user"/>
+                                 constraintName="fk_user_role_role_id"
+                                 referencedColumnNames="role_id"
+                                 referencedTableName="user"/>
 
     </changeSet>
 </databaseChangeLog>

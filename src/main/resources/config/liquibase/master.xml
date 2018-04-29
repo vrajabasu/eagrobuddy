@@ -16,7 +16,7 @@
     <include file="classpath:config/liquibase/changelog/sensorcoveragerange.xml" relativeToChangelogFile="false"/>
   
     <include file="classpath:config/liquibase/changelog/user_constraints.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/userrole_constraints.xml" relativeToChangelogFile="false"/>
+    <!--  <include file="classpath:config/liquibase/changelog/userrole_constraints.xml" relativeToChangelogFile="false"/>-->
     <include file="classpath:config/liquibase/changelog/layout_constraints.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/sensor_constraints.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/kpi_constraints.xml" relativeToChangelogFile="false"/>

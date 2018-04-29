@@ -8,15 +8,10 @@
     -->
     <changeSet id="20180422181226-2" author="Rajee">
         
-        <addForeignKeyConstraint baseColumnNames="layouts_id"
-                                 baseTableName="layout_user_layout_mapping"
-                                 constraintName="fk_layout_user_layout_mapping_layouts_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="layout"/>
-        <addForeignKeyConstraint baseColumnNames="user_layout_mappings_id"
-                                 baseTableName="layout_user_layout_mapping"
-                                 constraintName="fk_layout_user_layout_mapping_user_layout_mappings_id"
-                                 referencedColumnNames="id"
+        <addForeignKeyConstraint baseColumnNames="layout_id"
+                                 baseTableName="layout"
+                                 constraintName="fk_layout_user_layout_mapping_layout_id"
+                                 referencedColumnNames="layout_id"
                                  referencedTableName="user_layout_mapping"/>
         
     </changeSet>

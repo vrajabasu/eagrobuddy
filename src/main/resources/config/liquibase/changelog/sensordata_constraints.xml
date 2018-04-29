@@ -11,7 +11,7 @@
         <addForeignKeyConstraint baseColumnNames="layout_id"
                                  baseTableName="sensor_data"
                                  constraintName="fk_sensor_data_layout_id"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="layout_id"
                                  referencedTableName="layout"/>
 
     </changeSet>

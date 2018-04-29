@@ -11,13 +11,13 @@
         <addForeignKeyConstraint baseColumnNames="layout_id"
                                  baseTableName="segment"
                                  constraintName="fk_segment_layout_id"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="layout_id"
                                  referencedTableName="layout"/>
 
         <addForeignKeyConstraint baseColumnNames="section_id"
                                  baseTableName="segment"
                                  constraintName="fk_segment_section_id"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="section_id"
                                  referencedTableName="section"/>
 
     </changeSet>

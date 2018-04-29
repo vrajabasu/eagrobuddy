@@ -17,19 +17,16 @@
         Added the entity EagroUser.
     -->
     <changeSet id="20180422181224-1" author="Rajee">
-        <createTable tableName="eagro_user">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+        <createTable tableName="user">
+            <column name="user_id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="user_id" type="bigint">
-                <constraints nullable="true" />
             </column>
 
             <column name="login_key" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="jhi_password" type="varchar(255)">
+            <column name="password" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -49,7 +46,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="active_flag" type="varchar(255)">
+            <column name="active_flag" type="boolean">
                 <constraints nullable="true" />
             </column>
 
@@ -69,20 +66,8 @@
                 <constraints nullable="true" />
             </column>
 
-            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
-        <createTable tableName="eagro_user_user_layout_mapping">
-            <column name="user_layout_mappings_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="eagro_users_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="eagro_users_id, user_layout_mappings_id" tableName="eagro_user_user_layout_mapping"/>
-        
+      
     </changeSet>
-    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+    
 </databaseChangeLog>

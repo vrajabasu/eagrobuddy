@@ -18,11 +18,8 @@
     -->
     <changeSet id="20180422181233-1" author="Rajee">
         <createTable tableName="segment">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+            <column name="segment_id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="segment_id" type="bigint">
-                <constraints nullable="true" />
             </column>
 
             <column name="segment_name" type="varchar(255)">
@@ -49,7 +46,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="active_flag" type="varchar(255)">
+            <column name="active_flag" type="boolean">
                 <constraints nullable="true" />
             </column>
 
@@ -77,9 +74,8 @@
                 <constraints nullable="true" />
             </column>
 
-            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         
     </changeSet>
-    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+   
 </databaseChangeLog>
