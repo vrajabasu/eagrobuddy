@@ -25,8 +25,8 @@ public class SensorData implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_sensor_data")
+    @SequenceGenerator(name = "sequence_sensor_data", sequenceName = "sequence_sensor_data", allocationSize = 1)
     private Long id;
 
     @Column(name = "recorded_date_time")

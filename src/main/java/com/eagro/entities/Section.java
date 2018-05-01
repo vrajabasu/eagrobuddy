@@ -29,8 +29,8 @@ public class Section implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_section")
+    @SequenceGenerator(name = "sequence_section", sequenceName = "sequence_section", allocationSize = 1)
     @Column(name = "section_id")
     private Long sectionId;
 

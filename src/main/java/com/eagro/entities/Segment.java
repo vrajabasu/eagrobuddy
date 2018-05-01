@@ -16,8 +16,8 @@ public class Segment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_segment")
+    @SequenceGenerator(name = "sequence_segment", sequenceName = "sequence_segment", allocationSize = 1)
     private Long segmentId;
 
     @Column(name = "segment_name")

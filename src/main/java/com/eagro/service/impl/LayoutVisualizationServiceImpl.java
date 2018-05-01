@@ -3,6 +3,7 @@ package com.eagro.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,18 +13,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eagro.entities.Layout;
 import com.eagro.entities.Section;
+import com.eagro.entities.SectionSensorMapping;
 import com.eagro.entities.Segment;
+import com.eagro.entities.enumeration.ZoneType;
 import com.eagro.repository.LayoutRepository;
 import com.eagro.repository.SectionRepository;
+import com.eagro.repository.SectionSensorMappingRepository;
 import com.eagro.repository.SegmentRepository;
 import com.eagro.service.LayoutVisualizationService;
 import com.eagro.service.component.SegmentDetailsService;
 import com.eagro.service.dto.KPIDTO;
 import com.eagro.service.dto.LayoutDTO;
 import com.eagro.service.dto.LayoutResponseDTO;
+import com.eagro.service.dto.OptimalKpiValueResponseDTO;
 import com.eagro.service.dto.SectionDTO;
 import com.eagro.service.dto.SectionSensorMappingDTO;
 import com.eagro.service.dto.SectionsResponseDTO;
+import com.eagro.service.dto.SectionwithkpiResponseDTO;
 import com.eagro.service.dto.SegmentDTO;
 import com.eagro.service.dto.SegmentsResponseDTO;
 import com.eagro.service.dto.SegmentsResponseDTO.OverallThresholdstateEnum;
@@ -31,6 +37,7 @@ import com.eagro.service.dto.SensorDataDTO;
 import com.eagro.service.mapper.LayoutMapper;
 import com.eagro.service.mapper.LayoutVisualizationMapper;
 import com.eagro.service.mapper.SectionMapper;
+import com.eagro.service.mapper.SectionSensorMappingMapper;
 import com.eagro.service.mapper.SegmentMapper;
 import com.eagro.service.utils.ServiceUtil;
 
@@ -59,6 +66,12 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 	public SegmentRepository segmentRepository;
 	@Autowired
 	public SegmentMapper segmentMapper;
+	@Autowired
+	public SectionSensorMappingRepository sectionSensorMappingRepository;
+	@Autowired
+	public SectionSensorMappingMapper sectionSensorMappingMapper;
+	
+	
 
 	/*
 	 * (non-Javadoc)
@@ -105,8 +118,7 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 		SectionsResponseDTO sectionResponseDTO = new SectionsResponseDTO();
 		sectionResponseDTO = layoutVisualizationMapper.sectiontoSectionResponse(sectionDTO);
 		// Retrieve the list of segments for specific section
-		List<Segment> segmentList = segmentRepository.findByLayoutIdAndSectionId(layoutId, sectionDTO.getSectionId());
-		List<SegmentDTO> segmentDTOList = segmentMapper.toDto(segmentList);
+		List<SegmentDTO> segmentDTOList = retrieveSegment(layoutId, sectionDTO);
 		List<SegmentsResponseDTO> segmentsResponseDTOList = new ArrayList<>();
 		for (SegmentDTO segment : segmentDTOList) {
 			// Enrich segment details to the response
@@ -140,12 +152,46 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 
 	}
 
+	private List<SegmentDTO> retrieveSegment(Long layoutId, SectionDTO sectionDTO) {
+		List<Segment> segmentList = segmentRepository.findByLayoutIdAndSectionId(layoutId, sectionDTO.getSectionId());
+		List<SegmentDTO> segmentDTOList = segmentMapper.toDto(segmentList);
+		return segmentDTOList;
+	}
+
 	@Override
 	public SectionsResponseDTO getSectionDetails(Long layoutId, Long sectionId) {
 		log.debug("Request to get Section details based on layoutId  : {} and sectionId : {}", layoutId, sectionId);
+		SectionDTO sectionDTO = retrieveSectionBasicInfo(layoutId, sectionId);
+		return fetchPerSectionDetails(layoutId, sectionDTO);
+	}
+
+	private SectionDTO retrieveSectionBasicInfo(Long layoutId, Long sectionId) {
 		Section section = sectionRepository.findByLayoutIdAndSectionId(layoutId, sectionId);
 		SectionDTO sectionDTO = sectionMapper.toDto(section);
-		return fetchPerSectionDetails(layoutId, sectionDTO);
+		return sectionDTO;
+	}
+
+	@Override
+	public SectionwithkpiResponseDTO getSectionBasedOptimalKpi(Long sectionId, Long layoutId) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get Section Based Optimal Kpi values by layoutId  : {} and sectionId : {}", layoutId, sectionId);
+		//To fetch sectionDetails
+		SectionDTO sectionDTO = retrieveSectionBasicInfo(layoutId,sectionId);
+		
+		List<SectionSensorMapping> sectionSensorMappingList = sectionSensorMappingRepository.findBySectionIdAndLayoutId(layoutId, sectionId);
+		List<SectionSensorMappingDTO> sectionSensorMappingDTOList = sectionSensorMappingMapper.toDto(sectionSensorMappingList);
+		SectionwithkpiResponseDTO sectionWithKpiResponseDTO = new SectionwithkpiResponseDTO();
+		
+		Map<ZoneType, List<SectionSensorMappingDTO>> zoneBasedSectionMappings = sectionSensorMappingDTOList.stream().collect(Collectors.groupingBy(p -> p.getZoneType(), Collectors.toList()));
+		List<OptimalKpiValueResponseDTO> optimalValueList = new ArrayList<OptimalKpiValueResponseDTO>();
+		zoneBasedSectionMappings.keySet().forEach( zoneType -> {
+			List<KPIDTO> kpiDTO = segmentDetailsService.retrieveKpi(layoutId, sectionId, zoneType);
+		
+		});
+		//fetch KPI for each zonetype
+		
+		
+		return null;
 	}
 
 }

@@ -29,8 +29,8 @@ public class SectionSensorMapping implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-	@SequenceGenerator(name = "sequenceGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_section_sensor_mapping")
+	@SequenceGenerator(name = "sequence_section_sensor_mapping", sequenceName = "sequence_section_sensor_mapping", allocationSize = 1)
 	private Long id;
 
 	@Enumerated(EnumType.STRING)

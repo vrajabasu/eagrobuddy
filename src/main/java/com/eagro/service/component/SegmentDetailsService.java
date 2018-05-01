@@ -85,18 +85,28 @@ public class SegmentDetailsService {
 			// consider
 			if (!(LIGHT.equalsIgnoreCase(sensor.getParam1()))) {
 				List<KPIDTO> sensorOptimalKpi = sensorOptimalKPIMap.get(sensor.getSensorId());
-				sensorOptimalKpi.forEach(kpi -> {
+				for (KPIDTO kpi : sensorOptimalKpi) {
 					if (kpi != null && ServiceUtil.isNotEmpty(kpi.getKpiName())) {
 						if (kpi.getKpiName().equals(sensor.getParam1())) {
 							// TODO Logic to check within reference range and
 							// deviation range
-							sensor.getParamValue1().equals(kpi.getDeviationRange());
+							Double interimVar = sensor.getParamValue1();
+							if (kpi.getLowerRefLimit()<= interimVar && kpi.getUpperRefLimit() >= interimVar) {
+								if((kpi.getLowerRefLimit() + kpi.getDeviationRange() <= interimVar) && ((kpi.getUpperRefLimit()- kpi.getDeviationRange()) >= interimVar)) {
+									currentSensorState = OverallThresholdstateEnum.NORMAL;
+								} else {
+									currentSensorState = OverallThresholdstateEnum.EXCEEDING_SOON;
+								}
+							} else {
+								currentSensorState = OverallThresholdstateEnum.EXCEEDED;
+							}
 						}
 					}
-				});
+				}
+				currentThresholdStateList.add(currentSensorState);
 			}
 			log.trace("The sensorId : {} hold the threshold state as : {}", sensor.getSensorId(), currentSensorState);
-			currentThresholdStateList.add(currentSensorState);
+			
 		});
 
 		return calculateThresholdBasedOnPrecendence(currentThresholdStateList);
@@ -167,15 +177,21 @@ public class SegmentDetailsService {
 
 			ZoneType zoneType = sensorDTO.getZoneType();
 			// Retrieve optimal KPI vlaues form KPI entity
-			List<KPI> kpiList = kpiRespository.findByLayoutIdAndSectionIdAndZoneType(section.getLayoutId(),
-					section.getSectionId(), zoneType);
-			List<KPIDTO> kpiDTOList = kpiMapper.toDto(kpiList);
+			List<KPIDTO> kpiDTOList = retrieveKpi(section.getLayoutId(),
+					section.getSectionId(), sensorDTO.getZoneType());
+			
 			sensorOptimalKPIMap.put(sensorDTO.getSensorId(), kpiDTOList);
 
 		});
 		return sensorOptimalKPIMap;
 	}
 
+	public List<KPIDTO> retrieveKpi(Long layoutId, Long sectionId, ZoneType zoneType) {
+		List<KPI> kpiList = kpiRespository.findByLayoutIdAndSectionIdAndZoneType(layoutId,
+				sectionId, zoneType);
+		List<KPIDTO> kpiDTOList = kpiMapper.toDto(kpiList);
+		return kpiDTOList;
+	}
 	/**
 	 * Retrieve list of sensors applicable for current segment.
 	 *

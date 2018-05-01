@@ -1,99 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <property name="now" value="now()" dbms="h2"/>
+	<property name="now" value="now()" dbms="h2" />
 
-    <property name="now" value="current_timestamp" dbms="postgresql"/>
+	<property name="now" value="current_timestamp" dbms="postgresql" />
 
-    <property name="floatType" value="float4" dbms="postgresql, h2"/>
-    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+	<property name="floatType" value="float4" dbms="postgresql, h2" />
+	<property name="floatType" value="float" dbms="mysql, oracle, mssql" />
 
-    <!--
-        Added the entity Sensor.
-    -->
-    <changeSet id="20180422181228-1" author="Rajee">
-        <createTable tableName="sensor">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            
-             <column name="sensor_id" type="bigint">
-                <constraints nullable="true" />
-            </column>  
-                      
-            <column name="sensor_name" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+	<!-- Added the entity Sensor. -->
+	<changeSet id="sensor-3" author="Rajee">
+		<createSequence cacheSize="20" cycle="false"
+			incrementBy="1" minValue="1"
+			sequenceName="sequence_sensor" startValue="1" />
+	</changeSet>
+	<changeSet id="sensor-1" author="Rajee">
+		<createTable tableName="sensor">
+			<column name="id" type="bigint" autoIncrement="${autoIncrement}">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
 
-            <column name="sensor_desc" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+			<column name="sensor_id" type="bigint">
+				<constraints unique="true" nullable="true" />
+			</column>
 
-            <column name="active_flag" type="boolean">
-                <constraints nullable="true" />
-            </column>
+			<column name="sensor_name" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
 
-            <column name="created_date" type="date">
-                <constraints nullable="true" />
-            </column>
+			<column name="sensor_desc" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
 
-            <column name="created_by" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+			<column name="active_flag" type="boolean">
+				<constraints nullable="true" />
+			</column>
 
-            <column name="updated_date" type="date">
-                <constraints nullable="true" />
-            </column>
+			<column name="created_date" type="date">
+				<constraints nullable="true" />
+			</column>
 
-            <column name="updated_by" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+			<column name="created_by" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
 
-            <column name="layout_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            
-            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
-        </createTable>
-        
-        <createTable tableName="sensor_sensor_coverage_range">
-            <column name="sensor_coverage_ranges_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="sensors_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
+			<column name="updated_date" type="date">
+				<constraints nullable="true" />
+			</column>
 
-        <addPrimaryKey columnNames="sensors_id, sensor_coverage_ranges_id" tableName="sensor_sensor_coverage_range"/>
-        
-        <createTable tableName="sensor_section_sensor_mapping">
-            <column name="section_sensor_mappings_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="sensors_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
+			<column name="updated_by" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
 
-        <addPrimaryKey columnNames="sensors_id, section_sensor_mappings_id" tableName="sensor_section_sensor_mapping"/>
-        
-        <createTable tableName="sensor_sensor_data">
-            <column name="sensor_data_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="sensors_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
+			<column name="layout_id" type="bigint">
+				<constraints nullable="true" />
+			</column>
 
-        <addPrimaryKey columnNames="sensors_id, sensor_data_id" tableName="sensor_sensor_data"/>
-        
-    </changeSet>
-    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+			<!-- jhipster-needle-liquibase-add-column - JHipster will add columns 
+				here, do not remove -->
+		</createTable>
+
+		<createTable tableName="sensor_sensor_coverage_range">
+			<column name="sensor_coverage_ranges_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="sensors_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addPrimaryKey columnNames="sensors_id, sensor_coverage_ranges_id"
+			tableName="sensor_sensor_coverage_range" />
+
+		<createTable tableName="sensor_section_sensor_mapping">
+			<column name="section_sensor_mappings_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="sensors_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addPrimaryKey columnNames="sensors_id, section_sensor_mappings_id"
+			tableName="sensor_section_sensor_mapping" />
+
+		<createTable tableName="sensor_sensor_data">
+			<column name="sensor_data_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="sensors_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addPrimaryKey columnNames="sensors_id, sensor_data_id"
+			tableName="sensor_sensor_data" />
+
+	</changeSet>
+	<changeSet id="sensor-2" author="Rajee">
+
+		<addForeignKeyConstraint baseColumnNames="sensor_id"
+			baseTableName="sensor_coverage_range" constraintName="fk_sensor_sensor_coverage_range_id"
+			referencedColumnNames="sensor_id" referencedTableName="sensor" />
+
+		<addForeignKeyConstraint baseColumnNames="sensor_id"
+			baseTableName="section_sensor_mapping" constraintName="fk_sensor_section_sensor_mapping_id"
+			referencedColumnNames="sensor_id" referencedTableName="sensor" />
+
+		<addForeignKeyConstraint baseColumnNames="sensor_id"
+			baseTableName="sensor_data" constraintName="fk_sensor_sensor_data_id"
+			referencedColumnNames="sensor_id" referencedTableName="sensor" />
+
+		<addForeignKeyConstraint baseColumnNames="layout_id"
+			baseTableName="sensor" constraintName="fk_sensor_layout_id"
+			referencedColumnNames="layout_id" referencedTableName="layout" />
+
+	</changeSet>
+
+
 </databaseChangeLog>

@@ -20,8 +20,8 @@ public class Layout implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-	@SequenceGenerator(name = "sequenceGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_layout")
+	@SequenceGenerator(name = "sequence_layout", sequenceName = "sequence_layout", allocationSize = 1)
 	@Column(name = "layout_id")
 	private Long layoutId;
 

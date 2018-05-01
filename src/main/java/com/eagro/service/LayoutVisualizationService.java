@@ -2,6 +2,7 @@ package com.eagro.service;
 
 import com.eagro.service.dto.LayoutResponseDTO;
 import com.eagro.service.dto.SectionsResponseDTO;
+import com.eagro.service.dto.SectionwithkpiResponseDTO;
 
 public interface LayoutVisualizationService {
 
@@ -25,5 +26,15 @@ public interface LayoutVisualizationService {
 	 * @return the section details
 	 */
 	SectionsResponseDTO getSectionDetails(Long layoutId, Long sectionId);
+
+	/**
+	 * Gets the section based optimal kpi.
+	 *
+	 * @param sectionId
+	 *            the section id
+	 * @param layoutId TODO
+	 * @return the section based optimal kpi
+	 */
+	SectionwithkpiResponseDTO getSectionBasedOptimalKpi(Long sectionId, Long layoutId);
 
 }

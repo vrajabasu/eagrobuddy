@@ -25,8 +25,8 @@ public class SensorCoverageRange implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-	@SequenceGenerator(name = "sequenceGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_sensor_coverange_range")
+	@SequenceGenerator(name = "sequence_sensor_coverange_range", sequenceName = "sequence_sensor_coverange_range", allocationSize = 1)
 	private Long id;
 
 	@Column(name = "start_x")

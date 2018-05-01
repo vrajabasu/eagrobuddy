@@ -15,6 +15,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.eagro.service.LayoutVisualizationService;
 import com.eagro.service.dto.LayoutResponseDTO;
 import com.eagro.service.dto.SectionsResponseDTO;
+import com.eagro.service.dto.SectionwithkpiResponseDTO;
 import com.eagro.service.utils.ResponseUtil;
 
 /**
@@ -46,7 +47,7 @@ public class LayoutVisualizationResource {
 	 *            the layout id
 	 * @return the layout
 	 */
-	@RequestMapping(value = "/eAgro/v1/visualization/optimalkpichart/{layoutId}/sections/{sectionId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/eAgro/v1/visualization/overall/layouts/{layoutId}", method = RequestMethod.GET)
 	@Timed
 	public ResponseEntity<LayoutResponseDTO> getLayout(@PathVariable Long layoutId) {
 		log.info("REST request to get Layout for layoutId:{} ", layoutId);
@@ -77,9 +78,23 @@ public class LayoutVisualizationResource {
 		log.info("REST request to get section for layoutId:{} and sectionId:{} ", layoutId, sectionId);
 		// TODO user validation need to be implement
 		SectionsResponseDTO finalSectionResponse = layoutVisualizationService.getSectionDetails(layoutId, sectionId);
-		log.info("Section info : {} for section : {} mapped with layout:{} ", sectionId, finalSectionResponse,
+		log.info("Section info : {} for section : {} mapped with layout:{} ", finalSectionResponse, sectionId,
 				layoutId);
 		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(finalSectionResponse));
+	}
+
+	@RequestMapping(value = "/eAgro/v1/visualization/optimalkpichart/{layoutId}/sections/{sectionId}", method = RequestMethod.GET)
+	@Timed
+	public ResponseEntity<SectionwithkpiResponseDTO> getOptimalKpi(@PathVariable Long layoutId,
+			@PathVariable Long sectionId) {
+		// TODO user validation for sectionId
+		log.info("REST request to get OptimalKpi for sectionId:{}  mapped with layoutId:{}", sectionId, layoutId);
+		// TODO user validation need to be implement
+		SectionwithkpiResponseDTO finalOptimalKpiResponse = layoutVisualizationService
+				.getSectionBasedOptimalKpi(sectionId, layoutId);
+		log.info("Section related KPI info : {} for section : {} mapped with layout:{} ", finalOptimalKpiResponse,
+				sectionId, layoutId);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(finalOptimalKpiResponse));
 	}
 
 }

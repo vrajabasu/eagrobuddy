@@ -10,7 +10,12 @@ import java.util.Objects;
  */
 public class UserRoleDTO implements Serializable {
 
-    private Long roleId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long roleId;
 
     private String roleName;
 

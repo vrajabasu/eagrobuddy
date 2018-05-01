@@ -21,8 +21,8 @@ public class KPI implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_kpi")
+    @SequenceGenerator(name = "sequence_kpi", sequenceName = "sequence_kpi", allocationSize = 1)
     @Column(name = "kpi_id")
     private Long kpiId;
 

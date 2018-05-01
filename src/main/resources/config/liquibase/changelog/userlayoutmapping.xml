@@ -12,7 +12,13 @@
 	<property name="floatType" value="float" dbms="mysql, oracle, mssql" />
 
 	<!-- Added the entity UserLayoutMapping. -->
-	<changeSet id="20180422181227-1" author="Rajee">
+	<changeSet id="user_layout_mapping-2" author="Rajee">
+		<createSequence cacheSize="20" cycle="false"
+			incrementBy="1" minValue="1"
+			sequenceName="sequence_user_layout_mapping"
+			startValue="1" />
+	</changeSet>
+	<changeSet id="user_layout_mapping-1" author="Rajee">
 		<createTable tableName="user_layout_mapping">
 			<column name="id" type="bigint" autoIncrement="${autoIncrement}">
 				<constraints primaryKey="true" nullable="false" />
@@ -47,5 +53,14 @@
 		</createTable>
 
 	</changeSet>
+	<changeSet id="user-2" author="Rajee">
+
+		<addForeignKeyConstraint baseColumnNames="user_id"
+			baseTableName="user_layout_mapping" constraintName="fk_user_user_layout_mapping_id"
+			referencedColumnNames="user_id" referencedTableName="user" />
+
+
+	</changeSet>
+
 
 </databaseChangeLog>

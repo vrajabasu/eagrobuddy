@@ -1,24 +1,18 @@
 package com.eagro.service.dto;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import javax.validation.Valid;
 
-import org.springframework.validation.annotation.Validated;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.wordnik.swagger.annotations.ApiModel;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
 /**
  * Representation of one of the section details.
  */
-@ApiModel(description = "Representation of one of the section details.")
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-25T19:49:05.151Z")
+
 
 public class SectionsResponseDTO   {
   @JsonProperty("sectionId")
