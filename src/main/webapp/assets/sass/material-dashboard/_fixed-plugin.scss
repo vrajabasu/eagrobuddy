@@ -1,0 +1,39 @@
+.fixed-plugin li > a,
+.fixed-plugin .badge{
+    transition: all .34s;
+    -webkit-transition: all .34s;
+    -moz-transition: all .34s;
+}
+
+.fixed-plugin{
+    position: fixed;
+    bottom: 60px;
+    margin-right: 40px;
+    right: 0;
+    width: 52px;
+    background: rgba(0,0,0,.3);
+    z-index: 1031;
+    border-radius: 50%; /* the magic */
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;    
+    // border-radius: 8px 0 0 8px;
+    text-align: center;
+}
+.fixed-plugin .fa-pencil{
+    color: #00bcd4;
+    padding: 10px;
+    border-radius: 0 0 6px 6px;
+    width: auto;
+}
+
+.fixed-plugin .dropdown-menu > li > a.switch-trigger:hover,
+.fixed-plugin .dropdown-menu > li > a.switch-trigger:focus{
+    background-color: transparent;
+}
+
+@media (max-width: 991px){
+
+    .fixed-plugin{
+        bottom: 40px;
+    }
+}

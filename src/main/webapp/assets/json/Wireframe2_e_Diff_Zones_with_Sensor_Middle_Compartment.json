@@ -1,0 +1,51 @@
+{
+  "sectionName": "Greens",
+  "sectionDescription": "Section for Greens",
+  "segmentName": "SegmentA",
+  "segmentDescription": "SegmentA",
+  "segmentX": 0,
+  "segmentY": 0,
+  "sectionX": 12.5,
+  "sectionY": 12.5,
+  "zones": [
+    {
+      "key": "WATER",
+      "value": "NORMAL",
+      "sensors": [
+        {
+          "sensorId": 1,
+          "sensorName": "SensorA",
+          "sensorDescription": "Water Sensor",
+          "widthX": 0,
+          "heightY": 4.5
+        }
+      ]
+    },
+	{
+      "key": "CANOPY",
+      "value": "BELOW_REF_RANGE",
+      "sensors": [
+        {
+          "sensorId": 2,
+          "sensorName": "SensorB",
+          "sensorDescription": "Canopy Sensor",
+          "widthX": 5,
+          "heightY": 7
+        }
+      ]
+    },
+	{
+      "key": "TOP-CANOPY",
+      "value": "NORMAL",
+      "sensors": [
+        {
+          "sensorId": 3,
+          "sensorName": "SensorC",
+          "sensorDescription": "Top - Above Canopy Sensor",
+          "widthX": 5,
+          "heightY": 7
+        }
+      ]
+    }
+  ]
+}

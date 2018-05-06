@@ -1,0 +1,44 @@
+{
+  "sectionName": "SegmentA",
+  "sectionDescription": "SegmentA",
+  "zoneWithKpis": [
+    {
+      "zoneType": "WATER",
+      "optimalKpiValues": [
+        {
+          "kpiName": "PH",
+          "valueRange": "5.5 – 6.7"
+        },
+		{
+          "kpiName": "EC",
+          "valueRange": "1.5 – 2.2"
+        },
+		{
+          "kpiName": "Temp",
+          "valueRange": "24 – 34"
+        },
+		{
+          "kpiName": "Moisture",
+          "valueRange": "> 10"
+        }
+      ]
+    },
+    {
+      "zoneType": "CANOPY",
+      "optimalKpiValues": [
+		{
+          "kpiName": "Light",
+          "valueRange": "400 – 800"
+        },
+		{
+          "kpiName": "Temp",
+          "valueRange": "24 – 34"
+        },
+		{
+          "kpiName": "Humidity",
+          "valueRange": "70 - 80"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+<div class="wrapper wrapper-full-page">
+    <nav class="navbar navbar-success navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-example">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <strong><a class="navbar-brand" href="http://www.binarylogica.com">eAgroBuddy</a></strong>
+            </div>
+            <div class="collapse navbar-collapse" id="menu-example">
+                <ul class="nav navbar-nav navbar-right">
+                    <div class="collapse navbar-collapse" id="menu-example">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="/login">
+                                    <i class="material-icons">input</i> Sign In
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="full-page login-page" filter-color="none">
+        <!--  you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose | none " -->
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
+                        <form [formGroup]="loginForm" (ngSubmit)="onLogin(userName.value, password.value); $event.preventDefault()" class="form">
+                            <div class="card card-login">
+                                <div class="card-header text-center" data-background-color="green">
+                                    <h4 class="card-title">eAgroBuddy Login</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div *ngIf="isExpired||statusCode">
+                                        <div *ngIf="isExpired&&statusCode!==401" class="alert alert-danger">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                            <strong>Sorry!</strong> Your Session is Expired.
+
+                                        </div>
+                                        <div *ngIf="statusCode===401" class="alert alert-danger">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                            <strong>Sorry!</strong> Invalid Login Credentials.
+
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">face</i>
+                                        </span>
+                                        <div class="form-group label-floating">
+                                            <input id="userName" type="text" placeholder="User Name" #userName formControlName="userName" class="form-control" >
+                                            <ccm-field-error-display [displayError]="isFieldValid(loginForm, 'userName')" errorMsg="User Name is required and must be minimum 3 characters">
+                                                </ccm-field-error-display>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">lock_outline</i>
+                                        </span>
+                                        <div class="form-group label-floating">
+                                            <input id= "password" type="password" placeholder="Password" #password formControlName="password" class="form-control">
+                                            <ccm-field-error-display [displayError]="isFieldValid(loginForm, 'password')" errorMsg="Password is required">
+                                                </ccm-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer text-center">
+                                    <button type="submit" class="btn btn-success btn-round" (click)="onLogin()">
+                                    Sign In</button>
+<!--                                     <button type="submit" class="btn btn-success btn-round">
+                                        Sign In</button> -->
+                                </div>
+                                                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+                            <a href="http://www.binarylogica.com">
+                                Company
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.binarylogica.com">
+                                About
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.binarylogica.com">
+                                Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.binarylogica.com">
+                               Contact
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; {{test | date: 'yyyy'}} <a href="http://www.binarylogica.com">eAgroBuddy Inc</a>, made with <span style="color:red;font-size:20px"> &hearts; </span> for a better Green House Farm Managment
+                </p>
+            </div>
+        </footer>
+      <div class="full-page-background" style="background-image: url(../../../assets/img/loginbg.jpg) "></div>
+    </div>
+</div>

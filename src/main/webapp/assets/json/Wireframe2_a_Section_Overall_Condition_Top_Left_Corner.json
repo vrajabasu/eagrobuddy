@@ -1,0 +1,110 @@
+{
+  "sectionName": "Greens",
+  "sectionDescription": "Section for Greens",
+  "activeFlag": true,
+  "startX": 12.5,
+  "startY": 2.5,
+  "endX": 22.5,
+  "endY": 11.5,
+  "segments": [
+	{
+	  "segmentId": 1,
+	  "segmentName": "SegmentA",
+	  "segmentDescription": "SegmentA",
+	  "activeFlag": true,
+	  "startX": 12.5,
+	  "startY": 2.5,
+	  "endX": 15.833,
+	  "endY": 5.5,
+	  "overallThresholdstate": "BELOW_REF_RANGE"
+	},
+	{
+	  "segmentId": 2,
+	  "segmentName": "SegmentB",
+	  "segmentDescription": "SegmentB",
+	  "activeFlag": true,
+	  "startX": 15.833,
+	  "startY": 2.5,
+	  "endX": 19.163,
+	  "endY": 5.5,
+	  "overallThresholdstate": "ABOVE_REF_RANGE"
+	},
+	{
+	  "segmentId": 3,
+	  "segmentName": "SegmentC",
+	  "segmentDescription": "SegmentC",
+	  "activeFlag": true,
+	  "startX": 19.163,
+	  "startY": 2.5,
+	  "endX": 22.5,
+	  "endY": 5.5,
+	  "overallThresholdstate": "BELOW_REF_RANGE"
+	},
+	{
+	  "segmentId": 4,
+	  "segmentName": "SegmentD",
+	  "segmentDescription": "SegmentD",
+	  "activeFlag": true,
+	  "startX": 12.5,
+	  "startY": 5.5,
+	  "endX": 15.833,
+	  "endY": 8.5,
+	  "overallThresholdstate": "NORMAL"
+	},
+	{
+	  "segmentId": 5,
+	  "segmentName": "SegmentE",
+	  "segmentDescription": "SegmentE",
+	  "activeFlag": true,
+	  "startX": 15.833,
+	  "startY": 5.5,
+	  "endX": 19.163,
+	  "endY": 8.5,
+	  "overallThresholdstate": "NORMAL"
+	},
+	{
+	  "segmentId": 6,
+	  "segmentName": "SegmentF",
+	  "segmentDescription": "SegmentF",
+	  "activeFlag": true,
+	  "startX": 19.163,
+	  "startY": 5.5,
+	  "endX": 22.5,
+	  "endY": 8.5,
+	  "overallThresholdstate": "NORMAL"
+	},
+	{
+	  "segmentId": 7,
+	  "segmentName": "SegmentG",
+	  "segmentDescription": "SegmentG",
+	  "activeFlag": true,
+	  "startX": 12.5,
+	  "startY": 8.5,
+	  "endX": 15.833,
+	  "endY": 11.5,
+	  "overallThresholdstate": "BELOW_REF_RANGE"
+	},
+	{
+	  "segmentId": 8,
+	  "segmentName": "SegmentH",
+	  "segmentDescription": "SegmentH",
+	  "activeFlag": true,
+	  "startX": 15.833,
+	  "startY": 8.5,
+	  "endX": 19.163,
+	  "endY": 11.5,
+	  "overallThresholdstate": "ABOVE_REF_RANGE"
+	},
+	{
+	  "segmentId": 9,
+	  "segmentName": "SegmentI",
+	  "segmentDescription": "SegmentI",
+	  "activeFlag": true,
+	  "startX": 19.163,
+	  "startY": 8.5,
+	  "endX": 22.5,
+	  "endY": 11.5,
+	  "overallThresholdstate": "NORMAL"
+	}
+  ]
+}

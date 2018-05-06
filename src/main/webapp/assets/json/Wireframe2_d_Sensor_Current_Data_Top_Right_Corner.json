@@ -1,0 +1,22 @@
+{
+  "segmentName": "SegmentA",
+  "segmentDescription": "SegmentA",
+  "date": "string",
+  "time": "string",
+  "sensorId": 2,
+  "zoneType": "CANOPY",
+  "kpiValues": [
+    {
+      "key": "Light",
+      "value": 500
+    },
+	{
+      "key": "Temp",
+      "value": 31.2
+    },
+	{
+      "key": "Humidity",
+      "value": 75
+    }
+  ]
+}

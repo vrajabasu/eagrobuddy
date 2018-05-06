@@ -1,0 +1,61 @@
+{
+  "segmentName": "SegmentA",
+  "segmentDescription": "SegmentA",
+  "zoneWithKpis": [
+    {
+      "zoneType": "WATER",
+      "currentKpiValues": [
+        {
+          "kpiName": "PH",
+          "averagevalue": 5.8
+        },
+		{
+          "kpiName": "EC",
+          "averagevalue": 1.7
+        },
+		{
+          "kpiName": "Temp",
+          "averagevalue": 31.2
+        },
+		{
+          "kpiName": "Moisture",
+          "averagevalue": 12.5
+        }
+      ]
+    },
+	{
+      "zoneType": "CANOPY",
+      "currentKpiValues": [
+        {
+          "kpiName": "Light",
+          "averagevalue": 500
+        },
+		{
+          "kpiName": "Temp",
+          "averagevalue": 31.2
+        },
+		{
+          "kpiName": "Humidity",
+          "averagevalue": 75
+        }
+      ]
+    },
+	{
+      "zoneType": "TOP-CANOPY",
+      "currentKpiValues": [
+        {
+          "kpiName": "Light",
+          "averagevalue": 600
+        },
+		{
+          "kpiName": "Temp",
+          "averagevalue": 35.2
+        },
+		{
+          "kpiName": "Humidity",
+          "averagevalue": 65
+        }
+      ]
+    }
+  ]
+}

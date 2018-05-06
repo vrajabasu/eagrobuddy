@@ -1,0 +1,77 @@
+[
+  {
+    "zoneType": "WATER",
+    "kpiValues": [
+      {
+        "kpiName": "PH",
+        "lowerRange": 5.5,
+        "upperRange": 6.7,
+        "average": 5.6
+      },
+	  {
+        "kpiName": "EC",
+        "lowerRange": 1.5,
+        "upperRange": 2.0,
+        "average": 1.8
+      },
+	  {
+        "kpiName": "Temp",
+        "lowerRange": 30.0,
+        "upperRange": 32.5,
+        "average": 32.1
+      },
+	  {
+        "kpiName": "Moisture",
+        "lowerRange": 10.4,
+        "upperRange": 25.5,
+        "average": 11.2
+      }
+    ]
+  },
+  {
+    "zoneType": "CANOPY",
+    "kpiValues": [
+      {
+        "kpiName": "Light",
+        "lowerRange": 400,
+        "upperRange": 700,
+        "average": 450
+      },
+	  {
+        "kpiName": "Temp",
+        "lowerRange": 29.0,
+        "upperRange": 31.2,
+        "average": 29.5
+      },
+	  {
+        "kpiName": "Humidity",
+        "lowerRange": 60,
+        "upperRange": 85,
+        "average": 75
+      }
+    ]
+  },
+  {
+    "zoneType": "TOP-CANOPY",
+    "kpiValues": [
+      {
+        "kpiName": "Light",
+        "lowerRange": 400,
+        "upperRange": 900,
+        "average": 650
+      },
+	  {
+        "kpiName": "Temp",
+        "lowerRange": 34.0,
+        "upperRange": 36.2,
+        "average": 35.5
+      },
+	  {
+        "kpiName": "Humidity",
+        "lowerRange": 60,
+        "upperRange": 70,
+        "average": 63
+      }
+    ]
+  }
+]
