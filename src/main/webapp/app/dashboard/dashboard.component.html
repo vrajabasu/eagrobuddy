@@ -1,24 +1,24 @@
-<div *ngIf="data" class="container" (window:resize)="onResize()" [ngStyle]="{'height':((oneHeightFeet*data.heightY) - (headerHeight+footerHeight))+'px'}">
   <select class="form-control">
     <option *ngFor="let layout of layouts">{{layout}}</option>
   </select>
+<div *ngIf="data" (window:resize)="onResize()" [ngStyle]="{'height':((oneHeightFeet*data.heightY) - (headerHeight+footerHeight))+'px'}">
   <ul>
     <li *ngFor="let section of data.sections; let i = index">
-      <!-- <canvas id="animation{{i}}" [ngStyle]="{'margin-left':(calcMarginLeft(i)*onefeet)+'px', 'margin-top':calcMarginTop(i)*onefeet+'px'}" width='{{(section.endX - section.startX) * onefeet}}'
+      <!-- <canvas id="animation{{i}}" [ngStyle]="{'margin-left':(calcMarginLeft(i)*oneWidthfeet)+'px', 'margin-top':calcMarginTop(i)*oneWidthfeet+'px'}" width='{{(section.endX - section.startX) * oneWidthfeet}}'
         height="{{(section.endY - section.startY) * oneHeightFeet}}">
           <ul>
             <li *ngFor="let segment of section.segments">
-              <div [ngStyle]="{'width':((segment.endX - segment.startX) * onefeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}"></div>
+              <div [ngStyle]="{'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}"></div>
             </li>
           </ul>
       </canvas> -->
       <!-- <svg width="1000" height="800">
-        <rect [attr.width]='{{(section.endX - section.startX) * onefeet}}' height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />
+        <rect [attr.width]='{{(section.endX - section.startX) * oneWidthfeet}}' height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />
       </svg> -->
-      <div class="section" id="animation{{i}}" [ngStyle]="{'margin-left':(calcMarginLeft(i)*onefeet)+'px', 'margin-top':calcMarginTop(i)*onefeet+'px', 'width':(section.endX - section.startX) * onefeet+'px', 'height':(section.endY - section.startY) * oneHeightFeet+'px'}">
+      <div class="section" id="animation{{i}}" [ngStyle]="{'margin-left':(calcMarginLeft(i)*oneWidthfeet)+'px', 'margin-top':calcMarginTop(i)*oneWidthfeet+'px', 'width':(section.endX - section.startX) * oneWidthfeet+'px', 'height':(section.endY - section.startY) * oneHeightFeet+'px'}">
         <ul>
           <li *ngFor="let segment of section.segments">
-            <div class="segment" (click)="goToPage(section.sectionId)" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate),'width':((segment.endX - segment.startX) * onefeet - 1)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet - 1)+'px'}">
+            <div class="segment" (click)="goToPage(section.sectionId)" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate),'width':((segment.endX - segment.startX) * oneWidthfeet - 1)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet - 1)+'px'}">
               {{segment.segmentName}}
             </div>
           </li>

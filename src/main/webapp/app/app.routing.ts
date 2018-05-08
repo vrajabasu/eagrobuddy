@@ -26,7 +26,7 @@ export const CCMRoutes: Routes = [
     },
     {
         /** SECURE ROUTES declared here **/
-        // CCM Module secure content area
+        // eAgro Buddy Module secure content area
         //  Access only for logged in User */
         path: '',
         component: GHLayoutComponent,

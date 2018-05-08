@@ -24,3 +24,6 @@
 /nbdist/
 /.nb-gradle/
 /${project.testresult.directory}/
+
+### Node Modules ###
+node_modules/

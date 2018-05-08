@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 		// 	this.loginService.login(userName, password)
 			
 		// 	.subscribe(() => {
-     this.router.navigate(['../dashboard']);
+     this.router.navigate(['dashboard']);
    // }, errorCode =>  this.statusCode = errorCode);
 			
 	  // 	} else {

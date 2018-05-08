@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
   data: any;
   totalWidthPercentage: any;
   totalHeightPercentage: any;
-  widthX; heightY; onefeet; oneHeightFeet; headerHeight; footerHeight;
+  widthX; heightY; oneWidthfeet; oneHeightFeet; headerHeight; footerHeight;
   layouts = ['Layout1', 'Layout2', 'Layout3'];
 
   constructor(private http: Http,private router: Router) {}
@@ -30,17 +30,20 @@ export class DashboardComponent implements OnInit {
           this.widthX = this.data.widthX;
           this.heightY = this.data.heightY;
           console.log(this.data);
+          console.log(" Screen Size : " + x + " : " + y);
           // console.log(res.headers.get('Content-Type'));
           this.totalWidthPercentage = x;
           this.totalHeightPercentage = y;
-          this.onefeet = (this.totalWidthPercentage / this.widthX);
+          this.oneWidthfeet = (this.totalWidthPercentage / this.widthX);
           this.oneHeightFeet = (this.totalHeightPercentage / this.heightY);
-          console.log(this.totalWidthPercentage);
-          console.log(this.totalHeightPercentage);
+          console.log(" Total Width : " + this.totalWidthPercentage);
+          console.log(" Total Height : " + this.totalHeightPercentage);
+          console.log(" One feet Width : " + this.oneWidthfeet);
+          console.log(" One feet Height : " + this.oneHeightFeet);
           this.headerHeight = document.getElementById('header').offsetHeight;
           this.footerHeight = document.getElementById('footer').offsetHeight;
-          console.log(this.headerHeight);
-          console.log(this.footerHeight);
+          console.log(" Header Height : " + this.headerHeight);
+          console.log(" Footer Height : " + this.footerHeight);
         },
         err => {
           console.log(err);
