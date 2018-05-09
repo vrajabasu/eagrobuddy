@@ -1,20 +1,26 @@
-<header id="header">
-<div>
-    <nav class="navbar navbar-success navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-example">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <strong><a class="navbar-brand" href="http://www.binarylogica.com">eAgroBuddy</a></strong>
-            </div>
+<header class="container-fluid">
+    <nav class="navbar navbar-success navbar-fixed-top" id="header">
+        <div class="col-sm-4">
+            <strong>
+                <a class="navbar-brand" href="http://www.binarylogica.com">eAgroBuddy</a>
+            </strong>
+        </div>
+        <div class="col-sm-4">
+            <select class="form-control">
+                <option *ngFor="let layout of layouts">{{layout}}</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-example">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <div class="collapse navbar-collapse" id="menu-example">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav pull-right">
                     <div class="collapse navbar-collapse" id="menu-example">
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav">
                             <li class="">
                                 <a href="/login">
                                     <i class="material-icons">input</i> Sign Out
@@ -26,5 +32,4 @@
             </div>
         </div>
     </nav>
-</div>
 </header>

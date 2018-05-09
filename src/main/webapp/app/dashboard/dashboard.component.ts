@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
   totalWidthPercentage: any;
   totalHeightPercentage: any;
   widthX; heightY; oneWidthfeet; oneHeightFeet; headerHeight; footerHeight;
-  layouts = ['Layout1', 'Layout2', 'Layout3'];
+  
 
   constructor(private http: Http,private router: Router) {}
 

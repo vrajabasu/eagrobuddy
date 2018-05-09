@@ -10,7 +10,8 @@ const misc: any = {
 declare var $: any;
 @Component({
     selector: 'app-navbar',
-    templateUrl: 'navbar.component.html'
+    templateUrl: 'navbar.component.html',
+    styleUrls: ['navbar.component.css']
 })
 
 export class NavbarComponent implements OnInit {
@@ -20,6 +21,8 @@ export class NavbarComponent implements OnInit {
     private sidebarVisible: boolean;
 
     private pathArray:any[];
+
+    layouts = ['Layout1', 'Layout2', 'Layout3'];
   
 
     @ViewChild('app-navbar-cmp') button: any;

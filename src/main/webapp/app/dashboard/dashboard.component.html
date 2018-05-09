@@ -1,20 +1,6 @@
-  <select class="form-control">
-    <option *ngFor="let layout of layouts">{{layout}}</option>
-  </select>
-<div *ngIf="data" (window:resize)="onResize()" [ngStyle]="{'height':((oneHeightFeet*data.heightY) - (headerHeight+footerHeight))+'px'}">
+<div class="layout-container" *ngIf="data" (window:resize)="onResize()" [ngStyle]="{'height':((oneHeightFeet*data.heightY) - (headerHeight+footerHeight))+'px', 'margin-top':headerHeight+'px'}">
   <ul>
     <li *ngFor="let section of data.sections; let i = index">
-      <!-- <canvas id="animation{{i}}" [ngStyle]="{'margin-left':(calcMarginLeft(i)*oneWidthfeet)+'px', 'margin-top':calcMarginTop(i)*oneWidthfeet+'px'}" width='{{(section.endX - section.startX) * oneWidthfeet}}'
-        height="{{(section.endY - section.startY) * oneHeightFeet}}">
-          <ul>
-            <li *ngFor="let segment of section.segments">
-              <div [ngStyle]="{'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}"></div>
-            </li>
-          </ul>
-      </canvas> -->
-      <!-- <svg width="1000" height="800">
-        <rect [attr.width]='{{(section.endX - section.startX) * oneWidthfeet}}' height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />
-      </svg> -->
       <div class="section" id="animation{{i}}" [ngStyle]="{'margin-left':(calcMarginLeft(i)*oneWidthfeet)+'px', 'margin-top':calcMarginTop(i)*oneWidthfeet+'px', 'width':(section.endX - section.startX) * oneWidthfeet+'px', 'height':(section.endY - section.startY) * oneHeightFeet+'px'}">
         <ul>
           <li *ngFor="let segment of section.segments">
