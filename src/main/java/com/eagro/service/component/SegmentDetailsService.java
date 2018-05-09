@@ -64,6 +64,9 @@ public class SegmentDetailsService {
 
 	@Autowired
 	public SensorCoverageRangeMapper sensorCoverageRangeMapper;
+	
+	@Autowired
+	public MockDataService mockDataService;
 
 	/**
 	 * Calculate overall threshold state by comparing actual sensor data and
@@ -158,8 +161,9 @@ public class SegmentDetailsService {
 				SensorData sensorData = sensorDataRepository.findBySensorIdAndLayoutId(sensor.getLayoutId(),
 						sensor.getSensorId());
 				SensorDataDTO sensorDataDTO = sensorDataMapper.toDto(sensorData);
+				if (sensorDataDTO != null && sensorDataDTO.getSensorId() != null) {
 				sensorActualValueMap.put(sensorDataDTO.getSensorId(), sensorDataDTO);
-
+				}
 			});
 		}
 		log.trace("The Actual KPI values from Sensor Latest Data : {} ", sensorActualValueMap.values());
@@ -170,25 +174,38 @@ public class SegmentDetailsService {
 			Map<Long, SectionSensorMappingDTO> segmentSensorMap) {
 		Map<Long, List<KPIDTO>> sensorOptimalKPIMap = new HashMap<>();
 		segmentSensorMap.values().forEach(senor -> {
+			
 			// Retrieve zoneType from sectionsensormapping entity
-			SectionSensorMapping sensor = sectionSensorMappingRepository.findByLayoutIdAndSectionIdAndSensorId(
+			SectionSensorMapping sensor = null;
+			if(section.getLayoutId() == 1) {
+				sensor = mockDataService.sectionSensorMappingList().get(0);
+			} else {
+			sensor = sectionSensorMappingRepository.findByLayoutIdAndSectionIdAndSensorId(
 					section.getLayoutId(), section.getSectionId(), senor.getSensorId());
+			}
 			SectionSensorMappingDTO sensorDTO = sectionSensorMappingMapper.toDto(sensor);
 
-			ZoneType zoneType = sensorDTO.getZoneType();
 			// Retrieve optimal KPI vlaues form KPI entity
+			if(sensorDTO != null && sensorDTO.getZoneType() != null) {
 			List<KPIDTO> kpiDTOList = retrieveKpi(section.getLayoutId(),
 					section.getSectionId(), sensorDTO.getZoneType());
 			
 			sensorOptimalKPIMap.put(sensorDTO.getSensorId(), kpiDTOList);
+			}
 
 		});
 		return sensorOptimalKPIMap;
 	}
 
 	public List<KPIDTO> retrieveKpi(Long layoutId, Long sectionId, ZoneType zoneType) {
-		List<KPI> kpiList = kpiRespository.findByLayoutIdAndSectionIdAndZoneType(layoutId,
-				sectionId, zoneType);
+		
+		List<KPI> kpiList = null;
+		if(layoutId == 1) {
+			kpiList = mockDataService.getKpiList();
+		} else {
+				kpiList = kpiRespository.findByLayoutIdAndSectionIdAndZoneType(layoutId,
+						sectionId, zoneType);
+		}
 		List<KPIDTO> kpiDTOList = kpiMapper.toDto(kpiList);
 		return kpiDTOList;
 	}
@@ -207,45 +224,70 @@ public class SegmentDetailsService {
 		Map<Long, SectionSensorMappingDTO> segmentSensorMap = new HashMap<>();
 		// Retrieve all sensor for the section from sectionsensorMapping entity
 		// using layoutId and sectionId
-		List<SectionSensorMapping> sensorList = sectionSensorMappingRepository
+		List<SectionSensorMapping> sensorList = null;
+		if(sectionDTO.getLayoutId() == 1) {
+			sensorList = mockDataService.sectionSensorMappingList();
+		} else {
+		sensorList = sectionSensorMappingRepository
 				.findBySectionIdAndLayoutId(sectionDTO.getLayoutId(), sectionDTO.getSectionId());
+		}
+		log.debug("sensorList Data Fetched from DB : {} for layoutId : {}", sensorList, sectionDTO.getLayoutId());
+		
 		// Mapper entityToDTO
 		List<SectionSensorMappingDTO> sensorDTOList = sectionSensorMappingMapper.toDto(sensorList);
+		
+		log.debug("sensorList Data : {} for layoutId : {}", sensorDTOList, sectionDTO.getLayoutId());
 		// validate whether the coordinates of the sensor falls within the
 		// segment coordinates
 		for (SectionSensorMappingDTO sensor : sensorDTOList) {
 			SectionSensorMappingDTO interimSectionBasedSensor = null;
 			if (checkSensorWithInSegRange(segmentDTO, sensor)) {
 				interimSectionBasedSensor = layoutVisualizationMapper.sensorToSensor(sensor);
+				log.debug("The interim sensor :{} is within segment Range and added to segmentSensorMap with segmentId: {}", interimSectionBasedSensor, segmentDTO.getSegmentId());
 				segmentSensorMap.put(segmentDTO.getSegmentId(), interimSectionBasedSensor);
 
 			}
 		}
+		log.debug("segmentSensorMap : {}", segmentSensorMap);
 		// Logic to consider Water sensorCoverageRange
 		// Retrieve all sensor for the section from sectionsensorMapping entity
 		// using layoutId,sectionId and ZoneType
-		List<SectionSensorMapping> waterSensorList = sectionSensorMappingRepository
+		List<SectionSensorMapping> waterSensorList = null;
+		if (sectionDTO.getLayoutId() == 1) {
+			waterSensorList = mockDataService.waterSensorMappingList();
+		} else {
+		waterSensorList = sectionSensorMappingRepository
 				.findByLayoutIdAndSectionIdAndZoneType(sectionDTO.getLayoutId(), sectionDTO.getSectionId(),
 						ZoneType.WATER);
+		}
 		// Mapper entityToDTO
 		List<SectionSensorMappingDTO> waterSensorDTOList = sectionSensorMappingMapper.toDto(waterSensorList);
 		// Check waterSensor is available in Sensor Interim Object
 		// TODO Need to check with Veera
+		log.debug("Water Sensor List : {}", waterSensorDTOList);
 		segmentSensorMap.values().forEach(sectionSensorMapping -> {
 			if (!waterSensorDTOList.contains(sectionSensorMapping)) {
 				// Retrieve sensorCoveragerange from entity based on
 				// layout,section and sensorId
-				SensorCoverageRange currentSensorCoverageRange = sensorCoverageRangeRepository
+				log.debug("Considering Water Coverage Range");
+				SensorCoverageRange currentSensorCoverageRange = null;
+				if (sectionSensorMapping.getLayoutId() == 1) {
+					currentSensorCoverageRange = mockDataService.currentSensorCoverageRange();
+				} else {
+				currentSensorCoverageRange = sensorCoverageRangeRepository
 						.findByLayoutIdAndSectionIdAndSensorId(sectionSensorMapping.getLayoutId(),
 								sectionSensorMapping.getSectionId(), sectionSensorMapping.getSensorId());
+				}
+				log.debug("Retrieve current SensorRange");
 				SensorCoverageRangeDTO sensorCoverageRange = sensorCoverageRangeMapper
 						.toDto(currentSensorCoverageRange);
+				log.debug("sensorCoverageRange : {} and segmentDTO : {}", sensorCoverageRange, segmentDTO );
 				if (checkSensorCoverageWithinsegRange(segmentDTO, sensorCoverageRange)) {
 					segmentSensorMap.put(segmentDTO.getSegmentId(), sectionSensorMapping);
 				}
 			}
 		});
-
+		log.debug("The segment sensor Map : {}  contains sensor coverage range is within segment range");
 		return segmentSensorMap;
 	}
 

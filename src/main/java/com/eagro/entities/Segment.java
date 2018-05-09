@@ -39,7 +39,7 @@ public class Segment implements Serializable {
     private Double endY;
 
     @Column(name = "active_flag")
-    private String activeFlag;
+    private boolean activeFlag;
 
     @Column(name = "created_date")
     private LocalDate createdDate;
@@ -153,20 +153,17 @@ public class Segment implements Serializable {
         this.endY = endY;
     }
 
-    public String getActiveFlag() {
-        return activeFlag;
-    }
+   
 
-    public Segment activeFlag(String activeFlag) {
-        this.activeFlag = activeFlag;
-        return this;
-    }
+    public boolean isActiveFlag() {
+		return activeFlag;
+	}
 
-    public void setActiveFlag(String activeFlag) {
-        this.activeFlag = activeFlag;
-    }
+	public void setActiveFlag(boolean activeFlag) {
+		this.activeFlag = activeFlag;
+	}
 
-    public LocalDate getCreatedDate() {
+	public LocalDate getCreatedDate() {
         return createdDate;
     }
 
@@ -274,7 +271,7 @@ public class Segment implements Serializable {
             ", startY=" + getStartY() +
             ", endX=" + getEndX() +
             ", endY=" + getEndY() +
-            ", activeFlag='" + getActiveFlag() + "'" +
+            ", activeFlag='" + isActiveFlag() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", updatedDate='" + getUpdatedDate() + "'" +
