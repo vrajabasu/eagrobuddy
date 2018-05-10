@@ -14,7 +14,7 @@
 	<!-- Added the entity Layout. -->
 	<changeSet id="layout-3" author="Rajee">
 		<createSequence cacheSize="20" cycle="false"
-			incrementBy="1" minValue="1"
+			incrementBy="1"
 			sequenceName="sequence_layout" startValue="1" />
 	</changeSet>
 
@@ -61,14 +61,6 @@
 			</column>
 
 		</createTable>
-
-	</changeSet>
-
-	<changeSet id="layout-2" author="Rajee">
-
-		<addForeignKeyConstraint baseColumnNames="layout_id"
-			baseTableName="user_layout_mapping" constraintName="fk_layout_user_layout_mapping_layout_id"
-			referencedColumnNames="layout_id" referencedTableName="layout" />
 
 	</changeSet>
 

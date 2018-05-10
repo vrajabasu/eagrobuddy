@@ -14,7 +14,7 @@
 	<!-- Added the entity SectionSensorMapping. -->
 	<changeSet id="sectionsensormaping-3" author="Rajee">
 		<createSequence cacheSize="20" cycle="false"
-			incrementBy="1" minValue="1"
+			incrementBy="1"
 			sequenceName="sequence_section_sensor_mapping"
 			startValue="1" />
 	</changeSet>

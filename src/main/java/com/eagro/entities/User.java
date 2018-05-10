@@ -65,7 +65,7 @@ public class User implements Serializable {
 	private String updatedBy;
 
 	@OneToOne
-	@JsonIgnore
+	@JoinColumn(name = "user_id", nullable = false)
 	private UserLayoutMapping userLayoutMapping;
 
 	@OneToOne

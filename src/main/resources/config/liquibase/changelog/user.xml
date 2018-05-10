@@ -14,7 +14,7 @@
 	<!-- Added the entity EagroUser. -->
 	<changeSet id="user-3" author="Rajee">
 		<createSequence cacheSize="20" cycle="false"
-			incrementBy="1" minValue="1"
+			incrementBy="1"
 			sequenceName="sequence_user" startValue="1" />
 	</changeSet>
 	<changeSet id="user-1" author="Rajee">

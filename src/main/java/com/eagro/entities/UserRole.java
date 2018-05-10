@@ -1,12 +1,16 @@
 package com.eagro.entities;
 
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * UserRoles entity.
@@ -43,10 +47,6 @@ public class UserRole implements Serializable {
 
     @Column(name = "updated_by")
     private String updatedBy;
-
-    @OneToOne
-    @JsonIgnore
-    private User user;
 
     public Long getRoleId() {
         return roleId;
@@ -145,18 +145,6 @@ public class UserRole implements Serializable {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public UserRole user(User user) {
-        this.user = user;
-        return this;
-    }
-    public void setUser(User user) {
-        this.user = user;
     }
 
     @Override

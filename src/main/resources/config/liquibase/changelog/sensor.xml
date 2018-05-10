@@ -14,7 +14,7 @@
 	<!-- Added the entity Sensor. -->
 	<changeSet id="sensor-3" author="Rajee">
 		<createSequence cacheSize="20" cycle="false"
-			incrementBy="1" minValue="1"
+			incrementBy="1"
 			sequenceName="sequence_sensor" startValue="1" />
 	</changeSet>
 	<changeSet id="sensor-1" author="Rajee">
