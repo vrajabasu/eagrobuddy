@@ -89,7 +89,7 @@ export class DashboardComponent implements OnInit {
 
   goToPage(id) {
     console.log(id);
-    this.router.navigate(['/section/'+id],{queryParams: {sectionId: id},skipLocationChange:true})
+    this.router.navigate(['/section/'+id])
   }
 
 }

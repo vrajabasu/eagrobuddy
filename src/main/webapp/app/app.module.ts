@@ -93,7 +93,7 @@ export class MaterialModule {}
         CommonModule,
         BrowserAnimationsModule,
         FormsModule,
-        RouterModule.forRoot(CCMRoutes),
+        RouterModule.forRoot(CCMRoutes, {enableTracing:true}),
         HttpModule,
         MaterialModule,
         MatNativeDateModule,
