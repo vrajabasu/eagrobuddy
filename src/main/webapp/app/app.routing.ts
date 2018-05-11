@@ -4,7 +4,7 @@ import { GHLayoutComponent } from './layouts/gh/gh-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { RoleGuard } from './../app/shared/AuthGuard/role-guard';
 
-export const CCMRoutes: Routes = [
+export const GHRoutes: Routes = [
   {
     // Redirect app launch to login
     path: '',

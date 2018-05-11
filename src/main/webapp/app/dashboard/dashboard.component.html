@@ -1,11 +1,11 @@
-<div class="layout-container" *ngIf="data" (window:resize)="onResize()" [ngStyle]="{'height':((oneHeightFeet*data.heightY) - (headerHeight+footerHeight))+'px', 'margin-top':headerHeight+'px'}">
+<div class="layout-container" *ngIf="data" (window:resize)="onResize()" [ngStyle]="{'height':((oneHeightFeet*data.heightY) - (headerHeight+footerHeight))+'px', 'margin-left':layoutWidthMargin+'px', 'margin-right':layoutWidthMargin+'px', 'margin-top':(headerHeight+layoutHeightMargin)+'px', 'margin-bottom':(footerHeight+layoutHeightMargin)+'px'}">
   <ul>
     <li *ngFor="let section of data.sections; let i = index">
       <div class="section" id="animation{{i}}" [ngStyle]="{'margin-left':(calcMarginLeft(i)*oneWidthfeet)+'px', 'margin-top':calcMarginTop(i)*oneWidthfeet+'px', 'width':(section.endX - section.startX) * oneWidthfeet+'px', 'height':(section.endY - section.startY) * oneHeightFeet+'px'}">
         <ul>
           <li *ngFor="let segment of section.segments">
             <div class="segment" (click)="goToPage(section.sectionId)" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate),'width':((segment.endX - segment.startX) * oneWidthfeet - 1)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet - 1)+'px'}">
-              {{segment.segmentName}}
+              <!-- {{segment.segmentName}} -->
             </div>
           </li>
         </ul>

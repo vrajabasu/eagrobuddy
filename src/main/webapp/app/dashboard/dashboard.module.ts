@@ -8,6 +8,8 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutes } from './dashboard.routing';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { SectionComponent } from '../section/section.component';
+import { DashboardService } from './dashboard.service';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -16,7 +18,13 @@ import { SectionComponent } from '../section/section.component';
         MaterialModule,
         ChartsModule
     ],
-    declarations: [DashboardComponent, SectionComponent]
+    declarations: [
+    	DashboardComponent, 
+    	SectionComponent
+    ],
+    providers: [
+    	DashboardService
+    ]
 })
 
 export class Dashboard {}

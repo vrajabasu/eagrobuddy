@@ -48,7 +48,7 @@ import { NavbarModule} from './components/navbar/navbar.module';
 import { GHLayoutComponent } from './layouts/gh/gh-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { CCMRoutes } from './app.routing';
+import { GHRoutes } from './app.routing';
 import { AuthGuard } from 'app/shared/AuthGuard/auth-guard';
 
 @NgModule({
@@ -93,7 +93,7 @@ export class MaterialModule {}
         CommonModule,
         BrowserAnimationsModule,
         FormsModule,
-        RouterModule.forRoot(CCMRoutes, {enableTracing:true}),
+        RouterModule.forRoot(GHRoutes, {enableTracing: false}),
         HttpModule,
         MaterialModule,
         MatNativeDateModule,
