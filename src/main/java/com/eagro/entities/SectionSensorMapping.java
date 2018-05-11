@@ -1,10 +1,11 @@
 package com.eagro.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -43,14 +44,16 @@ public class SectionSensorMapping implements Serializable {
 	@Column(name = "pos_y")
 	private Double posY;
 
-	@Column(name = "created_date")
-	private LocalDate createdDate;
+	@Convert(converter = LocalDateTimeConverter.class)
+	@Column(name = "created_date", columnDefinition = "TIMESTAMP(3)", nullable = false)
+	private LocalDateTime createdDate;
 
 	@Column(name = "created_by")
 	private String createdBy;
 
+	@Convert(converter = LocalDateTimeConverter.class)
 	@Column(name = "updated_date")
-	private LocalDate updatedDate;
+	private LocalDateTime updatedDate;
 
 	@Column(name = "updated_by")
 	private String updatedBy;
@@ -114,18 +117,7 @@ public class SectionSensorMapping implements Serializable {
 		this.posY = posY;
 	}
 
-	public LocalDate getCreatedDate() {
-		return createdDate;
-	}
 
-	public SectionSensorMapping createdDate(LocalDate createdDate) {
-		this.createdDate = createdDate;
-		return this;
-	}
-
-	public void setCreatedDate(LocalDate createdDate) {
-		this.createdDate = createdDate;
-	}
 
 	public String getCreatedBy() {
 		return createdBy;
@@ -140,16 +132,21 @@ public class SectionSensorMapping implements Serializable {
 		this.createdBy = createdBy;
 	}
 
-	public LocalDate getUpdatedDate() {
+
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public LocalDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
-	public SectionSensorMapping updatedDate(LocalDate updatedDate) {
-		this.updatedDate = updatedDate;
-		return this;
-	}
-
-	public void setUpdatedDate(LocalDate updatedDate) {
+	public void setUpdatedDate(LocalDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 

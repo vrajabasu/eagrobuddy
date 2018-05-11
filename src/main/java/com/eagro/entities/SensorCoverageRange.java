@@ -1,10 +1,11 @@
 package com.eagro.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -44,14 +45,16 @@ public class SensorCoverageRange implements Serializable {
 	@Column(name = "active_flag")
 	private boolean activeFlag;
 
-	@Column(name = "created_date")
-	private LocalDate createdDate;
+	@Convert(converter = LocalDateTimeConverter.class)
+	@Column(name = "created_date", columnDefinition = "TIMESTAMP(3)", nullable = false)
+	private LocalDateTime createdDate;
 
 	@Column(name = "created_by")
 	private String createdBy;
 
+	@Convert(converter = LocalDateTimeConverter.class)
 	@Column(name = "updated_date")
-	private LocalDate updatedDate;
+	private LocalDateTime updatedDate;
 
 	@Column(name = "updated_by")
 	private String updatedBy;
@@ -136,18 +139,6 @@ public class SensorCoverageRange implements Serializable {
 		this.activeFlag = activeFlag;
 	}
 
-	public LocalDate getCreatedDate() {
-		return createdDate;
-	}
-
-	public SensorCoverageRange createdDate(LocalDate createdDate) {
-		this.createdDate = createdDate;
-		return this;
-	}
-
-	public void setCreatedDate(LocalDate createdDate) {
-		this.createdDate = createdDate;
-	}
 
 	public String getCreatedBy() {
 		return createdBy;
@@ -162,16 +153,21 @@ public class SensorCoverageRange implements Serializable {
 		this.createdBy = createdBy;
 	}
 
-	public LocalDate getUpdatedDate() {
+	
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public LocalDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
-	public SensorCoverageRange updatedDate(LocalDate updatedDate) {
-		this.updatedDate = updatedDate;
-		return this;
-	}
-
-	public void setUpdatedDate(LocalDate updatedDate) {
+	public void setUpdatedDate(LocalDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 

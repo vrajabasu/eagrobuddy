@@ -1,10 +1,19 @@
 package com.eagro.entities;
 
-import javax.persistence.*;
-
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * Segments entity.
@@ -40,15 +49,17 @@ public class Segment implements Serializable {
 
     @Column(name = "active_flag")
     private boolean activeFlag;
-
-    @Column(name = "created_date")
-    private LocalDate createdDate;
+    
+    @Convert(converter = LocalDateTimeConverter.class)
+    @Column(name = "created_date", columnDefinition = "TIMESTAMP(3)", nullable = false)
+    private LocalDateTime createdDate;
 
     @Column(name = "created_by")
     private String createdBy;
 
+    @Convert(converter = LocalDateTimeConverter.class)
     @Column(name = "updated_date")
-    private LocalDate updatedDate;
+    private LocalDateTime updatedDate;
 
     @Column(name = "updated_by")
     private String updatedBy;
@@ -163,18 +174,7 @@ public class Segment implements Serializable {
 		this.activeFlag = activeFlag;
 	}
 
-	public LocalDate getCreatedDate() {
-        return createdDate;
-    }
-
-    public Segment createdDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
-        return this;
-    }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
-    }
+	
 
     public String getCreatedBy() {
         return createdBy;
@@ -189,20 +189,25 @@ public class Segment implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public LocalDate getUpdatedDate() {
-        return updatedDate;
-    }
 
-    public Segment updatedDate(LocalDate updatedDate) {
-        this.updatedDate = updatedDate;
-        return this;
-    }
 
-    public void setUpdatedDate(LocalDate updatedDate) {
-        this.updatedDate = updatedDate;
-    }
+    public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
 
-    public String getUpdatedBy() {
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public LocalDateTime getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(LocalDateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	public String getUpdatedBy() {
         return updatedBy;
     }
 

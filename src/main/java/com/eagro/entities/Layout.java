@@ -1,14 +1,22 @@
 package com.eagro.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Layout entity.
@@ -17,6 +25,9 @@ import java.util.Objects;
 @Table(name = "layout")
 public class Layout implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -40,14 +51,16 @@ public class Layout implements Serializable {
 	@Column(name = "active_flag")
 	private boolean activeFlag;
 
-	@Column(name = "created_date")
-	private LocalDate createdDate;
+	@Convert(converter = LocalDateTimeConverter.class)
+	@Column(name = "created_date", columnDefinition = "TIMESTAMP(3)", nullable = false)
+	private LocalDateTime createdDate;
 
 	@Column(name = "created_by")
 	private String createdBy;
 
-	@Column(name = "updated_date")
-	private LocalDate updatedDate;
+	@Convert(converter = LocalDateTimeConverter.class)
+	@Column(name = "updated_date", columnDefinition = "TIMESTAMP(3)", nullable = false)
+	private LocalDateTime updatedDate;
 
 	@Column(name = "updated_by")
 	private String updatedBy;
@@ -79,10 +92,6 @@ public class Layout implements Serializable {
 	@OneToMany(mappedBy = "layout")
 	@JsonIgnore
 	private Set<SensorData> sensorData = new HashSet<>();
-
-	@OneToOne
-	@JsonIgnore
-	private UserLayoutMapping userLayoutMapping;
 
 	public Long getLayoutId() {
 		return layoutId;
@@ -157,18 +166,7 @@ public class Layout implements Serializable {
 		this.activeFlag = activeFlag;
 	}
 
-	public LocalDate getCreatedDate() {
-		return createdDate;
-	}
 
-	public Layout createdDate(LocalDate createdDate) {
-		this.createdDate = createdDate;
-		return this;
-	}
-
-	public void setCreatedDate(LocalDate createdDate) {
-		this.createdDate = createdDate;
-	}
 
 	public String getCreatedBy() {
 		return createdBy;
@@ -183,19 +181,6 @@ public class Layout implements Serializable {
 		this.createdBy = createdBy;
 	}
 
-	public LocalDate getUpdatedDate() {
-		return updatedDate;
-	}
-
-	public Layout updatedDate(LocalDate updatedDate) {
-		this.updatedDate = updatedDate;
-		return this;
-	}
-
-	public void setUpdatedDate(LocalDate updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-
 	public String getUpdatedBy() {
 		return updatedBy;
 	}
@@ -203,6 +188,22 @@ public class Layout implements Serializable {
 	public Layout updatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 		return this;
+	}
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public LocalDateTime getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(LocalDateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 
 	public void setUpdatedBy(String updatedBy) {
@@ -392,13 +393,6 @@ public class Layout implements Serializable {
 		this.kPIS = kPIS;
 	}
 
-	public UserLayoutMapping getUserLayoutMapping() {
-		return userLayoutMapping;
-	}
-
-	public void setUserLayoutMapping(UserLayoutMapping userLayoutMapping) {
-		this.userLayoutMapping = userLayoutMapping;
-	}
 
 	@Override
 	public boolean equals(Object o) {

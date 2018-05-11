@@ -2,7 +2,7 @@ package com.eagro.service.dto;
 
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -23,11 +23,11 @@ public class UserRoleDTO implements Serializable {
 
     private String activeFlag;
 
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
 
     private String createdBy;
 
-    private LocalDate updatedDate;
+    private LocalDateTime updatedDate;
 
     private String updatedBy;
 
@@ -65,11 +65,11 @@ public class UserRoleDTO implements Serializable {
         this.activeFlag = activeFlag;
     }
 
-    public LocalDate getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -81,11 +81,11 @@ public class UserRoleDTO implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public LocalDate getUpdatedDate() {
+    public LocalDateTime getUpdatedDate() {
         return updatedDate;
     }
 
-    public void setUpdatedDate(LocalDate updatedDate) {
+    public void setUpdatedDate(LocalDateTime updatedDate) {
         this.updatedDate = updatedDate;
     }
 

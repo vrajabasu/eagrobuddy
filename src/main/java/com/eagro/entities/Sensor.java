@@ -1,7 +1,7 @@
 package com.eagro.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,11 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Sensor entity.
@@ -43,29 +40,17 @@ public class Sensor implements Serializable {
 	@Column(name = "active_flag")
 	private boolean activeFlag;
 
-	@Column(name = "created_date")
-	private LocalDate createdDate;
+	@Column(name = "created_date", columnDefinition = "TIMESTAMP(3)", nullable = false)
+	private LocalDateTime createdDate;
 
 	@Column(name = "created_by")
 	private String createdBy;
 
 	@Column(name = "updated_date")
-	private LocalDate updatedDate;
+	private LocalDateTime updatedDate;
 
 	@Column(name = "updated_by")
 	private String updatedBy;
-
-	@OneToOne
-	@JsonIgnore
-	private SensorCoverageRange sensorCoverageRanges;
-
-	@OneToOne
-	@JsonIgnore
-	private SectionSensorMapping sectionSensorMapping;
-
-	@OneToOne
-	@JsonIgnore
-	private SensorData sensorData;
 
 	@ManyToOne
 	@JoinColumn(name = "layout_id", nullable = false)
@@ -126,18 +111,6 @@ public class Sensor implements Serializable {
 		this.sensorId = sensorId;
 	}
 
-	public LocalDate getCreatedDate() {
-		return createdDate;
-	}
-
-	public Sensor createdDate(LocalDate createdDate) {
-		this.createdDate = createdDate;
-		return this;
-	}
-
-	public void setCreatedDate(LocalDate createdDate) {
-		this.createdDate = createdDate;
-	}
 
 	public String getCreatedBy() {
 		return createdBy;
@@ -152,18 +125,6 @@ public class Sensor implements Serializable {
 		this.createdBy = createdBy;
 	}
 
-	public LocalDate getUpdatedDate() {
-		return updatedDate;
-	}
-
-	public Sensor updatedDate(LocalDate updatedDate) {
-		this.updatedDate = updatedDate;
-		return this;
-	}
-
-	public void setUpdatedDate(LocalDate updatedDate) {
-		this.updatedDate = updatedDate;
-	}
 
 	public String getUpdatedBy() {
 		return updatedBy;
@@ -176,30 +137,6 @@ public class Sensor implements Serializable {
 
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
-	}
-
-	public SensorCoverageRange getSensorCoverageRanges() {
-		return sensorCoverageRanges;
-	}
-
-	public void setSensorCoverageRanges(SensorCoverageRange sensorCoverageRanges) {
-		this.sensorCoverageRanges = sensorCoverageRanges;
-	}
-
-	public SectionSensorMapping getSectionSensorMapping() {
-		return sectionSensorMapping;
-	}
-
-	public void setSectionSensorMapping(SectionSensorMapping sectionSensorMapping) {
-		this.sectionSensorMapping = sectionSensorMapping;
-	}
-
-	public SensorData getSensorData() {
-		return sensorData;
-	}
-
-	public void setSensorData(SensorData sensorData) {
-		this.sensorData = sensorData;
 	}
 
 	public Layout getLayout() {
@@ -228,6 +165,22 @@ public class Sensor implements Serializable {
 			return false;
 		}
 		return Objects.equals(getId(), sensor.getId());
+	}
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public LocalDateTime getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(LocalDateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 
 	@Override

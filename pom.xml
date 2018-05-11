@@ -29,6 +29,41 @@
 		<liquibase-slf4j.version>1.2.1</liquibase-slf4j.version>
 	</properties>
 	<dependencies>
+	
+	<!-- For enabling local H2 DB Start-->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-aop</artifactId>
+		<scope>compile</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-jdbc</artifactId>
+		<scope>compile</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<scope>compile</scope>
+	</dependency>
+	<dependency>
+		<groupId>javax.transaction</groupId>
+		<artifactId>javax.transaction-api</artifactId>
+		<scope>compile</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.data</groupId>
+		<artifactId>spring-data-jpa</artifactId>
+		<scope>compile</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-aspects</artifactId>
+		<version>5.0.1.RELEASE</version>
+		<scope>compile</scope>
+	</dependency>
+	
+	<!--  For enabling local H2 DB end -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>

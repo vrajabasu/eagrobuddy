@@ -2,7 +2,7 @@ package com.eagro.service.dto;
 
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -17,7 +17,7 @@ public class SensorDataDTO implements Serializable {
 
 	private Long id;
 
-    private LocalDate recordedDateTime;
+    private LocalDateTime recordedDateTime;
 
     private String param1;
 
@@ -43,11 +43,11 @@ public class SensorDataDTO implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getRecordedDateTime() {
+    public LocalDateTime getRecordedDateTime() {
         return recordedDateTime;
     }
 
-    public void setRecordedDateTime(LocalDate recordedDateTime) {
+    public void setRecordedDateTime(LocalDateTime recordedDateTime) {
         this.recordedDateTime = recordedDateTime;
     }
 

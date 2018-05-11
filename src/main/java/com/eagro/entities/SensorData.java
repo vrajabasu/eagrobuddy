@@ -1,10 +1,11 @@
 package com.eagro.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,8 +30,9 @@ public class SensorData implements Serializable {
     @SequenceGenerator(name = "sequence_sensor_data", sequenceName = "sequence_sensor_data", allocationSize = 1)
     private Long id;
 
-    @Column(name = "recorded_date_time")
-    private LocalDate recordedDateTime;
+    @Convert(converter = LocalDateTimeConverter.class)
+    @Column(name = "recorded_date_time", columnDefinition = "TIMESTAMP(3)", nullable = false)
+    private LocalDateTime recordedDateTime;
 
     @Column(name = "param_1")
     private String param1;
@@ -66,20 +68,17 @@ public class SensorData implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getRecordedDateTime() {
-        return recordedDateTime;
-    }
+  
 
-    public SensorData recordedDateTime(LocalDate recordedDateTime) {
-        this.recordedDateTime = recordedDateTime;
-        return this;
-    }
+    public LocalDateTime getRecordedDateTime() {
+		return recordedDateTime;
+	}
 
-    public void setRecordedDateTime(LocalDate recordedDateTime) {
-        this.recordedDateTime = recordedDateTime;
-    }
+	public void setRecordedDateTime(LocalDateTime recordedDateTime) {
+		this.recordedDateTime = recordedDateTime;
+	}
 
-    public String getParam1() {
+	public String getParam1() {
         return param1;
     }
 

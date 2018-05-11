@@ -1,6 +1,6 @@
 package com.eagro.service.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -40,13 +40,13 @@ public class LayoutResponseDTO {
 	private Double heightY = null;
 
 	@JsonProperty("createdDate")
-	private LocalDate createdDate = null;
+	private LocalDateTime createdDate = null;
 
 	@JsonProperty("createdBy")
 	private String createdBy = null;
 
 	@JsonProperty("updatedDate")
-	private LocalDate updatedDate = null;
+	private LocalDateTime updatedDate = null;
 
 	@JsonProperty("updatedBy")
 	private String updatedBy = null;
@@ -157,7 +157,7 @@ public class LayoutResponseDTO {
 		this.heightY = heightY;
 	}
 
-	public LayoutResponseDTO createdDate(LocalDate createdDate) {
+	public LayoutResponseDTO createdDate(LocalDateTime createdDate) {
 		this.createdDate = createdDate;
 		return this;
 	}
@@ -189,7 +189,7 @@ public class LayoutResponseDTO {
 		this.createdBy = createdBy;
 	}
 
-	public LayoutResponseDTO updatedDate(LocalDate updatedDate) {
+	public LayoutResponseDTO updatedDate(LocalDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 		return this;
 	}
@@ -243,19 +243,19 @@ public class LayoutResponseDTO {
 		this.layoutDesc = layoutDesc;
 	}
 
-	public LocalDate getCreatedDate() {
+	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(LocalDate createdDate) {
+	public void setCreatedDate(LocalDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public LocalDate getUpdatedDate() {
+	public LocalDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
-	public void setUpdatedDate(LocalDate updatedDate) {
+	public void setUpdatedDate(LocalDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 

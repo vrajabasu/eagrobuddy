@@ -24,12 +24,12 @@ public class MockDataService {
 		layout.setLayoutId(1L);
 		layout.setActiveFlag(true);
 		layout.setCreatedBy("Rajee");
-		layout.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//layout.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		layout.setWidthX(58.0);
 		layout.setHeightY(30.0);
 		layout.setLayoutDesc("Overall Layout visualization showing sections and segments within the sections");
 		layout.setLayoutName("Overall Layout");
-		layout.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//layout.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		layout.setUpdatedBy("V");
 		return layout;
 	}
@@ -41,19 +41,19 @@ public class MockDataService {
 		layout.setLayoutId(1L);
 		layout.setActiveFlag(true);
 		layout.setCreatedBy("Rajee");
-		layout.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//layout.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		layout.setWidthX(58.0);
 		layout.setHeightY(30.0);
 		layout.setLayoutDesc("Overall Layout visualization showing sections and segments within the sections");
 		layout.setLayoutName("Overall Layout");
-		layout.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//layout.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		layout.setUpdatedBy("V"); 
 		
 		Section section1 = new Section();
 		section1.setSectionId(1L);
 		section1.setActiveFlag(true);
 		section1.setCreatedBy("Rajee");
-		section1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//section1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		section1.setEndX(22.5);
 		section1.setEndY(11.5);
 		section1.setLayout(layout);
@@ -62,14 +62,14 @@ public class MockDataService {
 		section1.setStartX(12.5);
 		section1.setStartY(2.5);
 		section1.setUpdatedBy("Veera");
-		section1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//section1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		
 		
 		Section section2 = new Section();
 		section2.setSectionId(2L);
 		section2.setActiveFlag(true);
 		section2.setCreatedBy("R");
-		section2.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//section2.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		section2.setEndX(35.0);
 		section2.setEndY(11.5);
 		section2.setLayout(layout);
@@ -78,13 +78,13 @@ public class MockDataService {
 		section2.setStartX(2.05);
 		section2.setStartY(2.5);
 		section2.setUpdatedBy("V");
-		section2.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//section2.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		
 		Section section3 = new Section();
 		section3.setSectionId(3L);
 		section3.setActiveFlag(true);
 		section3.setCreatedBy("R");
-		section3.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//section3.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		section3.setEndX(55.5);
 		section3.setEndY(11.5);
 		section3.setLayout(layout);
@@ -93,13 +93,13 @@ public class MockDataService {
 		section3.setStartX(37.5);
 		section3.setStartY(2.5);
 		section3.setUpdatedBy("V");
-		section3.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//section3.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		
 		Section section4 = new Section();
 		section4.setSectionId(4L);
 		section4.setActiveFlag(true);
 		section4.setCreatedBy("R");
-		section4.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//section4.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		section4.setEndX(55.5);
 		section4.setEndY(20.0);
 		section4.setLayout(layout);
@@ -108,7 +108,7 @@ public class MockDataService {
 		section4.setStartX(12.5);
 		section4.setStartY(15.0);
 		section4.setUpdatedBy("V");
-		section4.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//section4.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		
 		sectionList.add(section1);
 		sectionList.add(section2);
@@ -126,7 +126,7 @@ public class MockDataService {
 		section1.setSectionId(1L);
 		section1.setActiveFlag(true);
 		section1.setCreatedBy("Rajee");
-		section1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//section1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		section1.setEndX(22.5);
 		section1.setEndY(11.5);
 		section1.setLayout(layout);
@@ -135,7 +135,7 @@ public class MockDataService {
 		section1.setStartX(12.5);
 		section1.setStartY(2.5);
 		section1.setUpdatedBy("Veera");
-		section1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//section1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		
 		Segment segment1 = new Segment();
 		segment1.setSegmentId(1l);
@@ -144,7 +144,7 @@ public class MockDataService {
 		segment1.setSection(section1);
 		segment1.setActiveFlag(true);
 		segment1.setCreatedBy("R");
-		segment1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//segment1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		segment1.setEndX(3.75);
 		segment1.setEndY(3.5);
 		segment1.setLayout(layout);
@@ -160,7 +160,7 @@ public class MockDataService {
 		segment2.setSection(section1);
 		segment2.setActiveFlag(true);
 		segment2.setCreatedBy("R");
-		segment2.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//segment2.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		segment2.setEndX(6.25);
 		segment2.setEndY(3.5);
 		segment2.setLayout(layout);
@@ -176,7 +176,7 @@ public class MockDataService {
 		segment3.setSection(section1);
 		segment3.setActiveFlag(true);
 		segment3.setCreatedBy("R");
-		segment3.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//segment3.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		segment3.setEndX(10.0);
 		segment3.setEndY(3.5);
 		segment3.setLayout(layout);
@@ -191,7 +191,7 @@ public class MockDataService {
 		segment4.setSection(section1);
 		segment4.setActiveFlag(true);
 		segment4.setCreatedBy("R");
-		segment4.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//segment4.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		segment4.setEndX(3.75);
 		segment4.setEndY(5.5);
 		segment4.setLayout(layout);
@@ -206,7 +206,7 @@ public class MockDataService {
 		segment5.setSection(section1);
 		segment5.setActiveFlag(true);
 		segment5.setCreatedBy("R");
-		segment5.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//segment5.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		segment5.setEndX(6.25);
 		segment5.setEndY(5.5);
 		segment5.setLayout(layout);
@@ -221,7 +221,7 @@ public class MockDataService {
 		segment6.setSection(section1);
 		segment6.setActiveFlag(true);
 		segment6.setCreatedBy("R");
-		segment6.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//segment6.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		segment6.setEndX(10.0);
 		segment6.setEndY(5.5);
 		segment6.setLayout(layout);
@@ -247,19 +247,19 @@ public class MockDataService {
 		sensor1.setId(1L);
 		sensor1.setLayout(layout);
 		sensor1.setCreatedBy("Rajee");
-		sensor1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//sensor1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		sensor1.setActiveFlag(true);
 		sensor1.setSensorId(1L);
 		sensor1.setSensorName("Sensor1");
 		sensor1.setSensorDesc("Sensor1");
 		sensor1.setUpdatedBy("Veera");
-		sensor1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//sensor1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		
 		Section section1 = new Section();
 		section1.setSectionId(1L);
 		section1.setActiveFlag(true);
 		section1.setCreatedBy("Rajee");
-		section1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//section1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		section1.setEndX(22.5);
 		section1.setEndY(11.5);
 		section1.setLayout(layout);
@@ -268,7 +268,7 @@ public class MockDataService {
 		section1.setStartX(12.5);
 		section1.setStartY(2.5);
 		section1.setUpdatedBy("Veera");
-		section1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//section1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		
 		SectionSensorMapping sensorMapping = new SectionSensorMapping();
 		sensorMapping.setId(1L);
@@ -276,9 +276,9 @@ public class MockDataService {
 		sensorMapping.setPosX(0.0);
 		sensorMapping.setPosY(4.5);
 		sensorMapping.setCreatedBy("R");
-		sensorMapping.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//sensorMapping.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		sensorMapping.setUpdatedBy("V");
-		sensorMapping.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//sensorMapping.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		sensorMapping.setSection(section1);
 		sensorMapping.setSensor(sensor1);
 		sensorMapping.setZoneType(ZoneType.WATER);
@@ -289,9 +289,9 @@ public class MockDataService {
 		sensorMapping1.setPosX(2.5);
 		sensorMapping1.setPosY(2.5);
 		sensorMapping1.setCreatedBy("R");
-		sensorMapping1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//sensorMapping1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		sensorMapping1.setUpdatedBy("V");
-		sensorMapping1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//sensorMapping1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		sensorMapping1.setSection(section1);
 		sensorMapping1.setSensor(sensor1);
 		sensorMapping1.setZoneType(ZoneType.CANOPY);
@@ -300,13 +300,13 @@ public class MockDataService {
 		sensor2.setId(2L);
 		sensor2.setLayout(layout);
 		sensor2.setCreatedBy("Rajee");
-		sensor2.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//sensor2.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		sensor2.setActiveFlag(true);
 		sensor2.setSensorId(2L);
 		sensor2.setSensorName("Sensor2");
 		sensor2.setSensorDesc("Sensor2");
 		sensor2.setUpdatedBy("Veera");
-		sensor2.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//sensor2.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		
 		SectionSensorMapping sensorMapping2 = new SectionSensorMapping();
 		sensorMapping2.setId(2L);
@@ -314,9 +314,9 @@ public class MockDataService {
 		sensorMapping2.setPosX(5.0);
 		sensorMapping2.setPosY(2.5);
 		sensorMapping2.setCreatedBy("R");
-		sensorMapping2.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//sensorMapping2.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		sensorMapping2.setUpdatedBy("V");
-		sensorMapping2.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//sensorMapping2.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		sensorMapping2.setSection(section1);
 		sensorMapping2.setSensor(sensor2);
 		sensorMapping2.setZoneType(ZoneType.CANOPY);
@@ -325,13 +325,13 @@ public class MockDataService {
 		sensor3.setId(3L);
 		sensor3.setLayout(layout);
 		sensor3.setCreatedBy("Rajee");
-		sensor3.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//sensor3.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		sensor3.setActiveFlag(true);
 		sensor3.setSensorId(3L);
 		sensor3.setSensorName("sensor3");
 		sensor3.setSensorDesc("sensor3");
 		sensor3.setUpdatedBy("Veera");
-		sensor3.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//sensor3.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		
 		SectionSensorMapping sensorMapping3 = new SectionSensorMapping();
 		sensorMapping3.setId(2L);
@@ -339,9 +339,9 @@ public class MockDataService {
 		sensorMapping3.setPosX(7.5);
 		sensorMapping3.setPosY(2.5);
 		sensorMapping3.setCreatedBy("R");
-		sensorMapping3.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//sensorMapping3.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		sensorMapping3.setUpdatedBy("V");
-		sensorMapping3.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//sensorMapping3.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		sensorMapping3.setSection(section1);
 		sensorMapping3.setSensor(sensor2);
 		sensorMapping3.setZoneType(ZoneType.CANOPY);
@@ -363,19 +363,19 @@ public class MockDataService {
 		sensor1.setId(1L);
 		sensor1.setLayout(layout);
 		sensor1.setCreatedBy("Rajee");
-		sensor1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//sensor1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		sensor1.setActiveFlag(true);
 		sensor1.setSensorId(1L);
 		sensor1.setSensorName("Sensor1");
 		sensor1.setSensorDesc("Sensor1");
 		sensor1.setUpdatedBy("Veera");
-		sensor1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//sensor1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		
 		Section section1 = new Section();
 		section1.setSectionId(1L);
 		section1.setActiveFlag(true);
 		section1.setCreatedBy("Rajee");
-		section1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//section1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		section1.setEndX(22.5);
 		section1.setEndY(11.5);
 		section1.setLayout(layout);
@@ -384,7 +384,7 @@ public class MockDataService {
 		section1.setStartX(12.5);
 		section1.setStartY(2.5);
 		section1.setUpdatedBy("Veera");
-		section1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//section1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		
 		SectionSensorMapping sensorMapping = new SectionSensorMapping();
 		sensorMapping.setId(1L);
@@ -392,9 +392,9 @@ public class MockDataService {
 		sensorMapping.setPosX(0.0);
 		sensorMapping.setPosY(4.5);
 		sensorMapping.setCreatedBy("R");
-		sensorMapping.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//sensorMapping.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		sensorMapping.setUpdatedBy("V");
-		sensorMapping.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//sensorMapping.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		sensorMapping.setSection(section1);
 		sensorMapping.setSensor(sensor1);
 		sensorMapping.setZoneType(ZoneType.WATER);
@@ -413,19 +413,19 @@ public class MockDataService {
 		layout.setLayoutId(1L);
 		layout.setActiveFlag(true);
 		layout.setCreatedBy("Rajee");
-		layout.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//layout.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		layout.setWidthX(58.0);
 		layout.setHeightY(30.0);
 		layout.setLayoutDesc("Overall Layout visualization showing sections and segments within the sections");
 		layout.setLayoutName("Overall Layout");
-		layout.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//layout.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		layout.setUpdatedBy("V");
 		
 		Section section1 = new Section();
 		section1.setSectionId(1L);
 		section1.setActiveFlag(true);
 		section1.setCreatedBy("Rajee");
-		section1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//section1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		section1.setEndX(22.5);
 		section1.setEndY(11.5);
 		section1.setLayout(layout);
@@ -434,19 +434,19 @@ public class MockDataService {
 		section1.setStartX(12.5);
 		section1.setStartY(2.5);
 		section1.setUpdatedBy("Veera");
-		section1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//section1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		
 		Sensor sensor1 = new Sensor();
 		sensor1.setId(1L);
 		sensor1.setLayout(layout);
 		sensor1.setCreatedBy("Rajee");
-		sensor1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//sensor1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		sensor1.setActiveFlag(true);
 		sensor1.setSensorId(1L);
 		sensor1.setSensorName("Sensor1");
 		sensor1.setSensorDesc("Sensor1");
 		sensor1.setUpdatedBy("Veera");
-		sensor1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//sensor1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		
 		sensorCoverageRange.setId(1L);
 		sensorCoverageRange.setLayout(layout);
@@ -454,13 +454,13 @@ public class MockDataService {
 		sensorCoverageRange.setSensor(sensor1);
 		sensorCoverageRange.setActiveFlag(true);
 		sensorCoverageRange.setCreatedBy("Rajee");
-		sensorCoverageRange.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//sensorCoverageRange.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		sensorCoverageRange.setEndX(90.0);
 		sensorCoverageRange.setEndY(44.0);
 		sensorCoverageRange.setStartX(0.0);
 		sensorCoverageRange.setStartY(0.0);
 		sensorCoverageRange.setUpdatedBy("V");
-		sensorCoverageRange.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//sensorCoverageRange.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		return sensorCoverageRange;
 	}
 	
@@ -470,19 +470,19 @@ public class MockDataService {
 		layout.setLayoutId(1L);
 		layout.setActiveFlag(true);
 		layout.setCreatedBy("Rajee");
-		layout.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//layout.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		layout.setWidthX(58.0);
 		layout.setHeightY(30.0);
 		layout.setLayoutDesc("Overall Layout visualization showing sections and segments within the sections");
 		layout.setLayoutName("Overall Layout");
-		layout.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
+		//layout.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02));
 		layout.setUpdatedBy("V");
 		
 		Section section1 = new Section();
 		section1.setSectionId(1L);
 		section1.setActiveFlag(true);
 		section1.setCreatedBy("Rajee");
-		section1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
+		//section1.setCreatedDate(LocalDate.of(2017, Month.AUGUST, 02));
 		section1.setEndX(22.5);
 		section1.setEndY(11.5);
 		section1.setLayout(layout);
@@ -491,7 +491,7 @@ public class MockDataService {
 		section1.setStartX(12.5);
 		section1.setStartY(2.5);
 		section1.setUpdatedBy("Veera");
-		section1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02)); 
+		//section1.setUpdatedDate(LocalDate.of(2018, Month.FEBRUARY, 02)); 
 		
 		KPI phKpi = new KPI();
 		phKpi.setKpiId(1L);
