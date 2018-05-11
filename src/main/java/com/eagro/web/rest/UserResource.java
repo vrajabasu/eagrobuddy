@@ -88,10 +88,10 @@ public class UserResource {
     @RequestMapping(value = "/users",method = RequestMethod.GET)
     @Timed
     public List<UserDTO> getAllEagroUsers(@RequestParam(required = false) String filter) {
-        if ("userrole-is-null".equals(filter)) {
+      /*  if ("userrole-is-null".equals(filter)) {
             log.debug("REST request to get all EagroUsers where userRole is null");
             return eagroUserService.findAllWhereUserRoleIsNull();
-        }
+        }*/
         log.debug("REST request to get all EagroUsers");
         return eagroUserService.findAll();
         }

@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -66,9 +65,7 @@ public class SectionSensorMapping implements Serializable {
 	@JoinColumn(name = "section_id", nullable = false)
 	private Section section;
 
-	@OneToOne
-	@JoinColumn(name = "sensor_id", nullable = false)
-	private Sensor sensor;
+	private Long sensor_id;
 
 	public Long getId() {
 		return id;
@@ -189,12 +186,13 @@ public class SectionSensorMapping implements Serializable {
 		this.section = section;
 	}
 
-	public Sensor getSensor() {
-		return sensor;
+
+	public Long getSensor_id() {
+		return sensor_id;
 	}
 
-	public void setSensor(Sensor sensor) {
-		this.sensor = sensor;
+	public void setSensor_id(Long sensor_id) {
+		this.sensor_id = sensor_id;
 	}
 
 	@Override

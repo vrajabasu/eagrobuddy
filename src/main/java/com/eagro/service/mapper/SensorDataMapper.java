@@ -13,11 +13,11 @@ import com.eagro.service.dto.SensorDataDTO;
 public interface SensorDataMapper extends EntityMapper<SensorDataDTO, SensorData> {
 
     @Mapping(source = "layout.layoutId", target = "layoutId")
-    @Mapping(source = "sensor.sensorId", target = "sensorId")
+    @Mapping(source = "sensor_id", target = "sensorId")
     SensorDataDTO toDto(SensorData sensorData);
 
     @Mapping(source = "layoutId", target = "layout.layoutId")
-    @Mapping(source = "sensorId", target = "sensor.sensorId")
+    @Mapping(source = "sensorId", target = "sensor_id")
     SensorData toEntity(SensorDataDTO sensorDataDTO);
 
     default SensorData fromId(Long id) {

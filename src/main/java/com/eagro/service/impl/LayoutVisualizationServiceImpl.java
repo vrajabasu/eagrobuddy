@@ -21,7 +21,6 @@ import com.eagro.repository.SectionRepository;
 import com.eagro.repository.SectionSensorMappingRepository;
 import com.eagro.repository.SegmentRepository;
 import com.eagro.service.LayoutVisualizationService;
-import com.eagro.service.component.MockDataService;
 import com.eagro.service.component.SegmentDetailsService;
 import com.eagro.service.dto.KPIDTO;
 import com.eagro.service.dto.LayoutDTO;
@@ -71,8 +70,6 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 	public SectionSensorMappingRepository sectionSensorMappingRepository;
 	@Autowired
 	public SectionSensorMappingMapper sectionSensorMappingMapper;
-	@Autowired
-	public MockDataService mockDataService;
 	
 	
 
@@ -87,13 +84,7 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 	public LayoutResponseDTO getLayoutDetails(Long layoutId) {
 		// Fetch layout information from layout table
 		log.debug("Request to get Layout  : {}", layoutId);
-		Layout layout = null;
-		//mock
-		if (layoutId == 1) {
-			layout = mockDataService.mockLayoutData();
-		} else {
-		layout = layoutRepository.findOne(layoutId);
-		}
+		Layout layout = layoutRepository.findOne(layoutId);
 		log.debug("layout information fetched from DB: {}", layout);
 		LayoutDTO layoutDTO = layoutMapper.toDto(layout);
 		// Enrich layout information in response
@@ -103,16 +94,11 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 			log.debug("layout information : {}", layoutResponseDTO);
 		}
 		// Fetch all section info
-		List<Section> sectionList = new ArrayList<>();
-		if (layoutId == 1) {
-			sectionList = mockDataService.mockSectionListByLayoutId();
-		} else {
-		sectionList = sectionRepository.findByLayoutId(layoutId);
-		}
+		List<Section> sectionList  = sectionRepository.findByLayoutId(layoutId);
 		log.debug("section information fetched from DB: {}", sectionList);
 		List<SectionDTO> sectionDTOList = sectionMapper.toDto(sectionList);
 		
-		log.debug("List of section information : {} for layout : {}", layoutResponseDTO, layoutId);
+		log.debug("List of section information : {} for layout : {}", sectionDTOList, layoutId);
 		// Enrich section info to response
 		if (layoutResponseDTO != null && ServiceUtil.isNotEmptyResult(sectionDTOList)) {
 			List<SectionsResponseDTO> sectionResponseDTOList = new ArrayList<>();
@@ -172,12 +158,7 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 	}
 
 	private List<SegmentDTO> retrieveSegment(Long layoutId, SectionDTO sectionDTO) {
-		List<Segment> segmentList = new ArrayList<>();
-		if (layoutId == 1L) {
-		segmentList = mockDataService.getSegmentbyLayoutAndSectionId();
-		} else {
-		segmentList = segmentRepository.findByLayoutIdAndSectionId(layoutId, sectionDTO.getSectionId());
-		}
+		List<Segment> segmentList = segmentRepository.findByLayoutIdAndSectionId(layoutId, sectionDTO.getSectionId());
 		log.debug("Segment details fetched from DB : {} ",segmentList );
 		List<SegmentDTO> segmentDTOList = segmentMapper.toDto(segmentList);
 		log.debug("List of Segment details : {}  mapped for layoutId : {} ",segmentDTOList, layoutId );

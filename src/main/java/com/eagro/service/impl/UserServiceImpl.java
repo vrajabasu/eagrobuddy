@@ -3,7 +3,6 @@ package com.eagro.service.impl;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,10 +60,10 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    /**
+  /*  *//**
      *  get all the eagroUsers where UserRole is null.
      *  @return the list of entities
-     */
+     *//*
     @Transactional(readOnly = true) 
     public List<UserDTO> findAllWhereUserRoleIsNull() {
         log.debug("Request to get all eagroUsers where UserRole is null");
@@ -73,7 +72,7 @@ public class UserServiceImpl implements UserService {
             .filter(eagroUser -> eagroUser.getUserRole() == null)
             .map(eagroUserMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
-    }
+    }*/
 
     /**
      * Get one eagroUser by id.

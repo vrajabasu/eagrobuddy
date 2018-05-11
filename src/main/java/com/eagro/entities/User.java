@@ -69,9 +69,7 @@ public class User implements Serializable {
 	@JoinColumn(name = "user_id", nullable = false)
 	private UserLayoutMapping userLayoutMapping;
 
-	@OneToOne
-	@JoinColumn(name = "role_id", nullable = false)
-	private UserRole userRole;
+	private Long role_id;
 
 	public Long getUserId() {
 		return userId;
@@ -226,19 +224,6 @@ public class User implements Serializable {
 	}
 
 
-	public UserRole getUserRole() {
-		return userRole;
-	}
-
-	public User userRole(UserRole userRole) {
-		this.userRole = userRole;
-		return this;
-	}
-
-	public void setUserRole(UserRole userRole) {
-		this.userRole = userRole;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -267,5 +252,13 @@ public class User implements Serializable {
 				+ ", activeFlag='" + isActiveFlag() + "'" + ", createdDate='" + getCreatedDate() + "'" + ", createdBy='"
 				+ getCreatedBy() + "'" + ", updatedDate='" + getUpdatedDate() + "'" + ", updatedBy='" + getUpdatedBy()
 				+ "'" + "}";
+	}
+
+	public Long getRole_id() {
+		return role_id;
+	}
+
+	public void setRole_id(Long role_id) {
+		this.role_id = role_id;
 	}
 }

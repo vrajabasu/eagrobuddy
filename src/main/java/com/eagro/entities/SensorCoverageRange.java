@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -67,9 +66,15 @@ public class SensorCoverageRange implements Serializable {
 	@JoinColumn(name = "section_id", nullable = false)
 	private Section section;
 
-	@OneToOne
-	@JoinColumn(name = "sensor_id", nullable = false)
-	private Sensor sensor;
+	public Long getSensor_id() {
+		return sensor_id;
+	}
+
+	public void setSensor_id(Long sensor_id) {
+		this.sensor_id = sensor_id;
+	}
+
+	private Long sensor_id;
 
 	public Long getId() {
 		return id;
@@ -208,14 +213,6 @@ public class SensorCoverageRange implements Serializable {
 
 	public void setSection(Section section) {
 		this.section = section;
-	}
-
-	public Sensor getSensor() {
-		return sensor;
-	}
-
-	public void setSensor(Sensor sensor) {
-		this.sensor = sensor;
 	}
 
 	@Override

@@ -14,12 +14,12 @@ public interface SensorCoverageRangeMapper extends EntityMapper<SensorCoverageRa
 
 	@Mapping(source = "layout.layoutId", target = "layoutId")
 	@Mapping(source = "section.sectionId", target = "sectionId")
-	@Mapping(source = "sensor.sensorId", target = "sensorId")
+	@Mapping(source = "sensor_id", target = "sensorId")
 	SensorCoverageRangeDTO toDto(SensorCoverageRange sensorCoverageRange);
 
 	@Mapping(source = "layoutId", target = "layout.layoutId")
 	@Mapping(source = "sectionId", target = "section.sectionId")
-	@Mapping(source = "sensorId", target = "sensor.sensorId")
+	@Mapping(source = "sensorId", target = "sensor_id")
 	SensorCoverageRange toEntity(SensorCoverageRangeDTO sensorCoverageRangeDTO);
 
 	default SensorCoverageRange fromId(Long id) {

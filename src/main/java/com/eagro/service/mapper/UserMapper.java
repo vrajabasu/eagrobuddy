@@ -1,7 +1,6 @@
 package com.eagro.service.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import com.eagro.entities.User;
 import com.eagro.service.dto.UserDTO;
@@ -13,7 +12,7 @@ import com.eagro.service.dto.UserDTO;
 public interface UserMapper extends EntityMapper<UserDTO, User> {
 
 
-    @Mapping(target = "userRole", ignore = true)
+   
     User toEntity(UserDTO eagroUserDTO);
 
     default User fromId(Long id) {

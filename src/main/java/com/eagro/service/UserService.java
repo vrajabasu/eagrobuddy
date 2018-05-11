@@ -27,7 +27,7 @@ public interface UserService {
      *
      * @return the list of entities
      */
-    List<UserDTO> findAllWhereUserRoleIsNull();
+  //  List<UserDTO> findAllWhereUserRoleIsNull();
 
     /**
      * Get the "id" eagroUser.

@@ -16,12 +16,12 @@ public abstract class SectionSensorMappingMapper
 
 	@Mapping(source = "layout.layoutId", target = "layoutId")
 	@Mapping(source = "section.sectionId", target = "sectionId")
-	@Mapping(source = "sensor.sensorId", target = "sensorId")
+	@Mapping(source = "sensor_id", target = "sensorId")
 	public abstract SectionSensorMappingDTO toDto(SectionSensorMapping sectionSensorMapping);
 
 	@Mapping(source = "layoutId", target = "layout")
 	@Mapping(source = "sectionId", target = "section")
-	@Mapping(source = "sensorId", target = "sensor.sensorId")
+	@Mapping(source = "sensorId", target = "sensor_id")
 	public abstract SectionSensorMapping toEntity(SectionSensorMappingDTO sectionSensorMappingDTO);
 
 	public SectionSensorMapping fromId(Long id) {

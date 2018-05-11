@@ -16,16 +16,16 @@ import com.eagro.entities.enumeration.ZoneType;
 @Repository
 public interface SectionSensorMappingRepository extends JpaRepository<SectionSensorMapping, Long> {
 
-	@Query("select sensor from SectionSensorMapping sensor where sensor.layout.layoutId =:layoutId and sensor.section.sectionId =:sectionId")
+	@Query("select sectionSensorMapping from SectionSensorMapping sectionSensorMapping where sectionSensorMapping.layout.layoutId =:layoutId and sectionSensorMapping.section.sectionId =:sectionId")
 	List<SectionSensorMapping> findBySectionIdAndLayoutId(@Param("layoutId") Long layoutId,
 			@Param("sectionId") Long sectionId);
 
-	@Query("select sensor from SectionSensorMapping sensor where sensor.layout.layoutId =:layoutId and sensor.section.sectionId =:sectionId and zoneType =:zoneType")
+	@Query("select sectionSensorMapping from SectionSensorMapping sectionSensorMapping where sectionSensorMapping.layout.layoutId =:layoutId and sectionSensorMapping.section.sectionId =:sectionId and zoneType =:zoneType")
 	List<SectionSensorMapping> findByLayoutIdAndSectionIdAndZoneType(@Param("layoutId") Long layoutId,
 			@Param("sectionId") Long sectionId, @Param("zoneType") ZoneType zoneType);
 	
 	
-	@Query("select sensor from SectionSensorMapping sensor where sensor.layout.layoutId =:layoutId and sensor.section.sectionId =:sectionId and sensor.sensor.sensorId =:sensorId")
+	@Query("select sectionSensorMapping from SectionSensorMapping sectionSensorMapping where sectionSensorMapping.layout.layoutId =:layoutId and sectionSensorMapping.section.sectionId =:sectionId and sectionSensorMapping.sensor_id =:sensor_id")
 	SectionSensorMapping findByLayoutIdAndSectionIdAndSensorId(@Param("layoutId") Long layoutId,
-			@Param("sectionId") Long sectionId, @Param("sensorId") Long sensorId);
+			@Param("sectionId") Long sectionId, @Param("sensor_id") Long sensor_id);
 }

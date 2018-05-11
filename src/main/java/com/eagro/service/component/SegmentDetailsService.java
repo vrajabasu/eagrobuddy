@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eagro.entities.KPI;
 import com.eagro.entities.SectionSensorMapping;
@@ -35,6 +36,7 @@ import com.eagro.service.mapper.SensorDataMapper;
 import com.eagro.service.utils.ServiceUtil;
 
 @Component
+@Transactional
 public class SegmentDetailsService {
 
 	private static final String LIGHT = "Light";
@@ -65,8 +67,6 @@ public class SegmentDetailsService {
 	@Autowired
 	public SensorCoverageRangeMapper sensorCoverageRangeMapper;
 	
-	@Autowired
-	public MockDataService mockDataService;
 
 	/**
 	 * Calculate overall threshold state by comparing actual sensor data and
@@ -176,13 +176,8 @@ public class SegmentDetailsService {
 		segmentSensorMap.values().forEach(senor -> {
 			
 			// Retrieve zoneType from sectionsensormapping entity
-			SectionSensorMapping sensor = null;
-			if(section.getLayoutId() == 1) {
-				sensor = mockDataService.sectionSensorMappingList().get(0);
-			} else {
-			sensor = sectionSensorMappingRepository.findByLayoutIdAndSectionIdAndSensorId(
+			SectionSensorMapping sensor  = sectionSensorMappingRepository.findByLayoutIdAndSectionIdAndSensorId(
 					section.getLayoutId(), section.getSectionId(), senor.getSensorId());
-			}
 			SectionSensorMappingDTO sensorDTO = sectionSensorMappingMapper.toDto(sensor);
 
 			// Retrieve optimal KPI vlaues form KPI entity
@@ -199,13 +194,8 @@ public class SegmentDetailsService {
 
 	public List<KPIDTO> retrieveKpi(Long layoutId, Long sectionId, ZoneType zoneType) {
 		
-		List<KPI> kpiList = null;
-		if(layoutId == 1) {
-			kpiList = mockDataService.getKpiList();
-		} else {
-				kpiList = kpiRespository.findByLayoutIdAndSectionIdAndZoneType(layoutId,
+		List<KPI> kpiList = kpiRespository.findByLayoutIdAndSectionIdAndZoneType(layoutId,
 						sectionId, zoneType);
-		}
 		List<KPIDTO> kpiDTOList = kpiMapper.toDto(kpiList);
 		return kpiDTOList;
 	}
@@ -224,14 +214,9 @@ public class SegmentDetailsService {
 		Map<Long, SectionSensorMappingDTO> segmentSensorMap = new HashMap<>();
 		// Retrieve all sensor for the section from sectionsensorMapping entity
 		// using layoutId and sectionId
-		List<SectionSensorMapping> sensorList = null;
-		if(sectionDTO.getLayoutId() == 1) {
-			sensorList = mockDataService.sectionSensorMappingList();
-		} else {
-		sensorList = sectionSensorMappingRepository
+		List<SectionSensorMapping> sensorList = sectionSensorMappingRepository
 				.findBySectionIdAndLayoutId(sectionDTO.getLayoutId(), sectionDTO.getSectionId());
-		}
-		log.debug("sensorList Data Fetched from DB : {} for layoutId : {}", sensorList, sectionDTO.getLayoutId());
+		log.debug("sensorList Data Fetched from sectionSensorMappingRepository DB : {} for layoutId : {}", sensorList, sectionDTO.getLayoutId());
 		
 		// Mapper entityToDTO
 		List<SectionSensorMappingDTO> sensorDTOList = sectionSensorMappingMapper.toDto(sensorList);
@@ -252,14 +237,9 @@ public class SegmentDetailsService {
 		// Logic to consider Water sensorCoverageRange
 		// Retrieve all sensor for the section from sectionsensorMapping entity
 		// using layoutId,sectionId and ZoneType
-		List<SectionSensorMapping> waterSensorList = null;
-		if (sectionDTO.getLayoutId() == 1) {
-			waterSensorList = mockDataService.waterSensorMappingList();
-		} else {
-		waterSensorList = sectionSensorMappingRepository
+		List<SectionSensorMapping> waterSensorList  = sectionSensorMappingRepository
 				.findByLayoutIdAndSectionIdAndZoneType(sectionDTO.getLayoutId(), sectionDTO.getSectionId(),
 						ZoneType.WATER);
-		}
 		// Mapper entityToDTO
 		List<SectionSensorMappingDTO> waterSensorDTOList = sectionSensorMappingMapper.toDto(waterSensorList);
 		// Check waterSensor is available in Sensor Interim Object
@@ -270,14 +250,9 @@ public class SegmentDetailsService {
 				// Retrieve sensorCoveragerange from entity based on
 				// layout,section and sensorId
 				log.debug("Considering Water Coverage Range");
-				SensorCoverageRange currentSensorCoverageRange = null;
-				if (sectionSensorMapping.getLayoutId() == 1) {
-					currentSensorCoverageRange = mockDataService.currentSensorCoverageRange();
-				} else {
-				currentSensorCoverageRange = sensorCoverageRangeRepository
+				SensorCoverageRange currentSensorCoverageRange  = sensorCoverageRangeRepository
 						.findByLayoutIdAndSectionIdAndSensorId(sectionSensorMapping.getLayoutId(),
 								sectionSensorMapping.getSectionId(), sectionSensorMapping.getSensorId());
-				}
 				log.debug("Retrieve current SensorRange");
 				SensorCoverageRangeDTO sensorCoverageRange = sensorCoverageRangeMapper
 						.toDto(currentSensorCoverageRange);

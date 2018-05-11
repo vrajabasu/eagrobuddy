@@ -15,7 +15,7 @@ import com.eagro.entities.SensorData;
 @Repository
 public interface SensorDataRepository extends JpaRepository<SensorData, Long> {
 
-	@Query("select sensorData from SensorData sensorData where sensorData.layout.layoutId =:layoutId and sensorData.sensor.id =:sensorId ORDER BY recordedDateTime ASC")
+	@Query("select sensorData from SensorData sensorData where sensorData.layout.layoutId =:layoutId and sensorData.sensor_id =:sensor_id ORDER BY recordedDateTime ASC")
 	SensorData findBySensorIdAndLayoutId(@Param("layoutId") Long layoutId,
-			@Param("sensorId") Long sensorId);
+			@Param("sensor_id") Long sensor_id);
 }

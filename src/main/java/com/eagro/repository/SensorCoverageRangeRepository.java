@@ -15,7 +15,7 @@ import org.springframework.data.repository.query.Param;
 @SuppressWarnings("unused")
 @Repository
 public interface SensorCoverageRangeRepository extends JpaRepository<SensorCoverageRange, Long> {
-	@Query("select sensorCoverageRange from SensorCoverageRange sensorCoverageRange where sensorCoverageRange.layout.layoutId =:layoutId and sensorCoverageRange.section.sectionId =:sectionId and sensorCoverageRange.sensor.id =:sensorId")
+	@Query("select sensorCoverageRange from SensorCoverageRange sensorCoverageRange where sensorCoverageRange.layout.layoutId =:layoutId and sensorCoverageRange.section.sectionId =:sectionId and sensorCoverageRange.sensor_id =:sensor_id")
 	SensorCoverageRange findByLayoutIdAndSectionIdAndSensorId(@Param("layoutId") Long layoutId, @Param("sectionId") Long sectionId,
-			@Param("sensorId") Long sensorId);
+			@Param("sensor_id") Long sensor_id);
 }
