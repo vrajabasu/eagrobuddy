@@ -89,7 +89,7 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 		LayoutDTO layoutDTO = layoutMapper.toDto(layout);
 		// Enrich layout information in response
 		LayoutResponseDTO layoutResponseDTO = new LayoutResponseDTO();
-		if (layoutDTO != null) {
+		if (layoutDTO == null) {
 			log.error(LAYOUT_NOT_AVAILABLE);
 		} else {
 		layoutResponseDTO = layoutVisualizationMapper.layouttoLayoutResponse(layoutDTO);
@@ -142,7 +142,7 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 					Map<Long, SectionSensorMappingDTO> segmentSensorMap = segmentDetailsService
 							.retrieveSensorForCurrentSegment(sectionDTO, segment);
 					// Retrieve Optimal KPI values
-					if (segmentSensorMap != null && !segmentSensorMap.isEmpty()) {
+					if (segmentSensorMap != null && !segmentSensorMap.entrySet().isEmpty()) {
 						Map<Long, List<KPIDTO>> sensorOptimalKPIMap = segmentDetailsService
 								.retrieveOptimalKPIsForSensors(sectionDTO, segmentSensorMap);
 						if (sensorOptimalKPIMap != null && !sensorOptimalKPIMap.isEmpty()) {

@@ -262,7 +262,8 @@ public class SegmentDetailsService {
 					SensorCoverageRangeDTO sensorCoverageRange = sensorCoverageRangeMapper
 							.toDto(currentSensorCoverageRange);
 					log.debug("sensorCoverageRange : {} and segmentDTO : {}", sensorCoverageRange, segmentDTO);
-					if (checkSensorCoverageWithinsegRange(segmentDTO, sensorCoverageRange)) {
+					
+					if (sensorCoverageRange != null && checkSensorCoverageWithinsegRange(segmentDTO, sensorCoverageRange)) {
 						segmentSensorMap.put(segmentDTO.getSegmentId(), sectionSensorMapping);
 					}
 				}
