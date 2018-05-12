@@ -247,7 +247,7 @@
           "startY": 2.5,
           "endX": 40.5,
           "endY": 5.5,
-          "overallThresholdstate": "NORMAL"
+          "overallThresholdstate": "EXCEEDING_SOON"
         },
         {
           "segmentId": 2,
@@ -258,7 +258,7 @@
           "startY": 2.5,
           "endX": 43.5,
           "endY": 5.5,
-          "overallThresholdstate": "NORMAL"
+          "overallThresholdstate": "EXCEEDED"
         },
         {
           "segmentId": 3,
@@ -280,7 +280,7 @@
           "startY": 2.5,
           "endX": 49.5,
           "endY": 5.5,
-          "overallThresholdstate": "NORMAL"
+          "overallThresholdstate": "EXCEEDING_SOON"
         },
         {
           "segmentId": 5,
@@ -302,7 +302,7 @@
           "startY": 2.5,
           "endX": 55.5,
           "endY": 5.5,
-          "overallThresholdstate": "NORMAL"
+          "overallThresholdstate": "EXCEEDED"
         },    
         {
           "segmentId": 7,
@@ -335,7 +335,7 @@
           "startY": 5.5,
           "endX": 46.5,
           "endY": 8.5,
-          "overallThresholdstate": "NORMAL"
+          "overallThresholdstate": "EXCEEDING_SOON"
         },
         {
           "segmentId": 10,
@@ -346,7 +346,7 @@
           "startY": 5.5,
           "endX": 49.5,
           "endY": 8.5,
-          "overallThresholdstate": "NORMAL"
+          "overallThresholdstate": "EXCEEDED"
         },
         {
           "segmentId": 11,
@@ -379,7 +379,7 @@
           "startY": 8.5,
           "endX": 40.5,
           "endY": 11.5,
-          "overallThresholdstate": "NORMAL"
+          "overallThresholdstate": "EXCEEDING_SOON"
         },
         {
           "segmentId": 14,
@@ -401,7 +401,7 @@
           "startY": 8.5,
           "endX": 46.5,
           "endY": 11.5,
-          "overallThresholdstate": "NORMAL"
+          "overallThresholdstate": "EXCEEDING_SOON"
         },
         {
           "segmentId": 16,
@@ -428,13 +428,13 @@
         {
           "segmentId": 18,
           "segmentName": "3R",
-          "segmentDescription": "SegmentF",
+          "segmentDescription": "SegmentR",
           "activeFlag": true,
           "startX": 52.5,
           "startY": 8.5,
           "endX": 55.5,
           "endY": 11.5,
-          "overallThresholdstate": "NORMAL"
+          "overallThresholdstate": "EXCEEDED"
         }     
       ]
     },
@@ -601,7 +601,7 @@
           "startY": 22.5,
           "endX": 32.5,
           "endY": 25.0,
-          "overallThresholdstate": "EXCEEDING_SOON"
+          "overallThresholdstate": "EXCEEDED"
         },
         {
           "segmentId": 5,
@@ -634,7 +634,7 @@
           "startY": 22.5,
           "endX": 47.5,
           "endY": 25.0,
-          "overallThresholdstate": "EXCEEDING_SOON"
+          "overallThresholdstate": "NORMAL"
         },
         {
           "segmentId": 8,
@@ -678,7 +678,7 @@
           "startY": 25.0,
           "endX": 22.5,
           "endY": 27.5,
-          "overallThresholdstate": "NORMAL"
+          "overallThresholdstate": "EXCEEDED"
         },
         {
           "segmentId": 12,
@@ -700,7 +700,7 @@
           "startY": 25.0,
           "endX": 32.5,
           "endY": 27.5,
-          "overallThresholdstate": "EXCEEDING_SOON"
+          "overallThresholdstate": "NORMAL"
         },
         {
           "segmentId": 14,
@@ -722,7 +722,7 @@
           "startY": 25.0,
           "endX": 42.5,
           "endY": 27.5,
-          "overallThresholdstate": "EXCEEDING_SOON"
+          "overallThresholdstate": "NORMAL"
         },
         {
           "segmentId": 16,
@@ -755,7 +755,7 @@
           "startY": 25.0,
           "endX": 55.5,
           "endY": 27.5,
-          "overallThresholdstate": "EXCEEDING_SOON"
+          "overallThresholdstate": "NORMAL"
         }   
       ]
     } 

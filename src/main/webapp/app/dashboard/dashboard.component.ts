@@ -114,11 +114,11 @@ export class DashboardComponent implements OnInit {
   assignBgClr(clrvalue) {
     // Set back ground color based on overall threshold status
     if (clrvalue === 'EXCEEDED') {
-      return "red";
+      return "#ff765e"; // Light RED
     } else if (clrvalue === 'EXCEEDING_SOON') {
-      return 'yellow'
+      return '#fff249' // Light Yellow
     } else {
-      return 'green'
+      return '#42f480' // Light Green
     }
   }
 

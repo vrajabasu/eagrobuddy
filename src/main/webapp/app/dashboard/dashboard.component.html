@@ -1,7 +1,7 @@
 <div class="layout-container" *ngIf="data" (window:resize)="onResize()" [ngStyle]="{'height':(oneHeightFeet*data.heightY)+'px', 'margin-left':layoutWidthMargin+'px', 'margin-right':layoutWidthMargin+'px', 'margin-top':(headerHeight+layoutHeightMargin)+'px', 'margin-bottom':(footerHeight+layoutHeightMargin)+'px'}">
   <ul>
     <li *ngFor="let section of data.sections; let i = index">
-      <!-- {{section.sectionName}} -->
+      <span matTooltip="{{section.sectionName}} - {{section.sectionDescription}}" matTooltipPosition='above'>
       <div class="section" id="animation{{i}}" [ngStyle]="{'margin-left':(calcMarginLeft(i)*oneWidthfeet)+'px', 'margin-top':calcMarginTop(i)*oneHeightFeet+'px', 'width':(section.endX - section.startX) * oneWidthfeet+'px', 'height':(section.endY - section.startY) * oneHeightFeet+'px'}">
         <ul>
           <li *ngFor="let segment of section.segments">
@@ -11,6 +11,7 @@
           </li>
         </ul>
       </div>
+      </span>
     </li>
   </ul>
 </div>
