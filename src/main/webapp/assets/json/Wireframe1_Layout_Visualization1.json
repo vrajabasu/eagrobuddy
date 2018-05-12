@@ -1,0 +1,763 @@
+{
+  "layoutId": 1,
+  "layoutName": "Layout1",
+  "layoutDescription": "My First Farm Layout",
+  "activeFlag": true,
+  "widthX": 58,
+  "heightY": 30,
+  "sections": [
+    {
+      "sectionId": 1,
+      "sectionName": "Greens",
+      "sectionDescription": "Section for Greens",
+      "activeFlag": true,
+      "startX": 12.5,
+      "startY": 2.5,
+      "endX": 22.5,
+      "endY": 11.5,
+      "segments": [
+        {
+          "segmentId": 1,
+          "segmentName": "1A",
+          "segmentDescription": "SegmentA",
+          "activeFlag": true,
+          "startX": 12.5,
+          "startY": 2.5,
+          "endX": 15.833,
+          "endY": 5.5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 2,
+          "segmentName": "1B",
+          "segmentDescription": "SegmentB",
+          "activeFlag": true,
+          "startX": 15.833,
+          "startY": 2.5,
+          "endX": 19.163,
+          "endY": 5.5,
+          "overallThresholdstate": "EXCEEDED"
+        },
+        {
+          "segmentId": 3,
+          "segmentName": "1C",
+          "segmentDescription": "SegmentC",
+          "activeFlag": true,
+          "startX": 19.163,
+          "startY": 2.5,
+          "endX": 22.5,
+          "endY": 5.5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 4,
+          "segmentName": "1D",
+          "segmentDescription": "SegmentD",
+          "activeFlag": true,
+          "startX": 12.5,
+          "startY": 5.5,
+          "endX": 15.833,
+          "endY": 8.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 5,
+          "segmentName": "1E",
+          "segmentDescription": "SegmentE",
+          "activeFlag": true,
+          "startX": 15.833,
+          "startY": 5.5,
+          "endX": 19.163,
+          "endY": 8.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 6,
+          "segmentName": "1F",
+          "segmentDescription": "SegmentF",
+          "activeFlag": true,
+          "startX": 19.163,
+          "startY": 5.5,
+          "endX": 22.5,
+          "endY": 8.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 7,
+          "segmentName": "1G",
+          "segmentDescription": "SegmentG",
+          "activeFlag": true,
+          "startX": 12.5,
+          "startY": 8.5,
+          "endX": 15.833,
+          "endY": 11.5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 8,
+          "segmentName": "1H",
+          "segmentDescription": "SegmentH",
+          "activeFlag": true,
+          "startX": 15.833,
+          "startY": 8.5,
+          "endX": 19.163,
+          "endY": 11.5,
+          "overallThresholdstate": "EXCEEDED"
+        },
+        {
+          "segmentId": 9,
+          "segmentName": "1I",
+          "segmentDescription": "SegmentI",
+          "activeFlag": true,
+          "startX": 19.163,
+          "startY": 8.5,
+          "endX": 22.5,
+          "endY": 11.5,
+          "overallThresholdstate": "NORMAL"
+        }   
+      ]
+    },
+    {
+      "sectionId": 2,
+      "sectionName": "Lettuce",
+      "sectionDescription": "Section for Lettuce",
+      "activeFlag": true,
+      "startX": 25.0,
+      "startY": 2.5,
+      "endX": 35.0,
+      "endY": 11.5,
+      "segments": [
+        {
+          "segmentId": 1,
+          "segmentName": "2A",
+          "segmentDescription": "SegmentA",
+          "activeFlag": true,
+          "startX": 25.0,
+          "startY": 2.5,
+          "endX": 28.333,
+          "endY": 5.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 2,
+          "segmentName": "2B",
+          "segmentDescription": "SegmentB",
+          "activeFlag": true,
+          "startX": 28.333,
+          "startY": 2.5,
+          "endX": 31.666,
+          "endY": 5.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 3,
+          "segmentName": "2C",
+          "segmentDescription": "SegmentC",
+          "activeFlag": true,
+          "startX": 31.666,
+          "startY": 2.5,
+          "endX": 35.0,
+          "endY": 5.5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 4,
+          "segmentName": "2D",
+          "segmentDescription": "SegmentD",
+          "activeFlag": true,
+          "startX": 25,
+          "startY": 5.5,
+          "endX": 28.333,
+          "endY": 8.5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 5,
+          "segmentName": "2E",
+          "segmentDescription": "SegmentE",
+          "activeFlag": true,
+          "startX": 28.333,
+          "startY": 5.5,
+          "endX": 31.666,
+          "endY": 8.5,
+          "overallThresholdstate": "EXCEEDED"
+        },
+        {
+          "segmentId": 6,
+          "segmentName": "2F",
+          "segmentDescription": "SegmentF",
+          "activeFlag": true,
+          "startX": 31.666,
+          "startY": 5.5,
+          "endX": 35.0,
+          "endY": 8.5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 7,
+          "segmentName": "2G",
+          "segmentDescription": "SegmentG",
+          "activeFlag": true,
+          "startX": 25.0,
+          "startY": 8.5,
+          "endX": 28.333,
+          "endY": 11.5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 8,
+          "segmentName": "2H",
+          "segmentDescription": "SegmentH",
+          "activeFlag": true,
+          "startX": 28.333,
+          "startY": 8.5,
+          "endX": 31.666,
+          "endY": 11.5,
+          "overallThresholdstate": "EXCEEDED"
+        },
+        {
+          "segmentId": 9,
+          "segmentName": "2I",
+          "segmentDescription": "SegmentI",
+          "activeFlag": true,
+          "startX": 31.666,
+          "startY": 8.5,
+          "endX": 35.0,
+          "endY": 11.5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        }   
+      ]
+    },
+    {
+      "sectionId": 3,
+      "sectionName": "Cherry Tomato",
+      "sectionDescription": "Section for Cherry Tomato",
+      "activeFlag": true,
+      "startX": 37.5,
+      "startY": 2.5,
+      "endX": 55.5,
+      "endY": 11.5,
+      "segments": [
+        {
+          "segmentId": 1,
+          "segmentName": "3A",
+          "segmentDescription": "SegmentA",
+          "activeFlag": true,
+          "startX": 37.5,
+          "startY": 2.5,
+          "endX": 40.5,
+          "endY": 5.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 2,
+          "segmentName": "3B",
+          "segmentDescription": "SegmentB",
+          "activeFlag": true,
+          "startX": 40.5,
+          "startY": 2.5,
+          "endX": 43.5,
+          "endY": 5.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 3,
+          "segmentName": "3C",
+          "segmentDescription": "SegmentC",
+          "activeFlag": true,
+          "startX": 43.5,
+          "startY": 2.5,
+          "endX": 46.5,
+          "endY": 5.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 4,
+          "segmentName": "3D",
+          "segmentDescription": "SegmentD",
+          "activeFlag": true,
+          "startX": 46.5,
+          "startY": 2.5,
+          "endX": 49.5,
+          "endY": 5.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 5,
+          "segmentName": "3E",
+          "segmentDescription": "SegmentE",
+          "activeFlag": true,
+          "startX": 49.5,
+          "startY": 2.5,
+          "endX": 52.5,
+          "endY": 5.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 6,
+          "segmentName": "3F",
+          "segmentDescription": "SegmentF",
+          "activeFlag": true,
+          "startX": 52.5,
+          "startY": 2.5,
+          "endX": 55.5,
+          "endY": 5.5,
+          "overallThresholdstate": "NORMAL"
+        },    
+        {
+          "segmentId": 7,
+          "segmentName": "3G",
+          "segmentDescription": "SegmentG",
+          "activeFlag": true,
+          "startX": 37.5,
+          "startY": 5.5,
+          "endX": 40.5,
+          "endY": 8.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 8,
+          "segmentName": "3H",
+          "segmentDescription": "SegmentH",
+          "activeFlag": true,
+          "startX": 40.5,
+          "startY": 5.5,
+          "endX": 43.5,
+          "endY": 8.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 9,
+          "segmentName": "3I",
+          "segmentDescription": "SegmentI",
+          "activeFlag": true,
+          "startX": 43.5,
+          "startY": 5.5,
+          "endX": 46.5,
+          "endY": 8.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 10,
+          "segmentName": "3J",
+          "segmentDescription": "SegmentJ",
+          "activeFlag": true,
+          "startX": 46.5,
+          "startY": 5.5,
+          "endX": 49.5,
+          "endY": 8.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 11,
+          "segmentName": "3K",
+          "segmentDescription": "SegmentK",
+          "activeFlag": true,
+          "startX": 49.5,
+          "startY": 5.5,
+          "endX": 52.5,
+          "endY": 8.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 12,
+          "segmentName": "3L",
+          "segmentDescription": "SegmentL",
+          "activeFlag": true,
+          "startX": 52.5,
+          "startY": 5.5,
+          "endX": 55.5,
+          "endY": 8.5,
+          "overallThresholdstate": "NORMAL"
+        },  
+        {
+          "segmentId": 13,
+          "segmentName": "3M",
+          "segmentDescription": "SegmentM",
+          "activeFlag": true,
+          "startX": 37.5,
+          "startY": 8.5,
+          "endX": 40.5,
+          "endY": 11.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 14,
+          "segmentName": "3N",
+          "segmentDescription": "SegmentN",
+          "activeFlag": true,
+          "startX": 40.5,
+          "startY": 8.5,
+          "endX": 43.5,
+          "endY": 11.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 15,
+          "segmentName": "3O",
+          "segmentDescription": "SegmentO",
+          "activeFlag": true,
+          "startX": 43.5,
+          "startY": 8.5,
+          "endX": 46.5,
+          "endY": 11.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 16,
+          "segmentName": "3P",
+          "segmentDescription": "SegmentP",
+          "activeFlag": true,
+          "startX": 46.5,
+          "startY": 8.5,
+          "endX": 49.5,
+          "endY": 11.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 17,
+          "segmentName": "3Q",
+          "segmentDescription": "SegmentQ",
+          "activeFlag": true,
+          "startX": 49.5,
+          "startY": 8.5,
+          "endX": 52.5,
+          "endY": 11.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 18,
+          "segmentName": "3R",
+          "segmentDescription": "SegmentF",
+          "activeFlag": true,
+          "startX": 52.5,
+          "startY": 8.5,
+          "endX": 55.5,
+          "endY": 11.5,
+          "overallThresholdstate": "NORMAL"
+        }     
+      ]
+    },
+    {
+      "sectionId": 4,
+      "sectionName": "Bean",
+      "sectionDescription": "Section for Bean",
+      "activeFlag": true,
+      "startX": 12.5,
+      "startY": 15.0,
+      "endX": 55.5,
+      "endY": 20.0,
+      "segments": [
+        {
+          "segmentId": 1,
+          "segmentName": "4A",
+          "segmentDescription": "SegmentA",
+          "activeFlag": true,
+          "startX": 12.5,
+          "startY": 15.0,
+          "endX": 17.5,
+          "endY": 20.0,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 2,
+          "segmentName": "4B",
+          "segmentDescription": "SegmentB",
+          "activeFlag": true,
+          "startX": 17.5,
+          "startY": 15.0,
+          "endX": 22.5,
+          "endY": 20.0,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 3,
+          "segmentName": "4C",
+          "segmentDescription": "SegmentC",
+          "activeFlag": true,
+          "startX": 22.5,
+          "startY": 15.0,
+          "endX": 27.5,
+          "endY": 20.0,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 4,
+          "segmentName": "4D",
+          "segmentDescription": "SegmentD",
+          "activeFlag": true,
+          "startX": 27.5,
+          "startY": 15.0,
+          "endX": 32.5,
+          "endY": 20.0,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 5,
+          "segmentName": "4E",
+          "segmentDescription": "SegmentE",
+          "activeFlag": true,
+          "startX": 32.5,
+          "startY": 15.0,
+          "endX": 37.5,
+          "endY": 20.0,
+          "overallThresholdstate": "EXCEEDED"
+        },
+        {
+          "segmentId": 6,
+          "segmentName": "4F",
+          "segmentDescription": "SegmentF",
+          "activeFlag": true,
+          "startX": 37.5,
+          "startY": 15.0,
+          "endX": 42.5,
+          "endY": 20.0,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 7,
+          "segmentName": "4G",
+          "segmentDescription": "SegmentG",
+          "activeFlag": true,
+          "startX": 42.5,
+          "startY": 15.0,
+          "endX": 47.5,
+          "endY": 20.0,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 8,
+          "segmentName": "4H",
+          "segmentDescription": "SegmentH",
+          "activeFlag": true,
+          "startX": 47.5,
+          "startY": 15.0,
+          "endX": 52.5,
+          "endY": 20.0,
+          "overallThresholdstate": "EXCEEDED"
+        },
+        {
+          "segmentId": 9,
+          "segmentName": "4I",
+          "segmentDescription": "SegmentI",
+          "activeFlag": true,
+          "startX": 52.5,
+          "startY": 15.0,
+          "endX": 55.5,
+          "endY": 20.0,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        }   
+      ]
+    },
+    {
+      "sectionId": 5,
+      "sectionName": "Tomato",
+      "sectionDescription": "Section for Tomato",
+      "activeFlag": true,
+      "startX": 12.5,
+      "startY": 22.5,
+      "endX": 55.5,
+      "endY": 27.5,
+      "segments": [
+        {
+          "segmentId": 1,
+          "segmentName": "5A",
+          "segmentDescription": "SegmentA",
+          "activeFlag": true,
+          "startX": 12.5,
+          "startY": 22.5,
+          "endX": 17.5,
+          "endY": 25.0,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 2,
+          "segmentName": "5B",
+          "segmentDescription": "SegmentB",
+          "activeFlag": true,
+          "startX": 17.5,
+          "startY": 22.5,
+          "endX": 22.5,
+          "endY": 25.0,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 3,
+          "segmentName": "5C",
+          "segmentDescription": "SegmentC",
+          "activeFlag": true,
+          "startX": 22.5,
+          "startY": 22.5,
+          "endX": 27.5,
+          "endY": 25.0,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 4,
+          "segmentName": "5D",
+          "segmentDescription": "SegmentD",
+          "activeFlag": true,
+          "startX": 27.5,
+          "startY": 22.5,
+          "endX": 32.5,
+          "endY": 25.0,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 5,
+          "segmentName": "5E",
+          "segmentDescription": "SegmentE",
+          "activeFlag": true,
+          "startX": 32.5,
+          "startY": 22.5,
+          "endX": 37.5,
+          "endY": 25.0,
+          "overallThresholdstate": "EXCEEDED"
+        },
+        {
+          "segmentId": 6,
+          "segmentName": "5F",
+          "segmentDescription": "SegmentF",
+          "activeFlag": true,
+          "startX": 37.5,
+          "startY": 22.5,
+          "endX": 42.5,
+          "endY": 25.0,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 7,
+          "segmentName": "5G",
+          "segmentDescription": "SegmentG",
+          "activeFlag": true,
+          "startX": 42.5,
+          "startY": 22.5,
+          "endX": 47.5,
+          "endY": 25.0,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 8,
+          "segmentName": "5H",
+          "segmentDescription": "SegmentH",
+          "activeFlag": true,
+          "startX": 47.5,
+          "startY": 22.5,
+          "endX": 52.5,
+          "endY": 25.0,
+          "overallThresholdstate": "EXCEEDED"
+        },
+        {
+          "segmentId": 9,
+          "segmentName": "5I",
+          "segmentDescription": "SegmentI",
+          "activeFlag": true,
+          "startX": 52.5,
+          "startY": 22.5,
+          "endX": 55.5,
+          "endY": 25.0,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },    
+        {
+          "segmentId": 10,
+          "segmentName": "5J",
+          "segmentDescription": "SegmentJ",
+          "activeFlag": true,
+          "startX": 12.5,
+          "startY": 25.0,
+          "endX": 17.5,
+          "endY": 27.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 11,
+          "segmentName": "5K",
+          "segmentDescription": "SegmentK",
+          "activeFlag": true,
+          "startX": 17.5,
+          "startY": 25.0,
+          "endX": 22.5,
+          "endY": 27.5,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 12,
+          "segmentName": "5L",
+          "segmentDescription": "SegmentL",
+          "activeFlag": true,
+          "startX": 22.5,
+          "startY": 25.0,
+          "endX": 27.5,
+          "endY": 27.5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 13,
+          "segmentName": "5M",
+          "segmentDescription": "SegmentM",
+          "activeFlag": true,
+          "startX": 27.5,
+          "startY": 25.0,
+          "endX": 32.5,
+          "endY": 27.5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 14,
+          "segmentName": "5N",
+          "segmentDescription": "SegmentN",
+          "activeFlag": true,
+          "startX": 32.5,
+          "startY": 25.0,
+          "endX": 37.5,
+          "endY": 27.5,
+          "overallThresholdstate": "EXCEEDED"
+        },
+        {
+          "segmentId": 15,
+          "segmentName": "5O",
+          "segmentDescription": "SegmentO",
+          "activeFlag": true,
+          "startX": 37.5,
+          "startY": 25.0,
+          "endX": 42.5,
+          "endY": 27.5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 16,
+          "segmentName": "5P",
+          "segmentDescription": "SegmentP",
+          "activeFlag": true,
+          "startX": 42.5,
+          "startY": 25.0,
+          "endX": 47.5,
+          "endY": 27.5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 17,
+          "segmentName": "5Q",
+          "segmentDescription": "SegmentQ",
+          "activeFlag": true,
+          "startX": 47.5,
+          "startY": 25.0,
+          "endX": 52.5,
+          "endY": 27.5,
+          "overallThresholdstate": "EXCEEDED"
+        },
+        {
+          "segmentId": 18,
+          "segmentName": "5R",
+          "segmentDescription": "SegmentR",
+          "activeFlag": true,
+          "startX": 52.5,
+          "startY": 25.0,
+          "endX": 55.5,
+          "endY": 27.5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        }   
+      ]
+    } 
+  ]
+}

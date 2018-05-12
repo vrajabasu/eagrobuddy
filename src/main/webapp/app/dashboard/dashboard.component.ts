@@ -90,11 +90,14 @@ export class DashboardComponent implements OnInit {
 
   calcMarginTop(index) {
     if (index !== 0) {
-      if (this.data.sections[index].startX === this.data.sections[index - 1].startX) {
+      if (this.data.sections[index].startY === this.data.sections[index - 1].startY) {
+        return this.data.sections[index].startY;
+      } else {
         return this.data.sections[index].startY - this.data.sections[index - 1].endY;
       }
+    } else {
+      return this.data.sections[index].startY;
     }
-    return this.data.sections[index].startY;
   }
 
   assignBgClr(clrvalue) {

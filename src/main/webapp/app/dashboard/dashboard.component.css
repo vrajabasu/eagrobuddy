@@ -19,7 +19,7 @@ li {
 }
 .section,
 .segment {
-        border:1px solid #ccc;
+        /*border:1px solid #1CB94A;*/
 }
 .segment {
 	display: flex;
