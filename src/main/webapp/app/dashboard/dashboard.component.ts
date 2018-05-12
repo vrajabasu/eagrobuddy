@@ -11,14 +11,16 @@ import { Layout } from './layout';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  // Declare variables
   data: Layout;
-  totalWidthPercentage: number;
-  totalHeightPercentage: number;
   adjustedScreenWidth: number;
   adjustedScreenHeight: number;
   layoutWidthMargin: number;
   layoutHeightMargin: number;
-  widthX; heightY; oneWidthfeet; oneHeightFeet; headerHeight; footerHeight;
+  oneWidthfeet: number; 
+  oneHeightFeet: number; 
+  headerHeight: number; 
+  footerHeight: number;
 
   layout$: Observable<Layout>;
   
@@ -30,8 +32,10 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.layoutHeightMargin = 25; /* This is constant configurable value - to adjust Margin Height */
+    // Configurable value - to adjust Margin Height; used in top & bottom margins
+    this.layoutHeightMargin = 25; 
 
+    //Ensure that you get data from backend before preparing data for layout
     this.layout$ = this.dashboardService.retrieveOverallLayout(1);
 
     this.layout$.subscribe(
@@ -44,35 +48,40 @@ export class DashboardComponent implements OnInit {
   }
 
   onResize() {
+    // Whenever screen changes - redraw the layout!!!
     this.prepareLayoutData(window.innerWidth, window.innerHeight);
   }
 
   prepareLayoutData(screenWidth, screenHeight) {
+    //Get header & Footer height, in order arrive at actual height available for layout
     this.headerHeight = document.getElementById('header').offsetHeight;
     this.footerHeight = document.getElementById('footer').offsetHeight;
-    console.log(" Header Height : " + this.headerHeight);
-    console.log(" Footer Height : " + this.footerHeight);
-    console.log(" Total Width : " + screenWidth);
-    console.log(" Total Height : " + screenHeight);
+    // console.log(" Header Height : " + this.headerHeight);
+    // console.log(" Footer Height : " + this.footerHeight);
+    // console.log(" Total Width : " + screenWidth);
+    // console.log(" Total Height : " + screenHeight);
 
+    // Calculate adjusted screen height & width
     this.adjustedScreenHeight = screenHeight - (this.headerHeight + this.footerHeight + (2 * this.layoutHeightMargin));
     this.adjustedScreenWidth = this.getAdjustedScreenResolutionWidth(screenWidth, this.adjustedScreenHeight);
-    console.log(" Adjusted Width : " + this.adjustedScreenWidth);
-    console.log(" Adjusted Height : " + this.adjustedScreenHeight);
+    // console.log(" Screen Size : " + this.adjustedScreenWidth + " : " + this.adjustedScreenHeight);
 
     if (this.data !== undefined) {
-      console.log(" Screen Size : " + this.adjustedScreenWidth + " : " + this.adjustedScreenHeight);
+      // Arrive at logical One width Feet & One Height Feet
       this.oneWidthfeet = (this.adjustedScreenWidth / this.data.widthX);
       this.oneHeightFeet = (this.adjustedScreenHeight / this.data.heightY);
-      console.log(" One feet Width : " + this.oneWidthfeet);
-      console.log(" One feet Height : " + this.oneHeightFeet); 
+      // console.log(" One feet Width : " + this.oneWidthfeet);
+      // console.log(" One feet Height : " + this.oneHeightFeet); 
+
+      // Position the layout in the middle of the screen
       this.layoutWidthMargin = (screenWidth - this.adjustedScreenWidth)/2;
-      console.log(" Layout Margin Width : " + this.layoutWidthMargin);
+      // console.log(" Layout Margin Width : " + this.layoutWidthMargin);
     }
 
   }
 
   getAdjustedScreenResolutionWidth(screenWidth, screenHeight) {
+    //Aspect ratio based adjustment to get screen width
     if ( screenHeight * (this.data.widthX/this.data.heightY) > this.data.widthX ) 
       return screenWidth * (this.data.heightY/this.data.widthX);
     else
@@ -80,8 +89,9 @@ export class DashboardComponent implements OnInit {
   }
 
   calcMarginLeft(index) {
-    if (index !== 0) {
-      if (this.data.sections[index].startY === this.data.sections[index - 1].startY) {
+    // Calculate Left Margin of current section in comparision with co-ordinates from previous section
+    if (index !== 0) { //Except first section
+      if (this.data.sections[index].startY === this.data.sections[index - 1].startY) { //Sections in same row
         return this.data.sections[index].startX - this.data.sections[index - 1].endX;
       } 
     } 
@@ -89,18 +99,20 @@ export class DashboardComponent implements OnInit {
   }
 
   calcMarginTop(index) {
-    if (index !== 0) {
-      if (this.data.sections[index].startY === this.data.sections[index - 1].startY) {
+    // Calculate Top Margin of current section in comparision with co-ordinates from previous section
+    if (index !== 0) { //Except first section
+      if (this.data.sections[index].startY === this.data.sections[index - 1].startY) { //Sections in same row
         return this.data.sections[index].startY;
-      } else {
+      } else { // Sections in different row
         return this.data.sections[index].startY - this.data.sections[index - 1].endY;
       }
-    } else {
+    } else { // First Section
       return this.data.sections[index].startY;
-    }
+    } 
   }
 
   assignBgClr(clrvalue) {
+    // Set back ground color based on overall threshold status
     if (clrvalue === 'EXCEEDED') {
       return "red";
     } else if (clrvalue === 'EXCEEDING_SOON') {
@@ -110,8 +122,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  goToPage(id) {
-    console.log(id);
+  navigateToSection(id) {
     this.router.navigate(['/section/'+id])
   }
 
