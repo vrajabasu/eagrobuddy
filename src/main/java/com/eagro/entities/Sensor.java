@@ -40,7 +40,7 @@ public class Sensor implements Serializable {
 	@Column(name = "active_flag")
 	private boolean activeFlag;
 
-	@Column(name = "created_date", columnDefinition = "TIMESTAMP(3)", nullable = false)
+	@Column(name = "created_date", columnDefinition = "TIMESTAMP(3)")
 	private LocalDateTime createdDate;
 
 	@Column(name = "created_by")
@@ -53,7 +53,7 @@ public class Sensor implements Serializable {
 	private String updatedBy;
 
 	@ManyToOne
-	@JoinColumn(name = "layout_id", nullable = false)
+	@JoinColumn(name = "layout_id")
 	private Layout layout;
 
 	public Long getId() {

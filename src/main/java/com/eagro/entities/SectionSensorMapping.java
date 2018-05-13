@@ -44,7 +44,7 @@ public class SectionSensorMapping implements Serializable {
 	private Double posY;
 
 	@Convert(converter = LocalDateTimeConverter.class)
-	@Column(name = "created_date", columnDefinition = "TIMESTAMP(3)", nullable = false)
+	@Column(name = "created_date", columnDefinition = "TIMESTAMP(3)")
 	private LocalDateTime createdDate;
 
 	@Column(name = "created_by")
@@ -58,11 +58,11 @@ public class SectionSensorMapping implements Serializable {
 	private String updatedBy;
 
 	@ManyToOne
-	@JoinColumn(name = "layout_id", nullable = false)
+	@JoinColumn(name = "layout_id")
 	private Layout layout;
 
 	@ManyToOne
-	@JoinColumn(name = "section_id", nullable = false)
+	@JoinColumn(name = "section_id")
 	private Section section;
 
 	private Long sensor_id;

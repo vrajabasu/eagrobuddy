@@ -30,7 +30,7 @@ public class SensorData implements Serializable {
     private Long id;
 
     @Convert(converter = LocalDateTimeConverter.class)
-    @Column(name = "recorded_date_time", columnDefinition = "TIMESTAMP(3)", nullable = false)
+    @Column(name = "recorded_date_time", columnDefinition = "TIMESTAMP(3)")
     private LocalDateTime recordedDateTime;
 
     @Column(name = "param_1")
@@ -52,7 +52,7 @@ public class SensorData implements Serializable {
     private Double paramValue3;
 
     @ManyToOne
-    @JoinColumn(name = "layout_id", nullable = false)
+    @JoinColumn(name = "layout_id")
     private Layout layout;
 
     public Long getSensor_id() {

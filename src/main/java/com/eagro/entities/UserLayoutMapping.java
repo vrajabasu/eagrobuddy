@@ -34,7 +34,7 @@ public class UserLayoutMapping implements Serializable {
 	private boolean activeFlag;
 
 	@Convert(converter = LocalDateTimeConverter.class)
-	@Column(name = "created_date", columnDefinition = "TIMESTAMP(3)", nullable = false)
+	@Column(name = "created_date", columnDefinition = "TIMESTAMP(3)")
 	private LocalDateTime createdDate;
 
 	@Column(name = "created_by")
@@ -48,11 +48,11 @@ public class UserLayoutMapping implements Serializable {
 	private String updatedBy;
 
 	@OneToOne
-	@JoinColumn(name = "layout_id", nullable = false)
+	@JoinColumn(name = "layout_id")
 	private Layout layout;
 
 	@OneToOne
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	public Long getId() {

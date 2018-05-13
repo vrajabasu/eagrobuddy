@@ -52,14 +52,14 @@ public class Layout implements Serializable {
 	private boolean activeFlag;
 
 	@Convert(converter = LocalDateTimeConverter.class)
-	@Column(name = "created_date", columnDefinition = "TIMESTAMP(3)", nullable = false)
+	@Column(name = "created_date", columnDefinition = "TIMESTAMP(3)")
 	private LocalDateTime createdDate;
 
 	@Column(name = "created_by")
 	private String createdBy;
 
 	@Convert(converter = LocalDateTimeConverter.class)
-	@Column(name = "updated_date", columnDefinition = "TIMESTAMP(3)", nullable = false)
+	@Column(name = "updated_date", columnDefinition = "TIMESTAMP(3)")
 	private LocalDateTime updatedDate;
 
 	@Column(name = "updated_by")

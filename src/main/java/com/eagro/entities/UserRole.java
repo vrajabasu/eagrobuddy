@@ -38,7 +38,7 @@ public class UserRole implements Serializable {
     private boolean activeFlag;
 
     @Convert(converter = LocalDateTimeConverter.class)
-    @Column(name = "created_date", columnDefinition = "TIMESTAMP(3)", nullable = false)
+    @Column(name = "created_date", columnDefinition = "TIMESTAMP(3)")
     private LocalDateTime createdDate;
 
     @Column(name = "created_by")
