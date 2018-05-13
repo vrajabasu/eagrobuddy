@@ -1,11 +1,68 @@
-<div class="section-layout" [ngStyle]="{'margin-top':headerHeight+'px'}">
-    <div *ngIf="sectionId == 1">
+<div class="section-layout" [ngStyle]="{'margin-top':headerHeight+'px', 'margin-bottom':footerHeight+'px'}">
+    <div class="column col-lg-12" data-xl-width="12" *ngIf="sectionId == 1">
+        <div class="column col-lg-4" data-xl-width="4">
+            <div class="column">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Range</th>
+                            <th>Average</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div *ngFor="let zone of historical.zoneType">
+                    <h5>{{zone}}</h5>
+                    <table class="table">
+                        <tbody>
+                            <tr *ngFor="let kpiValue of zone.kpiValues">
+                                <td>{{kpiValue.kpiName}}</td>
+                                <td>{{kpiValue.lowerRange}} {{kpiValue.upperRange}}</td>
+                                <td>{{kpiValue.average}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="column col-lg-4" data-xl-width="4">
+            Middle Part
+        </div>
+        <div class="column col-lg-4" data-xl-width="4">
+            <div class="segment-condition column col-lg-12" data-xl-width="12">
+                <h5>{{segCont.segmentName}} {{segCont.segmentDescription}}</h5>
+                <div *ngFor="let zoneWithKpi of segCont.zoneWithKpis">
+                    <h6>
+                        <strong>{{zoneWithKpi.zoneType}}</strong>
+                    </h6>
+                    <table class="table">
+                        <tr *ngFor="let currentKpiValue of zoneWithKpi.currentKpiValues">
+                            <td>{{currentKpiValue.kpiName}}</td>
+                            <td>{{currentKpiValue.averagevalue}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="green-condition column col-lg-12" data-xl-width="12">
+                <h5>{{greenOptCont.sectionName}} {{greenOptCont.sectionDescription}}</h5>
+                <div *ngFor="let zoneWithKpi of greenOptCont.zoneWithKpis">
+                    <h6>
+                        <strong>{{zoneWithKpi.zoneType}}</strong>
+                    </h6>
+                    <table class="table">
+                        <tr *ngFor="let optimalKpiValue of zoneWithKpi.optimalKpiValues">
+                            <td>{{optimalKpiValue.kpiName}}</td>
+                            <td>{{optimalKpiValue.valueRange}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column col-lg-12" data-xl-width="12" *ngIf="sectionId == 2">
         {{sectionId}}
     </div>
-    <div *ngIf="sectionId == 2">
-        {{sectionId}}
-    </div>
-    <div *ngIf="sectionId == 3">
+    <div class="column col-lg-12" data-xl-width="12" *ngIf="sectionId == 3">
         {{sectionId}}
     </div>
 </div>

@@ -1,3 +1,4 @@
 .section-layout {
     min-height: 500px;
+    overflow: hidden;
 }
