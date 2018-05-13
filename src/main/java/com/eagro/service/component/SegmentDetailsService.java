@@ -129,7 +129,7 @@ public class SegmentDetailsService {
 		for (OverallThresholdstateEnum currentState : currentThresholdStateList) {
 			if (!currentState.equals(OverallThresholdstateEnum.NORMAL)) {
 				if (currentState.equals(OverallThresholdstateEnum.EXCEEDING_SOON)
-						&& (currentState.equals(OverallThresholdstateEnum.NORMAL))) {
+						&& (thresholdState.equals(OverallThresholdstateEnum.NORMAL))) {
 					thresholdState = OverallThresholdstateEnum.EXCEEDING_SOON;
 				}
 				if (currentState.equals(OverallThresholdstateEnum.EXCEEDED)) {
@@ -161,12 +161,13 @@ public class SegmentDetailsService {
 				SensorData sensorData = sensorDataRepository.findBySensorIdAndLayoutId(sensor.getLayoutId(),
 						sensor.getSensorId());
 				SensorDataDTO sensorDataDTO = sensorDataMapper.toDto(sensorData);
+				log.debug("SensorData : {} to pick actual value ", sensorDataDTO);
 				if (sensorDataDTO != null && sensorDataDTO.getSensorId() != null) {
 					sensorActualValueMap.put(sensorDataDTO.getSensorId(), sensorDataDTO);
 				}
 			});
 		}
-		log.trace("The Actual KPI values from Sensor Latest Data : {} ", sensorActualValueMap.values());
+		log.debug("The Actual KPI values from Sensor Latest Data : {} ", sensorActualValueMap.values());
 		return sensorActualValueMap;
 	}
 
@@ -179,6 +180,7 @@ public class SegmentDetailsService {
 			SectionSensorMapping sensor = sectionSensorMappingRepository.findByLayoutIdAndSectionIdAndSensorId(
 					section.getLayoutId(), section.getSectionId(), senor.getSensorId());
 			SectionSensorMappingDTO sensorDTO = sectionSensorMappingMapper.toDto(sensor);
+			log.debug("sectionSensorMapping :{} to pick zoneType and OptimalValue",sensorDTO);
 
 			// Retrieve optimal KPI vlaues form KPI entity
 			if (sensorDTO != null && sensorDTO.getZoneType() != null) {
@@ -189,6 +191,7 @@ public class SegmentDetailsService {
 			}
 
 		});
+		log.debug("Optimal value Map  : {} with sensorId key", sensorOptimalKPIMap);
 		return sensorOptimalKPIMap;
 	}
 
@@ -228,7 +231,7 @@ public class SegmentDetailsService {
 		if (ServiceUtil.isNotEmptyResult(sensorDTOList)) {
 			for (SectionSensorMappingDTO sensor : sensorDTOList) {
 				SectionSensorMappingDTO interimSectionBasedSensor = null;
-				if (checkSensorWithInSegRange(segmentDTO, sensor)) {
+				if (checkSensorWithInSegRange(segmentDTO, sensor, sectionDTO )) {
 					interimSectionBasedSensor = layoutVisualizationMapper.sensorToSensor(sensor);
 					log.debug(
 							"The interim sensor :{} is within segment Range and added to segmentSensorMap with segmentId: {}",
@@ -263,13 +266,13 @@ public class SegmentDetailsService {
 							.toDto(currentSensorCoverageRange);
 					log.debug("sensorCoverageRange : {} and segmentDTO : {}", sensorCoverageRange, segmentDTO);
 					
-					if (sensorCoverageRange != null && checkSensorCoverageWithinsegRange(segmentDTO, sensorCoverageRange)) {
+					if (sensorCoverageRange != null && checkSensorCoverageWithinsegRange(segmentDTO, sensorCoverageRange, sectionDTO)) {
 						segmentSensorMap.put(segmentDTO.getSegmentId(), sectionSensorMapping);
 					}
 				}
 			});
 		}
-		log.debug("The segment sensor Map : {}  contains sensor coverage range is within segment range");
+		log.debug("The segment sensor Map : {}  contains sensor coverage range is within segment range", segmentSensorMap);
 		return segmentSensorMap;
 	}
 
@@ -281,14 +284,24 @@ public class SegmentDetailsService {
 	 *            the segment DTO
 	 * @param currentSensorCoverageRangeDTO
 	 *            the current sensor coverage range DTO
+	 * @param sectionDTO TODO
 	 * @return true, if successful
 	 */
 	private boolean checkSensorCoverageWithinsegRange(SegmentDTO segmentDTO,
-			SensorCoverageRangeDTO currentSensorCoverageRangeDTO) {
-		return (currentSensorCoverageRangeDTO.getStartX() <= segmentDTO.getEndX())
-				&& (currentSensorCoverageRangeDTO.getEndX() >= currentSensorCoverageRangeDTO.getStartX())
-				&& (currentSensorCoverageRangeDTO.getStartY() <= segmentDTO.getEndY())
-				&& (currentSensorCoverageRangeDTO.getEndY() >= currentSensorCoverageRangeDTO.getStartY());
+			SensorCoverageRangeDTO currentSensorCoverageRangeDTO, SectionDTO sectionDTO) {
+		boolean isOverlapping = false;
+		Double sensorStartX = currentSensorCoverageRangeDTO.getStartX() + sectionDTO.getStartX();
+		Double sensorStartY = currentSensorCoverageRangeDTO.getStartY() + sectionDTO.getStartY();
+		Double sensorEndX = currentSensorCoverageRangeDTO.getEndX() + sectionDTO.getEndX();
+		Double sensorEndY = currentSensorCoverageRangeDTO.getEndY() + sectionDTO.getEndY();
+		log.debug("Absolute value for sensorCoverage startX :{} endX : {} startY: {} endY:{} ", sensorStartX, sensorEndX, sensorStartY, sensorEndY);
+		log.debug("Segment EndX : {} and EndY : {}",segmentDTO.getEndX(), segmentDTO.getEndY());
+		isOverlapping = (sensorStartX <= segmentDTO.getEndX())
+				&& (sensorEndX >= sensorStartX)
+				&& (sensorStartY <= segmentDTO.getEndY())
+				&& (sensorEndY >= sensorStartY);
+		
+		return isOverlapping;
 	}
 
 	/**
@@ -299,11 +312,24 @@ public class SegmentDetailsService {
 	 *            the segment
 	 * @param sensor
 	 *            the sensor
+	 * @param sectionDTO TODO
 	 * @return true, if successful
 	 */
-	private boolean checkSensorWithInSegRange(SegmentDTO segment, SectionSensorMappingDTO sensor) {
-		return (sensor.getPosX() >= segment.getStartX()) && (sensor.getPosX() <= segment.getEndX())
-				&& (sensor.getPosX() >= segment.getStartX()) && (sensor.getPosX() <= segment.getEndX());
+	private boolean checkSensorWithInSegRange(SegmentDTO segment, SectionSensorMappingDTO sensor, SectionDTO sectionDTO) {
+		boolean isWithinRange = false;
+		Double posX = sectionDTO.getStartX() + sensor.getPosX();
+		Double posY = sectionDTO.getStartY() + sensor.getPosY();
+		log.debug("Absolute Value for sensor PosX : {} and PosY : {}", posX, posY);
+		log.debug("Segment startX : {} endX : {} and startY : {} endY : {}",segment.getStartX() , segment.getEndX(), segment.getStartY(), segment.getEndY());
+		isWithinRange = (posX >= segment.getStartX()) && (posX <= segment.getEndX())
+				&& (posY >= segment.getStartY()) && (posY <= segment.getEndY());
+		if (isWithinRange) {
+		log.debug("The sensor : {} is within the Range of segment :{}",sensor.getSensorId(), segment.getSegmentId() );
+		} else
+		{
+			log.debug("The sensor doesn't falls within the segmentRange");
+		}
+		return isWithinRange;
 	}
 
 }
