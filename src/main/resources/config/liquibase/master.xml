@@ -15,6 +15,7 @@
     <include file="classpath:config/liquibase/changelog/sensorcoveragerange.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/sensor.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/kpi.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/insertscript.xml" relativeToChangelogFile="false"/>
    
 
   

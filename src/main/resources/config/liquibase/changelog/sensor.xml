@@ -39,7 +39,7 @@
 				<constraints nullable="true" />
 			</column>
 
-			<column name="created_date" type="TIMESTAMP(3)">
+			<column name="created_date" type="TIMESTAMP">
 				<constraints nullable="true" />
 			</column>
 
@@ -47,7 +47,7 @@
 				<constraints nullable="true" />
 			</column>
 
-			<column name="updated_date" type="date">
+			<column name="updated_date" type="TIMESTAMP">
 				<constraints nullable="true" />
 			</column>
 
