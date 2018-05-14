@@ -21,4 +21,8 @@ public interface KPIRepository extends JpaRepository<KPI, Long> {
 	@Query("select kpi from KPI kpi where kpi.layout.layoutId =:layoutId and kpi.section.sectionId =:sectionId and zoneType =:zoneType")
 	List<KPI> findByLayoutIdAndSectionIdAndZoneType(@Param("layoutId") Long layoutId,
 			@Param("sectionId") Long sectionId, @Param("zoneType") ZoneType zoneType);
+
+	@Query("select kpi from KPI kpi where kpi.layout.layoutId =:layoutId and kpi.section.sectionId =:sectionId")
+	List<KPI> findByLayoutIdAndSectionId(@Param("layoutId") Long layoutId,
+			@Param("sectionId") Long sectionId);
 }
