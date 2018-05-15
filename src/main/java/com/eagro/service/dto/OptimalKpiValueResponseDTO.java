@@ -9,93 +9,90 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
  * Representation a list of zone with kpis for one section.
  */
 
+public class OptimalKpiValueResponseDTO {
+	@JsonProperty("kpiName")
+	private String kpiName = null;
 
-public class OptimalKpiValueResponseDTO   {
-  @JsonProperty("kpiName")
-  private String kpiName = null;
+	@JsonProperty("optimalValueRange")
+	private Double optimalValueRange = null;
 
-  @JsonProperty("optimalValueRange")
-  private String optimalValueRange = null;
+	public OptimalKpiValueResponseDTO kpiName(String kpiName) {
+		this.kpiName = kpiName;
+		return this;
+	}
 
-  public OptimalKpiValueResponseDTO kpiName(String kpiName) {
-    this.kpiName = kpiName;
-    return this;
-  }
+	/**
+	 * specify the threshold name
+	 * 
+	 * @return kpiName
+	 **/
+	@ApiModelProperty(value = "specify the threshold name")
 
-  /**
-   * specify the threshold name
-   * @return kpiName
-  **/
-  @ApiModelProperty(value = "specify the threshold name")
+	public String getKpiName() {
+		return kpiName;
+	}
 
+	public void setKpiName(String kpiName) {
+		this.kpiName = kpiName;
+	}
 
-  public String getKpiName() {
-    return kpiName;
-  }
+	public OptimalKpiValueResponseDTO optimalValueRange(Double optimalValueRange) {
+		this.optimalValueRange = optimalValueRange;
+		return this;
+	}
 
-  public void setKpiName(String kpiName) {
-    this.kpiName = kpiName;
-  }
+	/**
+	 * Get optimalValueRange
+	 * 
+	 * @return optimalValueRange
+	 **/
+	@ApiModelProperty(value = "")
 
-  public OptimalKpiValueResponseDTO optimalValueRange(String optimalValueRange) {
-    this.optimalValueRange = optimalValueRange;
-    return this;
-  }
+	public Double getOptimalValueRange() {
+		return optimalValueRange;
+	}
 
-  /**
-   * Get optimalValueRange
-   * @return optimalValueRange
-  **/
-  @ApiModelProperty(value = "")
+	public void setOptimalValueRange(Double optimalValueRange) {
+		this.optimalValueRange = optimalValueRange;
+	}
 
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		OptimalKpiValueResponseDTO optimalKpiValueResponseDTO = (OptimalKpiValueResponseDTO) o;
+		return Objects.equals(this.kpiName, optimalKpiValueResponseDTO.kpiName)
+				&& Objects.equals(this.optimalValueRange, optimalKpiValueResponseDTO.optimalValueRange);
+	}
 
-  public String getOptimalValueRange() {
-    return optimalValueRange;
-  }
+	@Override
+	public int hashCode() {
+		return Objects.hash(kpiName, optimalValueRange);
+	}
 
-  public void setOptimalValueRange(String optimalValueRange) {
-    this.optimalValueRange = optimalValueRange;
-  }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class AverageValue {\n");
 
+		sb.append("    kpiName: ").append(toIndentedString(kpiName)).append("\n");
+		sb.append("    optimalValueRange: ").append(toIndentedString(optimalValueRange)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    OptimalKpiValueResponseDTO optimalKpiValueResponseDTO = (OptimalKpiValueResponseDTO) o;
-    return Objects.equals(this.kpiName, optimalKpiValueResponseDTO.kpiName) &&
-        Objects.equals(this.optimalValueRange, optimalKpiValueResponseDTO.optimalValueRange);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(kpiName, optimalValueRange);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class AverageValue {\n");
-    
-    sb.append("    kpiName: ").append(toIndentedString(kpiName)).append("\n");
-    sb.append("    optimalValueRange: ").append(toIndentedString(optimalValueRange)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }
-

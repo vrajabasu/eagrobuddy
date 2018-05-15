@@ -23,12 +23,15 @@ import com.eagro.repository.SectionSensorMappingRepository;
 import com.eagro.repository.SensorCoverageRangeRepository;
 import com.eagro.repository.SensorDataRepository;
 import com.eagro.service.dto.KPIDTO;
+import com.eagro.service.dto.OptimalKpiValueResponseDTO;
 import com.eagro.service.dto.SectionDTO;
 import com.eagro.service.dto.SectionSensorMappingDTO;
+import com.eagro.service.dto.SectionwithkpiResponseDTO;
 import com.eagro.service.dto.SegmentDTO;
 import com.eagro.service.dto.SegmentsResponseDTO.OverallThresholdstateEnum;
 import com.eagro.service.dto.SensorCoverageRangeDTO;
 import com.eagro.service.dto.SensorDataDTO;
+import com.eagro.service.dto.ZonewithkpisResponseDTO;
 import com.eagro.service.impl.LayoutVisualizationServiceImpl;
 import com.eagro.service.mapper.KPIMapper;
 import com.eagro.service.mapper.LayoutVisualizationMapper;
@@ -416,6 +419,35 @@ public class SegmentDetailsService {
 		List<KPIDTO> kpiDTOList = kpiMapper.toDto(kpiList);
 		
 		return kpiDTOList;
+	}
+	
+	public void getSectionBasedKpiValues(SectionDTO sectionDTO,
+			List<SectionSensorMappingDTO> sectionSensorMappingDTOList, Map<ZoneType, List<KPIDTO>> zoneBasedKpiValueMap,
+			SectionwithkpiResponseDTO sectionWithKpiResponseDTO) {
+		Map<ZoneType, List<SectionSensorMappingDTO>> zoneBasedSectionMappings = sectionSensorMappingDTOList.stream()
+				.collect(Collectors.groupingBy(p -> p.getZoneType(), Collectors.toList()));
+		List<ZonewithkpisResponseDTO> zoneWithKpis = new ArrayList<>();
+		zoneBasedSectionMappings.keySet().forEach(zoneType -> {
+			List<KPIDTO> kpiDtoList = zoneBasedKpiValueMap.get(zoneType);
+
+			if (ServiceUtil.isNotEmptyResult(kpiDtoList)) {
+				ZonewithkpisResponseDTO zoneWithKpi = new ZonewithkpisResponseDTO();
+				List<OptimalKpiValueResponseDTO> optimalKpiValueList = new ArrayList<>();
+				kpiDtoList.forEach(kpi -> {
+					OptimalKpiValueResponseDTO optimalKpi = new OptimalKpiValueResponseDTO();
+					optimalKpi.setKpiName(kpi.getKpiName());
+					optimalKpi.setOptimalValueRange(kpi.getOptimalValue());
+					optimalKpiValueList.add(optimalKpi);
+				});
+				zoneWithKpi.setZoneType(zoneType);
+				zoneWithKpi.setOptimalKpiValues(optimalKpiValueList);
+				zoneWithKpis.add(zoneWithKpi);
+			}
+		});
+		sectionWithKpiResponseDTO.setSectionName(sectionDTO.getSectionName());
+		sectionWithKpiResponseDTO.setSectionDescription(sectionDTO.getSectionDesc());
+		sectionWithKpiResponseDTO.setZoneWithKpis(zoneWithKpis);
+		log.debug("Optimal Kpi values based on the section : {}", sectionWithKpiResponseDTO);
 	}
 
 }

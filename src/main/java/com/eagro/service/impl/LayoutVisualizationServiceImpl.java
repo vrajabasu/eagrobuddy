@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eagro.entities.Layout;
 import com.eagro.entities.Section;
-import com.eagro.entities.SectionSensorMapping;
 import com.eagro.entities.Segment;
 import com.eagro.entities.enumeration.ZoneType;
 import com.eagro.repository.LayoutRepository;
@@ -25,7 +24,6 @@ import com.eagro.service.component.SegmentDetailsService;
 import com.eagro.service.dto.KPIDTO;
 import com.eagro.service.dto.LayoutDTO;
 import com.eagro.service.dto.LayoutResponseDTO;
-import com.eagro.service.dto.OptimalKpiValueResponseDTO;
 import com.eagro.service.dto.SectionDTO;
 import com.eagro.service.dto.SectionSensorMappingDTO;
 import com.eagro.service.dto.SectionsResponseDTO;
@@ -92,12 +90,20 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 	@Autowired
 	public SectionSensorMappingMapper sectionSensorMappingMapper;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.eagro.service.LayoutVisualizationService#generateLayout(java.lang.
-	 * Long)
+	
+	/**
+	 * Generate layout detail info used to retrieve overall layout visualization
+	 * showing sections and segments with in the sections, as well current
+	 * status of each section represented by colour coding. Green indicates
+	 * segment is under normal condition. Yellow indicates that the section is
+	 * performing with in the reference range but KPIs are outside deviation
+	 * range specified and propability of moving out of reference range is
+	 * likely. RED indicates that reading from sensors are outside optimal
+	 * reference range for that particular segment.
+	 *
+	 * @param layoutId
+	 *            the layout id
+	 * @return the layout response DTO
 	 */
 	@Override
 	public LayoutResponseDTO getLayoutDetails(Long layoutId) {
@@ -224,9 +230,23 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 		log.debug("List of Segment details : {}  mapped for layoutId : {} ", segmentDTOList, layoutId);
 		return segmentDTOList;
 	}
-
-	/* (non-Javadoc)
-	 * @see com.eagro.service.LayoutVisualizationService#getSectionDetails(java.lang.Long, java.lang.Long)
+	
+	/**
+	 * Gets the section details info used to provide current status of the
+	 * section based on the request section id within a particular layout. The
+	 * color coding of each segment within the section represents the current
+	 * condition of the segment. Green indicates segment is under normal
+	 * condition. Yellow indicates that the section is performing with in the
+	 * reference range but KPIs are outside deviation range specified and
+	 * propability of moving out of reference range is likely. RED indicates
+	 * that reading from sensors are outside optimal reference range for that
+	 * particular segment.
+	 *
+	 * @param layoutId
+	 *            the layout id
+	 * @param sectionId
+	 *            the section id
+	 * @return the section details
 	 */
 	@Override
 	public SectionsResponseDTO getSectionDetails(Long layoutId, Long sectionId) {
@@ -248,8 +268,17 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 		return sectionDTO;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.eagro.service.LayoutVisualizationService#getSectionBasedOptimalKpi(java.lang.Long, java.lang.Long)
+	/**
+	 * Gets the section based optimal kpi used to retrieve the optimal KPI
+	 * values that are applicable for the request section for the kpi entity.
+	 * The response incluce the ideal value for comaring against the actual
+	 * sensor data for various kpis in real time..
+	 *
+	 * @param sectionId
+	 *            the section id
+	 * @param layoutId
+	 *            TODO
+	 * @return the section based optimal kpi
 	 */
 	@Override
 	public SectionwithkpiResponseDTO getSectionBasedOptimalKpi(Long sectionId, Long layoutId) {
@@ -259,22 +288,25 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 		// To fetch sectionDetails
 		SectionDTO sectionDTO = retrieveSectionBasicInfo(layoutId, sectionId);
 
-		List<SectionSensorMapping> sectionSensorMappingList = sectionSensorMappingRepository
-				.findBySectionIdAndLayoutId(layoutId, sectionId);
-		List<SectionSensorMappingDTO> sectionSensorMappingDTOList = sectionSensorMappingMapper
-				.toDto(sectionSensorMappingList);
+		Map<SectionDTO, List<SectionSensorMappingDTO>> currentSectionSensorMap = segmentDetailsService
+				.getAllSensorsForSection(sectionDTO);
+		List<SectionSensorMappingDTO> sectionSensorMappingDTOList = currentSectionSensorMap.get(sectionDTO);
+		List<KPIDTO> currentSectionKpi = segmentDetailsService.retrieveKpiForCurrentSection(layoutId,
+				sectionDTO.getSectionId());
+
+		// create map based on zoneType
+		Map<ZoneType, List<KPIDTO>> zoneBasedKpiValueMap = currentSectionKpi.stream()
+				.collect(Collectors.groupingBy(k -> k.getZoneType()));
 		SectionwithkpiResponseDTO sectionWithKpiResponseDTO = new SectionwithkpiResponseDTO();
 
-		Map<ZoneType, List<SectionSensorMappingDTO>> zoneBasedSectionMappings = sectionSensorMappingDTOList.stream()
-				.collect(Collectors.groupingBy(p -> p.getZoneType(), Collectors.toList()));
-		List<OptimalKpiValueResponseDTO> optimalValueList = new ArrayList<OptimalKpiValueResponseDTO>();
-		zoneBasedSectionMappings.keySet().forEach(zoneType -> {
-			//List<KPIDTO> kpiDTO = segmentDetailsService.retrieveKpi(layoutId, sectionId, zoneType);
-
-		});
-		// fetch KPI for each zonetype
-
-		return null;
+		if (ServiceUtil.isNotEmptyResult(sectionSensorMappingDTOList)) {
+			segmentDetailsService.getSectionBasedKpiValues(sectionDTO, sectionSensorMappingDTOList, zoneBasedKpiValueMap,
+					sectionWithKpiResponseDTO);
+		}
+		return sectionWithKpiResponseDTO;
 	}
+
+	
+		
 
 }
