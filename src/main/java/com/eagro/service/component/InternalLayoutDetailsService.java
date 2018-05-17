@@ -45,7 +45,7 @@ import com.eagro.service.utils.ServiceUtil;
  */
 @Component
 @Transactional
-public class SegmentDetailsService {
+public class InternalLayoutDetailsService {
 
 	/** The Constant LIGHT. */
 	private static final String LIGHT = "Light";
@@ -191,11 +191,6 @@ public class SegmentDetailsService {
 						sensorActualValueMap.put(sensor.getSensorId(), sensorData);
 					}
 				});
-				 /*Optional<SensorDataDTO> val = currentSectionSensorData.stream()
-						.filter(sensorData -> sensorData.getSensorId() != null
-								&& sensorData.getSensorId() == sensor.getSensorId()).findAny();
-				log.debug("SensorData : {} to pick actual value ", val);
-					sensorActualValueMap.put(sensor.getSensorId(), val.get());*/
 			});
 		}
 		log.debug("The Actual KPI values from Sensor Latest Data : {} ", sensorActualValueMap.values());
@@ -262,7 +257,7 @@ public class SegmentDetailsService {
 		// validate whether the coordinates of the sensor falls within the
 		// segment coordinates
 		
-		if (!currentSectionSensorMap.entrySet().isEmpty()) {
+		if (!currentSectionSensorMap.entrySet().isEmpty() && segmentDTO != null) {
 			Entry<SectionDTO, List<SectionSensorMappingDTO>> singleEntryMap = currentSectionSensorMap.entrySet().iterator().next();
 			SectionDTO sectionDTO = singleEntryMap.getKey();
 			singleEntryMap.getValue().forEach(sensor -> {
@@ -293,12 +288,8 @@ public class SegmentDetailsService {
 					// Retrieve sensorCoveragerange from entity based on
 					// layout,section and sensorId
 					log.debug("Considering Water Coverage Range");
-					SensorCoverageRange currentSensorCoverageRange = sensorCoverageRangeRepository
-							.findByLayoutIdAndSectionIdAndSensorId(sectionSensorMapping.getLayoutId(),
-									sectionSensorMapping.getSectionId(), sectionSensorMapping.getSensorId());
-					log.debug("Retrieve current SensorRange");
-					SensorCoverageRangeDTO sensorCoverageRange = sensorCoverageRangeMapper
-							.toDto(currentSensorCoverageRange);
+					SensorCoverageRangeDTO sensorCoverageRange = getSensorCoverageByIds(sectionSensorMapping.getLayoutId(),
+							sectionSensorMapping.getSectionId(), sectionSensorMapping.getSensorId());
 					log.debug("sensorCoverageRange : {} and segmentDTO : {}", sensorCoverageRange, segmentDTO);
 					
 					if (sensorCoverageRange != null && checkSensorCoverageWithinsegRange(segmentDTO, sensorCoverageRange, sectionDTO)) {
@@ -310,6 +301,22 @@ public class SegmentDetailsService {
 		log.debug("The segment sensor Map : {}  contains sensor coverage range is within segment range", segmentSensorMap);
 		return segmentSensorMap;
 	}
+
+	public SensorCoverageRangeDTO getSensorCoverageByIds(Long layoutId, Long sectionId, Long sensorId) {
+		SensorCoverageRange currentSensorCoverageRange = sensorCoverageRangeRepository
+				.findByLayoutIdAndSectionIdAndSensorId(layoutId, sectionId, sensorId);
+		log.debug("Retrieve current SensorRange");
+		SensorCoverageRangeDTO sensorCoverageRange = sensorCoverageRangeMapper
+				.toDto(currentSensorCoverageRange);
+		return sensorCoverageRange;
+	}
+	
+	public SectionSensorMappingDTO getSensorByIds(Long layoutId, Long sectionId, Long sensorId) {
+		SectionSensorMapping sensor = sectionSensorMappingRepository.findByLayoutIdAndSectionIdAndSensorId(layoutId, sectionId, sensorId);
+		SectionSensorMappingDTO sectionSensor = sectionSensorMappingMapper.toDto(sensor);
+		return sectionSensor;
+	}
+	
 
 	/**
 	 * This method used to Gets the all sensors for current section in bulk manner.
@@ -399,7 +406,7 @@ public class SegmentDetailsService {
 	 * @param sectionSensor the section sensor
 	 * @return the list
 	 */
-	public List<SensorDataDTO> retrieveSensorData(Long layoutId, List<SectionSensorMappingDTO> sectionSensor) {
+	public List<SensorDataDTO> retrieveSensorDataList(Long layoutId, List<SectionSensorMappingDTO> sectionSensor) {
 		List<Long> sensorIdList = sectionSensor.stream().map(sensor -> sensor.getSensorId()).collect(Collectors.toList());
 		List<SensorData> sensorDataList = sensorDataRepository.findByLayoutIdAndSensorIds(layoutId,
 				sensorIdList);
@@ -420,6 +427,13 @@ public class SegmentDetailsService {
 		
 		return kpiDTOList;
 	}
+	
+	public SensorDataDTO retrieveSensorData(Long layoutId, Long sensorId) {
+		SensorData sensorData = sensorDataRepository.findBySensorIdAndLayoutId(layoutId, sensorId);
+		SensorDataDTO sensorDto = sensorDataMapper.toDto(sensorData);
+		return sensorDto;
+	}
+
 	
 	public void getSectionBasedKpiValues(SectionDTO sectionDTO,
 			List<SectionSensorMappingDTO> sectionSensorMappingDTOList, Map<ZoneType, List<KPIDTO>> zoneBasedKpiValueMap,
