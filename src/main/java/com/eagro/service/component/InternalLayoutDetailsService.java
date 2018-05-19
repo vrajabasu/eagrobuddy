@@ -848,6 +848,7 @@ public class InternalLayoutDetailsService {
 		List<KpiValuesForTheCurrentSegment> kpiValuesList = new ArrayList<>();
 		kpiDtoList.forEach(kpi -> {
 			KpiValuesForTheCurrentSegment kpiValues = new KpiValuesForTheCurrentSegment();
+			kpiValues.setKpiName(kpi.getKpiName());
 			kpiValues.setLowerRange(kpi.getLowerRefLimit());
 			kpiValues.setUpperRange(kpi.getUpperRefLimit());
 			// need to check with veera average
