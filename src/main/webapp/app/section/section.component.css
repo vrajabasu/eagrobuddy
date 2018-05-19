@@ -1,4 +1,68 @@
 .section-layout {
-    min-height: 500px;
+    /* min-height: 539px; */
     overflow: hidden;
+}
+.section-header {
+    text-align:center;
+    font-weight: 700;
+    border-bottom:1px solid #ccc;
+    margin:0;
+    padding:5px 0;
+    background-color:#f4f4f4;
+    color:#000;
+}
+.segment-condition {
+    background-color:#fff;
+    padding:0 10px;
+}
+.green-condition {
+    background-color: rgb(180,199,231);
+    padding:0 10px;
+}
+.over-condition {
+    overflow: hidden;
+}
+.over-condition li {    
+    float: left;    
+}
+h5 {
+    font-size: 16px;
+}
+h6 {
+    font-size: 14px;
+}
+h5,
+h6,
+ul,
+li {
+    margin:0;
+    padding:0;
+}
+ul,
+li {
+    list-style: none;
+    font-size: 12px;
+}
+.column-left,
+.column-middle,
+.column-right {
+    float:left;
+}
+.column-left {
+    width:35%;
+}
+.column-middle {
+    width:40%;
+}
+.column-right {
+    width:25%;
+}
+.zone-header span{
+    width:32%;
+    display: inline-block;
+    text-align: center;
+}
+.segment-box {
+    width:50%;
+    float:left;
 }

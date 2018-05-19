@@ -10,3 +10,7 @@
 #footer .container .copyright a {
 	color: white;
 }
+footer ul li a,
+footer .copyright {
+    padding:0 15px;
+}
