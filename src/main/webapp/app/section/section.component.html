@@ -1,60 +1,105 @@
 <div class="section-layout" [ngStyle]="{'margin-top':headerHeight+'px', 'margin-bottom':footerHeight+'px'}">
-    <div class="column col-lg-12" data-xl-width="12" *ngIf="sectionId == 1">
-        <div class="column col-lg-4" data-xl-width="4">
+    <!-- <h4 class="section-header">{{overCondition.sectionName}} {{overCondition.sectionDescription}}</h4> -->
+    <div class="column" data-xl-width="12" *ngIf="sectionId == 1">
+        <div class="column column-left" data-xl-width="4">
             <div class="column">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Parameter</th>
-                            <th>Range</th>
-                            <th>Average</th>
-                        </tr>
-                    </thead>
-                </table>
-                <div *ngFor="let zone of historical.zoneType">
-                    <h5>{{zone}}</h5>
-                    <table class="table">
-                        <tbody>
-                            <tr *ngFor="let kpiValue of zone.kpiValues">
-                                <td>{{kpiValue.kpiName}}</td>
-                                <td>{{kpiValue.lowerRange}} {{kpiValue.upperRange}}</td>
-                                <td>{{kpiValue.average}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <ul class="over-condition" [ngStyle]="{'height':((layoutHeight - (headerHeight + footerHeight)) * 0.4)+'px'}">
+                    <li *ngFor="let segment of overCondition.segments" [ngStyle]="{'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
+                        <div>
+                            {{segment.segmentName}}
+                        </div>
+                    </li>
+                </ul>
+                <div [ngStyle]="{'height':((layoutHeight - (headerHeight + footerHeight)) * 0.6)+'px'}">
+                    <div class="zone-header">
+                        <span>Parameter</span>
+                        <span>Range</span>
+                        <span>Average</span>
+                    </div>
+                    <div *ngFor="let zone of historical.zoneType">
+                        <div>{{zone}}</div>
+                        <ul>
+                            <li *ngFor="let kpiValue of zone.kpiValues">
+                                <div>
+                                    {{kpiValue.kpiName}}
+                                </div>
+                                <div>
+                                    {{kpiValue.lowerRange}} {{kpiValue.upperRange}}
+                                </div>
+                                <div>
+                                    {{kpiValue.average}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="column col-lg-4" data-xl-width="4">
-            Middle Part
+        <div class="column column-middle" data-xl-width="4">
+            <div class="column" data-xl-width="12" [ngStyle]="{'height':((layoutHeight - (headerHeight + footerHeight)) * 0.2)+'px'}">
+                <p>Position of Segment in Layout: {{diffZone.sectionX}} {{diffZone.sectionY}}</p>
+                <p>Position of Segment in Layout: {{diffZone.segmentX}} {{diffZone.segmentY}}</p>
+            </div>
+            <div [ngStyle]="{'height':((layoutHeight - (headerHeight + footerHeight)) * 0.4)+'px'}">
+                <div class="segment-box">
+                    box1
+                </div>
+                <div class="segment-box">
+                    box2
+                </div>
+            </div>
+            <div [ngStyle]="{'height':((layoutHeight - (headerHeight + footerHeight)) * 0.4)+'px'}">
+                <div class="segment-box">
+                    box3
+                </div>
+                <div class="segment-box">
+                    box4
+                </div>
+            </div>
         </div>
-        <div class="column col-lg-4" data-xl-width="4">
-            <div class="segment-condition column col-lg-12" data-xl-width="12">
-                <h5>{{segCont.segmentName}} {{segCont.segmentDescription}}</h5>
+        <div class="column column-right" data-xl-width="4">
+            <div class="segment-condition column" data-xl-width="12" [ngStyle]="{'height':((layoutHeight - (headerHeight + footerHeight)) * 0.5)+'px'}">
+                <h5 class="text-center">
+                    <strong>
+                        {{segCont.segmentName}} {{segCont.segmentDescription}}
+                    </strong>
+                </h5>
                 <div *ngFor="let zoneWithKpi of segCont.zoneWithKpis">
                     <h6>
                         <strong>{{zoneWithKpi.zoneType}}</strong>
                     </h6>
-                    <table class="table">
-                        <tr *ngFor="let currentKpiValue of zoneWithKpi.currentKpiValues">
-                            <td>{{currentKpiValue.kpiName}}</td>
-                            <td>{{currentKpiValue.averagevalue}}</td>
-                        </tr>
-                    </table>
+                    <ul>
+                        <li *ngFor="let currentKpiValue of zoneWithKpi.currentKpiValues">
+                            <div class="col-lg-6">
+                                {{currentKpiValue.kpiName}}
+                            </div>
+                            <div class="col-lg-6">
+                                : {{currentKpiValue.averagevalue}}
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="green-condition column col-lg-12" data-xl-width="12">
-                <h5>{{greenOptCont.sectionName}} {{greenOptCont.sectionDescription}}</h5>
+            <div class="green-condition column" data-xl-width="12" [ngStyle]="{'height':((layoutHeight - (headerHeight + footerHeight)) * 0.5)+'px'}">
+                <h5 class="text-center">
+                    <strong>
+                        {{greenOptCont.sectionName}} {{greenOptCont.sectionDescription}}
+                    </strong>
+                </h5>
                 <div *ngFor="let zoneWithKpi of greenOptCont.zoneWithKpis">
                     <h6>
                         <strong>{{zoneWithKpi.zoneType}}</strong>
                     </h6>
-                    <table class="table">
-                        <tr *ngFor="let optimalKpiValue of zoneWithKpi.optimalKpiValues">
-                            <td>{{optimalKpiValue.kpiName}}</td>
-                            <td>{{optimalKpiValue.valueRange}}</td>
-                        </tr>
-                    </table>
+                    <ul>
+                        <li *ngFor="let optimalKpiValue of zoneWithKpi.optimalKpiValues">
+                            <div class="col-lg-6">
+                                {{optimalKpiValue.kpiName}}
+                            </div>
+                            <div class="col-lg-6">
+                                {{optimalKpiValue.valueRange}}
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
