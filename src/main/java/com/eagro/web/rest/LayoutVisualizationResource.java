@@ -17,6 +17,8 @@ import com.eagro.service.dto.LayoutResponseDTO;
 import com.eagro.service.dto.SectionsResponseDTO;
 import com.eagro.service.dto.SectionwithkpiResponseDTO;
 import com.eagro.service.dto.SegmentWithkpiResponse;
+import com.eagro.service.dto.SegmentZoneDetailsResponse;
+import com.eagro.service.dto.Segmentkpichart;
 import com.eagro.service.dto.SensorWithKpi;
 import com.eagro.service.utils.ResponseUtil;
 import com.wordnik.swagger.annotations.ApiParam;
@@ -26,10 +28,10 @@ import com.wordnik.swagger.annotations.ApiParam;
  * project with focus on Phase 1 implementation scope. These APIs lets the users
  * to retrieve information about green house in near real time from cloud data
  * source. Visualization section provides the complete set of APIs which will be
- * used to deliver the current status of the green house on screen. Color
- * coding is used to indicate the current status of the green house. User could
- * easily identify the area of green house which requires immediate attention
- * from the display.
+ * used to deliver the current status of the green house on screen. Color coding
+ * is used to indicate the current status of the green house. User could easily
+ * identify the area of green house which requires immediate attention from the
+ * display.
  */
 @RestController
 @RequestMapping("/api")
@@ -180,9 +182,57 @@ public class LayoutVisualizationResource {
 				sensorId);
 		log.info(
 				"Sensor Status  info : {} withs sensorId : {} for Segment :{}  mapped with section : {} and layout:{} ",
-				sensorId, sensorWithKpiResponse, segmentId, sectionId, layoutId);
+				sensorWithKpiResponse, sensorId, segmentId, sectionId, layoutId);
 
 		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(sensorWithKpiResponse));
 
 	}
+
+	/**
+	 * This service endpoint is used to retrieve the current status of the farm
+	 * categorized by different zone types. The reponse also includes current
+	 * threshold state identified by different color codes. Green indicates
+	 * segment is under normal condition. Yellow indicates that the section is
+	 * performing with in the reference range but KPIs are outside deviation
+	 * range specified and propability of moving out of reference range is
+	 * likely. RED indicates that reading from sensors are outside optimal
+	 * reference range for that particular segment.
+	 *
+	 * @param layoutId
+	 *            the layout id
+	 * @param sectionId
+	 *            the section id
+	 * @param segmentId
+	 *            the segment id
+	 * @return the zone status
+	 */
+	@RequestMapping(value = "/eAgro/v1/visualization/zonestatus/{layoutId}/sections/{sectionId}/segments/{segmentId}", method = RequestMethod.GET)
+	ResponseEntity<SegmentZoneDetailsResponse> getZoneStatus(
+			@ApiParam(value = "Identifier for the layout", required = true) @PathVariable("layoutId") Long layoutId,
+			@ApiParam(value = "Identifier for the section", required = true) @PathVariable("sectionId") Long sectionId,
+			@ApiParam(value = "Identifier for the segment", required = true) @PathVariable("segmentId") Long segmentId) {
+		log.info("REST request to get Segment status for sectionId:{}  mapped with layoutId:{} , segmentId : {} ",
+				sectionId, layoutId, segmentId);
+		SegmentZoneDetailsResponse zoneStatusResponse = layoutVisualizationService.getZoneStatus(layoutId, sectionId,
+				segmentId);
+
+		log.info("Zone Status  info : {}  for Segment :{}  mapped with section : {} and layout:{} ", zoneStatusResponse,
+				segmentId, sectionId, layoutId);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(zoneStatusResponse));
+	}
+
+
+	@RequestMapping(value = "/eAgro/v1/visualization/segmentkpichart/{layoutId}/sections/{sectionId}/segments/{segmentId}", method = RequestMethod.GET)
+	ResponseEntity<Segmentkpichart> getSegmentKpiChart(
+			@ApiParam(value = "Identifier for the layout", required = true) @PathVariable("layoutId") Long layoutId,
+			@ApiParam(value = "Identifier for the section", required = true) @PathVariable("sectionId") Long sectionId,
+			@ApiParam(value = "Identifier for the segment", required = true) @PathVariable("segmentId") Long segmentId) {
+		log.info("REST request to get SegmentKpiChart for sectionId:{}  mapped with layoutId:{} , segmentId : {} ",
+				sectionId, layoutId, segmentId);
+		 Segmentkpichart segmentKpiChartValues = layoutVisualizationService.getSegmentKpiChartValues(layoutId, sectionId, segmentId);
+		 log.info("REST Response SegmentKpiChart:{} for sectionId:{}  mapped with layoutId:{} , segmentId : {} ",
+				 segmentKpiChartValues, sectionId, layoutId, segmentId);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(segmentKpiChartValues));
+	}
+
 }

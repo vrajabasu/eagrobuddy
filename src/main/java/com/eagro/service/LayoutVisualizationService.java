@@ -1,9 +1,13 @@
 package com.eagro.service;
 
+import java.util.List;
+
 import com.eagro.service.dto.LayoutResponseDTO;
 import com.eagro.service.dto.SectionsResponseDTO;
 import com.eagro.service.dto.SectionwithkpiResponseDTO;
 import com.eagro.service.dto.SegmentWithkpiResponse;
+import com.eagro.service.dto.SegmentZoneDetailsResponse;
+import com.eagro.service.dto.Segmentkpichart;
 import com.eagro.service.dto.SensorWithKpi;
 
 public interface LayoutVisualizationService {
@@ -59,5 +63,25 @@ public interface LayoutVisualizationService {
 	 * @return the sensor status
 	 */
 	SensorWithKpi getSensorStatus(Long layoutId, Long sectionId, Long segmentId, Long sensorId);
+
+	/**
+	 * Gets the zone status.
+	 *
+	 * @param layoutId the layout id
+	 * @param sectionId the section id
+	 * @param segmentId the segment id
+	 * @return the zone status
+	 */
+	SegmentZoneDetailsResponse getZoneStatus(Long layoutId, Long sectionId, Long segmentId);
+
+	/**
+	 * Gets the segment kpi chart values.
+	 *
+	 * @param layoutId the layout id
+	 * @param sectionId the section id
+	 * @param segmentId the segment id
+	 * @return the segment kpi chart values
+	 */
+	Segmentkpichart getSegmentKpiChartValues(Long layoutId, Long sectionId, Long segmentId);
 
 }
