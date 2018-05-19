@@ -7,9 +7,8 @@ import java.util.Objects;
 
 import javax.validation.Valid;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import com.eagro.entities.enumeration.ZoneType;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
 /**
@@ -21,46 +20,15 @@ public class ZonewithkpisResponseDTO   {
   /**
    * Type of the zone holds the sensor positioning
    */
-  public enum ZoneTypeEnum {
-    WATER("WATER"),
-    
-    CANOPY("CANOPY"),
-    
-    ROOT("ROOT"),
-    
-    TOP_CANOPY("TOP_CANOPY");
-
-    private String value;
-
-    ZoneTypeEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static ZoneTypeEnum fromValue(String text) {
-      for (ZoneTypeEnum b : ZoneTypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
 
   @JsonProperty("zoneType")
-  private ZoneTypeEnum zoneType = null;
+  private ZoneType zoneType = null;
 
   @JsonProperty("optimalKpiValues")
   @Valid
   private List<OptimalKpiValueResponseDTO> optimalKpiValues = null;
 
-  public ZonewithkpisResponseDTO zoneType(ZoneTypeEnum zoneType) {
+  public ZonewithkpisResponseDTO zoneType(ZoneType zoneType) {
     this.zoneType = zoneType;
     return this;
   }
@@ -72,11 +40,11 @@ public class ZonewithkpisResponseDTO   {
   @ApiModelProperty(value = "Type of the zone holds the sensor positioning")
 
 
-  public ZoneTypeEnum getZoneType() {
+  public ZoneType getZoneType() {
     return zoneType;
   }
 
-  public void setZoneType(ZoneTypeEnum zoneType) {
+  public void setZoneType(ZoneType zoneType) {
     this.zoneType = zoneType;
   }
 

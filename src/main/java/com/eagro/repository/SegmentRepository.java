@@ -19,4 +19,8 @@ import org.springframework.data.repository.query.Param;
 public interface SegmentRepository extends JpaRepository<Segment, Long> {
 	@Query("select segment from Segment segment where segment.layout.layoutId =:layoutId and segment.section.sectionId =:sectionId")
     List<Segment> findByLayoutIdAndSectionId(@Param("layoutId") Long layoutId, @Param("sectionId") Long sectionId);
+	
+	@Query("select segment from Segment segment where segment.layout.layoutId =:layoutId and segment.section.sectionId =:sectionId and segment.segmentId =:segmentId")
+	Segment findByLayoutIdAndSectionIdAndSegmentId(@Param("layoutId") Long layoutId, @Param("sectionId") Long sectionId, @Param("segmentId") Long segmentId);
+	
 }
