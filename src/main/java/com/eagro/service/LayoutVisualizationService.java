@@ -1,7 +1,5 @@
 package com.eagro.service;
 
-import java.util.List;
-
 import com.eagro.service.dto.LayoutResponseDTO;
 import com.eagro.service.dto.SectionsResponseDTO;
 import com.eagro.service.dto.SectionwithkpiResponseDTO;
