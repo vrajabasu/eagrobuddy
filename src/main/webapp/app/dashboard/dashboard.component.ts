@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   oneHeightFeet: number; 
   headerHeight: number; 
   footerHeight: number;
+  noOfRows: number;
 
   layout$: Observable<Layout>;
   
@@ -31,6 +32,7 @@ export class DashboardComponent implements OnInit {
     private dashboardService : DashboardService
   ) {}
 
+  
   ngOnInit() {
     // Configurable value - to adjust Margin Height; used in top & bottom margins
     this.layoutHeightMargin = 25; 
@@ -55,14 +57,15 @@ export class DashboardComponent implements OnInit {
   prepareLayoutData(screenWidth, screenHeight) {
     //Get header & Footer height, in order arrive at actual height available for layout
     this.headerHeight = document.getElementById('header').offsetHeight;
-    this.footerHeight = document.getElementById('footer').offsetHeight;
+    // this.footerHeight = document.getElementById('footer').offsetHeight;
+    this.footerHeight = 0;
     // console.log(" Header Height : " + this.headerHeight);
     // console.log(" Footer Height : " + this.footerHeight);
     // console.log(" Total Width : " + screenWidth);
     // console.log(" Total Height : " + screenHeight);
-
+    this.noOfRows = this.calculateNoOfRows();
     // Calculate adjusted screen height & width
-    this.adjustedScreenHeight = screenHeight - (this.headerHeight + this.footerHeight + (2 * this.layoutHeightMargin));
+    this.adjustedScreenHeight = screenHeight - (this.headerHeight + (2 * this.layoutHeightMargin) + (25 * this.noOfRows));
     this.adjustedScreenWidth = this.getAdjustedScreenResolutionWidth(screenWidth, this.adjustedScreenHeight);
     // console.log(" Screen Size : " + this.adjustedScreenWidth + " : " + this.adjustedScreenHeight);
 
@@ -120,6 +123,10 @@ export class DashboardComponent implements OnInit {
     } else {
       return '#42f480' // Light Green
     }
+  }
+
+  calculateNoOfRows() {
+    return 3;
   }
 
   navigateToSection(id) {
