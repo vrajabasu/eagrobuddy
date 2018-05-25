@@ -25,7 +25,7 @@ export class SectionComponent implements OnInit {
   ngOnInit() {
     this.layoutHeightMargin = 25;
     this.headerHeight = document.getElementById('header').offsetHeight;
-    this.footerHeight = document.getElementById('footer').offsetHeight;
+    // this.footerHeight = document.getElementById('footer').offsetHeight;
     this.layoutWidth = window.innerWidth;
     this.layoutHeight = window.innerHeight;
     console.log('layoutheight'+ this.layoutHeight);
