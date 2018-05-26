@@ -1,3 +1,13 @@
+.section {
+    /*display: flex;*/
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border:1px dashed #000000;
+}
+.segment {
+    border:1px dashed #000000;
+}
 .section-layout {
     /* min-height: 539px; */
     overflow: hidden;

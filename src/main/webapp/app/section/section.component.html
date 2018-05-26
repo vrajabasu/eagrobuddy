@@ -3,13 +3,16 @@
     <div class="column" data-xl-width="12" *ngIf="sectionId == 1">
         <div class="column column-left" data-xl-width="4">
             <div class="column">
-                <ul *ngIf="overCondition" class="over-condition" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
-                    <li *ngFor="let segment of overCondition.segments" [ngStyle]="{'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
-                        <div>
+                <div *ngIf="overallCondition" class="section" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
+                    <!-- {{overallCondition.sectionName}} - {{overallCondition.sectionDescription}} -->
+                    <ul>
+                        <li *ngFor="let segment of overallCondition.segments" [ngStyle]="{'height':adjustedScreenHeight+'px'}" >
+                          <div class="segment" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate), 'margin-left':(sectionMargin + (segment.startX * oneWidthfeet))+'px', 'margin-top':(sectionMargin + (segment.startY * oneHeightFeet))+'px','width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
                             {{segment.segmentName}}
-                        </div>
-                    </li>
-                </ul>
+                          </div>
+                        </li>
+                    </ul>
+                </div>
                 <div *ngIf="historical" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.6)+'px'}">
                     <div class="zone-header">
                         <span>Parameter</span>

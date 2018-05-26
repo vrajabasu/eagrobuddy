@@ -9,6 +9,7 @@ import { DashboardRoutes } from './dashboard.routing';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { SectionComponent } from '../section/section.component';
 import { DashboardService } from './dashboard.service';
+import { SectionService } from '../section/section.service';
 
 @NgModule({
     imports: [
@@ -23,7 +24,8 @@ import { DashboardService } from './dashboard.service';
     	SectionComponent
     ],
     providers: [
-    	DashboardService
+    	DashboardService,
+        SectionService
     ]
 })
 

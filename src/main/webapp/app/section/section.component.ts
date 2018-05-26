@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs';
+
+import { SectionService } from './section.service';
 
 @Component({
   selector: 'app-section',
@@ -10,123 +13,122 @@ import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angul
 export class SectionComponent implements OnInit {
   sectionId: number;
   headerHeight; footerHeight;
-  segCont; greenOptCont; historical; diffZone; overCondition: any;
+  segCont; greenOptCont; historical; diffZone; overallCondition: any;
   oneWidthfeet: number;
   oneHeightFeet: number;
   adjustedScreenWidth: number;
   adjustedScreenHeight: number;
+  sectionMargin: number;
   layoutWidthMargin: number;
   layoutHeightMargin: number;
   layoutWidth: number;
   layoutHeight: number;
+  segmentId: number;
 
-  constructor(private activatedRoute: ActivatedRoute, private http: Http) { }
+  sectionOverallCondition$ : Observable<any>;
+  segmentCurrentCondition$ : Observable<any>;
+  sectionOptimalCondition$ : Observable<any>;
+  sectionKPIChart$ : Observable<any>;
+  segmentZoneCondition$ : Observable<any>;
+
+  constructor(private activatedRoute: ActivatedRoute, private http: Http, private sectionService: SectionService) { }
 
   ngOnInit() {
-    this.layoutHeightMargin = 25;
-    this.headerHeight = document.getElementById('header').offsetHeight;
-    // this.footerHeight = document.getElementById('footer').offsetHeight;
-    this.layoutWidth = window.innerWidth;
-    this.layoutHeight = window.innerHeight;
-    console.log('layoutheight'+ this.layoutHeight);
+
     this.activatedRoute.params.subscribe(params => {
       this.sectionId = params['sectionId'];
-      console.log(this.sectionId);
+      console.log("Selected Section : " + this.sectionId);
+      }
+    );
+
+    // Configurable value - to adjust Margin Height; used in top & bottom margins
+    this.layoutHeightMargin = 5;
+    this.headerHeight = document.getElementById('header').offsetHeight;
+
+    //Ensure that you get data from backend before preparing data for layout
+    this.sectionOverallCondition$ = this.sectionService.sectionOverallCondition(this.sectionId);
+    this.segmentCurrentCondition$ = this.sectionService.segmentCurrentCondition(this.segmentId);
+    this.sectionOptimalCondition$ = this.sectionService.sectionOptimalCondition(this.sectionId);
+    this.sectionKPIChart$ = this.sectionService.segmentZoneCondition(this.sectionId);
+    this.segmentZoneCondition$ = this.sectionService.segmentZoneCondition(this.segmentId);
+
+    // Get the available height & width from window object
+    this.layoutWidth = window.innerWidth;
+    this.layoutHeight = window.innerHeight;
+    console.log("Screen Resolution : "+ this.layoutWidth + " , " + this.layoutHeight);
+
+    this.sectionOverallCondition$.subscribe(
+      res => {
+        this.overallCondition = res;
+        this.prepareSectionData(window.innerWidth, window.innerHeight);
+        console.log("Section Overall Condition : " + this.overallCondition);
+      },
+      console.error
+    ); 
+
+    this.segmentCurrentCondition$.subscribe(
+      res => {
+        this.segCont = res;
+        console.log("Segment Current Condition : " + this.segCont);
+      },
+      console.error
+    );     
+
+    this.sectionOptimalCondition$.subscribe(
+      res => {
+        this.greenOptCont = res;
+        console.log("Section Optimal Condition : " + this.greenOptCont);
+      },
+      console.error
+    ); 
+
+    this.sectionKPIChart$.subscribe(
+      res => {
+        this.historical = res;
+        console.log("Section Current Condition : " + this.historical);
+      },
+      console.error
+    );
+
+    this.segmentZoneCondition$.subscribe(
+      res => {
+        this.diffZone = res;
+        console.log("Segment Zone Condition : " + this.diffZone);
+      },
+      console.error
+    );        
+
+  }
+
+  prepareSectionData(screenWidth, screenHeight) {
+
+    //Get header & Footer height, in order arrive at actual height available for layout
+    this.headerHeight = document.getElementById('header').offsetHeight;
+
+    //Configurable Margin to draw the section - all sides
+    this.sectionMargin = 50;
+    console.log("Section Margin : " + this.sectionMargin);
+    
+    this.adjustedScreenHeight = ((screenHeight - this.headerHeight) * 0.4) - (this.sectionMargin * 2);
+    this.adjustedScreenWidth = (screenWidth * 0.33) - (this.sectionMargin * 2);
+    console.log("Adjusted Screen Resolution : " + this.adjustedScreenWidth + " , " +this.adjustedScreenHeight);
+
+    if (this.overallCondition !== undefined) {
+      this.oneWidthfeet = (this.adjustedScreenWidth / (this.overallCondition.endX - this.overallCondition.startX));
+      this.oneHeightFeet = (this.adjustedScreenHeight / (this.overallCondition.endY - this.overallCondition.startY));
+      console.log("One Feet Width & Height : " + this.oneWidthfeet + " , " + this.oneHeightFeet);
     }
-    );
-    this.segmentCondition();
-    this.greensOptimal();
-    this.historicalKPI();
-    this.diffZones();
-    this.overallCondition();
   }
 
-  segmentCondition() {
-    return this.http.get('../assets/json/Wireframe2_c_Segment_Current_Condition_Top_Right_Corner.json').subscribe(
-      res => {
-        this.segCont = res.json();
-        console.log(this.segCont);
-      },
-      err => {
-        console.log("Error occured.")
-      }
-    );
-  }
-
-  greensOptimal() {
-    return this.http.get('../assets/json/Wireframe2_b_Section_Optimal_Condition_Bottom_Right_Corner.json').subscribe(
-      res => {
-        this.greenOptCont = res.json();
-        console.log(this.greenOptCont);
-      },
-      err => {
-        console.log("Error occured.")
-      }
-    );
-  }
-
-  historicalKPI() {
-    return this.http.get('../assets/json/Wireframe2_f_Historical_KPI_From_Sensor_Bottom_Left_Corner.json').subscribe(
-      res => {
-        this.historical = res.json();
-        console.log(this.historical);
-      },
-      err => {
-        console.log("Error occured.")
-      }
-    );
-  }
-
-  diffZones() {
-    return this.http.get('../assets/json/Wireframe2_e_Diff_Zones_with_Sensor_Middle_Compartment.json').subscribe(
-      res => {
-        this.diffZone = res.json();
-        console.log(this.diffZone);
-      },
-      err => {
-        console.log("Error occured.")
-      }
-    );
-  }
-
-  overallCondition() {
-    return this.http.get('../assets/json/Wireframe2_a_Section_Overall_Condition_Top_Left_Corner.json').subscribe(
-      res => {
-        this.overCondition = res.json();
-        console.log(this.overCondition);
-        this.prepareLayoutData(window.innerWidth, window.innerHeight);
-      },
-      err => {
-        console.log("Error occured.")
-      }
-    );
-  }
-
-  prepareLayoutData(screenWidth, screenHeight) {
-
-    this.adjustedScreenHeight = screenHeight - (this.headerHeight + this.footerHeight + (2 * this.layoutHeightMargin));
-    this.adjustedScreenWidth = this.getAdjustedScreenResolutionWidth(screenWidth, this.adjustedScreenHeight);
-    console.log(this.adjustedScreenHeight);
-    console.log(this.adjustedScreenWidth);
-
-    if (this.overCondition !== undefined) {
-
-      this.oneWidthfeet = (this.adjustedScreenWidth / this.overCondition.startX);
-      this.oneHeightFeet = (this.adjustedScreenHeight / this.overCondition.startY);
-      this.layoutWidthMargin = (screenWidth - this.adjustedScreenWidth) / 2;
-      console.log(this.oneWidthfeet);
-      console.log(this.oneHeightFeet);
-      console.log(this.layoutWidthMargin);
+  assignBgClr(clrvalue) {
+    // Set back ground color based on overall threshold status
+    if (clrvalue === 'EXCEEDED') {
+      return "#ff765e"; // Light RED
+    } else if (clrvalue === 'EXCEEDING_SOON') {
+      return '#fff249' // Light Yellow
+    } else {
+      return '#42f480' // Light Green
     }
-
-  }
-
-  getAdjustedScreenResolutionWidth(screenWidth, screenHeight) {
-    //Aspect ratio based adjustment to get screen width
-    if (screenHeight * (this.overCondition.startX / this.overCondition.startY) > this.overCondition.startX)
-      return screenWidth * (this.overCondition.startY / this.overCondition.startX);
-    else
-      return screenHeight * (this.overCondition.startX / this.overCondition.startY);
   }
 
 }

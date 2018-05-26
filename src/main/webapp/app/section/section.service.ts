@@ -9,7 +9,7 @@ export class SectionService {
 	constructor(private http:Http) { }
 
 	//Retrieve Segment Current Information
-    segmentCurrentCondition() {
+    segmentCurrentCondition(segmentId: number) {
 	    let cpHeaders = new Headers({ 'Content-Type': 'application/json', "x-auth-token":localStorage.getItem('jwt') });
         let options = new RequestOptions({ headers: cpHeaders });
         return this.http.get('../assets/json/Wireframe2_c_Segment_Current_Condition_Top_Right_Corner.json', options)
@@ -17,8 +17,8 @@ export class SectionService {
                .catch(this.handleError);
     }
 
-    //Retrieve Segment Optimal Information
-    segmentOptimalCondition() {
+    //Retrieve Section Optimal Information
+    sectionOptimalCondition(sectionId: number) {
         let cpHeaders = new Headers({ 'Content-Type': 'application/json', "x-auth-token":localStorage.getItem('jwt') });
         let options = new RequestOptions({ headers: cpHeaders });
         return this.http.get('../assets/json/Wireframe2_b_Section_Optimal_Condition_Bottom_Right_Corner.json', options)
@@ -26,8 +26,8 @@ export class SectionService {
                .catch(this.handleError);
     }
 
-    //Retrieve Segment KPI Chart Values
-    segmentKPIChart() {
+    //Retrieve Section KPI Chart Values
+    sectionKPIChart(sectionId: number) {
         let cpHeaders = new Headers({ 'Content-Type': 'application/json', "x-auth-token":localStorage.getItem('jwt') });
         let options = new RequestOptions({ headers: cpHeaders });
         return this.http.get('../assets/json/Wireframe2_f_Historical_KPI_From_Sensor_Bottom_Left_Corner.json', options)
@@ -36,7 +36,7 @@ export class SectionService {
     } 
 
     //Retrieve Segment Zone Information
-    segmentZoneCondition() {
+    segmentZoneCondition(segmentId: number) {
         let cpHeaders = new Headers({ 'Content-Type': 'application/json', "x-auth-token":localStorage.getItem('jwt') });
         let options = new RequestOptions({ headers: cpHeaders });
         return this.http.get('../assets/json/Wireframe2_e_Diff_Zones_with_Sensor_Middle_Compartment.json', options)
@@ -44,8 +44,8 @@ export class SectionService {
                .catch(this.handleError);
     }     
 
-    //Retrieve Segment Overall Information
-    segmentOverallCondition() {
+    //Retrieve Section Overall Information
+    sectionOverallCondition(sectionId: number) {
         let cpHeaders = new Headers({ 'Content-Type': 'application/json', "x-auth-token":localStorage.getItem('jwt') });
         let options = new RequestOptions({ headers: cpHeaders });
         return this.http.get('../assets/json/Wireframe2_a_Section_Overall_Condition_Top_Left_Corner.json', options)
