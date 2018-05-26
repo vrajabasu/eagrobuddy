@@ -49,7 +49,7 @@ export class SectionComponent implements OnInit {
     this.sectionOverallCondition$ = this.sectionService.sectionOverallCondition(this.sectionId);
     this.segmentCurrentCondition$ = this.sectionService.segmentCurrentCondition(this.segmentId);
     this.sectionOptimalCondition$ = this.sectionService.sectionOptimalCondition(this.sectionId);
-    this.sectionKPIChart$ = this.sectionService.segmentZoneCondition(this.sectionId);
+    this.sectionKPIChart$ = this.sectionService.sectionKPIChart(this.sectionId);
     this.segmentZoneCondition$ = this.sectionService.segmentZoneCondition(this.segmentId);
 
     // Get the available height & width from window object
@@ -85,7 +85,8 @@ export class SectionComponent implements OnInit {
     this.sectionKPIChart$.subscribe(
       res => {
         this.historical = res;
-        console.log("Section Current Condition : " + this.historical);
+        console.log("Section KPI Chart : ");
+        console.log(this.historical);
       },
       console.error
     );
