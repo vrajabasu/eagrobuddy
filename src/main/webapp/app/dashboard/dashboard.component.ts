@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
   
   ngOnInit() {
     // Configurable value - to adjust Margin Height; used in top & bottom margins
-    this.layoutHeightMargin = 25; 
+    this.layoutHeightMargin = 5; 
 
     //Ensure that you get data from backend before preparing data for layout
     this.layout$ = this.dashboardService.retrieveOverallLayout(1);
@@ -59,26 +59,26 @@ export class DashboardComponent implements OnInit {
     this.headerHeight = document.getElementById('header').offsetHeight;
     // this.footerHeight = document.getElementById('footer').offsetHeight;
     this.footerHeight = 0;
-    // console.log(" Header Height : " + this.headerHeight);
+    console.log(" Header Height : " + this.headerHeight);
     // console.log(" Footer Height : " + this.footerHeight);
-    // console.log(" Total Width : " + screenWidth);
-    // console.log(" Total Height : " + screenHeight);
+    console.log(" Total Width : " + screenWidth);
+    console.log(" Total Height : " + screenHeight);
     this.noOfRows = this.calculateNoOfRows();
     // Calculate adjusted screen height & width
-    this.adjustedScreenHeight = screenHeight - (this.headerHeight + (2 * this.layoutHeightMargin) + (25 * this.noOfRows));
+    this.adjustedScreenHeight = screenHeight - (this.headerHeight + (2 * this.layoutHeightMargin));
     this.adjustedScreenWidth = this.getAdjustedScreenResolutionWidth(screenWidth, this.adjustedScreenHeight);
-    // console.log(" Screen Size : " + this.adjustedScreenWidth + " : " + this.adjustedScreenHeight);
+    console.log(" Screen Size : " + this.adjustedScreenWidth + " : " + this.adjustedScreenHeight);
 
     if (this.data !== undefined) {
       // Arrive at logical One width Feet & One Height Feet
       this.oneWidthfeet = (this.adjustedScreenWidth / this.data.widthX);
       this.oneHeightFeet = (this.adjustedScreenHeight / this.data.heightY);
-      // console.log(" One feet Width : " + this.oneWidthfeet);
-      // console.log(" One feet Height : " + this.oneHeightFeet); 
+      console.log(" One feet Width : " + this.oneWidthfeet);
+      console.log(" One feet Height : " + this.oneHeightFeet); 
 
       // Position the layout in the middle of the screen
       this.layoutWidthMargin = (screenWidth - this.adjustedScreenWidth)/2;
-      // console.log(" Layout Margin Width : " + this.layoutWidthMargin);
+      console.log(" Layout Margin Width : " + this.layoutWidthMargin);
     }
 
   }

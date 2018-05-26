@@ -10,11 +10,11 @@ export const DashboardRoutes: Routes = [
       children: [ {
         path: 'dashboard',
         component: DashboardComponent
-    },
-    {
+    }
+    ,{
         path: 'section/:sectionId',
         component: SectionComponent
-      }
-    ]
+    }
+  ]
 }
 ];

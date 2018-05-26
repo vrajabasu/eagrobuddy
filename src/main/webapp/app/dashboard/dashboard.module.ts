@@ -19,7 +19,7 @@ import { DashboardService } from './dashboard.service';
         ChartsModule
     ],
     declarations: [
-    	DashboardComponent, 
+    	DashboardComponent,
     	SectionComponent
     ],
     providers: [
