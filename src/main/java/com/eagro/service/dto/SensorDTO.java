@@ -23,7 +23,7 @@ public class SensorDTO implements Serializable {
 
     private String activeFlag;
     
-    private String sensorId;
+    private Long sensorId;
 
     private LocalDateTime createdDate;
 
@@ -142,11 +142,11 @@ public class SensorDTO implements Serializable {
             "}";
     }
 
-	public String getSensorId() {
+	public Long getSensorId() {
 		return sensorId;
 	}
 
-	public void setSensorId(String sensorId) {
+	public void setSensorId(Long sensorId) {
 		this.sensorId = sensorId;
 	}
 }

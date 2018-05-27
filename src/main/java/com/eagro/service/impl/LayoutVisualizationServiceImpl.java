@@ -343,8 +343,8 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 				segmentId);
 
 		if (segmentDTO != null) {
-			internalLayoutDetailsService.fetchZoneStatus(layoutId, segmentId, sectionDTO, currentSectionSensorMap,
-					currentSectionKpi, currentSectionSensorData, segmentZoneDetails, segmentDTO);
+			internalLayoutDetailsService.fetchZoneStatus(sectionDTO, currentSectionSensorMap, currentSectionKpi, currentSectionSensorData,
+					segmentZoneDetails, segmentDTO);
 
 		}
 		return segmentZoneDetails;
@@ -370,10 +370,9 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 		// Retrieve segmentDetails
 		Segment segment = segmentRepository.findByLayoutIdAndSectionIdAndSegmentId(layoutId, sectionId, segmentId);
 		SegmentDTO segmentDto = segmentMapper.toDto(segment);
-		log.debug("List of Segment details : {}  mapped for layoutId : {} ", segmentDto, layoutId);
 
 		// Retrieve Sensor applicable for segment
-		Map<Long, SectionSensorMappingDTO> segmentSensorMap = internalLayoutDetailsService
+		Map<Long, List<SectionSensorMappingDTO>> segmentSensorMap = internalLayoutDetailsService
 				.identiySensorForCurrentSegment(currentSectionSensorMap, segmentDto);
 		// Retrieve historical kpi by zones
 		Segmentkpichart segmentKpiChartValues = new Segmentkpichart();

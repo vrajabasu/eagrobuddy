@@ -2,11 +2,9 @@ package com.eagro.service.component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -45,6 +43,7 @@ import com.eagro.service.dto.SensorDTO;
 import com.eagro.service.dto.SensorDataDTO;
 import com.eagro.service.dto.SensorWithKpi;
 import com.eagro.service.dto.SensorsResponse;
+import com.eagro.service.dto.ZoneStatus;
 import com.eagro.service.dto.Zones;
 import com.eagro.service.dto.ZonewithkpisResponseDTO;
 import com.eagro.service.dto.enumeration.OverallThresholdstateEnum;
@@ -145,21 +144,23 @@ public class InternalLayoutDetailsService {
 			// consider
 			if (!(LIGHT.equalsIgnoreCase(sensor.getParam1()))) {
 				List<KPIDTO> sensorOptimalKpi = sensorOptimalKPIMap.get(sensor.getSensorId());
-				for (KPIDTO kpi : sensorOptimalKpi) {
-					if (kpi != null && ServiceUtil.isNotEmpty(kpi.getKpiName())) {
-						if (kpi.getKpiName().equals(sensor.getParam1())) {
-							// Logic to check within reference range and
-							// deviation range
-							Double interimVar = sensor.getParamValue1();
-							if (kpi.getLowerRefLimit() <= interimVar && kpi.getUpperRefLimit() >= interimVar) {
-								if ((kpi.getLowerRefLimit() + kpi.getDeviationRange() <= interimVar)
-										&& ((kpi.getUpperRefLimit() - kpi.getDeviationRange()) >= interimVar)) {
-									currentSensorState = OverallThresholdstateEnum.NORMAL;
+				if (ServiceUtil.isNotEmptyResult(sensorOptimalKpi)) {
+					for (KPIDTO kpi : sensorOptimalKpi) {
+						if (kpi != null && ServiceUtil.isNotEmpty(kpi.getKpiName())) {
+							if (kpi.getKpiName().equals(sensor.getParam1())) {
+								// Logic to check within reference range and
+								// deviation range
+								Double interimVar = sensor.getParamValue1();
+								if (kpi.getLowerRefLimit() <= interimVar && kpi.getUpperRefLimit() >= interimVar) {
+									if ((kpi.getLowerRefLimit() + kpi.getDeviationRange() <= interimVar)
+											&& ((kpi.getUpperRefLimit() - kpi.getDeviationRange()) >= interimVar)) {
+										currentSensorState = OverallThresholdstateEnum.NORMAL;
+									} else {
+										currentSensorState = OverallThresholdstateEnum.EXCEEDING_SOON;
+									}
 								} else {
-									currentSensorState = OverallThresholdstateEnum.EXCEEDING_SOON;
+									currentSensorState = OverallThresholdstateEnum.EXCEEDED;
 								}
-							} else {
-								currentSensorState = OverallThresholdstateEnum.EXCEEDED;
 							}
 						}
 					}
@@ -175,7 +176,7 @@ public class InternalLayoutDetailsService {
 
 	public Map<Long, OverallThresholdstateEnum> calculateThresholdStateOfSensors(
 			Map<Long, SensorDataDTO> sensorActualValueMap, Map<Long, List<KPIDTO>> sensorOptimalKPIMap) {
-		log.debug("Individual ThresholdState En");
+		log.debug("Individual ThresholdState Entry");
 		Map<Long, OverallThresholdstateEnum> sensorThresholdState = new HashMap<Long, OverallThresholdstateEnum>();
 		sensorActualValueMap.values().forEach(sensor -> {
 			OverallThresholdstateEnum currentSensorState = OverallThresholdstateEnum.NORMAL;
@@ -183,21 +184,23 @@ public class InternalLayoutDetailsService {
 			// consider
 			if (!(LIGHT.equalsIgnoreCase(sensor.getParam1()))) {
 				List<KPIDTO> sensorOptimalKpi = sensorOptimalKPIMap.get(sensor.getSensorId());
-				for (KPIDTO kpi : sensorOptimalKpi) {
-					if (kpi != null && ServiceUtil.isNotEmpty(kpi.getKpiName())) {
-						if (kpi.getKpiName().equals(sensor.getParam1())) {
-							// Logic to check within reference range and
-							// deviation range
-							Double interimVar = sensor.getParamValue1();
-							if (kpi.getLowerRefLimit() <= interimVar && kpi.getUpperRefLimit() >= interimVar) {
-								if ((kpi.getLowerRefLimit() + kpi.getDeviationRange() <= interimVar)
-										&& ((kpi.getUpperRefLimit() - kpi.getDeviationRange()) >= interimVar)) {
-									currentSensorState = OverallThresholdstateEnum.NORMAL;
+				if (ServiceUtil.isNotEmptyResult(sensorOptimalKpi)) {
+					for (KPIDTO kpi : sensorOptimalKpi) {
+						if (kpi != null && ServiceUtil.isNotEmpty(kpi.getKpiName())) {
+							if (kpi.getKpiName().equals(sensor.getParam1())) {
+								// Logic to check within reference range and
+								// deviation range
+								Double interimVar = sensor.getParamValue1();
+								if (kpi.getLowerRefLimit() <= interimVar && kpi.getUpperRefLimit() >= interimVar) {
+									if ((kpi.getLowerRefLimit() + kpi.getDeviationRange() <= interimVar)
+											&& ((kpi.getUpperRefLimit() - kpi.getDeviationRange()) >= interimVar)) {
+										currentSensorState = OverallThresholdstateEnum.NORMAL;
+									} else {
+										currentSensorState = OverallThresholdstateEnum.EXCEEDING_SOON;
+									}
 								} else {
-									currentSensorState = OverallThresholdstateEnum.EXCEEDING_SOON;
+									currentSensorState = OverallThresholdstateEnum.EXCEEDED;
 								}
-							} else {
-								currentSensorState = OverallThresholdstateEnum.EXCEEDED;
 							}
 						}
 					}
@@ -250,20 +253,23 @@ public class InternalLayoutDetailsService {
 	 *            the current section sensor Data from bulk call
 	 * @return the map
 	 */
-	public Map<Long, SensorDataDTO> identifyCurrentDataFromSensors(Map<Long, SectionSensorMappingDTO> segmentSensorMap,
-			List<SensorDataDTO> currentSectionSensorData) {
+	public Map<Long, SensorDataDTO> identifyCurrentDataFromSensors(
+			Map<Long, List<SectionSensorMappingDTO>> segmentSensorMap, List<SensorDataDTO> currentSectionSensorData) {
 		Map<Long, SensorDataDTO> sensorActualValueMap = new HashMap<>();
 		// Iterate Map with key
 		if (segmentSensorMap.values() != null && !segmentSensorMap.values().isEmpty()) {
 
-			segmentSensorMap.values().forEach(sensor -> {
-				log.debug("sensor Data from map : {}", sensor);
-				// Retrieve latest recorded sensor data from sensorData entity
-				currentSectionSensorData.forEach(sensorData -> {
-					log.debug("sensor Data from currentSectionSensorData : {}", sensorData);
-					if (sensorData.getSensorId() != null && sensorData.getSensorId().equals(sensor.getSensorId())) {
-						sensorActualValueMap.put(sensor.getSensorId(), sensorData);
-					}
+			segmentSensorMap.values().forEach(sensorList -> {
+				log.debug("sensor Data from map : {}", sensorList);
+				sensorList.forEach(sensor -> {
+					// Retrieve latest recorded sensor data from sensorData
+					// entity
+					currentSectionSensorData.forEach(sensorData -> {
+						log.debug("sensor Data from currentSectionSensorData : {}", sensorData);
+						if (sensorData.getSensorId() != null && sensorData.getSensorId().equals(sensor.getSensorId())) {
+							sensorActualValueMap.put(sensor.getSensorId(), sensorData);
+						}
+					});
 				});
 			});
 		}
@@ -283,20 +289,25 @@ public class InternalLayoutDetailsService {
 	 * @return the map
 	 */
 	public Map<Long, List<KPIDTO>> identifyOptimalKPIsForSensors(SectionDTO section,
-			Map<Long, SectionSensorMappingDTO> segmentSensorMap, List<KPIDTO> currentSectionKpi) {
+			Map<Long, List<SectionSensorMappingDTO>> segmentSensorMap, List<KPIDTO> currentSectionKpi) {
 		Map<Long, List<KPIDTO>> sensorOptimalKPIMap = new HashMap<>();
-		segmentSensorMap.values().forEach(sensor -> {
+		segmentSensorMap.values().forEach(sensorList -> {
 			// Retrieve zoneType from segmentSensorMap
-			if (sensor != null) {
-				// Retrieve optimal value from currentSectionKpi
-				List<KPIDTO> kpiList = new ArrayList<>();
-				currentSectionKpi.forEach(kpi -> {
-					if (kpi.getSectionId() == sensor.getSectionId() && sensor.getLayoutId() == section.getLayoutId()
-							&& kpi.getZoneType().equals(sensor.getZoneType())) {
-						kpiList.add(kpi);
+			if (ServiceUtil.isNotEmptyResult(sensorList)) {
+				sensorList.forEach(sensor -> {
+					// Retrieve optimal value from currentSectionKpi
+					List<KPIDTO> kpiList = new ArrayList<>();
+					currentSectionKpi.forEach(kpi -> {
+						if (kpi.getSectionId() == sensor.getSectionId() && sensor.getLayoutId() == section.getLayoutId()
+								&& kpi.getZoneType().equals(sensor.getZoneType())) {
+							kpiList.add(kpi);
+						}
+					});
+					if (ServiceUtil.isNotEmptyResult(kpiList)) {
+						sensorOptimalKPIMap.put(sensor.getSensorId(), kpiList);
 					}
 				});
-				sensorOptimalKPIMap.put(sensor.getSensorId(), kpiList);
+
 			}
 		});
 		log.debug("Optimal value Map  : {} with sensorId key", sensorOptimalKPIMap);
@@ -332,13 +343,13 @@ public class InternalLayoutDetailsService {
 	 *            the segment DTO
 	 * @return the map
 	 */
-	public Map<Long, SectionSensorMappingDTO> identiySensorForCurrentSegment(
+	public Map<Long, List<SectionSensorMappingDTO>> identiySensorForCurrentSegment(
 			Map<SectionDTO, List<SectionSensorMappingDTO>> currentSectionSensorMap, SegmentDTO segmentDTO) {
 
-		Map<Long, SectionSensorMappingDTO> segmentSensorMap = new HashMap<>();
+		Map<Long, List<SectionSensorMappingDTO>> segmentSensorMap = new HashMap<>();
 		// validate whether the coordinates of the sensor falls within the
 		// segment coordinates
-
+		List<SectionSensorMappingDTO> interimSectionBasedSensorList = new ArrayList<>();
 		if (!currentSectionSensorMap.entrySet().isEmpty() && segmentDTO != null) {
 			Entry<SectionDTO, List<SectionSensorMappingDTO>> singleEntryMap = currentSectionSensorMap.entrySet()
 					.iterator().next();
@@ -350,23 +361,25 @@ public class InternalLayoutDetailsService {
 					log.debug(
 							"The interim sensor :{} is within segment Range and added to segmentSensorMap with segmentId: {}",
 							interimSectionBasedSensor, segmentDTO.getSegmentId());
-					segmentSensorMap.put(segmentDTO.getSegmentId(), interimSectionBasedSensor);
+					interimSectionBasedSensorList.add(interimSectionBasedSensor);
+					// segmentSensorMap.put(segmentDTO.getSegmentId(),
+					// interimSectionBasedSensor);
 
 				}
 			});
-			log.debug("segmentSensorMap : {}", segmentSensorMap);
+			log.debug("Before considering the Water Sesnor, the interimSectionBasedSensorList : {}",
+					interimSectionBasedSensorList);
 			// Logic to consider Water sensorCoverageRange
 			List<SectionSensorMappingDTO> sectionSensorList = currentSectionSensorMap.values().stream()
 					.flatMap(v -> v.stream()).collect(Collectors.toList());
 			if (ServiceUtil.isNotEmptyResult(sectionSensorList)) {
 				sectionSensorList.forEach(sectionSensorMapping -> {
-					log.debug("Considering Water Coverage Range : {}", sectionSensorMapping);
 					// retrieve setionSenorMapping = Zonetype checking whether
 					// water sensor coverage range is within the range
 					if (sectionSensorMapping != null && sectionSensorMapping.getZoneType() == ZoneType.WATER) {
 						// Retrieve sensorCoveragerange from entity based on
 						// layout,section and sensorId
-						log.debug("Water sensor : {}", sectionSensorMapping);
+						log.debug("Water sensor for the section: {}", sectionSensorMapping);
 						SensorCoverageRangeDTO sensorCoverageRange = getSensorCoverageByIds(
 								sectionSensorMapping.getLayoutId(), sectionSensorMapping.getSectionId(),
 								sectionSensorMapping.getSensorId());
@@ -374,12 +387,15 @@ public class InternalLayoutDetailsService {
 
 						if (sensorCoverageRange != null
 								&& checkSensorCoverageWithinsegRange(segmentDTO, sensorCoverageRange, sectionDTO)) {
-							segmentSensorMap.put(segmentDTO.getSegmentId(), sectionSensorMapping);
+							interimSectionBasedSensorList.add(sectionSensorMapping);
+							// segmentSensorMap.put(segmentDTO.getSegmentId(),
+							// sectionSensorMapping);
 							log.debug("Water Sensor segmentSensorMap : {}", segmentSensorMap);
 						}
 					}
 				});
 			}
+			segmentSensorMap.put(segmentDTO.getSegmentId(), interimSectionBasedSensorList);
 		}
 		log.debug("The segment sensor Map : {}  contains sensor coverage range is within segment range",
 				segmentSensorMap);
@@ -451,7 +467,11 @@ public class InternalLayoutDetailsService {
 		log.debug("Segment EndX : {} and EndY : {}", segmentDTO.getEndX(), segmentDTO.getEndY());
 		isOverlapping = (sensorStartX <= segmentDTO.getEndX()) && (sensorEndX >= sensorStartX)
 				&& (sensorStartY <= segmentDTO.getEndY()) && (sensorEndY >= sensorStartY);
-
+		if (isOverlapping) {
+			log.debug("The sensor falls with in the segment Range");
+		} else {
+			log.debug("The sensor is not in the segment Range");
+		}
 		return isOverlapping;
 	}
 
@@ -634,7 +654,7 @@ public class InternalLayoutDetailsService {
 			List<SectionSensorMappingDTO> sensorList, List<SensorDataDTO> currentSectionSensorData, Segment segment,
 			SegmentDTO segmentDto, SegmentWithkpiResponse response) {
 		// Retrieve Sensor applicable for segment
-		Map<Long, SectionSensorMappingDTO> segmentSensorMap = this
+		Map<Long, List<SectionSensorMappingDTO>> segmentSensorMap = this
 				.identiySensorForCurrentSegment(currentSectionSensorMap, segmentDto);
 		Map<ZoneType, List<ActualKpi>> ZoneKPIMap = null;
 		if (segmentSensorMap != null && !segmentSensorMap.entrySet().isEmpty()) {
@@ -736,7 +756,7 @@ public class InternalLayoutDetailsService {
 	private OverallThresholdstateEnum fetchPerSegmentDetails(SectionDTO sectionDTO,
 			Map<SectionDTO, List<SectionSensorMappingDTO>> currentSectionSensorMap, List<KPIDTO> currentSectionKpi,
 			List<SensorDataDTO> currentSectionSensorData, SegmentDTO segment) {
-		Map<Long, SectionSensorMappingDTO> segmentSensorMap = this
+		Map<Long, List<SectionSensorMappingDTO>> segmentSensorMap = this
 				.identiySensorForCurrentSegment(currentSectionSensorMap, segment);
 		Map<Long, List<KPIDTO>> sensorOptimalKPIMap = null;
 		Map<Long, SensorDataDTO> sensorActualValueMap = null;
@@ -793,7 +813,7 @@ public class InternalLayoutDetailsService {
 		return segmentDTO;
 	}
 
-	public void fetchZoneStatus(Long layoutId, Long segmentId, SectionDTO sectionDTO,
+	public void fetchZoneStatus(SectionDTO sectionDTO,
 			Map<SectionDTO, List<SectionSensorMappingDTO>> currentSectionSensorMap, List<KPIDTO> currentSectionKpi,
 			List<SensorDataDTO> currentSectionSensorData, SegmentZoneDetailsResponse segmentZoneDetails,
 			SegmentDTO segmentDTO) {
@@ -803,7 +823,7 @@ public class InternalLayoutDetailsService {
 		segmentZoneDetails.setSegmentY(sectionDTO.getStartY());
 
 		// Retrieve sensor applicable for segment
-		Map<Long, SectionSensorMappingDTO> segmentSensorMap = this
+		Map<Long, List<SectionSensorMappingDTO>> segmentSensorMap = this
 				.identiySensorForCurrentSegment(currentSectionSensorMap, segmentDTO);
 
 		// Retrieve Optimal KPI values
@@ -815,77 +835,106 @@ public class InternalLayoutDetailsService {
 			if (sensorOptimalKPIMap != null && !sensorOptimalKPIMap.isEmpty()) {
 				// Retrieve Actual KPI Values
 				sensorActualValueMap = this.identifyCurrentDataFromSensors(segmentSensorMap, currentSectionSensorData);
-
 				if (sensorActualValueMap != null && !sensorActualValueMap.isEmpty()) {
 					thresholdState = this.calculateThresholdStateOfSensors(sensorActualValueMap, sensorOptimalKPIMap);
 				}
 
 			}
-			List<Zones> zoneList = new ArrayList<>();
-			Map<Long, OverallThresholdstateEnum> thresholdStateMap = thresholdState;
-			sensorOptimalKPIMap.entrySet().forEach(sensorOptimal -> {
-				List<KPIDTO> kpilist = sensorOptimal.getValue();
-				log.debug("Optimal kpiList : {}", kpilist);
-				SectionSensorMappingDTO sectionSenorDetail = segmentSensorMap.get(segmentId);
-				Zones zones = new Zones();
-				SensorDTO sensor = retrieveSensorInfo(layoutId, sectionSenorDetail.getSensorId());
-				Set<SensorsResponse> sensorList = new HashSet<>();
-				if (ServiceUtil.isNotEmptyResult(kpilist)) {
-					kpilist.forEach(kpi -> {
-						if (kpi != null && kpi.getZoneType() != null
-								&& kpi.getZoneType().equals(sectionSenorDetail.getZoneType())) {
-							zones.setKey(kpi.getZoneType());
-							SensorsResponse sensorResponse = new SensorsResponse();
-							sensorResponse.setSensorId(sensorOptimal.getKey());
-							sensorResponse.setSensorName(sensor.getSensorName());
-							sensorResponse.setSensorDescription(sensor.getSensorDesc());
-							sensorResponse.setHeightY(sectionSenorDetail.getPosY());
-							sensorResponse.setWidthX(sectionSenorDetail.getPosX());
-							OverallThresholdstateEnum individualState = thresholdStateMap
-									.get(sectionSenorDetail.getSensorId());
-							sensorResponse.setThresholdState(individualState);
-							// Need to check with Veera | possibility of
-							// more than one sensor
-							sensorList.add(sensorResponse);
-						}
-					});
-				}
-				zones.setSensors(new ArrayList<>(sensorList));
-				zoneList.add(zones);
-			});
+			Long segmentId = segmentDTO.getSegmentId();
+			// Retrieve section senor Mapping values for specific segment
+			List<ZoneStatus> zoneStatusList = new ArrayList<>();
+			List<SectionSensorMappingDTO> setionSensorMappingList = segmentSensorMap.get(segmentId);
+			List<Long> sensorListFromSection = setionSensorMappingList.stream().map(v -> v.getSensorId())
+					.collect(Collectors.toList());
+			List<SensorDTO> sensorDtoList = retrieveSensorInfo(sectionDTO.getLayoutId(), sensorListFromSection);
+			log.debug("sensorDtoList : {}", sensorDtoList);
+			// Convert List of sensorDTO to Map : key as sensorId
+			Map<Long, String> sensorDescMap = sensorDtoList.stream()
+					.collect(Collectors.toMap(SensorDTO::getSensorId, SensorDTO::getSensorDesc));
+			Map<Long, String> sensorNameMap = sensorDtoList.stream()
+					.collect(Collectors.toMap(SensorDTO::getSensorId, SensorDTO::getSensorName));
 			
-			segmentZoneDetails.setZones(zoneList);
+			if (ServiceUtil.isNotEmptyResult(setionSensorMappingList)) {
+				for (SectionSensorMappingDTO sectionSensor : setionSensorMappingList) {
+					if (sectionSensor != null && sectionSensor.getSensorId() != null) {
+							Long sensorId = sectionSensor.getSensorId();
+							List<KPIDTO> kpiDtoList = sensorOptimalKPIMap.get(sensorId);
+							List<ZoneType> zoneListBasedOnSensor = new ArrayList<>();
+							if (ServiceUtil.isNotEmptyResult(kpiDtoList)) {
+								zoneListBasedOnSensor = kpiDtoList.stream().map(kpiList -> kpiList.getZoneType())
+										.collect(Collectors.toList());
+								if (ServiceUtil.isNotEmptyResult(zoneListBasedOnSensor)
+										&& zoneListBasedOnSensor.contains(sectionSensor.getZoneType())) {
+									ZoneStatus zoneStatus = new ZoneStatus();
+									zoneStatus.setZoneType(sectionSensor.getZoneType());
+									zoneStatus.setPosX(sectionSensor.getPosX());
+									zoneStatus.setPosY(sectionSensor.getPosY());
+									zoneStatus.setSensorDesc(sensorDescMap.get(sensorId));
+									zoneStatus.setSensorName(sensorNameMap.get(sensorId));
+									zoneStatus.setThresholdState(thresholdState.get(sensorId));
+									zoneStatus.setSensorId(sensorId);
+									zoneStatusList.add(zoneStatus);
+							}
+						}
+					}
+				}
+			}
+			log.debug("Intermediate DTO for ZoneStatus : {}", zoneStatusList);
+			Map<ZoneType, List<ZoneStatus>> sensorsGroupByZone = zoneStatusList.stream().collect(Collectors.groupingBy(ZoneStatus::getZoneType));
+			List<Zones> zones = new ArrayList<>();
+			sensorsGroupByZone.forEach((key, value) -> {
+				Zones zone = new Zones();
+				zone.setKey(key);
+				List<SensorsResponse> sensorResponseList = new ArrayList<>();
+				value.forEach(v -> {
+					SensorsResponse sensorResponse = new SensorsResponse();
+					sensorResponse.setHeightY(v.getPosY());
+					sensorResponse.setWidthX(v.getPosX());
+					sensorResponse.setSensorDescription(v.getSensorDesc());
+					sensorResponse.setSensorName(v.getSensorName());
+					sensorResponse.setSensorId(v.getSensorId());
+					sensorResponse.setThresholdState(v.getThresholdState());
+					sensorResponseList.add(sensorResponse);
+				});
+				zone.setSensors(sensorResponseList);
+				zones.add(zone);
+			});
+			segmentZoneDetails.setZones(zones);
 		}
 	}
 
-	public void findHistoricalKpiValues(Long segmentId, Map<Long, SectionSensorMappingDTO> segmentSensorMap,
+	public void findHistoricalKpiValues(Long segmentId, Map<Long, List<SectionSensorMappingDTO>> segmentSensorMap,
 			Segmentkpichart segmentKpiChartValues) {
 		// Retrieve latest sensorData
-		SectionSensorMappingDTO sectionSensorMappingDto = segmentSensorMap.get(segmentId);
-		List<KPI> kpiList = kpiRespository.findByLayoutIdAndSectionIdAndZoneType(sectionSensorMappingDto.getLayoutId(),
-				sectionSensorMappingDto.getSectionId(), sectionSensorMappingDto.getZoneType());
-		log.debug("KpiList :{} for the layoutId:{} sectionId:{} and ZoneType: {}", kpiList,
-				sectionSensorMappingDto.getLayoutId(), sectionSensorMappingDto.getSectionId(),
-				sectionSensorMappingDto.getZoneType());
-		segmentKpiChartValues.setZoneType(sectionSensorMappingDto.getZoneType());
-		List<KPIDTO> kpiDtoList = kpiMapper.toDto(kpiList);
-		List<KpiValuesForTheCurrentSegment> kpiValuesList = new ArrayList<>();
-		kpiDtoList.forEach(kpi -> {
-			KpiValuesForTheCurrentSegment kpiValues = new KpiValuesForTheCurrentSegment();
-			kpiValues.setKpiName(kpi.getKpiName());
-			kpiValues.setLowerRange(kpi.getLowerRefLimit());
-			kpiValues.setUpperRange(kpi.getUpperRefLimit());
-			// need to check with veera average
-			kpiValues.setAverage(kpi.getOptimalValue());
-			kpiValuesList.add(kpiValues);
+		List<SectionSensorMappingDTO> sectionSensorMappingDtoList = segmentSensorMap.get(segmentId);
+		sectionSensorMappingDtoList.forEach(sectionSensorMappingDto -> {
 
+			List<KPI> kpiList = kpiRespository.findByLayoutIdAndSectionIdAndZoneType(
+					sectionSensorMappingDto.getLayoutId(), sectionSensorMappingDto.getSectionId(),
+					sectionSensorMappingDto.getZoneType());
+			log.debug("KpiList :{} for the layoutId:{} sectionId:{} and ZoneType: {}", kpiList,
+					sectionSensorMappingDto.getLayoutId(), sectionSensorMappingDto.getSectionId(),
+					sectionSensorMappingDto.getZoneType());
+			segmentKpiChartValues.setZoneType(sectionSensorMappingDto.getZoneType());
+			List<KPIDTO> kpiDtoList = kpiMapper.toDto(kpiList);
+			List<KpiValuesForTheCurrentSegment> kpiValuesList = new ArrayList<>();
+			kpiDtoList.forEach(kpi -> {
+				KpiValuesForTheCurrentSegment kpiValues = new KpiValuesForTheCurrentSegment();
+				kpiValues.setKpiName(kpi.getKpiName());
+				kpiValues.setLowerRange(kpi.getLowerRefLimit());
+				kpiValues.setUpperRange(kpi.getUpperRefLimit());
+				// need to check with veera average
+				kpiValues.setAverage(kpi.getOptimalValue());
+				kpiValuesList.add(kpiValues);
+
+			});
+			segmentKpiChartValues.setKpiValues(kpiValuesList);
 		});
-		segmentKpiChartValues.setKpiValues(kpiValuesList);
 	}
 
-	public SensorDTO retrieveSensorInfo(Long layoutId, Long sensorId) {
-		Sensor sensor = sensorRepository.findByLayoutIdAndSensorId(layoutId, sensorId);
-		SensorDTO sensorDTO = sensorMapper.toDto(sensor);
-		return sensorDTO;
+	public List<SensorDTO> retrieveSensorInfo(Long layoutId, List<Long> sensorIdList) {
+		List<Sensor> sensorList = sensorRepository.findByLayoutIdAndSensorId(layoutId, sensorIdList);
+		List<SensorDTO> sensorDtoList = sensorMapper.toDto(sensorList);
+		return sensorDtoList;
 	}
 }
