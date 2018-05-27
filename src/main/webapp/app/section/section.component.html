@@ -5,9 +5,16 @@
             <div class="column">
                 <div *ngIf="overallCondition" class="section" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
                     <!-- {{overallCondition.sectionName}} - {{overallCondition.sectionDescription}} -->
-                    <ul>
+                    <!-- <ul>
                         <li *ngFor="let segment of overallCondition.segments" [ngStyle]="{'height':adjustedScreenHeight+'px'}" >
                           <div class="segment" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate), 'margin-left':(sectionMargin + (segment.startX * oneWidthfeet))+'px', 'margin-top':(sectionMargin + (segment.startY * oneHeightFeet))+'px','width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
+                            {{segment.segmentName}}
+                          </div>
+                        </li>
+                    </ul> -->
+                    <ul>
+                        <li *ngFor="let segment of overallCondition.segments">
+                          <div class="segment" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate), 'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
                             {{segment.segmentName}}
                           </div>
                         </li>
@@ -19,8 +26,8 @@
                         <span>Range</span>
                         <span>Average</span>
                     </div>
-                    <div *ngFor="let currentZone of historical">
-                        <div>{{currentZone.zoneType}}</div>
+                    <div *ngFor="let currentZone of historical; let first = first; let last = last" [class.first-item]="first" [class.last-item]="last" class="zone-value">
+                        <div class="zone-header">{{currentZone.zoneType}}</div>
                         <ul>
                             <li *ngFor="let kpiValue of currentZone.kpiValues">
                                 <div>
@@ -40,8 +47,12 @@
         </div>
         <div class="column column-middle" data-xl-width="4">
             <div *ngIf = "diffZone" class="column" data-xl-width="12" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.2)+'px'}">
-                <p>Position of Segment in Layout: {{diffZone.sectionX}} {{diffZone.sectionY}}</p>
-                <p>Position of Segment in Layout: {{diffZone.segmentX}} {{diffZone.segmentY}}</p>
+                <p class="text-center">
+                    <strong>Position of Segment in Layout:</strong> {{diffZone.sectionX}} {{diffZone.sectionY}}
+                </p>
+                <p class="text-center">
+                    <strong>Position of Segment in Layout:</strong> {{diffZone.segmentX}} {{diffZone.segmentY}}
+                </p>
             </div>
             <div [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
                 <div class="segment-box">

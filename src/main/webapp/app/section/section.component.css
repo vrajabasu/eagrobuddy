@@ -1,10 +1,54 @@
 .section {
-    /*display: flex;*/
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     border:1px dashed #000000;
 }
+.section ul {
+    overflow: hidden;
+    margin:0 10%;
+}
+.section ul li {
+    float:left;
+}
+.section ul li div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.zone-header {
+    font-weight: 700;
+    color:#000;
+}
+.zone-value {
+    background-color:rgb(84,130,53);
+    overflow: hidden;
+}
+.zone-value.first-item {
+    background-color:rgb(197,90,17);
+    overflow: hidden;
+}
+.zone-value.last-item {
+    background-color:rgb(191,144,0);
+    overflow: hidden;
+}
+.zone-value ul li {
+    overflow: hidden;
+}
+.zone-value ul li div {
+    width:33%;
+    float:left;
+    color:#000;
+    padding:3px 0 3px 42px;
+    border-top:1px solid #000;
+    border-right:1px solid #000;
+}
+.zone-value ul li:last-child div {
+    border-bottom:1px solid #000;
+}
+
 .segment {
     border:1px dashed #000000;
 }
@@ -73,6 +117,10 @@ li {
     text-align: center;
 }
 .segment-box {
-    width:50%;
+    width:40%;
     float:left;
+    text-align: center;
+    border:1px solid #000;
+    margin:5%;
+    height: 150px;
 }

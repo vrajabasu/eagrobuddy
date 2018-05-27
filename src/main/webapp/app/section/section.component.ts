@@ -94,7 +94,7 @@ export class SectionComponent implements OnInit {
     this.segmentZoneCondition$.subscribe(
       res => {
         this.diffZone = res;
-        console.log("Segment Zone Condition : " + this.diffZone);
+        console.log(this.diffZone);
       },
       console.error
     );        
