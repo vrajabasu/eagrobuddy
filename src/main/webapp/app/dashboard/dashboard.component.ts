@@ -57,17 +57,18 @@ export class DashboardComponent implements OnInit {
   prepareLayoutData(screenWidth, screenHeight) {
     //Get header & Footer height, in order arrive at actual height available for layout
     this.headerHeight = document.getElementById('header').offsetHeight;
-    // this.footerHeight = document.getElementById('footer').offsetHeight;
-    this.footerHeight = 0;
     console.log(" Header Height : " + this.headerHeight);
-    // console.log(" Footer Height : " + this.footerHeight);
     console.log(" Total Width : " + screenWidth);
     console.log(" Total Height : " + screenHeight);
-    this.noOfRows = this.calculateNoOfRows();
+
     // Calculate adjusted screen height & width
     this.adjustedScreenHeight = screenHeight - (this.headerHeight + (2 * this.layoutHeightMargin));
-    this.adjustedScreenWidth = this.getAdjustedScreenResolutionWidth(screenWidth, this.adjustedScreenHeight);
-    console.log(" Screen Size : " + this.adjustedScreenWidth + " : " + this.adjustedScreenHeight);
+    this.adjustedScreenWidth = this.adjustedScreenHeight * (screenWidth / screenHeight);
+    if (this.adjustedScreenWidth > screenWidth) {
+      this.adjustedScreenWidth = screenWidth;
+      this.adjustedScreenHeight = screenWidth * (screenHeight / screenWidth);
+    }
+    console.log(" Adjusted Screen Size : " + this.adjustedScreenWidth + " : " + this.adjustedScreenHeight);
 
     if (this.data !== undefined) {
       // Arrive at logical One width Feet & One Height Feet
@@ -79,16 +80,9 @@ export class DashboardComponent implements OnInit {
       // Position the layout in the middle of the screen
       this.layoutWidthMargin = (screenWidth - this.adjustedScreenWidth)/2;
       console.log(" Layout Margin Width : " + this.layoutWidthMargin);
+      console.log(" Layout Margin Height : " + this.layoutHeightMargin);
     }
 
-  }
-
-  getAdjustedScreenResolutionWidth(screenWidth, screenHeight) {
-    //Aspect ratio based adjustment to get screen width
-    if ( screenHeight * (this.data.widthX/this.data.heightY) > this.data.widthX ) 
-      return screenWidth * (this.data.heightY/this.data.widthX);
-    else
-      return screenHeight * (this.data.widthX/this.data.heightY);
   }
 
   calcMarginLeft(index) {
