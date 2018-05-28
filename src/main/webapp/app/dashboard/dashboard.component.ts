@@ -63,10 +63,10 @@ export class DashboardComponent implements OnInit {
 
     // Calculate adjusted screen height & width
     this.adjustedScreenHeight = screenHeight - (this.headerHeight + (2 * this.layoutHeightMargin));
-    this.adjustedScreenWidth = this.adjustedScreenHeight * (screenWidth / screenHeight);
+    this.adjustedScreenWidth = this.adjustedScreenHeight * (this.data.widthX / this.data.heightY);
     if (this.adjustedScreenWidth > screenWidth) {
       this.adjustedScreenWidth = screenWidth;
-      this.adjustedScreenHeight = screenWidth * (screenHeight / screenWidth);
+      this.adjustedScreenHeight = screenWidth * (this.data.heightY / this.data.widthX);
     }
     console.log(" Adjusted Screen Size : " + this.adjustedScreenWidth + " : " + this.adjustedScreenHeight);
 
@@ -119,8 +119,9 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  calculateNoOfRows() {
-    return 3;
+  calcSectionLabelLength( index) {
+    // 1 character (X) = 8.00000000000007 pixel (X)
+    return this.data.sections[index].sectionName.length * 8.00000000000007;
   }
 
   navigateToSection(id) {
