@@ -12,7 +12,7 @@ export class DashboardService {
     retrieveOverallLayout(layoutId: number) {
 	    let cpHeaders = new Headers({ 'Content-Type': 'application/json', "x-auth-token":localStorage.getItem('jwt') });
         let options = new RequestOptions({ headers: cpHeaders });
-        return this.http.get('../assets/json/Wireframe1_Layout_1_Visualization_Complete.json', options)
+        return this.http.get('../assets/json/Wireframe1_Layout_4_Visualization_Complete.json', options)
                .map(this.extractData)
                .catch(this.handleError);
     }

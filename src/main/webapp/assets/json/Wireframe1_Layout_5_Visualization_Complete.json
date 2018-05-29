@@ -1,0 +1,88 @@
+{
+  "layoutId": 5,
+  "layoutName": "Layout5",
+  "layoutDescription": "My Fifth Farm Layout",
+  "activeFlag": true,
+  "widthX": 100,
+  "heightY": 18,
+  "sections": [
+    {
+      "sectionId": 1,
+      "sectionName": "Cucumber Row",
+      "sectionDescription": "Section for Cucumber Row",
+      "activeFlag": true,
+      "startX": 5,
+      "startY": 3,
+      "endX": 95,
+      "endY": 15,
+      "segments": [
+        {
+          "segmentId": 1,
+          "segmentName": "1A",
+          "segmentDescription": "SegmentA",
+          "activeFlag": true,
+          "startX": 0,
+          "startY": 0,
+          "endX": 15,
+          "endY": 12,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 2,
+          "segmentName": "1B",
+          "segmentDescription": "SegmentB",
+          "activeFlag": true,
+          "startX": 15,
+          "startY": 0,
+          "endX": 30,
+          "endY": 12,
+          "overallThresholdstate": "EXCEEDED"
+        },
+        {
+          "segmentId": 3,
+          "segmentName": "1C",
+          "segmentDescription": "SegmentC",
+          "activeFlag": true,
+          "startX": 30,
+          "startY": 0,
+          "endX": 45,
+          "endY": 12,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 4,
+          "segmentName": "1D",
+          "segmentDescription": "SegmentD",
+          "activeFlag": true,
+          "startX": 45,
+          "startY": 0,
+          "endX": 60,
+          "endY": 12,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 5,
+          "segmentName": "1E",
+          "segmentDescription": "SegmentE",
+          "activeFlag": true,
+          "startX": 60,
+          "startY": 0,
+          "endX": 75,
+          "endY": 12,
+          "overallThresholdstate": "NORMAL"
+        },
+        {
+          "segmentId": 6,
+          "segmentName": "1F",
+          "segmentDescription": "SegmentF",
+          "activeFlag": true,
+          "startX": 75,
+          "startY": 0,
+          "endX": 90,
+          "endY": 12,
+          "overallThresholdstate": "NORMAL"
+        }		
+      ]
+    } 
+  ]
+}

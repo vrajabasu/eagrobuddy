@@ -1,0 +1,44 @@
+{
+  "layoutId": 4,
+  "layoutName": "Layout4",
+  "layoutDescription": "My Fourth Farm Layout",
+  "activeFlag": true,
+  "widthX": 53,
+  "heightY": 10,
+  "sections": [
+    {
+      "sectionId": 1,
+      "sectionName": "Tomato Lines",
+      "sectionDescription": "Section for Tomato Lines",
+      "activeFlag": true,
+      "startX": 5,
+      "startY": 2.5,
+      "endX": 48,
+      "endY": 7.5,
+      "segments": [
+        {
+          "segmentId": 1,
+          "segmentName": "1A",
+          "segmentDescription": "SegmentA",
+          "activeFlag": true,
+          "startX": 0,
+          "startY": 0,
+          "endX": 21.25,
+          "endY": 5,
+          "overallThresholdstate": "EXCEEDING_SOON"
+        },
+        {
+          "segmentId": 2,
+          "segmentName": "1B",
+          "segmentDescription": "SegmentB",
+          "activeFlag": true,
+          "startX": 21.25,
+          "startY": 0,
+          "endX": 43,
+          "endY": 5,
+          "overallThresholdstate": "EXCEEDED"
+        }		
+      ]
+    } 
+  ]
+}
