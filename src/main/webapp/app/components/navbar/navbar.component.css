@@ -1,3 +1,6 @@
 .custom-select {
     margin-top:-20px;
 }
+.navbar.navbar-success {
+    background:url(../../../assets/img/gh_small.jpg) repeat center center transparent;
+}
