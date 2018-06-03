@@ -3,104 +3,23 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-	<property name="now" value="now()" dbms="h2" />
-
-	<property name="now" value="current_timestamp" dbms="postgresql" />
-
-	<property name="floatType" value="float4" dbms="postgresql, h2" />
-	<property name="floatType" value="float" dbms="mysql, oracle, mssql" />
-
-	<!-- Added the entity KPI. -->
-	<changeSet id="insert-layout" author="Rajee">
-	<loadData
-	        encoding="UTF-8"
-            file="classpath:config/liquibase/changelog/dataset/USER_ROLE.csv"
-            separator=","
-            tableName="USER_ROLE">
-            <column name="CREATED_DATE" type="TIMESTAMP"/>
-            <column name="UPDATED_DATE" type="TIMESTAMP"/>
-     </loadData>
-     <loadData
-	        encoding="UTF-8"
-            file="classpath:config/liquibase/changelog/dataset/USER.csv"
-            separator=","
-            tableName="USER">
-            <column name="CREATED_DATE" type="TIMESTAMP"/>
-            <column name="UPDATED_DATE" type="TIMESTAMP"/>
-     </loadData>
-     <loadData
-	        encoding="UTF-8"
-            file="classpath:config/liquibase/changelog/dataset/LAYOUT.csv"
-            separator=","
-            tableName="LAYOUT">
-            <column name="CREATED_DATE" type="TIMESTAMP"/>
-            <column name="UPDATED_DATE" type="TIMESTAMP"/>
-     </loadData>
-     <loadData
-	        encoding="UTF-8"
-            file="classpath:config/liquibase/changelog/dataset/USER_LAYOUT_MAPPING.csv"
-            separator=","
-            tableName="USER_LAYOUT_MAPPING">
-            <column name="CREATED_DATE" type="TIMESTAMP"/>
-            <column name="UPDATED_DATE" type="TIMESTAMP"/>
-     </loadData>
-     <loadData
-	        encoding="UTF-8"
-            file="classpath:config/liquibase/changelog/dataset/SECTION.csv"
-            separator=","
-            tableName="SECTION">
-            <column name="CREATED_DATE" type="TIMESTAMP"/>
-            <column name="UPDATED_DATE" type="TIMESTAMP"/>
-     </loadData>
-     <loadData
-	        encoding="UTF-8"
-            file="classpath:config/liquibase/changelog/dataset/SEGMENT.csv"
-            separator=","
-            tableName="SEGMENT">
-            <column name="CREATED_DATE" type="TIMESTAMP"/>
-            <column name="UPDATED_DATE" type="TIMESTAMP"/>
-     </loadData>
-      <loadData
-	        encoding="UTF-8"
-            file="classpath:config/liquibase/changelog/dataset/SENSOR.csv"
-            separator=","
-            tableName="SENSOR">
-            <column name="CREATED_DATE" type="TIMESTAMP"/>
-            <column name="UPDATED_DATE" type="TIMESTAMP"/>
-     </loadData>
-      <loadData
-	        encoding="UTF-8"
-            file="classpath:config/liquibase/changelog/dataset/KPI.csv"
-            separator=","
-            tableName="KPI">
-            <column name="CREATED_DATE" type="TIMESTAMP"/>
-            <column name="UPDATED_DATE" type="TIMESTAMP"/>
-     </loadData>
-     <loadData
-	        encoding="UTF-8"
-            file="classpath:config/liquibase/changelog/dataset/SECTION_SENSOR_MAPPING.csv"
-            separator=","
-            tableName="SECTION_SENSOR_MAPPING">
-            <column name="CREATED_DATE" type="TIMESTAMP"/>
-            <column name="UPDATED_DATE" type="TIMESTAMP"/>
-     </loadData>
-     <loadData
-	        encoding="UTF-8"
-            file="classpath:config/liquibase/changelog/dataset/SENSOR_COVERAGE_RANGE.csv"
-            separator=","
-            tableName="SENSOR_COVERAGE_RANGE">
-            <column name="CREATED_DATE" type="TIMESTAMP"/>
-            <column name="UPDATED_DATE" type="TIMESTAMP"/>
-     </loadData>
-    <!--  <loadData
-	        encoding="UTF-8"
-            file="classpath:config/liquibase/changelog/dataset/SENSOR_DATA.csv"
-            separator=","
-            tableName="SENSOR_DATA">
-            <column name="RECORDED_DATE_TIME" type="TIMESTAMP"/>
-     </loadData> -->
-     
-     
+	<!-- Initial Data loaded from CSV files -->
+	<changeSet id="insert-layout-data" author="Veera">
+	
+	<sql>		
+		INSERT INTO LAYOUT SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/LAYOUT.csv');
+		INSERT INTO SECTION SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/SECTION.csv', null);
+		INSERT INTO SEGMENT SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/SEGMENT.csv', null);
+		INSERT INTO USER_ROLE SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/USER_ROLE.csv', null);
+		INSERT INTO USER SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/USER.csv', null);
+		INSERT INTO USER_LAYOUT_MAPPING SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/USER_LAYOUT_MAPPING.csv', null);
+		INSERT INTO SENSOR SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/SENSOR.csv', null);
+		INSERT INTO SENSOR_COVERAGE_RANGE SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/SENSOR_COVERAGE_RANGE.csv', null);
+		INSERT INTO SECTION_SENSOR_MAPPING SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/SECTION_SENSOR_MAPPING.csv', null);
+		INSERT INTO KPI SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/KPI.csv', null);
+		INSERT INTO SENSOR_DATA SELECT ID, convert(parseDateTime(RECORDED_DATE_TIME,'dd/MM/yyyy hh:mm:ss'),timestamp) as RECORDED_DATE_TIME, PARAM_1, PARAM_VALUE_1, PARAM_2, PARAM_VALUE_2, PARAM_3, PARAM_VALUE_3, LAYOUT_ID, SENSOR_ID FROM CSVRead('classpath:config/liquibase/changelog/dataset/SENSOR_DATA.csv', null);
+		COMMIT;
+	</sql>
 	</changeSet>
 		
 </databaseChangeLog>

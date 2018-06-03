@@ -1,6 +1,6 @@
-LAYOUT_ID,ACTIVE_FLAG,CREATED_BY,CREATED_DATE,HEIGHT_Y,LAYOUT_DESC,LAYOUT_NAME,UPDATED_BY,UPDATED_DATE,WIDTH_X
-1,TRUE,admin,,30,My Farm Layout 1,Layout 1,admin,,58
-2,TRUE,admin,,54,My Farm Layout 2,Layout 2,admin,,100
-3,TRUE,admin,,30,My Farm Layout 3,Layout 3,admin,,58
-4,TRUE,admin,,10,My Farm Layout 4,Layout 4,admin,,53
-5,TRUE,admin,,18,My Farm Layout 5,Layout 5,admin,,100
+LAYOUT_ID,LAYOUT_NAME,LAYOUT_DESC,WIDTH_X,HEIGHT_Y,ACTIVE_FLAG,CREATED_DATE,CREATED_BY,UPDATED_DATE,UPDATED_BY
+1,Layout 1,My Farm Layout 1,58,30,TRUE,,admin,,admin
+2,Layout 2,My Farm Layout 2,100,54,TRUE,,admin,,admin
+3,Layout 3,My Farm Layout 3,58,30,TRUE,,admin,,admin
+4,Layout 4,My Farm Layout 4,53,10,TRUE,,admin,,admin
+5,Layout 5,My Farm Layout 5,100,18,TRUE,,admin,,admin

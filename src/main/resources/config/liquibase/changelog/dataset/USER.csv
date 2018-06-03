@@ -1,5 +1,5 @@
-USER_ID,ACTIVE_FLAG,CREATED_BY,CREATED_DATE,EMAIL_ADDRESS,FIRST_NAME,LAST_NAME,LOGIN_KEY,MIDDLE_NAME,PASSWORD,ROLE_ID,UPDATED_BY,UPDATED_DATE
-1,TRUE,admin,2015-03-03 00:00:00.0,rr@gmail.com,Rajee,R,rajeer,admin,green123,1,admin,2015-03-03 00:00:00.0
-2,TRUE,admin,2015-03-03 00:00:00.0,vv@gmail.com,Veera,B,veerab,admin,eagro123,1,admin,2015-03-03 00:00:00.0
-3,TRUE,admin,2015-03-03 00:00:00.0,user@localhost.com,User,User,user,admin,user,2,admin,2015-03-03 00:00:00.0
-4,TRUE,admin,2015-03-03 00:00:00.0,admin@localhost.com,Admin,Admin,admin,admin,admin,1,admin,2015-03-03 00:00:00.0
+USER_ID,LOGIN_KEY,PASSWORD,FIRST_NAME,MIDDLE_NAME,LAST_NAME,EMAIL_ADDRESS,ACTIVE_FLAG,CREATED_DATE,CREATED_BY,UPDATED_DATE,UPDATED_BY,ROLE_ID
+1,rajeer,green123,Rajee,admin,R,rr@gmail.com,TRUE,,admin,,admin,1
+2,veerab,eagro123,Veera,admin,B,vv@gmail.com,TRUE,,admin,,admin,1
+3,user,user,User,admin,User,user@localhost.com,TRUE,,admin,,admin,2
+4,admin,admin,Admin,admin,Admin,admin@localhost.com,TRUE,,admin,,admin,1

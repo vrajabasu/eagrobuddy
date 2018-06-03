@@ -24,7 +24,7 @@
 			</column>
 
 			<column name="sensor_id" type="bigint">
-				<constraints unique="true" nullable="true" />
+				<constraints nullable="false" />
 			</column>
 
 			<column name="sensor_name" type="varchar(255)">
