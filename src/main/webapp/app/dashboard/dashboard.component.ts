@@ -117,7 +117,7 @@ export class DashboardComponent implements OnInit {
   assignBgClr(clrvalue) {
     // Set back ground color based on overall threshold status
     if (clrvalue === 'EXCEEDED') {
-      return "radial-gradient(white 5%, red 75%)"; //#ff765e"; // Light RED
+      return "radial-gradient(white 25%, red 75%)"; //#ff765e"; // Light RED
     } else if (clrvalue === 'EXCEEDING_SOON') {
       return "radial-gradient(white 5%, yellow 75%)"; // Light Yellow
     } else {
@@ -140,11 +140,11 @@ export class DashboardComponent implements OnInit {
   assignBgClr2(clrvalue) {
     // Set back ground color based on overall threshold status
     if (clrvalue === 'EXCEEDED') {
-      return "linear-gradient(#c21500, #ffc500)"; // Light Red
+      return "linear-gradient(#ffb3b3, #ff0000)"; // Light Red
     } else if (clrvalue === 'EXCEEDING_SOON') {
-      return "linear-gradient(#d53369, #cbad6d)"; // Light Yellow
+      return "linear-gradient(#ffffcc, #ffff00)"; // Light Yellow
     } else {
-      return "linear-gradient(#a73737, #7a2828)"; // Light Green
+      return "linear-gradient(#ccffdd, #009900)"; // Light Green
     } 
   }  
 
@@ -152,11 +152,11 @@ export class DashboardComponent implements OnInit {
   assignBgClr3(clrvalue) {
     // Set back ground color based on overall threshold status
     if (clrvalue === 'EXCEEDED') {
-      return "linear-gradient(#f857a6, #ff5858)"; // Light Red
+      return "radial-gradient(rgb(138,0,0) 4%, rgb(92,0,0) 9%, rgba(102,0,0,0) 9%), radial-gradient(rgb(138,0,0) 4%, rgb(92,0,0) 8%, rgba(102,0,0,0) 10%), radial-gradient(rgba(153,0,0,0.8) 0, rgba(153,0,0,0.8) 21%, rgba(102,0,0,0) 100%), radial-gradient(rgba(153,0,0,0.8) 20%, rgba(102,0,0,0) 100%), radial-gradient(rgb(102,0,0) 35%, rgba(102,0,0,0) 60%), radial-gradient(rgb(102,0,0) 35%, rgba(102,0,0,0) 60%), radial-gradient(rgba(76,0,0,0.701961) 0, rgba(102,0,0,0) 100%), radial-gradient(rgba(76,0,0,0.701961) 0, rgba(102,0,0,0) 100%), linear-gradient(45deg, rgba(102,0,0,0) 49%, rgb(0,0,0) 50%, rgba(102,0,0,0) 70%), linear-gradient(-45deg, rgba(102,0,0,0) 49%, rgb(0,0,0) 50%, rgba(102,0,0,0) 70%), rgb(51, 0, 0)"; // Light Red
     } else if (clrvalue === 'EXCEEDING_SOON') {
-      return "linear-gradient(#4b6cb7, #182848)"; // Light Yellow
+      return "radial-gradient(rgba(238,242,4,1) 0, rgba(242,242,4,1) 4%, rgba(243,247,14,1) 8%, rgba(225,244,14,1) 9%, rgba(102,0,0,0) 10%, rgba(102,0,0,0) 100%), radial-gradient(rgba(244,233,26,1) 0, rgba(219,244,24,1) 4%, rgba(230,247,42,1) 8%, rgba(102,0,0,0) 10%, rgba(102,0,0,0) 100%), radial-gradient(rgba(233,247,32,0.8) 0, rgba(227,242,24,0.8) 21%, rgba(102,0,0,0) 100%), radial-gradient(rgba(221,242,60,0.8) 0, rgba(210,237,40,0.8) 20%, rgba(102,0,0,0) 100%), radial-gradient(rgba(230,237,52,1) 0, rgba(230,237,40,1) 35%, rgba(102,0,0,0) 60%, rgba(102,0,0,0) 100%), radial-gradient(rgba(229,244,66,1) 0, rgba(226,242,48,1) 35%, rgba(102,0,0,0) 60%, rgba(102,0,0,0) 100%), radial-gradient(rgba(235,242,53,0.7) 0, rgba(102,0,0,0) 100%), radial-gradient(rgba(235,242,41,0.7) 0, rgba(102,0,0,0) 100%), linear-gradient(45deg, rgba(102,0,0,0) 49%, rgb(0,0,0) 50%, rgba(102,0,0,0) 70%), linear-gradient(-45deg, rgba(102,0,0,0) 49%, rgb(0,0,0) 50%, rgba(102,0,0,0) 70%), rgba(247,231,61,1)"; // Light Yellow
     } else {
-      return "linear-gradient(#e43a15, #e65245)"; // Light Green
+      return "radial-gradient(rgba(39,137,0,1) 0, rgba(9,137,0,1) 4%, rgba(39,137,0,1) 8%, rgba(21,91,0,1) 9%, rgba(102,0,0,0) 10%, rgba(102,0,0,0) 100%), radial-gradient(rgba(6,137,0,1) 0, rgba(2,137,0,1) 4%, rgba(0,91,1,1) 8%, rgba(102,0,0,0) 10%, rgba(102,0,0,0) 100%), radial-gradient(rgba(20,153,0,0.8) 0, rgba(10,153,0,0.8) 21%, rgba(102,0,0,0) 100%), radial-gradient(rgba(0,153,7,0.8) 0, rgba(33,153,0,0.8) 20%, rgba(102,0,0,0) 100%), radial-gradient(rgba(0,102,1,1) 0, rgba(0,102,0,1) 35%, rgba(102,0,0,0) 60%, rgba(102,0,0,0) 100%), radial-gradient(rgba(11,102,0,1) 0, rgba(1,102,0,1) 35%, rgba(102,0,0,0) 60%, rgba(102,0,0,0) 100%), radial-gradient(rgba(8,73,0,0.7) 0, rgba(102,0,0,0) 100%), radial-gradient(rgba(20,73,0,0.7) 0, rgba(102,0,0,0) 100%), linear-gradient(45deg, rgba(102,0,0,0) 49%, rgb(0,0,0) 50%, rgba(102,0,0,0) 70%), linear-gradient(-45deg, rgba(102,0,0,0) 49%, rgb(0,0,0) 50%, rgba(102,0,0,0) 70%), rgba(17,51,0,1)"; // Light Green
     } 
   }    
 
@@ -165,11 +165,11 @@ export class DashboardComponent implements OnInit {
   assignBgClr4(clrvalue) {
     // Set back ground color based on overall threshold status
     if (clrvalue === 'EXCEEDED') {
-      return "linear-gradient(#C04848, #480048)"; // Light Red
+      return "linear-gradient(#e60000, #ff9999)"; // Light Red
     } else if (clrvalue === 'EXCEEDING_SOON') {
-      return "linear-gradient(#5f2c82, #49a09d)"; // Light Yellow
+      return "linear-gradient(#ffff00, #ffffb3)"; // Light Yellow
     } else {
-      return "linear-gradient(#24C6DC, #514A9D)"; // Light Green
+      return "linear-gradient(#003300, #99ff99)"; // Light Green
     } 
   }  
 
