@@ -22,13 +22,38 @@ li {
         /*margin-top: 50 px;*/
         /*padding-top: 50 px;*/
         height: 25 px;
+/*        animation-duration: 3s;
+        animation-name: slidein;
+        animation-iteration-count: 1;
+        animation-direction: normal;*/
 }
+
+/*@keyframes slidein {
+  from {
+    margin-left:100%;
+    width:100%
+  }
+  
+  to {
+    margin-left:40%;
+    width:50%;
+  }
+}*/
 .segment {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
     border:1px dashed #000000;
+}
+.segment:hover {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border:2px dashed #000000;
+    cursor: pointer;
+    /*transform: scale(1.1);*/
 }
 .row {
     display: flex;
