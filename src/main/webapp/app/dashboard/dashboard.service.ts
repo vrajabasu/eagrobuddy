@@ -6,13 +6,19 @@ import { Layout } from './layout';
 @Injectable()
 export class DashboardService {
 
+    layoutVisualizationURL = "http://localhost:8080/api/eAgro/v1/visualization/overall/layouts/";
+
 	constructor(private http:Http) { }
 
 	//Retrieve Overall Layout Information
     retrieveOverallLayout(layoutId: number) {
-	    let cpHeaders = new Headers({ 'Content-Type': 'application/json', "x-auth-token":localStorage.getItem('jwt') });
-        let options = new RequestOptions({ headers: cpHeaders });
-        return this.http.get('../assets/json/Wireframe1_Layout_1_Visualization_Complete.json', options)
+	    let ghHeaders = new Headers({ 'Content-Type': 'application/json', "x-auth-token":localStorage.getItem('jwt') });
+        // let ghParams = new URLSearchParams();
+        // ghParams.set('layoutId', layoutId.toString());
+        // let options = new RequestOptions({ headers: ghHeaders, params: ghParams });
+        let options = new RequestOptions({ headers: ghHeaders });
+        // return this.http.get('../assets/json/Wireframe1_Layout_1_Visualization_Complete.json', options)
+        return this.http.get(this.layoutVisualizationURL + layoutId, options)
                .map(this.extractData)
                .catch(this.handleError);
     }

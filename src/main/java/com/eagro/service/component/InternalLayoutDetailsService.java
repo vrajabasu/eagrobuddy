@@ -67,7 +67,7 @@ import io.swagger.model.KpiValuesForTheCurrentSegment;
 public class InternalLayoutDetailsService {
 
 	/** The Constant LIGHT. */
-	private static final String LIGHT = "Light";
+	private static final String LIGHT = "L";
 
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(LayoutVisualizationServiceImpl.class);
@@ -376,7 +376,7 @@ public class InternalLayoutDetailsService {
 				sectionSensorList.forEach(sectionSensorMapping -> {
 					// retrieve setionSenorMapping = Zonetype checking whether
 					// water sensor coverage range is within the range
-					if (sectionSensorMapping != null && sectionSensorMapping.getZoneType() == ZoneType.WATER) {
+					if (sectionSensorMapping != null && sectionSensorMapping.getZoneType() == ZoneType.W) {
 						// Retrieve sensorCoveragerange from entity based on
 						// layout,section and sensorId
 						log.debug("Water sensor for the section: {}", sectionSensorMapping);
