@@ -27,9 +27,9 @@ import com.eagro.service.utils.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class KPIResource {
+public class KPIWebService {
 
-	private final Logger log = LoggerFactory.getLogger(KPIResource.class);
+	private final Logger log = LoggerFactory.getLogger(KPIWebService.class);
 
 	private static final String ENTITY_NAME = "kPI";
 

@@ -27,9 +27,9 @@ import com.eagro.service.utils.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class UserRoleResource {
+public class UserRoleWebService {
 
-    private final Logger log = LoggerFactory.getLogger(UserRoleResource.class);
+    private final Logger log = LoggerFactory.getLogger(UserRoleWebService.class);
 
     private static final String ENTITY_NAME = "userRole";
 

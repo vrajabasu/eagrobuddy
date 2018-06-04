@@ -27,9 +27,9 @@ import com.eagro.service.utils.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class SensorDataResource {
+public class SensorDataWebService {
 
-    private final Logger log = LoggerFactory.getLogger(SensorDataResource.class);
+    private final Logger log = LoggerFactory.getLogger(SensorDataWebService.class);
 
     private static final String ENTITY_NAME = "sensorData";
 

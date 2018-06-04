@@ -29,9 +29,9 @@ import com.eagro.service.utils.ResponseUtil;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = {"http://localhost:4400"})
-public class LayoutResource {
+public class LayoutWebService {
 
-    private final Logger log = LoggerFactory.getLogger(LayoutResource.class);
+    private final Logger log = LoggerFactory.getLogger(LayoutWebService.class);
 
     private static final String ENTITY_NAME = "layout";
 

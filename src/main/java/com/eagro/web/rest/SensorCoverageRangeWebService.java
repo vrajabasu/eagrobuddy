@@ -27,9 +27,9 @@ import com.eagro.service.utils.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class SensorCoverageRangeResource {
+public class SensorCoverageRangeWebService {
 
-    private final Logger log = LoggerFactory.getLogger(SensorCoverageRangeResource.class);
+    private final Logger log = LoggerFactory.getLogger(SensorCoverageRangeWebService.class);
 
     private static final String ENTITY_NAME = "sensorCoverageRange";
 

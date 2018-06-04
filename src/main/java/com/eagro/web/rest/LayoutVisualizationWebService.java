@@ -35,10 +35,10 @@ import com.wordnik.swagger.annotations.ApiParam;
  */
 @RestController
 @RequestMapping("/api")
-public class LayoutVisualizationResource {
+public class LayoutVisualizationWebService {
 
 	/** The log. */
-	private final Logger log = LoggerFactory.getLogger(LayoutVisualizationResource.class);
+	private final Logger log = LoggerFactory.getLogger(LayoutVisualizationWebService.class);
 
 	/** The layout visualization service. */
 	@Autowired

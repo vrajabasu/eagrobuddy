@@ -27,9 +27,9 @@ import com.eagro.service.utils.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class SectionSensorMappingResource {
+public class SectionSensorMappingWebService {
 
-    private final Logger log = LoggerFactory.getLogger(SectionSensorMappingResource.class);
+    private final Logger log = LoggerFactory.getLogger(SectionSensorMappingWebService.class);
 
     private static final String ENTITY_NAME = "sectionSensorMapping";
 

@@ -490,8 +490,8 @@ public class InternalLayoutDetailsService {
 	private boolean checkSensorWithInSegRange(SegmentDTO segment, SectionSensorMappingDTO sensor,
 			SectionDTO sectionDTO) {
 		boolean isWithinRange = false;
-		Double posX = sectionDTO.getStartX() + sensor.getPosX();
-		Double posY = sectionDTO.getStartY() + sensor.getPosY();
+		Double posX = sensor.getPosX();
+		Double posY = sensor.getPosY();
 		log.debug("Absolute Value for sensor PosX : {} and PosY : {}", posX, posY);
 		log.debug("Segment startX : {} endX : {} and startY : {} endY : {}", segment.getStartX(), segment.getEndX(),
 				segment.getStartY(), segment.getEndY());

@@ -27,9 +27,9 @@ import com.eagro.service.utils.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class UserLayoutMappingResource {
+public class UserLayoutMappingWebService {
 
-    private final Logger log = LoggerFactory.getLogger(UserLayoutMappingResource.class);
+    private final Logger log = LoggerFactory.getLogger(UserLayoutMappingWebService.class);
 
     private static final String ENTITY_NAME = "userLayoutMapping";
 

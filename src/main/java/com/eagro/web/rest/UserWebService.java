@@ -28,9 +28,9 @@ import com.eagro.service.utils.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class UserResource {
+public class UserWebService {
 
-    private final Logger log = LoggerFactory.getLogger(UserResource.class);
+    private final Logger log = LoggerFactory.getLogger(UserWebService.class);
 
     private static final String ENTITY_NAME = "eagroUser";
 

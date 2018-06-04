@@ -27,9 +27,9 @@ import com.eagro.service.utils.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class SegmentResource {
+public class SegmentWebService {
 
-    private final Logger log = LoggerFactory.getLogger(SegmentResource.class);
+    private final Logger log = LoggerFactory.getLogger(SegmentWebService.class);
 
     private static final String ENTITY_NAME = "segment";
 
