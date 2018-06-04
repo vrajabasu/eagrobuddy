@@ -2,14 +2,11 @@
   <ul>
     <li *ngFor="let section of data.sections; let i = index">
 <!--       <span matTooltip="{{section.sectionName}} - {{section.sectionDescription}}" matTooltipPosition='above' matTooltipShowDelay=0> -->
-  <!-- , 'padding-top': 50+'px' -->
-      <!-- <div class="section-tag" [ngStyle]="{'margin-left':(calcMarginLeft(i)*oneWidthfeet)+((section.endX - section.startX) * oneWidthfeet)/3+'px'}">{{section.sectionName}}</div> -->
+      <div class="section-tag" [ngStyle]="{'margin-left':(calcMarginLeft(i)*oneWidthfeet)+((section.endX - section.startX) * oneWidthfeet)/3+'px'}">{{section.sectionName}}</div>
       <div class="section" id="animation{{i}}" [ngStyle]="{'margin-left':(calcMarginLeft(i)*oneWidthfeet)+'px', 'margin-top':((calcMarginTop(i)*oneHeightFeet)-25)+'px', 'width':(section.endX - section.startX) * oneWidthfeet+'px', 'height':(section.endY - section.startY) * oneHeightFeet+'px'}">
-            <div class="section-tag" [ngStyle]="{'margin-left':(((section.endX - section.startX) * oneWidthfeet)/2) - (calcSectionLabelLength(i)/2) +'px'}">{{section.sectionName}}</div>
         <ul>
           <li *ngFor="let segment of section.segments">
-            <div class="segment" (click)="navigateToSection(section.sectionId)" [ngStyle]="{'background':assignBgClr4(segment.overallThresholdstate),
-            'color': '#ffffff','width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
+            <div class="segment" (click)="navigateToSection(section.sectionId)" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate),'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
               {{segment.segmentName}}
             </div>
           </li>
@@ -19,4 +16,3 @@
     </li>
   </ul>
 </div>
-            <!-- 'box-shadow': assignBoxShadow(segment.overallThresholdstate),  -->

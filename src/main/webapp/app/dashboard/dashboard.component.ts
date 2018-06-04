@@ -125,6 +125,45 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+    assignBgImg(clrvalue) {
+    // Set back ground color based on overall threshold status
+    if (clrvalue === 'EXCEEDED') {
+      return "#ff765e url('../../assets/img/topography.png')"; // Light RED
+    } else if (clrvalue === 'EXCEEDING_SOON') {
+      return "#fff249 url('../../assets/img/round.png')"; // Light Yellow
+    } else {
+      return "#42f480 url('../../assets/img/spiration-light.png')"; // Light Green
+    }
+
+    // return "url('../../assets/img/sun-pattern.png')"; 
+  }
+
+  assignBgImgGradient(clrvalue) {
+    // Set back ground color based on overall threshold status
+    if (clrvalue === 'EXCEEDED') {
+      return "linear-gradient(#e60000, #ff9999), url('../../assets/img/topography.png')"; // Light RED
+    } else if (clrvalue === 'EXCEEDING_SOON') {
+      return "linear-gradient(#ffff00, #ffffb3), url('../../assets/img/round.png')"; // Light Yellow
+    } else {
+      return "linear-gradient(#003300, #99ff99), url('../../assets/img/spiration-light.png')"; // Light Green
+    }
+
+    // return "url('../../assets/img/sun-pattern.png')"; 
+  }
+
+    assignBoxShadow(clrvalue) {
+    // Set back ground color based on overall threshold status
+    if (clrvalue === 'EXCEEDED') {
+      return "inset 0 0 0 2000px rgba(255,0,0,0.7)"; // Light RED
+    } else if (clrvalue === 'EXCEEDING_SOON') {
+      return "inset 0 0 0 2000px rgba(255,255,0,0.5)"; // Light Yellow
+    } else {
+      return "inset 0 0 0 2000px rgba(0, 153, 51,0.5)"; // Light Green
+    }
+
+    // return "url('../../assets/img/sun-pattern.png')"; 
+  }  
+
   assignBgClr1(clrvalue) {
     // Set back ground color based on overall threshold status
     if (clrvalue === 'EXCEEDED') {
@@ -152,7 +191,7 @@ export class DashboardComponent implements OnInit {
   assignBgClr3(clrvalue) {
     // Set back ground color based on overall threshold status
     if (clrvalue === 'EXCEEDED') {
-      return "radial-gradient(rgb(138,0,0) 4%, rgb(92,0,0) 9%, rgba(102,0,0,0) 9%), radial-gradient(rgb(138,0,0) 4%, rgb(92,0,0) 8%, rgba(102,0,0,0) 10%), radial-gradient(rgba(153,0,0,0.8) 0, rgba(153,0,0,0.8) 21%, rgba(102,0,0,0) 100%), radial-gradient(rgba(153,0,0,0.8) 20%, rgba(102,0,0,0) 100%), radial-gradient(rgb(102,0,0) 35%, rgba(102,0,0,0) 60%), radial-gradient(rgb(102,0,0) 35%, rgba(102,0,0,0) 60%), radial-gradient(rgba(76,0,0,0.701961) 0, rgba(102,0,0,0) 100%), radial-gradient(rgba(76,0,0,0.701961) 0, rgba(102,0,0,0) 100%), linear-gradient(45deg, rgba(102,0,0,0) 49%, rgb(0,0,0) 50%, rgba(102,0,0,0) 70%), linear-gradient(-45deg, rgba(102,0,0,0) 49%, rgb(0,0,0) 50%, rgba(102,0,0,0) 70%), rgb(51, 0, 0)"; // Light Red
+      return "radial-gradient(rgb(93,0,0) 4%, rgb(92,0,0) 9%, rgba(75,0,0,0) 9%), radial-gradient(rgb(75,0,0) 4%, rgb(92,0,0) 8%, rgba(75,0,0,0) 10%), radial-gradient(rgba(153,0,0,0.8) 0, rgba(153,0,0,0.8) 21%, rgba(102,0,0,0) 100%), radial-gradient(rgba(153,0,0,0.8) 20%, rgba(102,0,0,0) 100%), radial-gradient(rgb(102,0,0) 35%, rgba(102,0,0,0) 60%), radial-gradient(rgb(102,0,0) 35%, rgba(102,0,0,0) 60%), radial-gradient(rgba(76,0,0,0.701961) 0, rgba(102,0,0,0) 100%), radial-gradient(rgba(76,0,0,0.701961) 0, rgba(102,0,0,0) 100%), linear-gradient(45deg, rgba(102,0,0,0) 49%, rgb(0,0,0) 50%, rgba(102,0,0,0) 70%), linear-gradient(-45deg, rgba(102,0,0,0) 49%, rgb(0,0,0) 50%, rgba(102,0,0,0) 70%), rgb(51, 0, 0)"; // Light Red
     } else if (clrvalue === 'EXCEEDING_SOON') {
       return "radial-gradient(rgba(238,242,4,1) 0, rgba(242,242,4,1) 4%, rgba(243,247,14,1) 8%, rgba(225,244,14,1) 9%, rgba(102,0,0,0) 10%, rgba(102,0,0,0) 100%), radial-gradient(rgba(244,233,26,1) 0, rgba(219,244,24,1) 4%, rgba(230,247,42,1) 8%, rgba(102,0,0,0) 10%, rgba(102,0,0,0) 100%), radial-gradient(rgba(233,247,32,0.8) 0, rgba(227,242,24,0.8) 21%, rgba(102,0,0,0) 100%), radial-gradient(rgba(221,242,60,0.8) 0, rgba(210,237,40,0.8) 20%, rgba(102,0,0,0) 100%), radial-gradient(rgba(230,237,52,1) 0, rgba(230,237,40,1) 35%, rgba(102,0,0,0) 60%, rgba(102,0,0,0) 100%), radial-gradient(rgba(229,244,66,1) 0, rgba(226,242,48,1) 35%, rgba(102,0,0,0) 60%, rgba(102,0,0,0) 100%), radial-gradient(rgba(235,242,53,0.7) 0, rgba(102,0,0,0) 100%), radial-gradient(rgba(235,242,41,0.7) 0, rgba(102,0,0,0) 100%), linear-gradient(45deg, rgba(102,0,0,0) 49%, rgb(0,0,0) 50%, rgba(102,0,0,0) 70%), linear-gradient(-45deg, rgba(102,0,0,0) 49%, rgb(0,0,0) 50%, rgba(102,0,0,0) 70%), rgba(247,231,61,1)"; // Light Yellow
     } else {
@@ -160,9 +199,21 @@ export class DashboardComponent implements OnInit {
     } 
   }    
 
+  // Dot Pattern
+  assignBgClr4(clrvalue) {
+    // Set back ground color based on overall threshold status
+    if (clrvalue === 'EXCEEDED') {
+      return "linear-gradient(135deg, rgba(248,80,50,1) 0%, rgba(241,111,92,1) 35%, rgba(240,47,23,1) 54%, rgba(231,56,39,1) 100%)"; // Light Red
+    } else if (clrvalue === 'EXCEEDING_SOON') {
+      return "linear-gradient(135deg, rgba(239,245,125,1) 0%, rgba(233,242,102,1) 40%, rgba(255,255,0,1) 50%, rgba(255,255,0,1) 71%, rgba(255,255,0,1) 100%)"; // Light Yellow
+    } else {
+      return " linear-gradient(135deg, rgba(163,245,142,1) 0%, rgba(145,242,106,1) 33%, rgba(59,191,32,1) 51%, rgba(69,207,15,1) 71%, rgba(78,156,39,1) 100%)"; // Light Green
+    } 
+  }    
+
 
   // Hero Pattern - leaf
-  assignBgClr4(clrvalue) {
+  assignBgClr5(clrvalue) {
     // Set back ground color based on overall threshold status
     if (clrvalue === 'EXCEEDED') {
       return "linear-gradient(#e60000, #ff9999)"; // Light Red
