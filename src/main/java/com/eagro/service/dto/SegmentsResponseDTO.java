@@ -45,7 +45,7 @@ public class SegmentsResponseDTO {
 	private Double endY = null;
 
 	@JsonProperty("overallThresholdstate")
-	private OverallThresholdstateEnum overallThresholdstate = null;
+	private OverallThresholdstateEnum overallThresholdstate = OverallThresholdstateEnum.NORMAL;
 
 	public SegmentsResponseDTO segmentId(BigDecimal segmentId) {
 		this.segmentId = segmentId;

@@ -36,7 +36,7 @@ public class SensorsResponse   {
 
   
   @JsonProperty("thresholdState")
-  private OverallThresholdstateEnum thresholdState = null;
+  private OverallThresholdstateEnum thresholdState = OverallThresholdstateEnum.NORMAL;
 
   public SensorsResponse sensorId(Long sensorId) {
     this.sensorId = sensorId;
