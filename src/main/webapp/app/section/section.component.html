@@ -13,7 +13,7 @@
                         </li>
                     </ul> -->
                     <ul>
-                        <li *ngFor="let segment of overallCondition.segments">
+                        <li *ngFor="let segment of overallCondition.segments; let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
                           <div class="segment" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate), 'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
                             {{segment.segmentName}}
                           </div>

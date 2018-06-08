@@ -24,21 +24,24 @@ export class SectionComponent implements OnInit {
   layoutWidth: number;
   layoutHeight: number;
   segmentId: number;
+  selectedIndex: number = null;
 
-  sectionOverallCondition$ : Observable<any>;
-  segmentCurrentCondition$ : Observable<any>;
-  sectionOptimalCondition$ : Observable<any>;
-  sectionKPIChart$ : Observable<any>;
-  segmentZoneCondition$ : Observable<any>;
+  sectionOverallCondition$: Observable<any>;
+  segmentCurrentCondition$: Observable<any>;
+  sectionOptimalCondition$: Observable<any>;
+  sectionKPIChart$: Observable<any>;
+  segmentZoneCondition$: Observable<any>;
 
   constructor(private activatedRoute: ActivatedRoute, private http: Http, private sectionService: SectionService) { }
 
   ngOnInit() {
 
+    this.selectedIndex = 0;
+
     this.activatedRoute.params.subscribe(params => {
       this.sectionId = params['sectionId'];
       console.log("Selected Section : " + this.sectionId);
-      }
+    }
     );
 
     // Configurable value - to adjust Margin Height; used in top & bottom margins
@@ -55,7 +58,7 @@ export class SectionComponent implements OnInit {
     // Get the available height & width from window object
     this.layoutWidth = window.innerWidth;
     this.layoutHeight = window.innerHeight;
-    console.log("Screen Resolution : "+ this.layoutWidth + " , " + this.layoutHeight);
+    console.log("Screen Resolution : " + this.layoutWidth + " , " + this.layoutHeight);
 
     this.sectionOverallCondition$.subscribe(
       res => {
@@ -64,7 +67,7 @@ export class SectionComponent implements OnInit {
         console.log("Section Overall Condition : " + this.overallCondition);
       },
       console.error
-    ); 
+    );
 
     this.segmentCurrentCondition$.subscribe(
       res => {
@@ -72,7 +75,7 @@ export class SectionComponent implements OnInit {
         console.log("Segment Current Condition : " + this.segCont);
       },
       console.error
-    );     
+    );
 
     this.sectionOptimalCondition$.subscribe(
       res => {
@@ -80,7 +83,7 @@ export class SectionComponent implements OnInit {
         console.log("Section Optimal Condition : " + this.greenOptCont);
       },
       console.error
-    ); 
+    );
 
     this.sectionKPIChart$.subscribe(
       res => {
@@ -97,7 +100,7 @@ export class SectionComponent implements OnInit {
         console.log(this.diffZone);
       },
       console.error
-    );        
+    );
 
   }
 
@@ -109,10 +112,10 @@ export class SectionComponent implements OnInit {
     //Configurable Margin to draw the section - all sides
     this.sectionMargin = 50;
     console.log("Section Margin : " + this.sectionMargin);
-    
+
     this.adjustedScreenHeight = ((screenHeight - this.headerHeight) * 0.4) - (this.sectionMargin * 2);
     this.adjustedScreenWidth = (screenWidth * 0.33) - (this.sectionMargin * 2);
-    console.log("Adjusted Screen Resolution : " + this.adjustedScreenWidth + " , " +this.adjustedScreenHeight);
+    console.log("Adjusted Screen Resolution : " + this.adjustedScreenWidth + " , " + this.adjustedScreenHeight);
 
     if (this.overallCondition !== undefined) {
       this.oneWidthfeet = (this.adjustedScreenWidth / (this.overallCondition.endX - this.overallCondition.startX));
@@ -130,6 +133,10 @@ export class SectionComponent implements OnInit {
     } else {
       return '#42f480' // Light Green
     }
+  }
+
+  setIndex(index: number) {
+    this.selectedIndex = index;
   }
 
 }

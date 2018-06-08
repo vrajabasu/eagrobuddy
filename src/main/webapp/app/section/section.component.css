@@ -52,6 +52,11 @@
 .segment {
     border:1px dashed #000000;
 }
+.segment:hover,
+.section ul li.active .segment {
+    border:2px dashed #000;
+    cursor: pointer;
+}
 .section-layout {
     /* min-height: 539px; */
     overflow: hidden;
