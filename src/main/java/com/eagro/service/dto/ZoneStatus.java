@@ -6,7 +6,7 @@ import com.eagro.service.dto.enumeration.OverallThresholdstateEnum;
 public class ZoneStatus {
 	private Long sensorId;
 
-	private OverallThresholdstateEnum thresholdState;
+	private OverallThresholdstateEnum thresholdState = OverallThresholdstateEnum.NORMAL;
 
 	private Double posX;
 

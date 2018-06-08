@@ -760,7 +760,7 @@ public class InternalLayoutDetailsService {
 				.identiySensorForCurrentSegment(currentSectionSensorMap, segment);
 		Map<Long, List<KPIDTO>> sensorOptimalKPIMap = null;
 		Map<Long, SensorDataDTO> sensorActualValueMap = null;
-		OverallThresholdstateEnum thresholdState = null;
+		OverallThresholdstateEnum thresholdState = OverallThresholdstateEnum.NORMAL;
 		// Retrieve Optimal KPI values
 		if (segmentSensorMap != null && !segmentSensorMap.entrySet().isEmpty()) {
 			sensorOptimalKPIMap = this.identifyOptimalKPIsForSensors(sectionDTO, segmentSensorMap, currentSectionKpi);
