@@ -373,7 +373,7 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 
 		// Retrieve Sensor applicable for segment
 		Map<Long, List<SectionSensorMappingDTO>> segmentSensorMap = internalLayoutDetailsService
-				.identiySensorForCurrentSegment(currentSectionSensorMap, segmentDto);
+				.identiySensorForCurrentSegment(currentSectionSensorMap, segmentDto, null);
 		// Retrieve historical kpi by zones
 		Segmentkpichart segmentKpiChartValues = new Segmentkpichart();
 		if (segmentSensorMap != null && !segmentSensorMap.entrySet().isEmpty()) {
