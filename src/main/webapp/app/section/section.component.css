@@ -122,10 +122,15 @@ li {
     text-align: center;
 }
 .segment-box {
-    width:40%;
     float:left;
     text-align: center;
     border:1px solid #000;
     margin:5%;
-    height: 150px;
+}
+.segment-box .sensor-box {
+    border:1px solid #000;
+    width:10px;
+    height:10px;
+    margin:5px;
+    cursor: pointer;
 }
