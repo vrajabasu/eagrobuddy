@@ -1,54 +1,49 @@
 package com.eagro.repository;
 
-import org.springframework.stereotype.Repository;
-
-import com.eagro.entities.User;
+import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.*;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.time.Instant;
-import java.util.List;
-import java.util.Optional;
+import com.eagro.entities.User;
 
 /**
  * Spring Data JPA repository for the EagroUser entity.
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-/*	String USERS_BY_LOGIN_CACHE = "usersByLogin";
+	String USERS_BY_LOGIN_CACHE = "usersByLogin";
 
     String USERS_BY_EMAIL_CACHE = "usersByEmail";
 	
-	//Login related Codes
-	
-	 Optional<User> findOneByActivationKey(String activationKey);
+	 Optional<User> findOneByActiveFlag(String activationKey);
 
-	    List<User> findAllByActivatedIsFalseAndCreatedDateBefore(Instant dateTime);
+	    List<User> findAllByActiveFlagIsFalseAndCreatedDateBefore(Instant dateTime);
 
-	    Optional<User> findOneByResetKey(String resetKey);
+	    //Optional<User> findOneByResetKey(String resetKey);
 
-	    Optional<User> findOneByEmailIgnoreCase(String email);
+	    Optional<User> findOneByEmailAddressIgnoreCase(String email_address);
 
-	    Optional<User> findOneByLogin(String login);
+	    Optional<User> findOneByloginKey(String login);
+	  
+	    @EntityGraph(attributePaths = "authorities")
+	    Optional<User> findOneWithAuthoritiesByuserId(Long user_id);
+
+	    @EntityGraph(attributePaths = "authorities")
+	    /*@Cacheable(cacheNames = USERS_BY_LOGIN_CACHE)*/
+	    Optional<User> findOneWithAuthoritiesByLoginKey(String login_key);
+
+	    @EntityGraph(attributePaths = "authorities")
+	    @Cacheable(cacheNames = USERS_BY_EMAIL_CACHE)
+	    Optional<User> findOneWithAuthoritiesByEmailAddress(String email_address);
 	    
-	    *//** Not Used **//*
-	    @EntityGraph(value = "userRole")
-	    Optional<User> findOneWithUserRoleById(Long id);
-
-	    @EntityGraph(value = "userRole")
-	    @Cacheable(value = USERS_BY_LOGIN_CACHE)
-	    Optional<User> findOneWithuserRoleByLogin(String login);
-	    
-	    
-	    @EntityGraph(value = "userRole")
-	    @Cacheable(value = USERS_BY_EMAIL_CACHE)
-	    Optional<User> findOneWithUserRoleByEmail(String email);
-	    
-	    Page<User> findAllByLoginNot(Pageable pageable, String login);*/
+	    Page<User> findAllByLoginKeyNot(Pageable pageable, String login_key);
 
 	
 	//Insertion

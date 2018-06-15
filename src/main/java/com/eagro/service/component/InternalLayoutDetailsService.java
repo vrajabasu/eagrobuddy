@@ -138,6 +138,10 @@ public class InternalLayoutDetailsService {
 	public OverallThresholdstateEnum calculateOverallThresholdState(Map<Long, SensorDataDTO> sensorActualValueMap,
 			Map<Long, List<KPIDTO>> sensorOptimalKPIMap) {
 		List<OverallThresholdstateEnum> currentThresholdStateList = new ArrayList<>();
+		log.debug("Caclculate OverallThresholdState");
+		
+		
+		
 		// Iterate sensorActualValue Map
 		sensorActualValueMap.values().forEach(sensor -> {
 			OverallThresholdstateEnum currentSensorState = OverallThresholdstateEnum.NORMAL;
@@ -168,7 +172,7 @@ public class InternalLayoutDetailsService {
 				}
 				currentThresholdStateList.add(currentSensorState);
 			}
-			log.trace("The sensorId : {} hold the threshold state as : {}", sensor.getSensorId(), currentSensorState);
+			log.debug("The sensorId : {} hold the threshold state as : {}", sensor.getSensorId(), currentSensorState);
 
 		});
 
@@ -270,7 +274,7 @@ public class InternalLayoutDetailsService {
 				sensorActualValueMap.put(sensorId, currentSensorDataMap.get(sensorId));
 			});
 		}
-		log.debug("The Actual KPI values from Sensor Latest Data : {} ", sensorActualValueMap.values());
+		log.debug("The Actual KPI values from Sensor Latest Data : {} ", sensorActualValueMap);
 		return sensorActualValueMap;
 	}
 
@@ -891,7 +895,7 @@ public class InternalLayoutDetailsService {
 								zoneStatus.setPosY(sectionSensor.getPosY());
 								zoneStatus.setSensorDesc(sensorDescMap.get(sensorId));
 								zoneStatus.setSensorName(sensorNameMap.get(sensorId));
-								zoneStatus.setThresholdState(thresholdState.get(sensorId));
+								zoneStatus.setThresholdState(thresholdState.get(sensorId) != null ? thresholdState.get(sensorId) : OverallThresholdstateEnum.NORMAL);
 								zoneStatus.setSensorId(sensorId);
 								zoneStatusList.add(zoneStatus);
 							}

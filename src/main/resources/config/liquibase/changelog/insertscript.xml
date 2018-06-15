@@ -12,6 +12,8 @@
 		INSERT INTO SEGMENT SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/SEGMENT.csv', null);
 		INSERT INTO USER_ROLE SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/USER_ROLE.csv', null);
 		INSERT INTO USER SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/USER.csv', null);
+		INSERT INTO AUTHORITY SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/authorities.csv', null);
+		INSERT INTO USER_AUTHORITY SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/users_authorities.csv', null);
 		INSERT INTO USER_LAYOUT_MAPPING SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/USER_LAYOUT_MAPPING.csv', null);
 		INSERT INTO SENSOR SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/SENSOR.csv', null);
 		INSERT INTO SENSOR_COVERAGE_RANGE SELECT * FROM CSVRead('classpath:config/liquibase/changelog/dataset/SENSOR_COVERAGE_RANGE.csv', null);

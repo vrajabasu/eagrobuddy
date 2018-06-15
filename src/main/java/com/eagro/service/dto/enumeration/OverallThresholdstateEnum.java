@@ -32,6 +32,6 @@ public enum OverallThresholdstateEnum {
 				return b;
 			}
 		}
-		return null;
+		return NORMAL;
 	}
 }

@@ -2,6 +2,18 @@
 # Spring Boot configuration for the application.yml file.
 #
 # ===================================================================
+
+management:
+    security:
+        roles: ADMIN
+    context-path: /management
+    info:
+        git:
+            mode: full
+    health:
+        mail:
+            enabled: false # When using the MailService, configure an SMTP server and set this to true
+
 spring:
     application:
         name: eAgroBuddy
@@ -21,4 +33,12 @@ info:
     project:
         version: #project.version#
 
-    
+#SEcurity
+eagro:
+    security:
+        authentication:
+            jwt:
+                secret: 93d41101287a0e18a5273f1880640f212e472d10
+                # Token is valid 24 hours
+                token-validity-in-seconds: 86400
+                token-validity-in-seconds-for-remember-me: 2592000

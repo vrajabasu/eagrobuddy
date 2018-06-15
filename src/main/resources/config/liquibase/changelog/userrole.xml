@@ -10,6 +10,7 @@
 
 	<property name="floatType" value="float4" dbms="postgresql, h2" />
 	<property name="floatType" value="float" dbms="mysql, oracle, mssql" />
+	
 
 	<!-- Added the entity UserRole. -->
 	<changeSet id="user_role-3" author="Rajee">
@@ -55,11 +56,11 @@
 
 	</changeSet>
 
-	<changeSet id="user_role-2" author="Rajee">
+	<!-- <changeSet id="user_role-2" author="Rajee">
 
-		<addForeignKeyConstraint baseColumnNames="role_id"
-			baseTableName="user" constraintName="fk_user_role_role_id"
-			referencedColumnNames="role_id" referencedTableName="user_role" />
-
-	</changeSet>
+	<addForeignKeyConstraint baseColumnNames="role_id"
+		baseTableName="user" constraintName="fk_user_role_role_id"
+		referencedColumnNames="role_id" referencedTableName="user_role" />
+ 
+	</changeSet> -->
 </databaseChangeLog>

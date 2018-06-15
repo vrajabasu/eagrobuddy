@@ -2,7 +2,9 @@ package com.eagro.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -11,9 +13,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import com.eagro.config.Constants;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A user.
@@ -30,6 +44,9 @@ public class User implements Serializable {
 	@Column(name = "user_id")
 	private Long userId;
 
+	@NotNull
+    @Pattern(regexp = Constants.LOGIN_REGEX)
+    @Size(min = 1, max = 50)
 	@Column(name = "login_key")
 	private String loginKey;
 
@@ -65,11 +82,16 @@ public class User implements Serializable {
 	@Column(name = "updated_by")
 	private String updatedBy;
 
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "user_authority", joinColumns = {
+			@JoinColumn(name = "user_id", referencedColumnName = "user_id") }, inverseJoinColumns = {
+					@JoinColumn(name = "authority_name", referencedColumnName = "name") })
+	private Set<Authority> authorities = new HashSet<>();
+
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private UserLayoutMapping userLayoutMapping;
-
-	private Long role_id;
 
 	public Long getUserId() {
 		return userId;
@@ -222,6 +244,13 @@ public class User implements Serializable {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
+	 public Set<Authority> getAuthorities() {
+	        return authorities;
+	    }
+
+	    public void setAuthorities(Set<Authority> authorities) {
+	        this.authorities = authorities;
+	    }
 
 
 	@Override
@@ -254,11 +283,4 @@ public class User implements Serializable {
 				+ "'" + "}";
 	}
 
-	public Long getRole_id() {
-		return role_id;
-	}
-
-	public void setRole_id(Long role_id) {
-		this.role_id = role_id;
-	}
 }

@@ -14,8 +14,7 @@
 	<!-- Added the entity EagroUser. -->
 	<changeSet id="user-3" author="Rajee">
 		<createSequence cacheSize="20" cycle="false"
-			incrementBy="1"
-			sequenceName="sequence_user" startValue="1" />
+			incrementBy="1" sequenceName="sequence_user" startValue="1" />
 	</changeSet>
 	<changeSet id="user-1" author="Rajee">
 		<createTable tableName="user">
@@ -66,12 +65,36 @@
 			<column name="updated_by" type="varchar(255)">
 				<constraints nullable="true" />
 			</column>
-
+<!-- 
 			<column name="role_id" type="bigint">
 				<constraints nullable="true" />
 			</column>
+ -->		</createTable>
+
+		<createTable tableName="authority">
+			<column name="name" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
 		</createTable>
 
+		<createTable tableName="user_authority">
+			<column name="user_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="authority_name" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addPrimaryKey columnNames="user_id, authority_name"
+			tableName="user_authority" />
+
+		<addForeignKeyConstraint baseColumnNames="authority_name"
+			baseTableName="user_authority" constraintName="fk_authority_name"
+			referencedColumnNames="name" referencedTableName="authority" />
+		<addForeignKeyConstraint baseColumnNames="user_id"
+			baseTableName="user_authority" constraintName="fk_user_user_id"
+			referencedColumnNames="user_id" referencedTableName="user" />
+
 	</changeSet>
-	
 </databaseChangeLog>
