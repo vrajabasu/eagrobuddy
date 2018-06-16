@@ -1,4 +1,4 @@
-/*package com.eagro.web.rest;
+package com.eagro.web.rest;
 
 import javax.validation.Valid;
 
@@ -20,9 +20,9 @@ import com.eagro.security.jwt.TokenProvider;
 import com.eagro.service.vo.LoginVM;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-*//**
+/**
  * Controller to authenticate users.
- *//*
+ */
 @RestController
 @RequestMapping("/api")
 public class UserJWTController {
@@ -52,9 +52,9 @@ public class UserJWTController {
         return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
     }
 
-    *//**
+    /**
      * Object to return as body in JWT Authentication.
-     *//*
+     */
     static class JWTToken {
 
         private String idToken;
@@ -73,4 +73,3 @@ public class UserJWTController {
         }
     }
 }
-*/
