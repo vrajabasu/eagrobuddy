@@ -6,12 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.eagro.security.AuthoritiesConstants;
 import com.eagro.service.LayoutVisualizationService;
 import com.eagro.service.dto.LayoutResponseDTO;
 import com.eagro.service.dto.SectionsResponseDTO;
@@ -61,6 +63,7 @@ public class LayoutVisualizationWebService {
 	 */
 	@RequestMapping(value = "/eAgro/v1/visualization/overall/layouts/{layoutId}", method = RequestMethod.GET)
 	@Timed
+	@Secured(AuthoritiesConstants.USER)
 	public ResponseEntity<LayoutResponseDTO> getLayout(@PathVariable Long layoutId) {
 		log.info("REST request to get Layout for layoutId:{} ", layoutId);
 		// TODO user validation need to be implement
@@ -86,6 +89,7 @@ public class LayoutVisualizationWebService {
 	 */
 	@RequestMapping(value = "/eAgro/v1/visualization/overall/{layoutId}/sections/{sectionId}", method = RequestMethod.GET)
 	@Timed
+	@Secured(AuthoritiesConstants.USER)
 	public ResponseEntity<SectionsResponseDTO> getSection(@PathVariable Long layoutId, @PathVariable Long sectionId) {
 		log.info("REST request to get section for layoutId:{} and sectionId:{} ", layoutId, sectionId);
 		// TODO user validation need to be implement
@@ -109,6 +113,7 @@ public class LayoutVisualizationWebService {
 	 */
 	@RequestMapping(value = "/eAgro/v1/visualization/optimalkpichart/{layoutId}/sections/{sectionId}", method = RequestMethod.GET)
 	@Timed
+	@Secured(AuthoritiesConstants.USER)
 	public ResponseEntity<SectionwithkpiResponseDTO> getOptimalKpi(@PathVariable Long layoutId,
 			@PathVariable Long sectionId) {
 		// TODO user validation for sectionId
@@ -137,6 +142,7 @@ public class LayoutVisualizationWebService {
 	 */
 	@RequestMapping(value = "/eAgro/v1/visualization/segmentstatus/{layoutId}/sections/{sectionId}/segments/{segmentId}", method = RequestMethod.GET)
 	@Timed
+	@Secured(AuthoritiesConstants.USER)
 	public ResponseEntity<SegmentWithkpiResponse> getSegmentStatus(
 			@ApiParam(value = "Identifier for the layout", required = true) @PathVariable("layoutId") Long layoutId,
 			@ApiParam(value = "Identifier for the section", required = true) @PathVariable("sectionId") Long sectionId,
@@ -170,6 +176,7 @@ public class LayoutVisualizationWebService {
 	 */
 	@RequestMapping(value = "/eAgro/v1/visualization/sensorstatus/{layoutId}/sections/{sectionId}/segments/{segmentId}/sensors/{sensorId}", method = RequestMethod.GET)
 	@Timed
+	@Secured(AuthoritiesConstants.USER)
 	public ResponseEntity<SensorWithKpi> getSensorStatus(
 			@ApiParam(value = "Identifier for the layout", required = true) @PathVariable("layoutId") Long layoutId,
 			@ApiParam(value = "Identifier for the section", required = true) @PathVariable("sectionId") Long sectionId,
@@ -207,6 +214,7 @@ public class LayoutVisualizationWebService {
 	 * @return the zone status
 	 */
 	@RequestMapping(value = "/eAgro/v1/visualization/zonestatus/{layoutId}/sections/{sectionId}/segments/{segmentId}", method = RequestMethod.GET)
+	@Secured(AuthoritiesConstants.USER)
 	ResponseEntity<SegmentZoneDetailsResponse> getZoneStatus(
 			@ApiParam(value = "Identifier for the layout", required = true) @PathVariable("layoutId") Long layoutId,
 			@ApiParam(value = "Identifier for the section", required = true) @PathVariable("sectionId") Long sectionId,
@@ -223,6 +231,7 @@ public class LayoutVisualizationWebService {
 
 
 	@RequestMapping(value = "/eAgro/v1/visualization/segmentkpichart/{layoutId}/sections/{sectionId}/segments/{segmentId}", method = RequestMethod.GET)
+	@Secured(AuthoritiesConstants.USER)
 	ResponseEntity<Segmentkpichart> getSegmentKpiChart(
 			@ApiParam(value = "Identifier for the layout", required = true) @PathVariable("layoutId") Long layoutId,
 			@ApiParam(value = "Identifier for the section", required = true) @PathVariable("sectionId") Long sectionId,

@@ -37,13 +37,12 @@ public class DomainUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(final String login) {
         log.debug("Authenticating {}", login);
         String lowercaseLogin = login.toLowerCase(Locale.ENGLISH);
-        Optional<User> userByEmailFromDatabase = userRepository.findOneWithAuthoritiesByEmailAddress(lowercaseLogin);
-        return userByEmailFromDatabase.map(user -> createSpringSecurityUser(lowercaseLogin, user)).orElseGet(() -> {
+   
             Optional<User> userByLoginFromDatabase = userRepository.findOneWithAuthoritiesByLoginKey(lowercaseLogin);
+            log.debug("user from DB : {}", userByLoginFromDatabase );
             return userByLoginFromDatabase.map(user -> createSpringSecurityUser(lowercaseLogin, user))
                 .orElseThrow(() -> new UsernameNotFoundException("User " + lowercaseLogin + " was not found in the " +
                     "database"));
-        });
     }
 
     private org.springframework.security.core.userdetails.User createSpringSecurityUser(String lowercaseLogin, User user) {
@@ -53,6 +52,7 @@ public class DomainUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
             .map(authority -> new SimpleGrantedAuthority(authority.getName()))
             .collect(Collectors.toList());
+        log.debug("Granted Authorities : {}" ,grantedAuthorities );
         return new org.springframework.security.core.userdetails.User(user.getLoginKey(),
             user.getPassword(),
             grantedAuthorities);

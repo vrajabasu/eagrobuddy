@@ -41,8 +41,8 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         }
       //  EnumSet<DispatcherType> disps = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ASYNC);
       //  initMetrics(servletContext, disps);
-        if (env.acceptsProfiles("dev")) {
-            initH2Console(servletContext);
+        if (env.acceptsProfiles("prod")) {
+       // 	initH2Console(servletContext);
         }
         log.info("Web application fully configured");
     }
