@@ -139,6 +139,8 @@ public class SensorDataDTO implements Serializable {
             ", paramValue2=" + getParamValue2() +
             ", param3='" + getParam3() + "'" +
             ", paramValue3=" + getParamValue3() +
+            ", sensorId=" + getSensorId() +
+            ", LayoutId=" + getLayoutId() +
             "}";
     }
 

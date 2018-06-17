@@ -1,6 +1,7 @@
 package com.eagro.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,6 +32,7 @@ import com.eagro.service.dto.SegmentDTO;
 import com.eagro.service.dto.SegmentWithkpiResponse;
 import com.eagro.service.dto.SegmentZoneDetailsResponse;
 import com.eagro.service.dto.Segmentkpichart;
+import com.eagro.service.dto.SensorCoverageRangeDTO;
 import com.eagro.service.dto.SensorDataDTO;
 import com.eagro.service.dto.SensorWithKpi;
 import com.eagro.service.mapper.LayoutMapper;
@@ -220,14 +222,19 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 		// Retreive all sensors from sectionsensormapping
 		Map<SectionDTO, List<SectionSensorMappingDTO>> currentSectionSensorMap = internalLayoutDetailsService
 				.getAllSensorsForSection(sectionDTO);
-
 		List<SectionSensorMappingDTO> sensorList = new ArrayList<>();
 		List<SensorDataDTO> currentSectionSensorData = new ArrayList<>();
+		Map<Long, List<SensorCoverageRangeDTO>> sensorCoverageRangeMap = new HashMap<>();
 		if (!currentSectionSensorMap.entrySet().isEmpty()) {
 			sensorList = currentSectionSensorMap.entrySet().iterator().next().getValue();
-			currentSectionSensorData = internalLayoutDetailsService.retrieveSensorDataList(layoutId, sensorList);
+			if (ServiceUtil.isNotEmptyResult(sensorList)) {
+				currentSectionSensorData = internalLayoutDetailsService.retrieveSensorDataList(layoutId, sensorList);
+				log.debug("currentSectionSensorData : {}  for currentSection : {}", currentSectionSensorData,
+						sectionDTO.getSectionId());
+				sensorCoverageRangeMap = internalLayoutDetailsService.getSensorCoveageRangeBasedOnSensorId(sectionDTO, sensorList);
+				log.debug("sensorCoverageRangeMap :{}", sensorCoverageRangeMap);
+			}
 		}
-		log.debug("currentSectionSensorData : {}  for currentSection : {}", currentSectionSensorData, sectionId);
 
 		// Retrieve segmentDetails
 		Segment segment = segmentRepository.findByLayoutIdAndSectionIdAndSegmentId(layoutId, sectionId, segmentId);
@@ -236,7 +243,7 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 		SegmentWithkpiResponse response = new SegmentWithkpiResponse();
 		if (segmentDto != null) {
 			internalLayoutDetailsService.retrieveSegmentWithKpi(currentSectionSensorMap, sensorList,
-					currentSectionSensorData, segment, segmentDto, response);
+					currentSectionSensorData, segment, segmentDto, response, sensorCoverageRangeMap);
 		}
 		return response;
 	}
@@ -325,12 +332,17 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 
 		List<SectionSensorMappingDTO> sensorList = new ArrayList<>();
 		List<SensorDataDTO> currentSectionSensorData = new ArrayList<>();
+		Map<Long, List<SensorCoverageRangeDTO>> sensorCoverageRangeMap = new HashMap<>();
 		if (!currentSectionSensorMap.entrySet().isEmpty()) {
 			sensorList = currentSectionSensorMap.entrySet().iterator().next().getValue();
-			currentSectionSensorData = internalLayoutDetailsService.retrieveSensorDataList(layoutId, sensorList);
+			if (ServiceUtil.isNotEmptyResult(sensorList)) {
+				currentSectionSensorData = internalLayoutDetailsService.retrieveSensorDataList(layoutId, sensorList);
+				log.debug("currentSectionSensorData : {}  for currentSection : {}", currentSectionSensorData,
+						sectionDTO.getSectionId());
+				sensorCoverageRangeMap = internalLayoutDetailsService.getSensorCoveageRangeBasedOnSensorId(sectionDTO, sensorList);
+				log.debug("sensorCoverageRangeMap :{}", sensorCoverageRangeMap);
+			}
 		}
-		log.debug("currentSectionSensorData : {}  for currentSection : {}", currentSectionSensorData,
-				sectionDTO.getSectionId());
 		SegmentZoneDetailsResponse segmentZoneDetails = new SegmentZoneDetailsResponse();
 
 		segmentZoneDetails.setSectionName(sectionDTO.getSectionName());
@@ -344,7 +356,7 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 
 		if (segmentDTO != null) {
 			internalLayoutDetailsService.fetchZoneStatus(sectionDTO, currentSectionSensorMap, currentSectionKpi, currentSectionSensorData,
-					segmentZoneDetails, segmentDTO);
+					segmentZoneDetails, segmentDTO, sensorCoverageRangeMap);
 
 		}
 		return segmentZoneDetails;
@@ -361,11 +373,17 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 
 		List<SectionSensorMappingDTO> sensorList = new ArrayList<>();
 		List<SensorDataDTO> currentSectionSensorData = new ArrayList<>();
+		Map<Long, List<SensorCoverageRangeDTO>> sensorCoverageRangeMap = new HashMap<>();
 		if (!currentSectionSensorMap.entrySet().isEmpty()) {
 			sensorList = currentSectionSensorMap.entrySet().iterator().next().getValue();
-			currentSectionSensorData = internalLayoutDetailsService.retrieveSensorDataList(layoutId, sensorList);
+			if (ServiceUtil.isNotEmptyResult(sensorList)) {
+				currentSectionSensorData = internalLayoutDetailsService.retrieveSensorDataList(layoutId, sensorList);
+				log.debug("currentSectionSensorData : {}  for currentSection : {}", currentSectionSensorData,
+						sectionDTO.getSectionId());
+				sensorCoverageRangeMap = internalLayoutDetailsService.getSensorCoveageRangeBasedOnSensorId(sectionDTO, sensorList);
+				log.debug("sensorCoverageRangeMap :{}", sensorCoverageRangeMap);
+			}
 		}
-		log.debug("currentSectionSensorData : {}  for currentSection : {}", currentSectionSensorData, sectionId);
 
 		// Retrieve segmentDetails
 		Segment segment = segmentRepository.findByLayoutIdAndSectionIdAndSegmentId(layoutId, sectionId, segmentId);
@@ -373,7 +391,7 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 
 		// Retrieve Sensor applicable for segment
 		Map<Long, List<SectionSensorMappingDTO>> segmentSensorMap = internalLayoutDetailsService
-				.identiySensorForCurrentSegment(currentSectionSensorMap, segmentDto, null);
+				.identiySensorForCurrentSegment(currentSectionSensorMap, segmentDto, sensorCoverageRangeMap);
 		// Retrieve historical kpi by zones
 		Segmentkpichart segmentKpiChartValues = new Segmentkpichart();
 		if (segmentSensorMap != null && !segmentSensorMap.entrySet().isEmpty()) {
