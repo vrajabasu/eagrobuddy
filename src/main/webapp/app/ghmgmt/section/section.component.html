@@ -3,7 +3,8 @@
     <div class="column" data-xl-width="12" *ngIf="sectionId == 1">
         <div class="column column-left" data-xl-width="4">
             <div class="column">
-                <div *ngIf="overallCondition" class="section" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
+                <div *ngIf="overallCondition" class="section" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px', 'width':(layoutwidth * 0.33)+'px'}">
+                <div class="section-cover" [ngStyle]="{'width':(overallCondition.endX - overallCondition.startX) * oneWidthfeet+'px', 'height':(overallCondition.endY - overallCondition.startY) * oneHeightFeet+'px'}">                    
                     <!-- {{overallCondition.sectionName}} - {{overallCondition.sectionDescription}} -->
                     <!-- <ul>
                         <li *ngFor="let segment of overallCondition.segments" [ngStyle]="{'height':adjustedScreenHeight+'px'}" >
@@ -14,11 +15,12 @@
                     </ul> -->
                     <ul>
                         <li *ngFor="let segment of overallCondition.segments; let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
-                          <div class="segment" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate), 'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
+                          <div class="segment" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate), 'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">                           
                             {{segment.segmentName}}
                           </div>
                         </li>
                     </ul>
+                </div>
                 </div>
                 <div *ngIf="historical" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.6)+'px'}">
                     <div class="zone-header">
@@ -54,7 +56,7 @@
                     <strong>Position of Segment in Layout:</strong> {{diffZone.segmentX}} {{diffZone.segmentY}}
                 </p>
             </div>
-            <div [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
+            <div *ngIf = "diffZone" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
                 <div class="segment-box" [ngStyle]="{'width':((diffZone.segmentEndX - diffZone.segmentStartX) * oneWidthfeet)+'px', 'height':((diffZone.segmentEndY - diffZone.segmentStartY) * oneHeightFeet)+'px'}">
                     <div class="sensor-box"></div>
                 </div>
@@ -62,7 +64,7 @@
                     box2
                 </div>
             </div>
-            <div [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
+            <div *ngIf = "diffZone" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
                 <div class="segment-box" [ngStyle]="{'width':((diffZone.segmentEndX - diffZone.segmentStartX) * oneWidthfeet)+'px', 'height':((diffZone.segmentEndY - diffZone.segmentStartY) * oneHeightFeet)+'px'}">
                     box3
                 </div>

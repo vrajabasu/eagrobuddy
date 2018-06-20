@@ -230,7 +230,7 @@ export class DashboardComponent implements OnInit {
   }
 
   navigateToSection(id) {
-    this.router.navigate(['/section/'+id])
+    this.router.navigate(['../sections/section/'],{queryParams:{sectionId:id},skipLocationChange:false})
   }
 
 }

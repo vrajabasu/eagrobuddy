@@ -25,6 +25,8 @@ export class SectionComponent implements OnInit {
   layoutHeight: number;
   segmentId: number;
   selectedIndex: number = null;
+  sectionWidth: number;
+  sectionHeight: number;
 
   sectionOverallCondition$: Observable<any>;
   segmentCurrentCondition$: Observable<any>;
@@ -38,8 +40,8 @@ export class SectionComponent implements OnInit {
 
     this.selectedIndex = 0;
 
-    this.activatedRoute.params.subscribe(params => {
-      this.sectionId = params['sectionId'];
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.sectionId = +params['sectionId'];
       console.log("Selected Section : " + this.sectionId);
     }
     );
@@ -63,6 +65,8 @@ export class SectionComponent implements OnInit {
     this.sectionOverallCondition$.subscribe(
       res => {
         this.overallCondition = res;
+        this.sectionWidth = this.overallCondition.endX - this.overallCondition.startX;
+        this.sectionHeight = this.overallCondition.endY - this.overallCondition.startY;
         this.prepareSectionData(window.innerWidth, window.innerHeight);
         console.log("Section Overall Condition : " + this.overallCondition);
       },
@@ -104,22 +108,34 @@ export class SectionComponent implements OnInit {
 
   }
 
+  onResize() {
+    // Whenever screen changes - redraw the layout!!!
+    this.prepareSectionData(window.innerWidth, window.innerHeight);
+  }
+
   prepareSectionData(screenWidth, screenHeight) {
 
     //Get header & Footer height, in order arrive at actual height available for layout
     this.headerHeight = document.getElementById('header').offsetHeight;
 
     //Configurable Margin to draw the section - all sides
-    this.sectionMargin = 50;
+    this.sectionMargin = 25;
     console.log("Section Margin : " + this.sectionMargin);
 
     this.adjustedScreenHeight = ((screenHeight - this.headerHeight) * 0.4) - (this.sectionMargin * 2);
-    this.adjustedScreenWidth = (screenWidth * 0.33) - (this.sectionMargin * 2);
+    // this.adjustedScreenWidth = (screenWidth * 0.33) - (this.sectionMargin * 2);
+    this.adjustedScreenWidth = this.adjustedScreenHeight * (this.sectionWidth/this.sectionHeight);
+    if (this.adjustedScreenWidth > ((screenWidth * 0.33) - (this.sectionMargin * 2))) {
+      this.adjustedScreenWidth = (screenWidth * 0.33) - (this.sectionMargin * 2);
+      this.adjustedScreenHeight = ((screenWidth * 0.33) - (this.sectionMargin * 2)) * (this.sectionWidth/this.sectionHeight);
+    }    
     console.log("Adjusted Screen Resolution : " + this.adjustedScreenWidth + " , " + this.adjustedScreenHeight);
 
     if (this.overallCondition !== undefined) {
-      this.oneWidthfeet = (this.adjustedScreenWidth / (this.overallCondition.endX - this.overallCondition.startX));
-      this.oneHeightFeet = (this.adjustedScreenHeight / (this.overallCondition.endY - this.overallCondition.startY));
+      // this.oneWidthfeet = (this.adjustedScreenWidth / (this.overallCondition.endX - this.overallCondition.startX));
+      // this.oneHeightFeet = (this.adjustedScreenHeight / (this.overallCondition.endY - this.overallCondition.startY));
+      this.oneWidthfeet = (this.adjustedScreenWidth / this.sectionWidth);
+      this.oneHeightFeet = (this.adjustedScreenHeight / this.sectionHeight);      
       console.log("One Feet Width & Height : " + this.oneWidthfeet + " , " + this.oneHeightFeet);
     }
   }

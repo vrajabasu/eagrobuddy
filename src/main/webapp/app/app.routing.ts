@@ -34,7 +34,7 @@ export const GHRoutes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './dashboard/dashboard.module#Dashboard'
+        loadChildren: './ghmgmt/ghmgmt.module#GHMgmt'
       },
       {
         path: '**',

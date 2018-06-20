@@ -5,16 +5,13 @@ import { SectionComponent } from './../section/section.component';
 
 export const DashboardRoutes: Routes = [
     {
-
+      path: '',
+      redirectTo: 'dashboard',  
+      pathMatch: 'full'
+    }, {
       path: '',
       children: [ {
         path: 'dashboard',
         component: DashboardComponent
-    }
-    ,{
-        path: 'section/:sectionId',
-        component: SectionComponent
-    }
-  ]
-}
+    }]}
 ];

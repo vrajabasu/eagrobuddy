@@ -7,7 +7,7 @@
 }
 .section ul {
     overflow: hidden;
-    margin:0 10%;
+    /*margin:0 10%;*/
 }
 .section ul li {
     float:left;
