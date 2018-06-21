@@ -8,8 +8,8 @@
             <div class="section-tag" [ngStyle]="{'margin-left':(((section.endX - section.startX) * oneWidthfeet)/2) - (calcSectionLabelLength(i)/2) +'px'}">{{section.sectionName}}</div>
         <ul>
           <li *ngFor="let segment of section.segments">
-            <div class="segment" (click)="navigateToSection(section.sectionId)" [ngStyle]="{'background':assignBgClr4(segment.overallThresholdstate),
-            'color': '#ffffff','width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
+            <div class="segment" (click)="navigateToSection(section.sectionId)" [ngStyle]="{'background':assignBgClr2(segment.overallThresholdstate),
+            'color': '#000000','width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
               {{segment.segmentName}}
             </div>
           </li>

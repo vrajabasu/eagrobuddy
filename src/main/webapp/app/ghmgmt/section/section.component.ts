@@ -19,6 +19,7 @@ export class SectionComponent implements OnInit {
   adjustedScreenWidth: number;
   adjustedScreenHeight: number;
   sectionMargin: number;
+  boxMargin: number;
   layoutWidthMargin: number;
   layoutHeightMargin: number;
   layoutWidth: number;
@@ -27,6 +28,7 @@ export class SectionComponent implements OnInit {
   selectedIndex: number = null;
   sectionWidth: number;
   sectionHeight: number;
+  zoneMap = {};
 
   sectionOverallCondition$: Observable<any>;
   segmentCurrentCondition$: Observable<any>;
@@ -102,6 +104,7 @@ export class SectionComponent implements OnInit {
       res => {
         this.diffZone = res;
         console.log(this.diffZone);
+        this.prepareZonedata();
       },
       console.error
     );
@@ -109,6 +112,10 @@ export class SectionComponent implements OnInit {
   }
 
   onResize() {
+        // Get the available height & width from window object
+    this.layoutWidth = window.innerWidth;
+    this.layoutHeight = window.innerHeight;
+    console.log("Screen Resolution after Resize: " + this.layoutWidth + " , " + this.layoutHeight);
     // Whenever screen changes - redraw the layout!!!
     this.prepareSectionData(window.innerWidth, window.innerHeight);
   }
@@ -122,7 +129,7 @@ export class SectionComponent implements OnInit {
     this.sectionMargin = 25;
     console.log("Section Margin : " + this.sectionMargin);
 
-    this.adjustedScreenHeight = ((screenHeight - this.headerHeight) * 0.4) - (this.sectionMargin * 2);
+    this.adjustedScreenHeight = ((screenHeight - this.headerHeight) * 0.35) - (this.sectionMargin * 2);
     // this.adjustedScreenWidth = (screenWidth * 0.33) - (this.sectionMargin * 2);
     this.adjustedScreenWidth = this.adjustedScreenHeight * (this.sectionWidth/this.sectionHeight);
     if (this.adjustedScreenWidth > ((screenWidth * 0.33) - (this.sectionMargin * 2))) {
@@ -140,15 +147,45 @@ export class SectionComponent implements OnInit {
     }
   }
 
+  prepareZonedata() {
+    var i = null;
+    for (i = 0; this.diffZone.zones.length > i; i += 1) {
+        this.zoneMap[this.diffZone.zones[i].key] = this.diffZone.zones[i].value;
+    }
+  }
+
+  hasZone(tagName) {
+    return this.zoneMap[tagName];
+  };
+ 
+
+  determineBoxHeight() {
+
+    //Get header & Footer height, in order arrive at actual height available for layout
+    this.headerHeight = document.getElementById('header').offsetHeight;
+    this.boxMargin = 25;
+    let boxHeight = ((this.layoutHeight - this.headerHeight) * 0.4) - (this.boxMargin*2.2);
+    console.log("Box Height : " + boxHeight);
+    return boxHeight;
+  }
+
+  determineBoxWidth() {
+
+    this.boxMargin = 25;
+    let boxWidth = ((this.layoutWidth * 0.45)/2) - (this.boxMargin*2.2);
+    console.log("Box Width : " + boxWidth);
+    return boxWidth;
+  }
+
   assignBgClr(clrvalue) {
     // Set back ground color based on overall threshold status
     if (clrvalue === 'EXCEEDED') {
-      return "#ff765e"; // Light RED
+      return "linear-gradient(#ffb3b3, #ff0000)"; // Light Red
     } else if (clrvalue === 'EXCEEDING_SOON') {
-      return '#fff249' // Light Yellow
+      return "linear-gradient(#ffffcc, #ffff00)"; // Light Yellow
     } else {
-      return '#42f480' // Light Green
-    }
+      return "linear-gradient(#ccffdd, #009900)"; // Light Green
+    } 
   }
 
   setIndex(index: number) {

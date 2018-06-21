@@ -1,9 +1,9 @@
 <div class="section-layout" [ngStyle]="{'margin-top':headerHeight+'px'}">
     <!-- <h4 class="section-header">{{overCondition.sectionName}} {{overCondition.sectionDescription}}</h4> -->
-    <div class="column" data-xl-width="12" *ngIf="sectionId == 1">
+    <div class="column" data-xl-width="12">
         <div class="column column-left" data-xl-width="4">
             <div class="column">
-                <div *ngIf="overallCondition" class="section" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px', 'width':(layoutwidth * 0.33)+'px'}">
+                <div *ngIf="overallCondition" class="section" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.35)+'px', 'width':(layoutwidth * 0.33)+'px'}">
                 <div class="section-cover" [ngStyle]="{'width':(overallCondition.endX - overallCondition.startX) * oneWidthfeet+'px', 'height':(overallCondition.endY - overallCondition.startY) * oneHeightFeet+'px'}">                    
                     <!-- {{overallCondition.sectionName}} - {{overallCondition.sectionDescription}} -->
                     <!-- <ul>
@@ -15,14 +15,14 @@
                     </ul> -->
                     <ul>
                         <li *ngFor="let segment of overallCondition.segments; let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
-                          <div class="segment" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate), 'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">                           
+                          <div class="segment" [ngStyle]="{'background':assignBgClr(segment.overallThresholdstate), 'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">                           
                             {{segment.segmentName}}
                           </div>
                         </li>
                     </ul>
                 </div>
                 </div>
-                <div *ngIf="historical" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.6)+'px'}">
+                <div *ngIf="historical" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.65)+'px'}">
                     <div class="zone-header">
                         <span>Parameter</span>
                         <span>Range</span>
@@ -50,26 +50,30 @@
         <div class="column column-middle" data-xl-width="4">
             <div *ngIf = "diffZone" class="column" data-xl-width="12" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.2)+'px'}">
                 <p class="text-center">
-                    <strong>Position of Segment in Layout:</strong> {{diffZone.sectionX}} {{diffZone.sectionY}}
+                    <strong>Position of Section in Layout:</strong> {{diffZone.sectionStartX}} {{diffZone.sectionStartY}}
                 </p>
                 <p class="text-center">
-                    <strong>Position of Segment in Layout:</strong> {{diffZone.segmentX}} {{diffZone.segmentY}}
+                    <strong>Position of Segment in Layout:</strong> {{diffZone.segmentStartX}} {{diffZone.segmentStartX}}
                 </p>
             </div>
             <div *ngIf = "diffZone" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
-                <div class="segment-box" [ngStyle]="{'width':((diffZone.segmentEndX - diffZone.segmentStartX) * oneWidthfeet)+'px', 'height':((diffZone.segmentEndY - diffZone.segmentStartY) * oneHeightFeet)+'px'}">
-                    <div class="sensor-box"></div>
+                <div class="segment-box" [ngStyle]="{'background':assignBgClr(hasZone('WATER')), 'width':determineBoxWidth()+'px', 'height':determineBoxHeight()+'px', 'margin':boxMargin+'px'}">
+                    
                 </div>
-                <div class="segment-box" [ngStyle]="{'width':((diffZone.segmentEndX - diffZone.segmentStartX) * oneWidthfeet)+'px', 'height':((diffZone.segmentEndY - diffZone.segmentStartY) * oneHeightFeet)+'px'}">
-                    box2
+                <div class="segment-box" [ngStyle]="{'width':determineBoxWidth()+'px', 'height':determineBoxHeight()+'px', 'margin':boxMargin+'px'}">
+                    <div class="sensor-box"></div>
                 </div>
             </div>
             <div *ngIf = "diffZone" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
-                <div class="segment-box" [ngStyle]="{'width':((diffZone.segmentEndX - diffZone.segmentStartX) * oneWidthfeet)+'px', 'height':((diffZone.segmentEndY - diffZone.segmentStartY) * oneHeightFeet)+'px'}">
-                    box3
+                <div class="segment-box" [ngStyle]="{'width':determineBoxWidth()+'px', 'height':determineBoxHeight()+'px', 'margin':boxMargin+'px'}">
+                    <div class="sensor-box"></div>
+                    <div class="sensor-box"></div>
                 </div>
-                <div class="segment-box" [ngStyle]="{'width':((diffZone.segmentEndX - diffZone.segmentStartX) * oneWidthfeet)+'px', 'height':((diffZone.segmentEndY - diffZone.segmentStartY) * oneHeightFeet)+'px'}">
-                    box4
+                <div class="segment-box" [ngStyle]="{'width':determineBoxWidth()+'px', 'height':determineBoxHeight()+'px', 'margin':boxMargin+'px'}">
+                    <div class="sensor-box"></div>
+                    <div class="sensor-box"></div>
+                    <div class="sensor-box"></div>
+                    <div class="sensor-box"></div>
                 </div>
             </div>
         </div>
@@ -77,7 +81,7 @@
             <div class="segment-condition column" data-xl-width="12" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.5)+'px'}">
                 <h5 class="text-center">
                     <strong>
-                        {{segCont.segmentName}} - {{segCont.segmentDescription}}
+                        {{segCont.segmentName}} Condition
                     </strong>
                 </h5>
                 <div *ngFor="let zoneWithKpi of segCont.zoneWithKpis">
@@ -99,7 +103,7 @@
             <div *ngIf="greenOptCont" class="green-condition column" data-xl-width="12" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.5)+'px'}">
                 <h5 class="text-center">
                     <strong>
-                        {{greenOptCont.sectionName}} - {{greenOptCont.sectionDescription}}
+                        {{greenOptCont.sectionName}} Optimal Condition
                     </strong>
                 </h5>
                 <div *ngFor="let zoneWithKpi of greenOptCont.zoneWithKpis">
@@ -119,11 +123,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="column col-lg-12" data-xl-width="12" *ngIf="sectionId == 2">
-        {{sectionId}}
-    </div>
-    <div class="column col-lg-12" data-xl-width="12" *ngIf="sectionId == 3">
-        {{sectionId}}
     </div>
 </div>
