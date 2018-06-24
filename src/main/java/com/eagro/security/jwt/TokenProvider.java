@@ -16,6 +16,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
+import com.eagro.security.JHipsterProperties;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -23,7 +25,6 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
-
 
 @Component
 public class TokenProvider {
@@ -37,20 +38,23 @@ public class TokenProvider {
     private long tokenValidityInMilliseconds;
 
     private long tokenValidityInMillisecondsForRememberMe;
-    
-    public SecurityProperties securityProperties;
 
-   
-   /* @PostConstruct
+    private final JHipsterProperties jHipsterProperties;
+
+    public TokenProvider(JHipsterProperties jHipsterProperties) {
+        this.jHipsterProperties = jHipsterProperties;
+    }
+
+    @PostConstruct
     public void init() {
         this.secretKey =
-        		securityProperties.getSecurity().getAuthentication().getJwt().getSecret();
+            jHipsterProperties.getSecurity().getAuthentication().getJwt().getSecret();
 
         this.tokenValidityInMilliseconds =
-            1000 * this.securityProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSeconds();
+            1000 * jHipsterProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSeconds();
         this.tokenValidityInMillisecondsForRememberMe =
-            1000 * this.securityProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSecondsForRememberMe();
-    }*/
+            1000 * jHipsterProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSecondsForRememberMe();
+    }
 
     public String createToken(Authentication authentication, boolean rememberMe) {
         String authorities = authentication.getAuthorities().stream()
@@ -111,5 +115,4 @@ public class TokenProvider {
         }
         return false;
     }
-    
 }
