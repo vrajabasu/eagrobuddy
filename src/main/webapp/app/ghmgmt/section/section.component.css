@@ -18,9 +18,13 @@
     align-items: center;
     justify-content: center;
 }
+.diff-zone {
+    padding-top: 40px;
+}
 .zone-header {
     font-weight: 700;
     color:#000;
+    padding-left: 10px;
 }
 .zone-value {
     background-color:rgb(84,130,53);
@@ -44,6 +48,9 @@
     padding:3px 0 3px 42px;
     border-top:1px solid #000;
     border-right:1px solid #000;
+}
+.zone-value ul li div:last-child {
+    width:34%;
 }
 .zone-value ul li:last-child div {
     border-bottom:1px solid #000;
@@ -74,9 +81,14 @@
     background-color:#fff;
     padding:0 10px;
 }
+.segment-condition ul li {
+    overflow:hidden;
+}
 .green-condition {
-    background-color: rgb(180,199,231);
-    padding:0 10px;
+    /* background-color: rgb(180,199,231); */
+    background: linear-gradient(45deg, #f9c667 0%,#f79621 100%);
+    padding:10px;
+    color: #000;
 }
 .over-condition {
     overflow: hidden;
@@ -124,7 +136,6 @@ li {
 .segment-box {
     float:left;
     text-align: center;
-    border:1px solid #000;
     margin:5%;
 }
 .segment-box .sensor-box {
@@ -133,4 +144,7 @@ li {
     height:10px;
     margin:5px;
     cursor: pointer;
+}
+.box-shadow {
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.5);
 }
