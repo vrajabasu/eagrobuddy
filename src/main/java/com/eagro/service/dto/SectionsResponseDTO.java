@@ -41,7 +41,7 @@ public class SectionsResponseDTO   {
 
   @JsonProperty("segments")
   @Valid
-  private List<SegmentsResponseDTO> segmentsResponseDTO = null;
+  private List<SegmentsResponseDTO> segments = null;
 
   public SectionsResponseDTO sectionId(Long sectionId) {
     this.sectionId = sectionId;
@@ -204,16 +204,16 @@ public class SectionsResponseDTO   {
     this.endY = endY;
   }
 
-  public SectionsResponseDTO segmentsResponseDTO(List<SegmentsResponseDTO> segmentsResponseDTO) {
-    this.segmentsResponseDTO = segmentsResponseDTO;
+  public SectionsResponseDTO segments(List<SegmentsResponseDTO> segmentsResponseDTO) {
+    this.segments = segmentsResponseDTO;
     return this;
   }
 
   public SectionsResponseDTO addSegmentsItem(SegmentsResponseDTO segmentsItem) {
-    if (this.segmentsResponseDTO == null) {
-      this.segmentsResponseDTO = new ArrayList<SegmentsResponseDTO>();
+    if (this.segments == null) {
+      this.segments = new ArrayList<SegmentsResponseDTO>();
     }
-    this.segmentsResponseDTO.add(segmentsItem);
+    this.segments.add(segmentsItem);
     return this;
   }
 
@@ -226,11 +226,11 @@ public class SectionsResponseDTO   {
   @Valid
 
   public List<SegmentsResponseDTO> getSegments() {
-    return segmentsResponseDTO;
+    return segments;
   }
 
   public void setSegments(List<SegmentsResponseDTO> segmentsResponseDTO) {
-    this.segmentsResponseDTO = segmentsResponseDTO;
+    this.segments = segmentsResponseDTO;
   }
 
 
@@ -251,12 +251,12 @@ public class SectionsResponseDTO   {
         Objects.equals(this.startY, sectionsResponseDTO.startY) &&
         Objects.equals(this.endX, sectionsResponseDTO.endX) &&
         Objects.equals(this.endY, sectionsResponseDTO.endY) &&
-        Objects.equals(this.segmentsResponseDTO, sectionsResponseDTO.segmentsResponseDTO);
+        Objects.equals(this.segments, sectionsResponseDTO.segments);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(sectionId, sectionName, sectionDesc, activeFlag, startX, startY, endX, endY, segmentsResponseDTO);
+    return Objects.hash(sectionId, sectionName, sectionDesc, activeFlag, startX, startY, endX, endY, segments);
   }
 
   @Override
@@ -272,7 +272,7 @@ public class SectionsResponseDTO   {
     sb.append("    startY: ").append(toIndentedString(startY)).append("\n");
     sb.append("    endX: ").append(toIndentedString(endX)).append("\n");
     sb.append("    endY: ").append(toIndentedString(endY)).append("\n");
-    sb.append("    segments: ").append(toIndentedString(segmentsResponseDTO)).append("\n");
+    sb.append("    segments: ").append(toIndentedString(segments)).append("\n");
     sb.append("}");
     return sb.toString();
   }

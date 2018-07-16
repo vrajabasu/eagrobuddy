@@ -215,7 +215,7 @@ public class LayoutVisualizationWebService {
 	 */
 	@RequestMapping(value = "/eAgro/v1/visualization/zonestatus/{layoutId}/sections/{sectionId}/segments/{segmentId}", method = RequestMethod.GET)
 	@Secured(AuthoritiesConstants.USER)
-	ResponseEntity<SegmentZoneDetailsResponse> getZoneStatus(
+	public ResponseEntity<SegmentZoneDetailsResponse> getZoneStatus(
 			@ApiParam(value = "Identifier for the layout", required = true) @PathVariable("layoutId") Long layoutId,
 			@ApiParam(value = "Identifier for the section", required = true) @PathVariable("sectionId") Long sectionId,
 			@ApiParam(value = "Identifier for the segment", required = true) @PathVariable("segmentId") Long segmentId) {
@@ -232,7 +232,7 @@ public class LayoutVisualizationWebService {
 
 	@RequestMapping(value = "/eAgro/v1/visualization/segmentkpichart/{layoutId}/sections/{sectionId}/segments/{segmentId}", method = RequestMethod.GET)
 	@Secured(AuthoritiesConstants.USER)
-	ResponseEntity<Segmentkpichart> getSegmentKpiChart(
+	public ResponseEntity<Segmentkpichart> getSegmentKpiChart(
 			@ApiParam(value = "Identifier for the layout", required = true) @PathVariable("layoutId") Long layoutId,
 			@ApiParam(value = "Identifier for the section", required = true) @PathVariable("sectionId") Long sectionId,
 			@ApiParam(value = "Identifier for the segment", required = true) @PathVariable("segmentId") Long segmentId) {
