@@ -137,6 +137,7 @@ li {
     float:left;
     text-align: center;
     margin:5%;
+    border: 1px solid #000;
 }
 .segment-box .sensor-box {
     border:1px solid #000;

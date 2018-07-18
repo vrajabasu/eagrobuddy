@@ -14,29 +14,42 @@
   "zones": [
     {
       "key": "WATER",
-      "value": "NORMAL",
       "sensors": [
         {
           "sensorId": 1,
           "sensorName": "SensorA",
           "sensorDescription": "Water Sensor",
           "widthX": 0,
-          "heightY": 4.5
+          "heightY": 4.5,
+          "thresholdState": "NORMAL"
         }
       ]
     },
-	{
-      "key": "CANOPY",
-      "value": "BELOW_REF_RANGE",
-      "sensors": [
-        {
-          "sensorId": 2,
-          "sensorName": "SensorB",
-          "sensorDescription": "Canopy Sensor",
-          "widthX": 2.5,
-          "heightY": 2.5
-        }
-      ]
-  }
+  	{
+        "key": "CANOPY",
+        "sensors": [
+          {
+            "sensorId": 2,
+            "sensorName": "SensorB",
+            "sensorDescription": "Canopy Sensor",
+            "widthX": 2.5,
+            "heightY": 2.5,
+            "thresholdState": "EXCEEDING_SOON"
+          }
+        ]
+    },
+    {
+        "key": "TOP",
+        "sensors": [
+          {
+            "sensorId": 2,
+            "sensorName": "SensorC",
+            "sensorDescription": "Canopy Sensor",
+            "widthX": 2.5,
+            "heightY": 2.5,
+            "thresholdState": "NORMAL"
+          }
+        ]
+    }  
   ]
 }

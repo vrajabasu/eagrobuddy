@@ -150,11 +150,12 @@ export class SectionComponent implements OnInit {
   prepareZonedata() {
     var i = null;
     for (i = 0; this.diffZone.zones.length > i; i += 1) {
-        this.zoneMap[this.diffZone.zones[i].key] = this.diffZone.zones[i].value;
+        this.zoneMap[this.diffZone.zones[i].key] = this.diffZone.zones[i].sensors;
     }
   }
 
-  hasZone(tagName) {
+  hasZoneSensors(tagName) {
+    console.log(this.zoneMap[tagName]);
     return this.zoneMap[tagName];
   };
  
@@ -179,6 +180,7 @@ export class SectionComponent implements OnInit {
 
   assignBgClr(clrvalue) {
     // Set back ground color based on overall threshold status
+    console.log("Current value : ", clrvalue);
     if (clrvalue === 'EXCEEDED') {
       return "linear-gradient(#ffb3b3, #ff0000)"; // Light Red
     } else if (clrvalue === 'EXCEEDING_SOON') {
