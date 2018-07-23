@@ -14,7 +14,7 @@
                         </li>
                     </ul> -->
                     <ul>
-                        <li *ngFor="let segment of overallCondition.segments; let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
+                        <li *ngFor="let segment of overallCondition.segments; let i = index" [class.active]="selectedIndex === i" (click)="setCurrentSegment(segment)">
                           <div class="segment" [ngStyle]="{'background':assignBgClr(segment.overallThresholdstate), 'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">                           
                             {{segment.segmentName}}
                           </div>
@@ -63,7 +63,7 @@
                 <div class="segment-box" [ngStyle]="{'width':determineBoxWidth()+'px', 'height':determineBoxHeight()+'px', 'margin':boxMargin+'px'}">
                     <ul>
                         <li *ngFor="let sensor of hasZoneSensors('ROOT'); let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
-                            <div class="sensor-box" [ngStyle]="{'background':assignBgClr(sensor.thresholdState)}"></div>
+                            <div class="sensor-box" [ngStyle]="{'background':assignBgClr(sensor.thresholdState), 'margin-left':(sensor.widthX * oneWidthZoneFeet)+'px', 'margin-top':(sensor.heightY * oneHeightZoneFeet)+'px'}"></div>
                         </li>
                     </ul>  
                 </div>
@@ -72,14 +72,14 @@
                 <div class="segment-box" [ngStyle]="{'width':determineBoxWidth()+'px', 'height':determineBoxHeight()+'px', 'margin':boxMargin+'px'}">
                     <ul>
                         <li *ngFor="let sensor of hasZoneSensors('CANOPY'); let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
-                            <div class="sensor-box" [ngStyle]="{'background':assignBgClr(sensor.thresholdState)}"></div>
+                            <div class="sensor-box" [ngStyle]="{'background':assignBgClr(sensor.thresholdState), 'margin-left':(sensor.widthX * oneWidthZoneFeet)+'px', 'margin-top':(sensor.heightY * oneHeightZoneFeet)+'px'}"></div>
                         </li>
                     </ul>  
                 </div>
                 <div class="segment-box" [ngStyle]="{'width':determineBoxWidth()+'px', 'height':determineBoxHeight()+'px', 'margin':boxMargin+'px'}">
                     <ul>
                         <li *ngFor="let sensor of hasZoneSensors('TOP'); let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
-                            <div class="sensor-box"  [ngStyle]="{'background':assignBgClr(sensor.thresholdState)}"></div>
+                            <div class="sensor-box"  [ngStyle]="{'background':assignBgClr(sensor.thresholdState), 'margin-left':(sensor.widthX * oneWidthZoneFeet)+'px', 'margin-top':(sensor.heightY * oneHeightZoneFeet)+'px'}"></div>
                         </li>
                     </ul>  
                 </div>
