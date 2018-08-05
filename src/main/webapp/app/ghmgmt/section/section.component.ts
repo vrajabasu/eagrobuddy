@@ -29,6 +29,11 @@ export class SectionComponent implements OnInit {
   sectionWidth: number;
   sectionHeight: number;
   zoneMap = {};
+  zoneWidth: number;
+  zoneHeight: number;
+  oneWidthZoneFeet: number;
+  oneHeightZoneFeet: number;
+  currentSegment: any;
 
   sectionOverallCondition$: Observable<any>;
   segmentCurrentCondition$: Observable<any>;
@@ -45,8 +50,7 @@ export class SectionComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       this.sectionId = +params['sectionId'];
       console.log("Selected Section : " + this.sectionId);
-    }
-    );
+    });
 
     // Configurable value - to adjust Margin Height; used in top & bottom margins
     this.layoutHeightMargin = 5;
@@ -71,6 +75,7 @@ export class SectionComponent implements OnInit {
         this.sectionHeight = this.overallCondition.endY - this.overallCondition.startY;
         this.prepareSectionData(window.innerWidth, window.innerHeight);
         console.log("Section Overall Condition : " + this.overallCondition);
+        this.setCurrentSegment(this.overallCondition.segment[0]);
       },
       console.error
     );
@@ -152,6 +157,7 @@ export class SectionComponent implements OnInit {
     for (i = 0; this.diffZone.zones.length > i; i += 1) {
         this.zoneMap[this.diffZone.zones[i].key] = this.diffZone.zones[i].sensors;
     }
+    this.calculateSensorPositionData();
   }
 
   hasZoneSensors(tagName) {
@@ -178,6 +184,13 @@ export class SectionComponent implements OnInit {
     return boxWidth;
   }
 
+  calculateSensorPositionData() {
+    this.zoneHeight = this.determineBoxHeight();
+    this.zoneWidth = this.determineBoxWidth();
+    this.oneWidthZoneFeet = this.zoneWidth/(this.diffZone.sectionEndX - this.diffZone.sectionStartX);
+    this.oneHeightZoneFeet = this.zoneHeight/(this.diffZone.sectionEndY - this.diffZone.sectionStartY);
+  }
+
   assignBgClr(clrvalue) {
     // Set back ground color based on overall threshold status
     console.log("Current value : ", clrvalue);
@@ -190,8 +203,14 @@ export class SectionComponent implements OnInit {
     } 
   }
 
+  setCurrentSegment(segment) {
+    this.currentSegment = segment;
+    console.log(this.currentSegment);
+  }
+
   setIndex(index: number) {
     this.selectedIndex = index;
+    console.log(this.selectedIndex);
   }
 
 }

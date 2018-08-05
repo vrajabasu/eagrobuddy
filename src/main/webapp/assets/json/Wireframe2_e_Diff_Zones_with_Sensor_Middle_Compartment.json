@@ -45,8 +45,8 @@
             "sensorId": 2,
             "sensorName": "SensorC",
             "sensorDescription": "Canopy Sensor",
-            "widthX": 2.5,
-            "heightY": 2.5,
+            "widthX": 7.5,
+            "heightY": 6.0,
             "thresholdState": "NORMAL"
           }
         ]
