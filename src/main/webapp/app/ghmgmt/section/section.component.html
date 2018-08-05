@@ -4,23 +4,23 @@
         <div class="column column-left" data-xl-width="4">
             <div class="column">
                 <div *ngIf="overallCondition" class="section" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.35)+'px', 'width':(layoutwidth * 0.33)+'px'}">
-                <div class="section-cover" [ngStyle]="{'width':(overallCondition.endX - overallCondition.startX) * oneWidthfeet+'px', 'height':(overallCondition.endY - overallCondition.startY) * oneHeightFeet+'px'}">                    
-                    <!-- {{overallCondition.sectionName}} - {{overallCondition.sectionDescription}} -->
-                    <!-- <ul>
+                    <div class="section-cover" [ngStyle]="{'width':(overallCondition.endX - overallCondition.startX) * oneWidthfeet+'px', 'height':(overallCondition.endY - overallCondition.startY) * oneHeightFeet+'px'}">
+                        <!-- {{overallCondition.sectionName}} - {{overallCondition.sectionDescription}} -->
+                        <!-- <ul>
                         <li *ngFor="let segment of overallCondition.segments" [ngStyle]="{'height':adjustedScreenHeight+'px'}" >
                           <div class="segment" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate), 'margin-left':(sectionMargin + (segment.startX * oneWidthfeet))+'px', 'margin-top':(sectionMargin + (segment.startY * oneHeightFeet))+'px','width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
                             {{segment.segmentName}}
                           </div>
                         </li>
                     </ul> -->
-                    <ul>
-                        <li *ngFor="let segment of overallCondition.segments; let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
-                          <div class="segment" [ngStyle]="{'background':assignBgClr(segment.overallThresholdstate), 'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">                           
-                            {{segment.segmentName}}
-                          </div>
-                        </li>
-                    </ul>
-                </div>
+                        <ul>
+                            <li *ngFor="let segment of overallCondition.segments; let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
+                                <div class="segment" [ngStyle]="{'background':assignBgClr(segment.overallThresholdstate), 'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
+                                    {{segment.segmentName}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div *ngIf="historical" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.65)+'px'}">
                     <div class="zone-header">
@@ -28,7 +28,133 @@
                         <span>Range</span>
                         <span>Average</span>
                     </div>
-                    <div *ngFor="let currentZone of historical; let first = first; let last = last" [class.first-item]="first" [class.last-item]="last" class="zone-value">
+                    <div class="zone-value first-item">
+                        <div class="zone-header">Water</div>
+                        <ul>
+                            <li>
+                                <div>
+                                    PH
+                                </div>
+                                <div>
+                                    {{historical[0].kpiValues[0].lowerRange}}- {{historical[0].kpiValues[0].upperRange}}
+                                </div>
+                                <div>
+                                    {{historical[0].kpiValues[0].average}}
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    EC
+                                </div>
+                                <div>
+                                    {{historical[0].kpiValues[1].lowerRange}}- {{historical[0].kpiValues[1].upperRange}}
+                                </div>
+                                <div>
+                                    {{historical[0].kpiValues[1].average}}
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    Temp
+                                </div>
+                                <div>
+                                    {{historical[0].kpiValues[2].lowerRange}}- {{historical[2].kpiValues[0].upperRange}}
+                                </div>
+                                <div>
+                                    {{historical[0].kpiValues[2].average}}
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    Moisture
+                                </div>
+                                <div>
+                                    {{historical[0].kpiValues[3].lowerRange}}- {{historical[0].kpiValues[3].upperRange}}
+                                </div>
+                                <div>
+                                    {{historical[0].kpiValues[3].average}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="zone-value">
+                        <div class="zone-header">Canopy</div>
+                        <ul>
+                            <li>
+                                <div>
+                                    Light
+                                </div>
+                                <div>
+                                    {{historical[1].kpiValues[0].lowerRange}}- {{historical[1].kpiValues[0].upperRange}}
+                                </div>
+                                <div>
+                                    {{historical[1].kpiValues[0].average}}
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    Temp
+                                </div>
+                                <div>
+                                    {{historical[1].kpiValues[1].lowerRange}}- {{historical[1].kpiValues[1].upperRange}}
+                                </div>
+                                <div>
+                                    {{historical[1].kpiValues[1].average}}
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    Humidity
+                                </div>
+                                <div>
+                                    {{historical[1].kpiValues[2].lowerRange}}- {{historical[1].kpiValues[2].upperRange}}
+                                </div>
+                                <div>
+                                    {{historical[1].kpiValues[2].average}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="zone-value last-item">
+                        <div class="zone-header">Top-Canopy</div>
+                        <ul>
+                            <li>
+                                <div>
+                                    Light
+                                </div>
+                                <div>
+                                    {{historical[2].kpiValues[0].lowerRange}}- {{historical[2].kpiValues[0].upperRange}}
+                                </div>
+                                <div>
+                                    {{historical[2].kpiValues[0].average}}
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    Temp
+                                </div>
+                                <div>
+                                    {{historical[2].kpiValues[1].lowerRange}}- {{historical[2].kpiValues[1].upperRange}}
+                                </div>
+                                <div>
+                                    {{historical[2].kpiValues[1].average}}
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    Humidity
+                                </div>
+                                <div>
+                                    {{historical[2].kpiValues[2].lowerRange}}- {{historical[2].kpiValues[2].upperRange}}
+                                </div>
+                                <div>
+                                    {{historical[2].kpiValues[2].average}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- <div *ngFor="let currentZone of historical; let first = first; let last = last" [class.first-item]="first" [class.last-item]="last"
+                        class="zone-value">
                         <div class="zone-header">{{currentZone.zoneType}}</div>
                         <ul>
                             <li *ngFor="let kpiValue of currentZone.kpiValues">
@@ -43,12 +169,12 @@
                                 </div>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
         <div class="column column-middle" data-xl-width="4">
-            <div *ngIf = "diffZone" class="column" data-xl-width="12" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.2)+'px'}">
+            <div *ngIf="diffZone" class="column" data-xl-width="12" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.2)+'px'}">
                 <p class="text-center">
                     <strong>Position of Section in Layout:</strong> {{diffZone.sectionStartX}} {{diffZone.sectionStartY}}
                 </p>
@@ -56,32 +182,32 @@
                     <strong>Position of Segment in Layout:</strong> {{diffZone.segmentStartX}} {{diffZone.segmentStartX}}
                 </p>
             </div>
-            <div *ngIf = "diffZone" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
+            <div *ngIf="diffZone" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
                 <div class="segment-box" [ngStyle]="{'background':assignBgClr(hasZoneSensors('WATER')[0].thresholdState), 'width':determineBoxWidth()+'px', 'height':determineBoxHeight()+'px', 'margin':boxMargin+'px'}">
-                    
+
                 </div>
                 <div class="segment-box" [ngStyle]="{'width':determineBoxWidth()+'px', 'height':determineBoxHeight()+'px', 'margin':boxMargin+'px'}">
                     <ul>
                         <li *ngFor="let sensor of hasZoneSensors('ROOT'); let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
                             <div class="sensor-box" [ngStyle]="{'background':assignBgClr(sensor.thresholdState)}"></div>
                         </li>
-                    </ul>  
+                    </ul>
                 </div>
             </div>
-            <div *ngIf = "diffZone" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
+            <div *ngIf="diffZone" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.4)+'px'}">
                 <div class="segment-box" [ngStyle]="{'width':determineBoxWidth()+'px', 'height':determineBoxHeight()+'px', 'margin':boxMargin+'px'}">
                     <ul>
                         <li *ngFor="let sensor of hasZoneSensors('CANOPY'); let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
                             <div class="sensor-box" [ngStyle]="{'background':assignBgClr(sensor.thresholdState)}"></div>
                         </li>
-                    </ul>  
+                    </ul>
                 </div>
                 <div class="segment-box" [ngStyle]="{'width':determineBoxWidth()+'px', 'height':determineBoxHeight()+'px', 'margin':boxMargin+'px'}">
                     <ul>
                         <li *ngFor="let sensor of hasZoneSensors('TOP'); let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
-                            <div class="sensor-box"  [ngStyle]="{'background':assignBgClr(sensor.thresholdState)}"></div>
+                            <div class="sensor-box" [ngStyle]="{'background':assignBgClr(sensor.thresholdState)}"></div>
                         </li>
-                    </ul>  
+                    </ul>
                 </div>
             </div>
         </div>
@@ -89,10 +215,108 @@
             <div class="segment-condition column" data-xl-width="12" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.5)+'px'}">
                 <h5 class="text-center">
                     <strong>
-                        {{segCont.segmentName}} Condition
+                        <!-- {{segCont.segmentName}} Condition -->
+                        SegmentA Condition
                     </strong>
                 </h5>
-                <div *ngFor="let zoneWithKpi of segCont.zoneWithKpis">
+                <div>
+                    <h6>
+                        <strong>Water</strong>
+                    </h6>
+                    <ul>
+                        <li>
+                            <div class="col-sm-6">
+                                {{segCont.zoneWithKpis[0].currentKpiValues[0].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{segCont.zoneWithKpis[0].currentKpiValues[0].averagevalue}}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-sm-6">
+                                {{segCont.zoneWithKpis[0].currentKpiValues[1].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{segCont.zoneWithKpis[0].currentKpiValues[1].averagevalue}}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-sm-6">
+                                {{segCont.zoneWithKpis[0].currentKpiValues[2].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{segCont.zoneWithKpis[0].currentKpiValues[2].averagevalue}}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-sm-6">
+                                {{segCont.zoneWithKpis[0].currentKpiValues[3].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{segCont.zoneWithKpis[0].currentKpiValues[3].averagevalue}}
+                            </div>
+                        </li>
+                    </ul>
+                    <h6>
+                        <strong>Canopy</strong>
+                    </h6>
+                    <ul>
+                        <li>
+                            <div class="col-sm-6">
+                                {{segCont.zoneWithKpis[1].currentKpiValues[0].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{segCont.zoneWithKpis[1].currentKpiValues[0].averagevalue}}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-sm-6">
+                                {{segCont.zoneWithKpis[1].currentKpiValues[1].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{segCont.zoneWithKpis[1].currentKpiValues[1].averagevalue}}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-sm-6">
+                                {{segCont.zoneWithKpis[1].currentKpiValues[2].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{segCont.zoneWithKpis[1].currentKpiValues[2].averagevalue}}
+                            </div>
+                        </li>
+                    </ul>
+                    <h6>
+                        <strong>Top-Canopy</strong>
+                    </h6>
+                    <ul>
+                        <li>
+                            <div class="col-sm-6">
+                                {{segCont.zoneWithKpis[2].currentKpiValues[0].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{segCont.zoneWithKpis[2].currentKpiValues[0].averagevalue}}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-sm-6">
+                                {{segCont.zoneWithKpis[2].currentKpiValues[1].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{segCont.zoneWithKpis[2].currentKpiValues[1].averagevalue}}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-sm-6">
+                                {{segCont.zoneWithKpis[2].currentKpiValues[2].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{segCont.zoneWithKpis[2].currentKpiValues[2].averagevalue}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- <div *ngFor="let zoneWithKpi of segCont.zoneWithKpis">
                     <h6>
                         <strong>{{zoneWithKpi.zoneType}}</strong>
                     </h6>
@@ -106,15 +330,88 @@
                             </div>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
             <div *ngIf="greenOptCont" class="green-condition column" data-xl-width="12" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.5)+'px'}">
                 <h5 class="text-center">
                     <strong>
-                        {{greenOptCont.sectionName}} Optimal Condition
+                        <!-- {{greenOptCont.sectionName}} Optimal Condition -->
+                        SegmentA Optimal Condition
                     </strong>
                 </h5>
-                <div *ngFor="let zoneWithKpi of greenOptCont.zoneWithKpis">
+                <div>
+                    <h6>
+                        <strong>
+                            Water
+                        </strong>
+                    </h6>
+                    <ul>
+                        <li>
+                            <div class="col-sm-6">
+                                {{greenOptCont.zoneWithKpis[0].optimalKpiValues[0].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{greenOptCont.zoneWithKpis[0].optimalKpiValues[0].valueRange}}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-sm-6">
+                                {{greenOptCont.zoneWithKpis[0].optimalKpiValues[1].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{greenOptCont.zoneWithKpis[0].optimalKpiValues[1].valueRange}}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-sm-6">
+                                {{greenOptCont.zoneWithKpis[0].optimalKpiValues[2].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{greenOptCont.zoneWithKpis[0].optimalKpiValues[2].valueRange}}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-sm-6">
+                                {{greenOptCont.zoneWithKpis[0].optimalKpiValues[3].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{greenOptCont.zoneWithKpis[0].optimalKpiValues[3].valueRange}}
+                            </div>
+                        </li>
+                    </ul>
+                    <h6>
+                        <strong>
+                            Canopy
+                        </strong>
+                    </h6>
+                    <ul>
+                        <li>
+                            <div class="col-sm-6">
+                                {{greenOptCont.zoneWithKpis[1].optimalKpiValues[0].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{greenOptCont.zoneWithKpis[1].optimalKpiValues[0].valueRange}}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-sm-6">
+                                {{greenOptCont.zoneWithKpis[1].optimalKpiValues[1].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{greenOptCont.zoneWithKpis[1].optimalKpiValues[1].valueRange}}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-sm-6">
+                                {{greenOptCont.zoneWithKpis[1].optimalKpiValues[2].kpiName}}
+                            </div>
+                            <div class="col-sm-6">
+                                : {{greenOptCont.zoneWithKpis[1].optimalKpiValues[2].valueRange}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- <div *ngFor="let zoneWithKpi of greenOptCont.zoneWithKpis">
                     <h6>
                         <strong>{{zoneWithKpi.zoneType}}</strong>
                     </h6>
@@ -128,7 +425,7 @@
                             </div>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
