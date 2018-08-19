@@ -17,8 +17,8 @@ export class DashboardService {
         // ghParams.set('layoutId', layoutId.toString());
         // let options = new RequestOptions({ headers: ghHeaders, params: ghParams });
         let options = new RequestOptions({ headers: ghHeaders });
-        return this.http.get('../assets/json/Wireframe1_Layout_1_Visualization_Complete.json', options)
-        // return this.http.get(this.layoutVisualizationURL + layoutId, options)
+      //  return this.http.get('../assets/json/Wireframe1_Layout_1_Visualization_Complete.json', options)
+         return this.http.get(this.layoutVisualizationURL + layoutId, options)
                .map(this.extractData)
                .catch(this.handleError);
     }
