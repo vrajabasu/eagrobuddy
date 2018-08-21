@@ -32,17 +32,29 @@ public class SegmentZoneDetailsResponse   {
   @JsonProperty("segmentDescription")
   private String segmentDescription = null;
 
-  @JsonProperty("segmentX")
-  private Double segmentX = null;
+  @JsonProperty("segmentStartX")
+  private Double segmentStartX = null;
 
-  @JsonProperty("segmentY")
-  private Double segmentY = null;
+  @JsonProperty("segmentStartY")
+  private Double segmentStartY = null;
+  
+  @JsonProperty("segmentEndX")
+  private Double segmentEndX = null;
 
-  @JsonProperty("sectionX")
-  private Double sectionX = null;
+  @JsonProperty("segmentEndY")
+  private Double segmentEndY = null;
 
-  @JsonProperty("sectionY")
-  private Double sectionY = null;
+  @JsonProperty("sectionStartX")
+  private Double sectionStartX = null;
+
+  @JsonProperty("sectionStartY")
+  private Double sectionStartY = null;
+  
+  @JsonProperty("sectionEndX")
+  private Double sectionEndX = null;
+
+  @JsonProperty("sectionEndY")
+  private Double sectionEndY = null;
 
   @JsonProperty("zones")
   @Valid
@@ -128,85 +140,7 @@ public class SegmentZoneDetailsResponse   {
     this.segmentDescription = segmentDescription;
   }
 
-  public SegmentZoneDetailsResponse segmentX(Double segmentX) {
-    this.segmentX = segmentX;
-    return this;
-  }
-
-  /**
-   * The startX coordinates for specific section.
-   * @return segmentX
-  **/
-  @ApiModelProperty(value = "The startX coordinates for specific section.")
-
-
-  public Double getSegmentX() {
-    return segmentX;
-  }
-
-  public void setSegmentX(Double segmentX) {
-    this.segmentX = segmentX;
-  }
-
-  public SegmentZoneDetailsResponse segmentY(Double segmentY) {
-    this.segmentY = segmentY;
-    return this;
-  }
-
-  /**
-   * The startY coordinates for specific section.
-   * @return segmentY
-  **/
-  @ApiModelProperty(value = "The startY coordinates for specific section.")
-
-
-  public Double getSegmentY() {
-    return segmentY;
-  }
-
-  public void setSegmentY(Double segmentY) {
-    this.segmentY = segmentY;
-  }
-
-  public SegmentZoneDetailsResponse sectionX(Double sectionX) {
-    this.sectionX = sectionX;
-    return this;
-  }
-
-  /**
-   * The endX coordinates for specific section.
-   * @return sectionX
-  **/
-  @ApiModelProperty(value = "The endX coordinates for specific section.")
-
-
-  public Double getSectionX() {
-    return sectionX;
-  }
-
-  public void setSectionX(Double sectionX) {
-    this.sectionX = sectionX;
-  }
-
-  public SegmentZoneDetailsResponse sectionY(Double sectionY) {
-    this.sectionY = sectionY;
-    return this;
-  }
-
-  /**
-   * The endY coordinates for specific section.
-   * @return sectionY
-  **/
-  @ApiModelProperty(value = "The endY coordinates for specific section.")
-
-
-  public Double getSectionY() {
-    return sectionY;
-  }
-
-  public void setSectionY(Double sectionY) {
-    this.sectionY = sectionY;
-  }
+  
 
   public SegmentZoneDetailsResponse zones(List<Zones> zones) {
     this.zones = zones;
@@ -238,7 +172,7 @@ public class SegmentZoneDetailsResponse   {
   }
 
 
-  @Override
+/*  @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
       return true;
@@ -279,9 +213,179 @@ public class SegmentZoneDetailsResponse   {
     sb.append("    zones: ").append(toIndentedString(zones)).append("\n");
     sb.append("}");
     return sb.toString();
-  }
+  }*/
 
-  /**
+  @Override
+public String toString() {
+	return "SegmentZoneDetailsResponse [sectionName=" + sectionName + ", sectionDescription=" + sectionDescription
+			+ ", segmentName=" + segmentName + ", segmentDescription=" + segmentDescription + ", segmentStartX="
+			+ segmentStartX + ", segmentStartY=" + segmentStartY + ", segmentEndX=" + segmentEndX + ", segmentEndY="
+			+ segmentEndY + ", sectionStartX=" + sectionStartX + ", sectionStartY=" + sectionStartY + ", sectionEndX="
+			+ sectionEndX + ", sectionEndY=" + sectionEndY + ", zones=" + zones + "]";
+}
+
+@Override
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((sectionDescription == null) ? 0 : sectionDescription.hashCode());
+	result = prime * result + ((sectionEndX == null) ? 0 : sectionEndX.hashCode());
+	result = prime * result + ((sectionEndY == null) ? 0 : sectionEndY.hashCode());
+	result = prime * result + ((sectionName == null) ? 0 : sectionName.hashCode());
+	result = prime * result + ((sectionStartX == null) ? 0 : sectionStartX.hashCode());
+	result = prime * result + ((sectionStartY == null) ? 0 : sectionStartY.hashCode());
+	result = prime * result + ((segmentDescription == null) ? 0 : segmentDescription.hashCode());
+	result = prime * result + ((segmentEndX == null) ? 0 : segmentEndX.hashCode());
+	result = prime * result + ((segmentEndY == null) ? 0 : segmentEndY.hashCode());
+	result = prime * result + ((segmentName == null) ? 0 : segmentName.hashCode());
+	result = prime * result + ((segmentStartX == null) ? 0 : segmentStartX.hashCode());
+	result = prime * result + ((segmentStartY == null) ? 0 : segmentStartY.hashCode());
+	result = prime * result + ((zones == null) ? 0 : zones.hashCode());
+	return result;
+}
+
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	SegmentZoneDetailsResponse other = (SegmentZoneDetailsResponse) obj;
+	if (sectionDescription == null) {
+		if (other.sectionDescription != null)
+			return false;
+	} else if (!sectionDescription.equals(other.sectionDescription))
+		return false;
+	if (sectionEndX == null) {
+		if (other.sectionEndX != null)
+			return false;
+	} else if (!sectionEndX.equals(other.sectionEndX))
+		return false;
+	if (sectionEndY == null) {
+		if (other.sectionEndY != null)
+			return false;
+	} else if (!sectionEndY.equals(other.sectionEndY))
+		return false;
+	if (sectionName == null) {
+		if (other.sectionName != null)
+			return false;
+	} else if (!sectionName.equals(other.sectionName))
+		return false;
+	if (sectionStartX == null) {
+		if (other.sectionStartX != null)
+			return false;
+	} else if (!sectionStartX.equals(other.sectionStartX))
+		return false;
+	if (sectionStartY == null) {
+		if (other.sectionStartY != null)
+			return false;
+	} else if (!sectionStartY.equals(other.sectionStartY))
+		return false;
+	if (segmentDescription == null) {
+		if (other.segmentDescription != null)
+			return false;
+	} else if (!segmentDescription.equals(other.segmentDescription))
+		return false;
+	if (segmentEndX == null) {
+		if (other.segmentEndX != null)
+			return false;
+	} else if (!segmentEndX.equals(other.segmentEndX))
+		return false;
+	if (segmentEndY == null) {
+		if (other.segmentEndY != null)
+			return false;
+	} else if (!segmentEndY.equals(other.segmentEndY))
+		return false;
+	if (segmentName == null) {
+		if (other.segmentName != null)
+			return false;
+	} else if (!segmentName.equals(other.segmentName))
+		return false;
+	if (segmentStartX == null) {
+		if (other.segmentStartX != null)
+			return false;
+	} else if (!segmentStartX.equals(other.segmentStartX))
+		return false;
+	if (segmentStartY == null) {
+		if (other.segmentStartY != null)
+			return false;
+	} else if (!segmentStartY.equals(other.segmentStartY))
+		return false;
+	if (zones == null) {
+		if (other.zones != null)
+			return false;
+	} else if (!zones.equals(other.zones))
+		return false;
+	return true;
+}
+
+public Double getSegmentStartX() {
+	return segmentStartX;
+}
+
+public void setSegmentStartX(Double segmentStartX) {
+	this.segmentStartX = segmentStartX;
+}
+
+public Double getSegmentStartY() {
+	return segmentStartY;
+}
+
+public void setSegmentStartY(Double segmentStartY) {
+	this.segmentStartY = segmentStartY;
+}
+
+public Double getSegmentEndX() {
+	return segmentEndX;
+}
+
+public void setSegmentEndX(Double segmentEndX) {
+	this.segmentEndX = segmentEndX;
+}
+
+public Double getSegmentEndY() {
+	return segmentEndY;
+}
+
+public void setSegmentEndY(Double segmentEndY) {
+	this.segmentEndY = segmentEndY;
+}
+
+public Double getSectionStartX() {
+	return sectionStartX;
+}
+
+public void setSectionStartX(Double sectionStartX) {
+	this.sectionStartX = sectionStartX;
+}
+
+public Double getSectionStartY() {
+	return sectionStartY;
+}
+
+public void setSectionStartY(Double sectionStartY) {
+	this.sectionStartY = sectionStartY;
+}
+
+public Double getSectionEndX() {
+	return sectionEndX;
+}
+
+public void setSectionEndX(Double sectionEndX) {
+	this.sectionEndX = sectionEndX;
+}
+
+public Double getSectionEndY() {
+	return sectionEndY;
+}
+
+public void setSectionEndY(Double sectionEndY) {
+	this.sectionEndY = sectionEndY;
+}
+
+/**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */

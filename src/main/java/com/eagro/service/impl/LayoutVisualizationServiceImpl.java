@@ -348,12 +348,14 @@ public class LayoutVisualizationServiceImpl implements LayoutVisualizationServic
 		segmentZoneDetails.setSectionName(sectionDTO.getSectionName());
 		segmentZoneDetails.setSectionDescription(sectionDTO.getSectionDesc());
 		// Need to check with Veera
-		segmentZoneDetails.setSectionX(sectionDTO.getStartX());
-		segmentZoneDetails.setSectionY(sectionDTO.getStartY());
-
+		segmentZoneDetails.setSectionStartX(sectionDTO.getStartX());
+		segmentZoneDetails.setSectionStartY(sectionDTO.getStartY());
+		segmentZoneDetails.setSectionEndX(sectionDTO.getEndX());
+		segmentZoneDetails.setSectionEndY(sectionDTO.getEndY());
+	
 		SegmentDTO segmentDTO = internalLayoutDetailsService.retrieveSegment(layoutId, sectionDTO.getSectionId(),
 				segmentId);
-
+		
 		if (segmentDTO != null) {
 			internalLayoutDetailsService.fetchZoneStatus(sectionDTO, currentSectionSensorMap, currentSectionKpi, currentSectionSensorData,
 					segmentZoneDetails, segmentDTO, sensorCoverageRangeMap);
