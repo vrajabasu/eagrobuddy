@@ -4,31 +4,35 @@
         <div class="column column-left" data-xl-width="4">
             <div class="column">
                 <div *ngIf="overallCondition" class="section" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.35)+'px', 'width':(layoutwidth * 0.33)+'px'}">
-                    <div class="section-cover" [ngStyle]="{'width':(overallCondition.endX - overallCondition.startX) * oneWidthfeet+'px', 'height':(overallCondition.endY - overallCondition.startY) * oneHeightFeet+'px'}">
-                        <!-- {{overallCondition.sectionName}} - {{overallCondition.sectionDescription}} -->
-                        <!-- <ul>
-                        <li *ngFor="let segment of overallCondition.segments" [ngStyle]="{'height':adjustedScreenHeight+'px'}" >
-                          <div class="segment" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate), 'margin-left':(sectionMargin + (segment.startX * oneWidthfeet))+'px', 'margin-top':(sectionMargin + (segment.startY * oneHeightFeet))+'px','width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
-                            {{segment.segmentName}}
-                          </div>
-                        </li>
-                    </ul> -->
-                    <ul>
-                        <li *ngFor="let segment of overallCondition.segments; let i = index" [class.active]="selectedIndex === i" (click)="setCurrentSegment(segment)">
-                          <div class="segment" [ngStyle]="{'background':assignBgClr(segment.overallThresholdstate), 'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">                           
-                            {{segment.segmentName}}
-                          </div>
-                        </li>
-                    </ul>
-                </div>
+                    <div class="column">
+                        <div>XYZ Section - Overall Condition</div>
+                        <div class="section-cover" [ngStyle]="{'width':(overallCondition.endX - overallCondition.startX) * oneWidthfeet+'px', 'height':(overallCondition.endY - overallCondition.startY) * oneHeightFeet+'px'}">
+                            <!-- {{overallCondition.sectionName}} - {{overallCondition.sectionDescription}} -->
+                            <!-- <ul>
+                                <li *ngFor="let segment of overallCondition.segments" [ngStyle]="{'height':adjustedScreenHeight+'px'}" >
+                                  <div class="segment" [ngStyle]="{'background-color':assignBgClr(segment.overallThresholdstate), 'margin-left':(sectionMargin + (segment.startX * oneWidthfeet))+'px', 'margin-top':(sectionMargin + (segment.startY * oneHeightFeet))+'px','width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
+                                    {{segment.segmentName}}
+                                  </div>
+                                </li>
+                            </ul> -->
+                            <ul>
+                                <li *ngFor="let segment of overallCondition.segments; let i = index" [class.active]="selectedIndex === i" (click)="setCurrentSegment(segment)">
+                                    <div class="segment" [ngStyle]="{'background':assignBgClr(segment.overallThresholdstate), 'width':((segment.endX - segment.startX) * oneWidthfeet)+'px', 'height':((segment.endY - segment.startY) * oneHeightFeet)+'px'}">
+                                        {{segment.segmentName}}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div *ngIf="historical" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.65)+'px'}">
-                    <div class="zone-header">
-                        <span>Parameter</span>
-                        <span>Range</span>
-                        <span>Average</span>
-                    </div>
+
                     <div class="zone-value first-item">
+                        <div class="zone-header border-bottom">
+                            <span>Parameter</span>
+                            <span>Range</span>
+                            <span>Average</span>
+                        </div>
                         <div class="zone-header">Water</div>
                         <ul>
                             <li>
@@ -174,6 +178,11 @@
             </div>
         </div>
         <div class="column column-middle" data-xl-width="4">
+            <div class="text-center">
+                <strong>
+                    ABC Layout - Zone level visualization of segment A in XYZ Section
+                </strong>
+            </div>
             <div *ngIf="diffZone" class="column" data-xl-width="12" [ngStyle]="{'height':((layoutHeight - (headerHeight)) * 0.2)+'px'}">
                 <p class="text-center">
                     <strong>Position of Section in Layout:</strong> {{diffZone.sectionStartX}} {{diffZone.sectionStartY}}
@@ -205,7 +214,7 @@
                 <div class="segment-box" [ngStyle]="{'width':determineBoxWidth()+'px', 'height':determineBoxHeight()+'px', 'margin':boxMargin+'px'}">
                     <ul>
                         <li *ngFor="let sensor of hasZoneSensors('TOP'); let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
-                            <div class="sensor-box"  [ngStyle]="{'background':assignBgClr(sensor.thresholdState), 'margin-left':(sensor.widthX * oneWidthZoneFeet)+'px', 'margin-top':(sensor.heightY * oneHeightZoneFeet)+'px'}"></div>
+                            <div class="sensor-box" [ngStyle]="{'background':assignBgClr(sensor.thresholdState), 'margin-left':(sensor.widthX * oneWidthZoneFeet)+'px', 'margin-top':(sensor.heightY * oneHeightZoneFeet)+'px'}"></div>
                         </li>
                     </ul>
                 </div>

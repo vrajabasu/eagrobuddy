@@ -26,6 +26,9 @@
     color:#000;
     padding-left: 10px;
 }
+.border-bottom {
+    border-bottom:1px solid #000000;
+}
 .zone-value {
     background-color:rgb(84,130,53);
     overflow: hidden;
