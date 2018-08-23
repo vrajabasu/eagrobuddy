@@ -903,9 +903,10 @@ public class InternalLayoutDetailsService {
 			SegmentDTO segmentDTO, Map<Long, List<SensorCoverageRangeDTO>> sensorCoverageRangeMap) {
 		segmentZoneDetails.setSegmentName(segmentDTO.getSegmentName());
 		segmentZoneDetails.setSegmentDescription(segmentDTO.getSegmentDesc());
-		segmentZoneDetails.setSegmentX(segmentDTO.getStartX());
-		segmentZoneDetails.setSegmentY(sectionDTO.getStartY());
-
+		segmentZoneDetails.setSegmentStartX(segmentDTO.getStartX());
+		segmentZoneDetails.setSegmentStartY(sectionDTO.getStartY());
+		segmentZoneDetails.setSegmentEndX(segmentDTO.getEndX());
+		segmentZoneDetails.setSegmentEndY(segmentDTO.getEndY());
 		// Retrieve sensor applicable for segment
 		Map<Long, List<SectionSensorMappingDTO>> segmentSensorMap = this
 				.identiySensorForCurrentSegment(currentSectionSensorMap, segmentDTO, sensorCoverageRangeMap);

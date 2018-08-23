@@ -13,7 +13,7 @@ public class OptimalKpiValueResponseDTO {
 	@JsonProperty("kpiName")
 	private String kpiName = null;
 
-	@JsonProperty("optimalValueRange")
+	@JsonProperty("valueRange")
 	private Double optimalValueRange = null;
 
 	public OptimalKpiValueResponseDTO kpiName(String kpiName) {
